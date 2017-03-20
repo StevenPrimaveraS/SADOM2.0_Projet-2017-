@@ -13,5 +13,26 @@ namespace Prj_Final_2017_.Controllers
         {
             return View();
         }
+
+        public ActionResult SearchVol()
+        {
+            return View();
+        }
+
+        public ActionResult SearchHotel()
+        {
+            return View();
+        }
+
+        public ActionResult SearchVoiture()
+        {
+            return View();
+        }
+
+        public ActionResult SearchForfait()
+        {
+            return View();
+        }
+
     }
 }
