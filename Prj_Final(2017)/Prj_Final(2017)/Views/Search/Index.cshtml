@@ -1,7 +1,37 @@
 ﻿
 @{
     ViewBag.Title = "Index";
+    ViewBag.Description = 
+        @"description - description - description - description - description -
+          description - description - description - description - description -
+          description - description - description - description - description -
+          description - description - description - description - description -
+          description - description - description - description - description -
+          description - description - description - description - description - ";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.Title</h2>
+@{ /* Styles temporaires : éventuellement dans fichier css */  }
+<div id="description" style="display:inline-block; width:300px;">
+    @ViewBag.Description
+</div>
 
+<div class="form-inline" id="boiteRecherche" style="display:inline-block;">
+    <input class="form-control" id="txtVilleDepart" type="text" placeholder="Ville de départ" style="margin: 0px 5px 0px 5px; width: 180px;" />
+    <p style="display:inline-block;">&nbsp;-&nbsp;</p>
+    <input class="form-control" id="txtVilleArrivee" type="text" placeholder="Ville de destination" style="margin: 0px 5px 0px 5px; width: 180px;" />
+    <br />
+    <div style="display:inline-block; margin: 0px 5px 0px 5px;">
+        <label class="label label-default" for="txtDateDepart">Date Départ</label>
+        <br />
+        <input class="form-control" id="txtDateDepart" type="date" style="width: 180px" />
+    </div>
+    <p style="display:inline-block;">&nbsp;-&nbsp;</p>
+    <div style="display:inline-block; margin: 0px 5px 0px 5px;" >
+        <label class="label label-default" for="txtDateRetour">Date Retour</label>
+        <br />
+        <input class="form-control" id="txtDateRetour" type="date"  style="width: 180px"/>
+    </div>
+    <br />
+    <input class="btn btn-default" id="btnOk" type="button" value="rechercher" style="margin: 3px 5px 0px 5px; " />
+</div>
