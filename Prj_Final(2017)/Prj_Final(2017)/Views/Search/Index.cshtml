@@ -72,25 +72,46 @@
 @{
     /* Section des articles : Généré dynamiquement dans le futur */
     ViewBag.Image = "[Insérer Image ICI]";
-    ViewBag.Nom = "";
+    ViewBag.Info = @"Info Info Info Info Info Info Info Info Info Info Info 
+                    Info Info Info Info Info Info Info Info Info Info Info";
+    ViewBag.Prix = "9999.99 $";
 
 
     //Produit séparé en sections : Image/infoImportante/Prix+Bouton
 }
-<div id="conteneurProduit">
-    <div id="produit1">
-        <div id="sectionImage">
-            @ViewBag.Image
+<div id="conteneurProduits" style="display:inline-block; width:100%;" >
+    <div class="container" id="produit1" style="background-color:#777777; width:100%;">
+        <div style="display:inline-flex; min-width:248px; max-width:900px;">
+            <div id="sectionImage" style="background-color:orange;">
+                <p>@ViewBag.Image</p>
+            </div>
+            <div id="sectionInfo" style="background-color:aqua;">
+                <p>@ViewBag.Info</p>
+            </div>
         </div>
-        <div id="sectionInfo">
-
-        </div>
-        <div id="sectionBouton">
-
+        <div style="float:right">
+            <div id="sectionBouton" style="background-color:lightgreen; text-align:right">
+                <p>@ViewBag.Prix</p>
+                <input class="btn btn-primary" type="button" value="Sélectionner" />
+            </div>
         </div>
     </div>
-    <div id="produit2">
 
+    <div class="container" id="produit1" style="background-color:#777777; width:100%;">
+        <div style="display:inline-flex; min-width:248px; max-width:900px;">
+            <div id="sectionImage" style="background-color:orange;">
+                <p>@ViewBag.Image</p>
+            </div>
+            <div id="sectionInfo" style="background-color:aqua;">
+                <p>@ViewBag.Info</p>
+            </div>
+        </div>
+        <div style="float:right">
+            <div id="sectionBouton" style="background-color:lightgreen; text-align:right">
+                <p>@ViewBag.Prix</p>
+                <input class="btn btn-primary" type="button" value="Sélectionner" />
+            </div>
+        </div>
     </div>
 </div>
 
