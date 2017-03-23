@@ -171,6 +171,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\VolController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -240,9 +241,6 @@
     <Content Include="Views\Search\SearchVoiture.cshtml" />
     <Content Include="Views\Search\SearchForfait.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
-    <Content Include="Views\Voiture\Voiture.cshtml" />
-    <Content Include="Views\Reservation\Reservation.cshtml" />
-    <Content Include="Views\Achat\Paiment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
