@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "Voiture";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+
+<h2>Voiture</h2>
+
+<form action="" method="get">
+    <fieldset>
+        <%--Les informations dessous ne sont que des exemples, ils seront à placer dans la base de donnée--%>
+        <select id="CategVoiture" name="CategVoiture">
+            <option value=""></option>
+            <option value="0">Économique</option>
+            <option value="1">Familiale</option>
+            <option value="2">Compacte</option>
+            <option value="3">Luxe</option>
+            <option value="4">Routière</option>
+            <option value="5">Intermédiaire</option>
+        </select>
+        <select id="TypeVoiture" name="TypeVoiture">
+            <option value=""></option>
+            <option value="0">2/4 portes</option>
+            <option value="1">4/5 portes</option>
+            <option value="2">Limousine</option>
+            <option value="3">Break</option>
+            <option value="4">Minibus</option>
+            <option value="5">Sport</option>
+        </select>
+        <select id="Transmission" name="Transmission">
+            <option value=""></option>
+            <option value="0">Manuelle</option>
+            <option value="1">Automatique</option>
+        </select>
+        <select id="Carburant" name="Carburant">
+            <option value=""></option>
+            <option value="0">Non-spécifié</option>
+            <option value="1">Diesel</option>
+            <option value="2">Hybride</option>
+            <option value="3">Électrique</option>    
+            <option value="4">GPL</option>  
+            <option value="5">Hydrogène</option>      
+            <option value="6">Carburant multiple</option>
+            <option value="7">Essence</option>
+            <option value="8">Éthanol</option>
+        </select>
+        <p><input type="submit" value="Submit" /> </p>
+    </fieldset>
+</form>
