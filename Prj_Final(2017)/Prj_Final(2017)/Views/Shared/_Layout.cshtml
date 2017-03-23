@@ -18,13 +18,23 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Nom d'application", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Voyage Ahuntsic", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Accueil", "Index", "Home")</li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Nos Services<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Voitures", "#", "#")</li>
+                            <li>@Html.ActionLink("Hôtels", "#", "#")</li>
+                            <li>@Html.ActionLink("Vols d'avions", "#", "#")</li>
+                            <li>@Html.ActionLink("Nos Forfaits", "#", "#")</li>
+                        </ul>
+                    </li>
                     <li>@Html.ActionLink("À propos de", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -34,7 +44,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Voyage Ahuntsic </p>
         </footer>
     </div>
 

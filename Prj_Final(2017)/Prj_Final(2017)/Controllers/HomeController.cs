@@ -15,14 +15,14 @@ namespace Prj_Final_2017_.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "À propos de Voyage Ahuntsic..";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Pour nous contacter.";
 
             return View();
         }
