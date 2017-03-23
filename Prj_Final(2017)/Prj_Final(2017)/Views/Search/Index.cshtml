@@ -69,3 +69,28 @@
         </div>
     </div>
 </div>
+@{
+    /* Section des articles : Généré dynamiquement dans le futur */
+    ViewBag.Image = "[Insérer Image ICI]";
+    ViewBag.Nom = "";
+
+
+    //Produit séparé en sections : Image/infoImportante/Prix+Bouton
+}
+<div id="conteneurProduit">
+    <div id="produit1">
+        <div id="sectionImage">
+            @ViewBag.Image
+        </div>
+        <div id="sectionInfo">
+
+        </div>
+        <div id="sectionBouton">
+
+        </div>
+    </div>
+    <div id="produit2">
+
+    </div>
+</div>
+
