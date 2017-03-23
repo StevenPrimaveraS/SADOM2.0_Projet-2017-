@@ -2,15 +2,13 @@
 @{
     ViewBag.Title = "Voiture";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-
-<h2>Voiture</h2>
 
 <form action="" method="get">
     <fieldset>
         <%--Les informations dessous ne sont que des exemples, ils seront à placer dans la base de donnée--%>
+        <h2>Veuillez entrer des informations désiré pour la voiture</h2>
+        <br />
         <select id="CategVoiture" name="CategVoiture">
             <option value=""></option>
             <option value="0">Économique</option>
@@ -20,6 +18,7 @@
             <option value="4">Routière</option>
             <option value="5">Intermédiaire</option>
         </select>
+        <br/>
         <select id="TypeVoiture" name="TypeVoiture">
             <option value=""></option>
             <option value="0">2/4 portes</option>
@@ -29,11 +28,13 @@
             <option value="4">Minibus</option>
             <option value="5">Sport</option>
         </select>
+        <br />
         <select id="Transmission" name="Transmission">
             <option value=""></option>
             <option value="0">Manuelle</option>
             <option value="1">Automatique</option>
         </select>
+        <br />
         <select id="Carburant" name="Carburant">
             <option value=""></option>
             <option value="0">Non-spécifié</option>
@@ -46,6 +47,9 @@
             <option value="7">Essence</option>
             <option value="8">Éthanol</option>
         </select>
+        <br />
         <p><input type="submit" value="Submit" /> </p>
+        <h2>@ViewBag.Title</h2>
+        Liste de voiture à ajouter
     </fieldset>
 </form>
