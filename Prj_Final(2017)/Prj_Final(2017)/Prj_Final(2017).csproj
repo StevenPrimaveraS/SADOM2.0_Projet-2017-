@@ -241,9 +241,14 @@
     <Content Include="Views\Search\SearchVoiture.cshtml" />
     <Content Include="Views\Search\SearchForfait.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Achat\Paiment.cshtml" />
+    <Content Include="Views\Reservation\Reservation.cshtml" />
+    <Content Include="Views\Voiture\Voiture.cshtml" />
+    <Content Include="Views\Vol\Vol.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\NewFolder1\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
