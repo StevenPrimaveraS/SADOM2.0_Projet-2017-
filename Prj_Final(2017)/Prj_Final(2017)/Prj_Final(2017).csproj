@@ -243,10 +243,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Search\SearchHotel.cshtml" />
-    <Content Include="Views\Search\SearchVol.cshtml" />
-    <Content Include="Views\Search\SearchVoiture.cshtml" />
-    <Content Include="Views\Search\SearchForfait.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Achat\Paiment.cshtml" />
     <Content Include="Views\Reservation\Reservation.cshtml" />

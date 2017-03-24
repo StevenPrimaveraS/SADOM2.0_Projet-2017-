@@ -80,23 +80,21 @@
     //Produit séparé en sections : Image/infoImportante/Prix+Bouton
 }
 <div id="conteneurProduits" style="display:inline-block; width:100%;" >
-    <div class="container" id="produit1" style="background-color:#777777; width:100%; margin-top:10px;">
+    <div class="container" id="produit1" style="border: 1px solid #aaaaaa; border-radius:6px; width:100%; margin-top:10px; padding-bottom:15px; padding-top:15px;">
         <div style="display:inline-flex; max-width:900px;">
-            <div id="sectionImage" style="background-color:orange;">
+            <div class="img-thumbnail img-responsive" id="sectionImage">
                 <p>@ViewBag.Image</p>
             </div>
-            <div id="sectionInfo" style="background-color:aqua;">
+            <div id="sectionInfo" style="padding: 5px 5px 5px 15px; ">
                 <p>@ViewBag.Info</p>
             </div>
         </div>
         <div style="float:right">
-            <div id="sectionBouton" style="background-color:lightgreen; text-align:right">
-                <p>@ViewBag.Prix</p>
+            <div id="sectionBouton" style="text-align:right">
+                <strong style="display:block; font-size:16px;">@ViewBag.Prix</strong>
                 <input class="btn btn-primary" type="button" value="Sélectionner" />
             </div>
         </div>
     </div>
-
-    
 </div>
 
