@@ -2,6 +2,54 @@
 @{
     ViewBag.Title = "Paiment";
 }
+<div class="jumbotron">
+    <h1>Paiment</h1>
+</div>
 
-<h2>Paiment</h2>
+<ul id="paiement" style="flex-direction:column">
+    <li style="flex-direction:row;justify-content:space-around; display:flex">
+        <span style="flex:auto">
+            Numéro de la carte
+            &nbsp;
+            <input class="text-form" type="text" value="" />
+        </span>
+        <br/>
+        <span style="flex:auto">
+            Date d'expiration(MM/AAAA)
+            &nbsp;
+            <select id="moisExpiration" name="moisExpiration">
+                <option value=""></option>
+                <option value="0">1</option>
+                <option value="1">2</option>
+                <option value="2">3</option>
+                <option value="3">4</option>
+                <option value="4">5</option>
+                <option value="5">6</option>
+                <option value="6">7</option>
+                <option value="7">8</option>
+                <option value="8">9</option>
+                <option value="9">10</option>
+                <option value="10">11</option>
+                <option value="11">12</option>
+            </select>
+            &nbsp;
+            <select id="anneeExpiration" name="anneeExpiration">
+                <option value=""></option>
+                <option value="0">2017</option>
+                <option value="1">2018</option>
+                <option value="2">2019</option>
+                <option value="3">2020</option>
+                <option value="4">2021</option>
+                <option value="5">2022</option>
+            </select>
+        </span>
+        <br />
+        <span style="flex:auto">
+            Cryptogramme virtuel(numéro derrière la carte)
+            &nbsp;
+            <input class="text-form" type="text" value="" />
+        </span>
+        <input class="text-form" type="button" value="Ajouter au panier" />
+    </li>
+</ul>
 
