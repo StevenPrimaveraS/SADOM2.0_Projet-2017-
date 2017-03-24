@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Chambre";
     ViewBag.Description =
         @"ma description ici  ";
 }
@@ -72,31 +72,38 @@
 @{
     /* Section des articles : Généré dynamiquement dans le futur */
     ViewBag.Image = "[Insérer Image ICI]";
-    ViewBag.Info = @"Info Info Info Info Info Info Info Info Info Info Info 
-                    Info Info Info Info Info Info Info Info Info Info Info";
+
+    ViewBag.NomChambre = "Nom Chambre ici";
+    ViewBag.MaxPersonneChambre = "Max : 10 personnes";
+    ViewBag.TailleChambre = "Taille : 10m²";
+    ViewBag.DescriptionChambre =
+        @"Description Description Description Description Description Description
+        Description Description Description Description Description Description
+        Description Description Description Description Description Description ";
+
     ViewBag.Prix = "9999.99 $";
 
 
-    //Produit séparé en sections : Image/infoImportante/Prix+Bouton
+    //
 }
-<div id="conteneurProduits" style="display:inline-block; width:100%;" >
+<div id="conteneurProduits" style="display:inline-block; width:100%;">
     <div class="container" id="produit1" style="background-color:#777777; width:100%; margin-top:10px;">
         <div style="display:inline-flex; max-width:900px;">
             <div id="sectionImage" style="background-color:orange;">
                 <p>@ViewBag.Image</p>
             </div>
             <div id="sectionInfo" style="background-color:aqua;">
-                <p>@ViewBag.Info</p>
+                <strong>@ViewBag.NomChambre</strong>
+                <p>@ViewBag.TailleChambre</p>
+                <p>@ViewBag.MaxPersonneChambre</p>
+                <p>@ViewBag.DescriptionChambre</p>
             </div>
         </div>
         <div style="float:right">
             <div id="sectionBouton" style="background-color:lightgreen; text-align:right">
                 <p>@ViewBag.Prix</p>
-                <input class="btn btn-primary" type="button" value="Sélectionner" />
+                <input class="btn btn-primary" type="button" value="Réserver" />
             </div>
         </div>
     </div>
-
-    
 </div>
-
