@@ -174,6 +174,7 @@
     <Compile Include="Controllers\HotelController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PaiementController.cs" />
+    <Compile Include="Controllers\PanierController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\VoitureController.cs" />
     <Compile Include="Controllers\VolController.cs" />
@@ -255,6 +256,7 @@
     <Content Include="Views\Chambre\Index.cshtml" />
     <Content Include="Views\Chambre\Chambre.cshtml" />
     <Content Include="Views\Forfait\Forfait.cshtml" />
+    <Content Include="Views\Panier\Panier.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

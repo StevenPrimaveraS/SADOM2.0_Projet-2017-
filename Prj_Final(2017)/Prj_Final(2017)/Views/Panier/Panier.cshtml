@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Panier";
+    ViewBag.Message = "Votre Panier contient " + ViewBag.nbItemsPanier + " produits";
+}
+
+<div class="jumbotron">
+    <h1>Votre Panier</h1>
+    <p class="lead">Liste des produits</p>
+</div>
+
+<ul id="listeProduits" style="flex-direction:column">
+    <li style="flex-direction:row;justify-content:space-around; display:flex">
+        <span style="flex:auto">
+            [Information]
+        </span>
+        <span style="flex:auto">
+            [Prix]
+        </span>
+        <span style="flex:auto">
+            <input class="text-form" type="number" value="[Nombre de produits]" />
+        </span>
+        <span style="flex:auto">
+            <input class="text-form" type="button" value="Supprimer" />
+        </span>
+    </li>
+</ul>
+
+
