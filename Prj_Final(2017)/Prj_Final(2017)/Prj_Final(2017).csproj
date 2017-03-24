@@ -252,6 +252,7 @@
     <Content Include="Views\Hotel\Index.cshtml" />
     <Content Include="Views\Chambre\Index.cshtml" />
     <Content Include="Views\Chambre\Chambre.cshtml" />
+    <Content Include="Views\Achat\Panier.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
