@@ -6,6 +6,33 @@
 <div class="jumbotron">
     <h1>Vols</h1>
     <p class="lead">Liste des vols</p>
+    <div class="form-group">
+
+        <div class="radio-inline">
+
+            @Html.RadioButton("siege", "Hublot", true,
+
+          new { id = "Hublot" }) Hublot
+
+        </div>
+
+        <div class="radio-inline">
+
+            @Html.RadioButton("siege", "Allee",
+
+           new { id = "Allee" }) Allée
+
+        </div>
+
+        <div class="radio-inline">
+
+            @Html.RadioButton("siege", "PeuImporte",
+
+           new { id = "PeuImporte" }) Peu Importe
+
+        </div>
+
+    </div>
 </div>
 
 <ul id="listeVols" style="flex-direction:column" >
