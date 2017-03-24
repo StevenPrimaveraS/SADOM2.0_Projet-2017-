@@ -259,6 +259,7 @@
     <Content Include="Views\Forfait\Forfait.cshtml" />
     <Content Include="Views\Panier\Panier.cshtml" />
     <Content Include="Views\Facture\Facture.cshtml" />
+    <Content Include="Views\Account\Profil.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

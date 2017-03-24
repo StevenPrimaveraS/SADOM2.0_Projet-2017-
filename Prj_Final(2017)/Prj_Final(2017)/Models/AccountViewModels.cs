@@ -66,6 +66,16 @@ namespace Prj_Final_2017_.Models
     {
         [Required]
         [EmailAddress]
+        [Display(Name = "Nom")]
+        public string Name { get; set; }
+
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Prénom")]
+        public string LastName { get; set; }
+
+        [Required]
+        [EmailAddress]
         [Display(Name = "Courrier électronique")]
         public string Email { get; set; }
 
