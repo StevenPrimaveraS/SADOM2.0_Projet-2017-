@@ -169,6 +169,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ChambreController.cs" />
+    <Compile Include="Controllers\FactureController.cs" />
     <Compile Include="Controllers\ForfaitController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HotelController.cs" />
@@ -257,6 +258,7 @@
     <Content Include="Views\Chambre\Chambre.cshtml" />
     <Content Include="Views\Forfait\Forfait.cshtml" />
     <Content Include="Views\Panier\Panier.cshtml" />
+    <Content Include="Views\Facture\Facture.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
