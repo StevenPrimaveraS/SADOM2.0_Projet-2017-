@@ -185,6 +185,21 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Connexion\Connexion.cs" />
+    <Compile Include="Models\DTO\AgenceVoitureDTO.cs" />
+    <Compile Include="Models\DTO\ChambreDTO.cs" />
+    <Compile Include="Models\DTO\CompteFournisseurChambreDTO.cs" />
+    <Compile Include="Models\DTO\CompteFournisseurSiegeDTO.cs" />
+    <Compile Include="Models\DTO\CompteFournusseurVoitureDTO.cs" />
+    <Compile Include="Models\DTO\CompteParticulierDTO.cs" />
+    <Compile Include="Models\DTO\ForfaitDTO.cs" />
+    <Compile Include="Models\DTO\HotelDTO.cs" />
+    <Compile Include="Models\DTO\ReservationChambreDTO.cs" />
+    <Compile Include="Models\DTO\ReservationForfaitDTO.cs" />
+    <Compile Include="Models\DTO\ReservationSiegeDTO.cs" />
+    <Compile Include="Models\DTO\ReservationVoitureDTO.cs" />
+    <Compile Include="Models\DTO\SiegeDTO.cs" />
+    <Compile Include="Models\DTO\VoitureDTO.cs" />
+    <Compile Include="Models\DTO\VolDTO.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
