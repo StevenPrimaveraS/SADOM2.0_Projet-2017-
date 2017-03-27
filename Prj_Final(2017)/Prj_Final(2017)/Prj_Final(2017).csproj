@@ -176,7 +176,6 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PaiementController.cs" />
     <Compile Include="Controllers\PanierController.cs" />
-    <Compile Include="Controllers\ProfilController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\VoitureController.cs" />
     <Compile Include="Controllers\VolController.cs" />
@@ -261,7 +260,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Achat\" />
-    <Folder Include="Views\Profile\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
