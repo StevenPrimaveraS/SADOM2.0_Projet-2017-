@@ -6,14 +6,14 @@ using System.Web.Mvc;
 
 namespace Prj_Final_2017_.Controllers
 {
-    public class PaiementController : Controller
+    public class ProfilController : Controller
     {
-        // GET: Paiement
+        // GET: Profile
         public ActionResult Index()
         {
             return View();
         }
-        public ActionResult Paiement()
+        public ActionResult Profil()
         {
             return View();
         }

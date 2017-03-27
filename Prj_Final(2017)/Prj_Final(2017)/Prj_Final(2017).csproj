@@ -176,6 +176,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PaiementController.cs" />
     <Compile Include="Controllers\PanierController.cs" />
+    <Compile Include="Controllers\ProfilController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\VoitureController.cs" />
     <Compile Include="Controllers\VolController.cs" />
@@ -244,7 +245,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
-    <Content Include="Views\Achat\Paiment.cshtml" />
+    <Content Include="Views\Paiement\Paiement.cshtml" />
     <Content Include="Views\Reservation\Reservation.cshtml" />
     <Content Include="Views\Voiture\Voiture.cshtml" />
     <Content Include="Views\Vol\Vol.cshtml" />
@@ -259,6 +260,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Achat\" />
+    <Folder Include="Views\Profile\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
