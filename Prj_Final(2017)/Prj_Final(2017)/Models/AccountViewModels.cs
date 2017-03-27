@@ -65,12 +65,10 @@ namespace Prj_Final_2017_.Models
     public class RegisterViewModel
     {
         [Required]
-        [EmailAddress]
         [Display(Name = "Nom")]
         public string Name { get; set; }
 
         [Required]
-        [EmailAddress]
         [Display(Name = "Prénom")]
         public string LastName { get; set; }
 
