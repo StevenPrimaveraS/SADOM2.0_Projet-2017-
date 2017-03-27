@@ -185,7 +185,6 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Connexion\Connexion.cs" />
-    <Compile Include="Models\DAO\TableDAO.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -262,6 +261,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\DAO\" />
     <Folder Include="Models\Exception\" />
     <Folder Include="Models\Facade\" />
     <Folder Include="Models\Service\" />
