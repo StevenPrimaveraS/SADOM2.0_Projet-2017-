@@ -13,7 +13,7 @@ namespace Prj_Final_2017_.Controllers
         {
             return View();
         }
-        public ActionResult Paiment()
+        public ActionResult Paiement()
         {
             return View();
         }

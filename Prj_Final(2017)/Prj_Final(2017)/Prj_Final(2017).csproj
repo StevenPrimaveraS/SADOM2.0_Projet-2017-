@@ -49,6 +49,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MySql.Data, Version=6.9.6.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -167,37 +168,24 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="App_Data\Controllers\AccountController.cs" />
-    <Compile Include="App_Data\Controllers\ChambreController.cs" />
-    <Compile Include="App_Data\Controllers\FactureController.cs" />
-    <Compile Include="App_Data\Controllers\ForfaitController.cs" />
-    <Compile Include="App_Data\Controllers\HomeController.cs" />
-    <Compile Include="App_Data\Controllers\HotelController.cs" />
-    <Compile Include="App_Data\Controllers\ManageController.cs" />
-    <Compile Include="App_Data\Controllers\PaiementController.cs" />
-    <Compile Include="App_Data\Controllers\PanierController.cs" />
-    <Compile Include="App_Data\Controllers\SearchController.cs" />
-    <Compile Include="App_Data\Controllers\VoitureController.cs" />
-    <Compile Include="App_Data\Controllers\VolController.cs" />
-    <Compile Include="dto\AgenceVoitureDTO.cs" />
-    <Compile Include="dto\ChambreDTO.cs" />
-    <Compile Include="dto\CompteFournisseurChambreDTO.cs" />
-    <Compile Include="dto\CompteFournisseurSiegeDTO.cs" />
-    <Compile Include="dto\CompteFournisseurVoitureDTO.cs" />
-    <Compile Include="dto\CompteParticulierDTO.cs" />
-    <Compile Include="dto\ForfaitDTO.cs" />
-    <Compile Include="dto\HotelDTO.cs" />
-    <Compile Include="dto\ReservationChambreDTO.cs" />
-    <Compile Include="dto\ReservationForfait.cs" />
-    <Compile Include="dto\ReservationSiege.cs" />
-    <Compile Include="dto\ReservationVoitureDTO.cs" />
-    <Compile Include="dto\SiegeDTO.cs" />
-    <Compile Include="dto\VoitureDTO.cs" />
-    <Compile Include="dto\VolDTO.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ChambreController.cs" />
+    <Compile Include="Controllers\FactureController.cs" />
+    <Compile Include="Controllers\ForfaitController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HotelController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PaiementController.cs" />
+    <Compile Include="Controllers\PanierController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\VoitureController.cs" />
+    <Compile Include="Controllers\VolController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Connexion\Connexion.cs" />
+    <Compile Include="Models\DAO\TableDAO.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -259,7 +247,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
-    <Content Include="Views\Achat\Paiment.cshtml" />
+    <Content Include="Views\Paiement\Paiement.cshtml" />
     <Content Include="Views\Reservation\Reservation.cshtml" />
     <Content Include="Views\Voiture\Voiture.cshtml" />
     <Content Include="Views\Vol\Vol.cshtml" />
@@ -272,7 +260,14 @@
     <Content Include="Views\Facture\Facture.cshtml" />
     <Content Include="Views\Account\Profil.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Models\Exception\" />
+    <Folder Include="Models\Facade\" />
+    <Folder Include="Models\Service\" />
+    <Folder Include="Models\util\" />
+    <Folder Include="Views\Achat\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
