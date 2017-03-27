@@ -259,6 +259,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\Connexion\" />
+    <Folder Include="Models\DAO\" />
+    <Folder Include="Models\Exception\" />
+    <Folder Include="Models\Facade\" />
+    <Folder Include="Models\Service\" />
+    <Folder Include="Models\util\" />
     <Folder Include="Views\Achat\" />
   </ItemGroup>
   <ItemGroup>
