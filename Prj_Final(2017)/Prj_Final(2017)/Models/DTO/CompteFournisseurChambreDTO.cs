@@ -5,34 +5,13 @@ using System.Web;
 
 namespace Prj_Final_2017_.DTO {
     public class CompteFournisseurChambreDTO {
-        private int idFournisseur;
-        private string courriel;
-        private string password;
-        private int idHotel;
+        
+        public int IdFournisseur { get; set; }
 
-        public CompteFournisseurChambreDTO(int idFournisseur, string courriel, string password, int idHotel) {
-            this.idFournisseur = idFournisseur;
-            this.courriel = courriel;
-            this.password = password;
-            this.idHotel = idHotel;
-        }
+        public string Courriel { get; set; }
 
+        public string Password { get; set; }
 
-        public int IdFournisseur {
-            get { return idFournisseur; }
-            set { idFournisseur = value; }
-        }
-        public string Courriel {
-            get { return courriel; }
-            set { courriel = value; }
-        }
-        public string Password {
-            get { return password; }
-            set { password = value; }
-        }
-        public int IdHotel {
-            get { return idHotel; }
-            set { idHotel = value; }
-        }
+        public int IdHotel { get; set; }
     }
 }

@@ -6,41 +6,15 @@ using System.Web;
 namespace Prj_Final_2017_.DTO {
     public class ReservationVoitureDTO {
 
-        private int idreservationVoiture;
-        private int idvoiture;
-        private int idparticulier;
-        private string datereservaton;
-        private string datefinreservation;
+        public int IdReservationVoiture { get; set; }
 
-        public ReservationVoitureDTO(int idreservationVoiture, int idvoiture, int idparticulier, string datereservaton, string datefinreservation) {
-            this.idreservationVoiture = idreservationVoiture;
-            this.idvoiture = idvoiture;
-            this.idparticulier = idparticulier;
-            this.datereservaton = datereservaton;
-            this.datefinreservation = datefinreservation;
+        public int IdVoiture { get; set; }
 
-        }
+        public int IdParticulier { get; set; }
 
-        public int IdreservationVoiture {
-            get { return idreservationVoiture; }
-            set { idreservationVoiture = value; }
-        }
+        public string DateReservaton { get; set; }
 
-        public int Idvoiture {
-            get { return idvoiture; }
-            set { idvoiture = value; }
-        }
-        public int Idparticulier {
-            get { return idparticulier; }
-            set { idparticulier = value; }
-        }
-        public string Datereservaton {
-            get { return datereservaton; }
-            set { datereservaton = value; }
-        }
-        public string Datefinreservation {
-            get { return datefinreservation; }
-            set { datefinreservation = value; }
-        }
+        public string DateFinReservation { get; set; }
+
     }
 }
