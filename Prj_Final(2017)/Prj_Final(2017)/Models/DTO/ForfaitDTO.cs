@@ -6,14 +6,14 @@ using System.Web;
 namespace Prj_Final_2017_.DTO {
     public class ForfaitDTO {
 
-        public int Idforfait { get; set; }
+        public int IdForfait { get; set; }
 
-        public int Idchambre { get; set; }
+        public int IdChambre { get; set; }
 
-        public int Idvoiture { get; set; }
+        public int IdVoiture { get; set; }
 
-        public int Idsiege { get; set; }
+        public int IdSiege { get; set; }
 
-        public int Tarifreduit { get; set; }
+        public int TarifReduit { get; set; }
     }
 }

@@ -4,22 +4,23 @@ using System.Linq;
 using System.Web;
 using MySql.Data.MySqlClient;
 using System.Data;
+using Prj_Final_2017_.DTO;
 
 namespace Prj_Final_2017_.Models.DAO {
-    public class TableDAO {
+    public class SiegeDAO {
 
         /* **********************************
          * *** Pour ctrl + F rapidement : ***
          * **********************************
          * 
-         * TableDAO = nom du dao de la table
-         * TableDTO = nom du DTO de la table
-         * tableDTO = instance de TableDTO
-         * tableBD = nom de la table dans la BD (requête)
-         * champID = champ d'ID de la table
-         * champ1 = 1er champ de la table
-         * champ2 = 2ième champ de la table
-         * champ3 = 3ième champ de la table
+         * SiegeDAO = nom du dao de la table
+         * SiegeDTO = nom du DTO de la table
+         * siegeDTO = instance de SiegeDTO
+         * Siege = nom de la table dans la BD (requête)
+         * IdSiege = champ d'ID de la table
+         * Type = 1er champ de la table
+         * Numero = 2ième champ de la table
+         * IdVol = 3ième champ de la table
          * champ4 = 4ième champ de la table
          * champ5 = 5ième champ de la table
          * 
@@ -29,31 +30,29 @@ namespace Prj_Final_2017_.Models.DAO {
 
 
         Connexion.Connexion connexion;
-        private static readonly string INSERT_QUERY = "INSERT INTO tableBD(`champ1`, `champ2`, `champ3`, `champ4`, `champ5`) VALUES(@champ1, @champ2, @champ3, @champ4, @champ5)";
-        private static readonly string READ_QUERY = "SELECT `champID`, `champ1`, `champ2`, `champ3`, `champ4`, `champ5` FROM tableBD WHERE `champID` = @champID";
-        private static readonly string UPDATE_QUERY = "UPDATE tableBD SET `champ1` = @champ1, `champ2` = @champ2, `champ3` = @champ3, `champ4` = @champ4, `champ5` = @champ5 WHERE `champID` = @champID";
-        private static readonly string DELETE_QUERY = "DELETE FROM tableBD WHERE `champID` = @champID";
-        private static readonly string GET_ALL_QUERY = "SELECT `champID`, `champ1`, `champ2`, `champ3`, `champ4`, `champ5` FROM tableBD";
+        private static readonly string INSERT_QUERY = "INSERT INTO Siege(`Type`, `Numero`, `IdVol`) VALUES(@Type, @Numero, @IdVol)";
+        private static readonly string READ_QUERY = "SELECT `IdSiege`, `Type`, `Numero`, `IdVol` FROM Siege WHERE `IdSiege` = @IdSiege";
+        private static readonly string UPDATE_QUERY = "UPDATE Siege SET `Type` = @Type, `Numero` = @Numero, `IdVol` = @IdVol WHERE `IdSiege` = @IdSiege";
+        private static readonly string DELETE_QUERY = "DELETE FROM Siege WHERE `IdSiege` = @IdSiege";
+        private static readonly string GET_ALL_QUERY = "SELECT `IdSiege`, `Type`, `Numero`, `IdVol` FROM Siege";
 
-        public TableDAO() {
+        public SiegeDAO() {
             connexion = new Connexion.Connexion();
         }
 
         /// <summary>
-        /// Fait un Insert dans la BD sur la table tableBD
+        /// Fait un Insert dans la BD sur la table Siege
         /// </summary>
-        /// <param name="tableDTO">tableBD a ajouter</param>
-        public void Add(TableDTO tableDTO) {
+        /// <param name="siegeDTO">Siege a ajouter</param>
+        public void Add(SiegeDTO siegeDTO) {
             try {
                 using (MySqlConnection connection = connexion.getConnexion()) {
                     connection.Open();
-                    using (MySqlCommand command = new MySqlCommand(TableDAO.INSERT_QUERY, connection)) {
+                    using (MySqlCommand command = new MySqlCommand(SiegeDAO.INSERT_QUERY, connection)) {
                         command.Prepare();
-                        command.Parameters.AddWithValue("champ1", tableDTO.champ1);
-                        command.Parameters.AddWithValue("champ2", tableDTO.champ2);
-                        command.Parameters.AddWithValue("champ3", tableDTO.champ3);
-                        command.Parameters.AddWithValue("champ4", tableDTO.champ4);
-                        command.Parameters.AddWithValue("champ5", tableDTO.champ5);
+                        command.Parameters.AddWithValue("Type", siegeDTO.Type);
+                        command.Parameters.AddWithValue("Numero", siegeDTO.Numero);
+                        command.Parameters.AddWithValue("IdVol", siegeDTO.IdVol);
 
                         command.ExecuteNonQuery();
                     }
@@ -65,27 +64,25 @@ namespace Prj_Final_2017_.Models.DAO {
         }
 
         /// <summary>
-        /// Fait un Read dans la BD sur la table tableBD
+        /// Fait un Read dans la BD sur la table Siege
         /// </summary>
-        /// <param name="champID">l'id de tableBD que l'on veut read</param>
-        /// <returns>une instance de TableDTO; null sinon</returns>
-        public TableDTO Read(int champID) {
-            TableDTO tableDTO = null;
+        /// <param name="IdSiege">l'id de Siege que l'on veut read</param>
+        /// <returns>une instance de SiegeDTO; null sinon</returns>
+        public SiegeDTO Read(int IdSiege) {
+            SiegeDTO siegeDTO = null;
             try {
                 using (MySqlConnection connection = connexion.getConnexion()) {
                     connection.Open();
-                    using (MySqlCommand command = new MySqlCommand(TableDAO.READ_QUERY, connection)) {
+                    using (MySqlCommand command = new MySqlCommand(SiegeDAO.READ_QUERY, connection)) {
                         command.Prepare();
-                        command.Parameters.AddWithValue("champID", champID);
+                        command.Parameters.AddWithValue("IdSiege", IdSiege);
                         using (MySqlDataReader reader = command.ExecuteReader()) {
                             if (reader.Read()) {
-                                tableDTO = new TableDTO();
-                                tableDTO.champID = reader.GetString("champID");
-                                tableDTO.champ2 = reader.GetString("champ1");
-                                tableDTO.champ2 = reader.GetString("champ2");
-                                tableDTO.champ3 = reader.GetString("champ3");
-                                tableDTO.champ4 = reader.GetString("champ4");
-                                tableDTO.champ5 = reader.GetString("champ5");
+                                siegeDTO = new SiegeDTO();
+                                siegeDTO.IdSiege = reader.GetInt32("IdSiege");
+                                siegeDTO.Type = reader.GetString("Type");
+                                siegeDTO.Numero = reader.GetInt32("Numero");
+                                siegeDTO.IdVol = reader.GetInt32("IdVol");
                             }
                         }
                     }
@@ -94,25 +91,23 @@ namespace Prj_Final_2017_.Models.DAO {
             catch (MySqlException mysqlException) {
                 System.Diagnostics.Debug.WriteLine(mysqlException.Message);
             }
-            return tableDTO;
+            return siegeDTO;
         }
 
         /// <summary>
-        /// Fait un Update dans la BD sur la table tableBD
+        /// Fait un Update dans la BD sur la table Siege
         /// </summary>
-        /// <param name="tableDTO">tableBD a modifier</param>
-        public void Update(TableDTO tableDTO) {
+        /// <param name="siegeDTO">Siege a modifier</param>
+        public void Update(SiegeDTO siegeDTO) {
             try {
                 using (MySqlConnection connection = connexion.getConnexion()) {
                     connection.Open();
-                    using (MySqlCommand command = new MySqlCommand(TableDAO.UPDATE_QUERY, connection)) {
+                    using (MySqlCommand command = new MySqlCommand(SiegeDAO.UPDATE_QUERY, connection)) {
                         command.Prepare();
-                        command.Parameters.AddWithValue("champ1", tableDTO.champ1);
-                        command.Parameters.AddWithValue("champ1", tableDTO.champ1);
-                        command.Parameters.AddWithValue("champ2", tableDTO.champ2);
-                        command.Parameters.AddWithValue("champ3", tableDTO.champ3);
-                        command.Parameters.AddWithValue("champ4", tableDTO.champ4);
-                        command.Parameters.AddWithValue("champID", tableDTO.champID);
+                        command.Parameters.AddWithValue("Type", siegeDTO.Type);
+                        command.Parameters.AddWithValue("Numero", siegeDTO.Numero);
+                        command.Parameters.AddWithValue("IdVol", siegeDTO.IdVol);
+                        command.Parameters.AddWithValue("IdSiege", siegeDTO.IdSiege);
 
                         command.ExecuteNonQuery();
                     }
@@ -124,16 +119,16 @@ namespace Prj_Final_2017_.Models.DAO {
         }
 
         /// <summary>
-        /// Fait un Delete dans la BD sur la table tableBD
+        /// Fait un Delete dans la BD sur la table Siege
         /// </summary>
-        /// <param name="tableDTO">tableBD a supprimer</param>
-        public void Delete(TableDTO tableDTO) {
+        /// <param name="siegeDTO">Siege a supprimer</param>
+        public void Delete(SiegeDTO siegeDTO) {
             try {
                 using (MySqlConnection connection = connexion.getConnexion()) {
                     connection.Open();
-                    using (MySqlCommand command = new MySqlCommand(TableDAO.DELETE_QUERY, connection)) {
+                    using (MySqlCommand command = new MySqlCommand(SiegeDAO.DELETE_QUERY, connection)) {
                         command.Prepare();
-                        command.Parameters.AddWithValue("champID", tableDTO.champID);
+                        command.Parameters.AddWithValue("IdSiege", siegeDTO.IdSiege);
 
                         command.ExecuteNonQuery();
                     }
@@ -145,15 +140,15 @@ namespace Prj_Final_2017_.Models.DAO {
         }
 
         /// <summary>
-        /// Retourne la liste de tous les tableBDs de la table tableBD
+        /// Retourne la liste de tous les Sieges de la table Siege
         /// </summary>
-        /// <returns>La liste de tous les tableBDs; une liste vide sinon</returns>
+        /// <returns>La liste de tous les Sieges; une liste vide sinon</returns>
         public DataSet GetAll() {
             DataSet dataset = null;
             try {
                 using (MySqlConnection connection = connexion.getConnexion()) {
                     connection.Open();
-                    using (MySqlCommand command = new MySqlCommand(TableDAO.GET_ALL_QUERY, connection)) {
+                    using (MySqlCommand command = new MySqlCommand(SiegeDAO.GET_ALL_QUERY, connection)) {
                         MySqlDataAdapter adapter = new MySqlDataAdapter(command);
                         dataset = new DataSet();
                         adapter.Fill(dataset);

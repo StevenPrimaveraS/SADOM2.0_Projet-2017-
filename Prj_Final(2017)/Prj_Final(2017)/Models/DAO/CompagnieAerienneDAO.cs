@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using MySql.Data.MySqlClient;
 using System.Data;
+using Prj_Final_2017_.DTO;
 
 namespace Prj_Final_2017_.Models.DAO {
     public class TableDAO {
@@ -81,7 +82,7 @@ namespace Prj_Final_2017_.Models.DAO {
                             if (reader.Read()) {
                                 tableDTO = new TableDTO();
                                 tableDTO.champID = reader.GetString("champID");
-                                tableDTO.champ2 = reader.GetString("champ1");
+                                tableDTO.champ1 = reader.GetString("champ1");
                                 tableDTO.champ2 = reader.GetString("champ2");
                                 tableDTO.champ3 = reader.GetString("champ3");
                                 tableDTO.champ4 = reader.GetString("champ4");
@@ -108,10 +109,10 @@ namespace Prj_Final_2017_.Models.DAO {
                     using (MySqlCommand command = new MySqlCommand(TableDAO.UPDATE_QUERY, connection)) {
                         command.Prepare();
                         command.Parameters.AddWithValue("champ1", tableDTO.champ1);
-                        command.Parameters.AddWithValue("champ1", tableDTO.champ1);
                         command.Parameters.AddWithValue("champ2", tableDTO.champ2);
                         command.Parameters.AddWithValue("champ3", tableDTO.champ3);
                         command.Parameters.AddWithValue("champ4", tableDTO.champ4);
+                        command.Parameters.AddWithValue("champ5", tableDTO.champ5);
                         command.Parameters.AddWithValue("champID", tableDTO.champID);
 
                         command.ExecuteNonQuery();

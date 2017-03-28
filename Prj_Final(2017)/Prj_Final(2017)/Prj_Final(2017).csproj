@@ -49,6 +49,9 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MySql.Data">
+      <HintPath>..\packages\MySql.Data.6.9.9\lib\net45\MySql.Data.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -189,7 +192,7 @@
     <Compile Include="Models\DAO\CompagnieAerienneDAO.cs" />
     <Compile Include="Models\DAO\CompteFournisseurChambreDAO.cs" />
     <Compile Include="Models\DAO\CompteFournisseurSiegeDAO.cs" />
-    <Compile Include="Models\DAO\CompteFournusseurVoitureDAO.cs" />
+    <Compile Include="Models\DAO\CompteFournisseurVoitureDAO.cs" />
     <Compile Include="Models\DAO\CompteParticulierDAO.cs" />
     <Compile Include="Models\DAO\ForfaitDAO.cs" />
     <Compile Include="Models\DAO\HotelDAO.cs" />
@@ -205,7 +208,7 @@
     <Compile Include="Models\DTO\CompagnieAerienneDTO.cs" />
     <Compile Include="Models\DTO\CompteFournisseurChambreDTO.cs" />
     <Compile Include="Models\DTO\CompteFournisseurSiegeDTO.cs" />
-    <Compile Include="Models\DTO\CompteFournusseurVoitureDTO.cs" />
+    <Compile Include="Models\DTO\CompteFournisseurVoitureDTO.cs" />
     <Compile Include="Models\DTO\CompteParticulierDTO.cs" />
     <Compile Include="Models\DTO\ForfaitDTO.cs" />
     <Compile Include="Models\DTO\HotelDTO.cs" />

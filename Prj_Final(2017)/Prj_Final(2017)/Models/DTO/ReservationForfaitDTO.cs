@@ -11,7 +11,7 @@ namespace Prj_Final_2017_.DTO {
 
         public int IdParticulier { get; set; }
 
-        public string DateReservaton { get; set; }
+        public string DateReservation { get; set; }
 
         public string DateFinReservation { get; set; }
     }
