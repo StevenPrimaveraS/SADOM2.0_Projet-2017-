@@ -187,6 +187,7 @@
     <Compile Include="Models\Connexion\Connexion.cs" />
     <Compile Include="Models\DTO\AgenceVoitureDTO.cs" />
     <Compile Include="Models\DTO\ChambreDTO.cs" />
+    <Compile Include="Models\DTO\CompagnieAerienneDTO.cs" />
     <Compile Include="Models\DTO\CompteFournisseurChambreDTO.cs" />
     <Compile Include="Models\DTO\CompteFournisseurSiegeDTO.cs" />
     <Compile Include="Models\DTO\CompteFournusseurVoitureDTO.cs" />
