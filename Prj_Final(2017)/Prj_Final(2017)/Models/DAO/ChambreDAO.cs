@@ -7,7 +7,7 @@ using System.Data;
 using Prj_Final_2017_.DTO;
 
 namespace Prj_Final_2017_.Models.DAO {
-    public class TableDAO {
+    public class ChambreDAO {
 
         /* **********************************
          * *** Pour ctrl + F rapidement : ***
@@ -30,13 +30,13 @@ namespace Prj_Final_2017_.Models.DAO {
 
 
         Connexion.Connexion connexion;
-        private static readonly string INSERT_QUERY = "INSERT INTO tableBD(`champ1`, `champ2`, `champ3`, `champ4`, `champ5`) VALUES(@champ1, @champ2, @champ3, @champ4, @champ5)";
-        private static readonly string READ_QUERY = "SELECT `champID`, `champ1`, `champ2`, `champ3`, `champ4`, `champ5` FROM tableBD WHERE `champID` = @champID";
-        private static readonly string UPDATE_QUERY = "UPDATE tableBD SET `champ1` = @champ1, `champ2` = @champ2, `champ3` = @champ3, `champ4` = @champ4, `champ5` = @champ5 WHERE `champID` = @champID";
-        private static readonly string DELETE_QUERY = "DELETE FROM tableBD WHERE `champID` = @champID";
-        private static readonly string GET_ALL_QUERY = "SELECT `champID`, `champ1`, `champ2`, `champ3`, `champ4`, `champ5` FROM tableBD";
+        private static readonly string INSERT_QUERY = "INSERT INTO Chambre('NumeroChambre','NomChambre', 'Tarif', 'MaxPersonne', 'Taille', 'Description', 'IdHotel') VALUES(@champ1, @champ2, @champ3, @champ4, @champ5, @champ6, @champ7)";
+        private static readonly string READ_QUERY = "SELECT 'IdChambre','NumeroChambre', 'NomChambre', 'Tarif', 'MaxPersonne', 'Taille', 'Description', 'IdHotel' FROM Chambre WHERE 'IdChambre' = @champID";
+        private static readonly string UPDATE_QUERY = "UPDATE Chambre SET 'NumeroChambre' = @champ1, 'NomChambre' = @champ2, 'Tarif' = @champ3, 'MaxPersonne' = @champ4, 'Taille' = @champ5, 'Description' = @champ6, 'IdHotel = @champ7' WHERE 'IdChambre' = @champID";
+        private static readonly string DELETE_QUERY = "DELETE FROM Chambre WHERE 'IdChambre' = @champID";
+        private static readonly string GET_ALL_QUERY = "SELECT 'IdChambre', 'NumeroChambre', 'NomChambre', 'Tarif', 'MaxPersonne', 'Taille', 'Description', 'IdHotel' FROM Chambre";
 
-        public TableDAO() {
+        public ChambreDAO() {
             connexion = new Connexion.Connexion();
         }
 
@@ -44,17 +44,19 @@ namespace Prj_Final_2017_.Models.DAO {
         /// Fait un Insert dans la BD sur la table tableBD
         /// </summary>
         /// <param name="tableDTO">tableBD a ajouter</param>
-        public void Add(TableDTO tableDTO) {
+        public void Add(ChambreDTO chambreDTO) {
             try {
                 using (MySqlConnection connection = connexion.getConnexion()) {
                     connection.Open();
-                    using (MySqlCommand command = new MySqlCommand(TableDAO.INSERT_QUERY, connection)) {
+                    using (MySqlCommand command = new MySqlCommand(ChambreDAO.INSERT_QUERY, connection)) {
                         command.Prepare();
-                        command.Parameters.AddWithValue("champ1", tableDTO.champ1);
-                        command.Parameters.AddWithValue("champ2", tableDTO.champ2);
-                        command.Parameters.AddWithValue("champ3", tableDTO.champ3);
-                        command.Parameters.AddWithValue("champ4", tableDTO.champ4);
-                        command.Parameters.AddWithValue("champ5", tableDTO.champ5);
+                        command.Parameters.AddWithValue("champ1", chambreDTO.NumeroChambre);
+                        command.Parameters.AddWithValue("champ2", chambreDTO.NomChambre);
+                        command.Parameters.AddWithValue("champ3", chambreDTO.Tarif);
+                        command.Parameters.AddWithValue("champ4", chambreDTO.MaxPersonne);
+                        command.Parameters.AddWithValue("champ5", chambreDTO.Taille);
+                        command.Parameters.AddWithValue("champ6", chambreDTO.Description);
+                        command.Parameters.AddWithValue("champ7", chambreDTO.IdHotel);
 
                         command.ExecuteNonQuery();
                     }
@@ -70,23 +72,25 @@ namespace Prj_Final_2017_.Models.DAO {
         /// </summary>
         /// <param name="champID">l'id de tableBD que l'on veut read</param>
         /// <returns>une instance de TableDTO; null sinon</returns>
-        public TableDTO Read(int champID) {
-            TableDTO tableDTO = null;
+        public ChambreDTO Read(int champID) {
+            ChambreDTO chambreDTO = null;
             try {
                 using (MySqlConnection connection = connexion.getConnexion()) {
                     connection.Open();
-                    using (MySqlCommand command = new MySqlCommand(TableDAO.READ_QUERY, connection)) {
+                    using (MySqlCommand command = new MySqlCommand(ChambreDAO.READ_QUERY, connection)) {
                         command.Prepare();
                         command.Parameters.AddWithValue("champID", champID);
                         using (MySqlDataReader reader = command.ExecuteReader()) {
                             if (reader.Read()) {
-                                tableDTO = new TableDTO();
-                                tableDTO.champID = reader.GetString("champID");
-                                tableDTO.champ1 = reader.GetString("champ1");
-                                tableDTO.champ2 = reader.GetString("champ2");
-                                tableDTO.champ3 = reader.GetString("champ3");
-                                tableDTO.champ4 = reader.GetString("champ4");
-                                tableDTO.champ5 = reader.GetString("champ5");
+                                chambreDTO= new ChambreDTO();
+                                chambreDTO.IdChambre= reader.GetString("champID");
+                                chambreDTO.NumeroChambre = reader.GetString("champ1");
+                                chambreDTO.NomChambre = reader.GetString("champ2");
+                                chambreDTO.Tarif = reader.GetString("champ3");
+                                chambreDTO.MaxPersonne = reader.GetString("champ4");
+                                chambreDTO.Taille = reader.GetString("champ5");
+                                chambreDTO.Description = reader.GetString("champ6");
+                                chambreDTO.IdHotel = reader.GetString("champ7");
                             }
                         }
                     }
@@ -95,25 +99,27 @@ namespace Prj_Final_2017_.Models.DAO {
             catch (MySqlException mysqlException) {
                 System.Diagnostics.Debug.WriteLine(mysqlException.Message);
             }
-            return tableDTO;
+            return chambreDTO;
         }
 
         /// <summary>
         /// Fait un Update dans la BD sur la table tableBD
         /// </summary>
         /// <param name="tableDTO">tableBD a modifier</param>
-        public void Update(TableDTO tableDTO) {
+        public void Update(ChambreDTO chambreDTO) {
             try {
                 using (MySqlConnection connection = connexion.getConnexion()) {
                     connection.Open();
-                    using (MySqlCommand command = new MySqlCommand(TableDAO.UPDATE_QUERY, connection)) {
+                    using (MySqlCommand command = new MySqlCommand(ChambreDAO.UPDATE_QUERY, connection)) {
                         command.Prepare();
-                        command.Parameters.AddWithValue("champ1", tableDTO.champ1);
-                        command.Parameters.AddWithValue("champ2", tableDTO.champ2);
-                        command.Parameters.AddWithValue("champ3", tableDTO.champ3);
-                        command.Parameters.AddWithValue("champ4", tableDTO.champ4);
-                        command.Parameters.AddWithValue("champ5", tableDTO.champ5);
-                        command.Parameters.AddWithValue("champID", tableDTO.champID);
+                        command.Parameters.AddWithValue("champ1", chambreDTO.NumeroChambre);
+                        command.Parameters.AddWithValue("champ2", chambreDTO.NomChambre);
+                        command.Parameters.AddWithValue("champ3", chambreDTO.Tarif);
+                        command.Parameters.AddWithValue("champ4", chambreDTO.MaxPersonne);
+                        command.Parameters.AddWithValue("champ5", chambreDTO.Taille);
+                        command.Parameters.AddWithValue("champ6", chambreDTO.Description);
+                        command.Parameters.AddWithValue("champ7", chambreDTO.IdHotel);
+                        command.Parameters.AddWithValue("champID", chambreDTO.IdChambre);
 
                         command.ExecuteNonQuery();
                     }
@@ -128,13 +134,13 @@ namespace Prj_Final_2017_.Models.DAO {
         /// Fait un Delete dans la BD sur la table tableBD
         /// </summary>
         /// <param name="tableDTO">tableBD a supprimer</param>
-        public void Delete(TableDTO tableDTO) {
+        public void Delete(ChambreDTO chambreDTO) {
             try {
                 using (MySqlConnection connection = connexion.getConnexion()) {
                     connection.Open();
-                    using (MySqlCommand command = new MySqlCommand(TableDAO.DELETE_QUERY, connection)) {
+                    using (MySqlCommand command = new MySqlCommand(ChambreDAO.DELETE_QUERY, connection)) {
                         command.Prepare();
-                        command.Parameters.AddWithValue("champID", tableDTO.champID);
+                        command.Parameters.AddWithValue("champID", chambreDTO.IdChambre);
 
                         command.ExecuteNonQuery();
                     }
@@ -154,7 +160,7 @@ namespace Prj_Final_2017_.Models.DAO {
             try {
                 using (MySqlConnection connection = connexion.getConnexion()) {
                     connection.Open();
-                    using (MySqlCommand command = new MySqlCommand(TableDAO.GET_ALL_QUERY, connection)) {
+                    using (MySqlCommand command = new MySqlCommand(ChambreDAO.GET_ALL_QUERY, connection)) {
                         MySqlDataAdapter adapter = new MySqlDataAdapter(command);
                         dataset = new DataSet();
                         adapter.Fill(dataset);

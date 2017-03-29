@@ -5,9 +5,10 @@ using System.Web;
 using MySql.Data.MySqlClient;
 using System.Data;
 using Prj_Final_2017_.DTO;
+using Prj_Final_2017_.Models.DTO;
 
 namespace Prj_Final_2017_.Models.DAO {
-    public class TableDAO {
+    public class CompagnieAerienneDAO {
 
         /* **********************************
          * *** Pour ctrl + F rapidement : ***
@@ -30,13 +31,13 @@ namespace Prj_Final_2017_.Models.DAO {
 
 
         Connexion.Connexion connexion;
-        private static readonly string INSERT_QUERY = "INSERT INTO tableBD(`champ1`, `champ2`, `champ3`, `champ4`, `champ5`) VALUES(@champ1, @champ2, @champ3, @champ4, @champ5)";
-        private static readonly string READ_QUERY = "SELECT `champID`, `champ1`, `champ2`, `champ3`, `champ4`, `champ5` FROM tableBD WHERE `champID` = @champID";
-        private static readonly string UPDATE_QUERY = "UPDATE tableBD SET `champ1` = @champ1, `champ2` = @champ2, `champ3` = @champ3, `champ4` = @champ4, `champ5` = @champ5 WHERE `champID` = @champID";
-        private static readonly string DELETE_QUERY = "DELETE FROM tableBD WHERE `champID` = @champID";
-        private static readonly string GET_ALL_QUERY = "SELECT `champID`, `champ1`, `champ2`, `champ3`, `champ4`, `champ5` FROM tableBD";
+        private static readonly string INSERT_QUERY = "INSERT INTO CompagnieAerienne('Nom', 'Telephone') VALUES(@champ1, @champ2)";
+        private static readonly string READ_QUERY = "SELECT 'IdCompagnieAerienne', 'Nom', 'Telephone' FROM CompagnieAerienne WHERE 'IdCompagnieAerienne' = @champID";
+        private static readonly string UPDATE_QUERY = "UPDATE CompagnieAerienne SET 'Nom' = @champ1, 'Telephone' = @champ2 WHERE 'IdCompagnieAerienne' = @champID";
+        private static readonly string DELETE_QUERY = "DELETE FROM CompagnieAerienne WHERE 'IdCompagnieAerienne' = @champID";
+        private static readonly string GET_ALL_QUERY = "SELECT 'IdCompagnieAerienne', 'Nom', 'Telephone' FROM CompagnieAerienne";
 
-        public TableDAO() {
+        public CompagnieAerienneDAO() {
             connexion = new Connexion.Connexion();
         }
 
@@ -44,18 +45,15 @@ namespace Prj_Final_2017_.Models.DAO {
         /// Fait un Insert dans la BD sur la table tableBD
         /// </summary>
         /// <param name="tableDTO">tableBD a ajouter</param>
-        public void Add(TableDTO tableDTO) {
+        public void Add(CompagnieAerienneDTO compagnieAerienneDTO) {
             try {
                 using (MySqlConnection connection = connexion.getConnexion()) {
                     connection.Open();
-                    using (MySqlCommand command = new MySqlCommand(TableDAO.INSERT_QUERY, connection)) {
+                    using (MySqlCommand command = new MySqlCommand(CompagnieAerienneDAO.INSERT_QUERY, connection)) {
                         command.Prepare();
-                        command.Parameters.AddWithValue("champ1", tableDTO.champ1);
-                        command.Parameters.AddWithValue("champ2", tableDTO.champ2);
-                        command.Parameters.AddWithValue("champ3", tableDTO.champ3);
-                        command.Parameters.AddWithValue("champ4", tableDTO.champ4);
-                        command.Parameters.AddWithValue("champ5", tableDTO.champ5);
-
+                        command.Parameters.AddWithValue("champ1", compagnieAerienneDTO.Nom);
+                        command.Parameters.AddWithValue("champ2", compagnieAerienneDTO.Telephone);
+         
                         command.ExecuteNonQuery();
                     }
                 }
@@ -70,23 +68,20 @@ namespace Prj_Final_2017_.Models.DAO {
         /// </summary>
         /// <param name="champID">l'id de tableBD que l'on veut read</param>
         /// <returns>une instance de TableDTO; null sinon</returns>
-        public TableDTO Read(int champID) {
-            TableDTO tableDTO = null;
+        public CompagnieAerienneDTO Read(int champID) {
+            CompagnieAerienneDTO compagnieAerienneDTO = null;
             try {
                 using (MySqlConnection connection = connexion.getConnexion()) {
                     connection.Open();
-                    using (MySqlCommand command = new MySqlCommand(TableDAO.READ_QUERY, connection)) {
+                    using (MySqlCommand command = new MySqlCommand(CompagnieAerienneDAO.READ_QUERY, connection)) {
                         command.Prepare();
                         command.Parameters.AddWithValue("champID", champID);
                         using (MySqlDataReader reader = command.ExecuteReader()) {
                             if (reader.Read()) {
-                                tableDTO = new TableDTO();
-                                tableDTO.champID = reader.GetString("champID");
-                                tableDTO.champ1 = reader.GetString("champ1");
-                                tableDTO.champ2 = reader.GetString("champ2");
-                                tableDTO.champ3 = reader.GetString("champ3");
-                                tableDTO.champ4 = reader.GetString("champ4");
-                                tableDTO.champ5 = reader.GetString("champ5");
+                                compagnieAerienneDTO = new CompagnieAerienneDTO();
+                                compagnieAerienneDTO.IdCompagnieAerienne = reader.GetString("champID");
+                                compagnieAerienneDTO.Nom = reader.GetString("champ1");
+                                compagnieAerienneDTO.Telephone = reader.GetString("champ2");
                             }
                         }
                     }
@@ -95,25 +90,22 @@ namespace Prj_Final_2017_.Models.DAO {
             catch (MySqlException mysqlException) {
                 System.Diagnostics.Debug.WriteLine(mysqlException.Message);
             }
-            return tableDTO;
+            return compagnieAerienneDTO;
         }
 
         /// <summary>
         /// Fait un Update dans la BD sur la table tableBD
         /// </summary>
         /// <param name="tableDTO">tableBD a modifier</param>
-        public void Update(TableDTO tableDTO) {
+        public void Update(CompagnieAerienneDTO compagnieAerienneDTO) {
             try {
                 using (MySqlConnection connection = connexion.getConnexion()) {
                     connection.Open();
-                    using (MySqlCommand command = new MySqlCommand(TableDAO.UPDATE_QUERY, connection)) {
+                    using (MySqlCommand command = new MySqlCommand(CompagnieAerienneDAO.UPDATE_QUERY, connection)) {
                         command.Prepare();
-                        command.Parameters.AddWithValue("champ1", tableDTO.champ1);
-                        command.Parameters.AddWithValue("champ2", tableDTO.champ2);
-                        command.Parameters.AddWithValue("champ3", tableDTO.champ3);
-                        command.Parameters.AddWithValue("champ4", tableDTO.champ4);
-                        command.Parameters.AddWithValue("champ5", tableDTO.champ5);
-                        command.Parameters.AddWithValue("champID", tableDTO.champID);
+                        command.Parameters.AddWithValue("champ1", compagnieAerienneDTO.Nom);
+                        command.Parameters.AddWithValue("champ2", compagnieAerienneDTO.Telephone);
+                        command.Parameters.AddWithValue("champID", compagnieAerienneDTO.IdCompagnieAerienne);
 
                         command.ExecuteNonQuery();
                     }
@@ -128,13 +120,13 @@ namespace Prj_Final_2017_.Models.DAO {
         /// Fait un Delete dans la BD sur la table tableBD
         /// </summary>
         /// <param name="tableDTO">tableBD a supprimer</param>
-        public void Delete(TableDTO tableDTO) {
+        public void Delete(CompagnieAerienneDTO compagnieAerienneDTO) {
             try {
                 using (MySqlConnection connection = connexion.getConnexion()) {
                     connection.Open();
-                    using (MySqlCommand command = new MySqlCommand(TableDAO.DELETE_QUERY, connection)) {
+                    using (MySqlCommand command = new MySqlCommand(CompagnieAerienneDAO.DELETE_QUERY, connection)) {
                         command.Prepare();
-                        command.Parameters.AddWithValue("champID", tableDTO.champID);
+                        command.Parameters.AddWithValue("champID", compagnieAerienneDTO.IdCompagnieAerienne);
 
                         command.ExecuteNonQuery();
                     }
@@ -154,7 +146,7 @@ namespace Prj_Final_2017_.Models.DAO {
             try {
                 using (MySqlConnection connection = connexion.getConnexion()) {
                     connection.Open();
-                    using (MySqlCommand command = new MySqlCommand(TableDAO.GET_ALL_QUERY, connection)) {
+                    using (MySqlCommand command = new MySqlCommand(CompagnieAerienneDAO.GET_ALL_QUERY, connection)) {
                         MySqlDataAdapter adapter = new MySqlDataAdapter(command);
                         dataset = new DataSet();
                         adapter.Fill(dataset);
