@@ -10,6 +10,12 @@
             @Html.ActionLink("Bonjour " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
         </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Se déconnecter</a></li>
+        <li>
+            <a href="@Url.Action("Panier", "Panier")">
+                <span class="glyphicon glyphicon-shopping-cart"></span>
+                Panier
+            </a>
+        </li>
     </ul>
     }
 }

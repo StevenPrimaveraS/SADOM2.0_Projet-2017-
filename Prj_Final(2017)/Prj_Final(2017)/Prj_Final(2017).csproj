@@ -187,22 +187,6 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Connexion\Connexion.cs" />
-    <Compile Include="Models\DAO\AgenceVoitureDAO.cs" />
-    <Compile Include="Models\DAO\ChambreDAO.cs" />
-    <Compile Include="Models\DAO\CompagnieAerienneDAO.cs" />
-    <Compile Include="Models\DAO\CompteFournisseurChambreDAO.cs" />
-    <Compile Include="Models\DAO\CompteFournisseurSiegeDAO.cs" />
-    <Compile Include="Models\DAO\CompteFournisseurVoitureDAO.cs" />
-    <Compile Include="Models\DAO\CompteParticulierDAO.cs" />
-    <Compile Include="Models\DAO\ForfaitDAO.cs" />
-    <Compile Include="Models\DAO\HotelDAO.cs" />
-    <Compile Include="Models\DAO\ReservationChambreDAO.cs" />
-    <Compile Include="Models\DAO\ReservationForfaitDAO.cs" />
-    <Compile Include="Models\DAO\ReservationSiegeDAO.cs" />
-    <Compile Include="Models\DAO\ReservationVoitureDAO.cs" />
-    <Compile Include="Models\DAO\SiegeDAO.cs" />
-    <Compile Include="Models\DAO\VoitureDAO.cs" />
-    <Compile Include="Models\DAO\VolDAO.cs" />
     <Compile Include="Models\DTO\AgenceVoitureDTO.cs" />
     <Compile Include="Models\DTO\ChambreDTO.cs" />
     <Compile Include="Models\DTO\CompagnieAerienneDTO.cs" />
@@ -225,8 +209,11 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\accueil.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Contact.css" />
+    <Content Include="Content\StylePrincipal.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
