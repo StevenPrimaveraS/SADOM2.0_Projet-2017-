@@ -427,6 +427,76 @@ ALTER TABLE `voiture`
 --
 ALTER TABLE `vol`
   MODIFY `IdVol` int(4) NOT NULL AUTO_INCREMENT;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `comptefournisseurchambre`
+--
+ALTER TABLE `comptefournisseurchambre`
+ADD CONSTRAINT `comptefournisseurchambre_ibfk_1` FOREIGN KEY (`IdHotel`) REFERENCES `hotel` (`IdHotel`);
+--
+-- Constraints for table `comptefournisseurvoiture`
+--
+ALTER TABLE `comptefournisseurvoiture`
+ADD CONSTRAINT `comptefournisseurvoiture_ibfk_1` FOREIGN KEY (`IdAgenceDeVoiture`) REFERENCES `agencevoiture` (`IdAgenceVoiture`);
+--
+-- Constraints for table `comptefournisseursiege`
+--
+ALTER TABLE `comptefournisseursiege`
+ADD CONSTRAINT `comptefournisseursiege_ibfk_1` FOREIGN KEY (`IdCompagnieAerienne`) REFERENCES `compagnieaerienne` (`IdCompagnieAerienne`);
+--
+-- Constraints for table `chambre`
+--
+ALTER TABLE `chambre`
+ADD CONSTRAINT `chambre_ibfk_1` FOREIGN KEY (`IdHotel`) REFERENCES `hotel` (`IdHotel`);
+--
+-- Constraints for table `voiture`
+--
+ALTER TABLE `voiture`
+ADD CONSTRAINT `voiture_ibfk_1` FOREIGN KEY (`IdAgence`) REFERENCES `agencevoiture` (`IdAgenceVoiture`);
+--
+-- Constraints for table `vol`
+--
+ALTER TABLE `vol`
+ADD CONSTRAINT `vol_ibfk_1` FOREIGN KEY (`IdCompagnieAerienne`) REFERENCES `compagnieaerienne` (`IdCompagnieAerienne`);
+--
+-- Constraints for table `siege`
+--
+ALTER TABLE `siege`
+ADD CONSTRAINT `siege_ibfk_1` FOREIGN KEY (`IdVol`) REFERENCES `vol` (`IdVol`);
+--
+-- Constraints for table `forfait`
+--
+ALTER TABLE `forfait`
+ADD CONSTRAINT `forfait_ibfk_1` FOREIGN KEY (`IdChambre`) REFERENCES `chambre` (`IdChambre`),
+ADD CONSTRAINT `forfait_ibfk_2` FOREIGN KEY (`IdVoiture`) REFERENCES `voiture` (`IdVoiture`),
+ADD CONSTRAINT `forfait_ibfk_3` FOREIGN KEY (`IdSiege`) REFERENCES `siege` (`IdSiege`);
+--
+-- Constraints for table `reservationchambre`
+--
+ALTER TABLE `reservationchambre`
+ADD CONSTRAINT `reservationchambre_ibfk_1` FOREIGN KEY (`IdChambre`) REFERENCES `hotel` (`IdChambre`),
+ADD CONSTRAINT `reservationchambre_ibfk_2` FOREIGN KEY (`IdParticulier`) REFERENCES `compteparticulier` (`IdParticulier`);
+--
+-- Constraints for table `reservationvoiture`
+--
+ALTER TABLE `reservationvoiture`
+ADD CONSTRAINT `reservationvoiture_ibfk_1` FOREIGN KEY (`IdVoiture`) REFERENCES `voiture` (`IdVoiture`),
+ADD CONSTRAINT `reservationvoiture_ibfk_2` FOREIGN KEY (`IdParticulier`) REFERENCES `compteparticulier` (`IdParticulier`);
+--
+-- Constraints for table `reservationsiege`
+--
+ALTER TABLE `reservationsiege`
+ADD CONSTRAINT `reservationsiege_ibfk_1` FOREIGN KEY (`IdSiege`) REFERENCES `siege` (`IdSiege`),
+ADD CONSTRAINT `reservationsiege_ibfk_2` FOREIGN KEY (`IdParticulier`) REFERENCES `compteparticulier` (`IdParticulier`);
+--
+-- Constraints for table `reservationchambre`
+--
+ALTER TABLE `reservationchambre`
+ADD CONSTRAINT `reservationchambre_ibfk_1` FOREIGN KEY (`IdForfait`) REFERENCES `forfait` (`IdForfait`),
+ADD CONSTRAINT `reservationchambre_ibfk_2` FOREIGN KEY (`IdParticulier`) REFERENCES `compteparticulier` (`IdParticulier`);
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
