@@ -81,7 +81,7 @@ namespace Prj_Final_2017_.Models.DAO {
                         using (MySqlDataReader reader = command.ExecuteReader()) {
                             if (reader.Read()) {
                                 compagnieAerienneDTO = new CompagnieAerienneDTO();
-                                compagnieAerienneDTO.IdCompagnieAerienne = reader.GetString("IdCompagnieAerienne");
+                                compagnieAerienneDTO.IdCompagnieAerienne = reader.GetInt32("IdCompagnieAerienne");
                                 compagnieAerienneDTO.Nom = reader.GetString("Nom");
                                 compagnieAerienneDTO.Telephone = reader.GetString("Telephone");
                                 compagnieAerienneDTO.Adresse = reader.GetString("Adresse");
