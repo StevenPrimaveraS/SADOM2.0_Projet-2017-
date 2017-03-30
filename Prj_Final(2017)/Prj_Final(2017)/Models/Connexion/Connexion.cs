@@ -14,7 +14,7 @@ namespace Prj_Final_2017_.Models.Connexion {
             }
             private void CreateConnexion() {
                 try {
-                string ConnexionString = "String Connexion"; //ConfigurationManager.ConnectionStrings["mysqlConnexionString"].ConnectionString;
+                string ConnexionString = ConfigurationManager.ConnectionStrings["mysqlConnexionString"].ConnectionString;
                     MySqlConnection Connexion = new MySqlConnection(ConnexionString);
                     setConnexion(Connexion);
                 }
