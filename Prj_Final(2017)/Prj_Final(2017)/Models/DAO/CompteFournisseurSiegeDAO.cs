@@ -30,11 +30,11 @@ namespace Prj_Final_2017_.Models.DAO {
 
 
         Connexion.Connexion connexion;
-        private static readonly string INSERT_QUERY = "INSERT INTO CompteFournisseurSiege(`Courriel`, `Password`, `IdCompagnieAerienne`, `champ4`, `champ5`) VALUES(@Courriel, @Password, @IdCompagnieAerienne, @champ4, @champ5)";
-        private static readonly string READ_QUERY = "SELECT `IdFournisseur`, `Courriel`, `Password`, `IdCompagnieAerienne`, `champ4`, `champ5` FROM CompteFournisseurSiege WHERE `IdFournisseur` = @IdFournisseur";
-        private static readonly string UPDATE_QUERY = "UPDATE CompteFournisseurSiege SET `Courriel` = @Courriel, `Password` = @Password, `IdCompagnieAerienne` = @IdCompagnieAerienne, `champ4` = @champ4, `champ5` = @champ5 WHERE `IdFournisseur` = @IdFournisseur";
+        private static readonly string INSERT_QUERY = "INSERT INTO CompteFournisseurSiege(`Courriel`, `Password`, `IdCompagnieAerienne`) VALUES(@Courriel, @Password, @IdCompagnieAerienne)";
+        private static readonly string READ_QUERY = "SELECT `IdFournisseur`, `Courriel`, `Password`, `IdCompagnieAerienne` FROM CompteFournisseurSiege WHERE `IdFournisseur` = @IdFournisseur";
+        private static readonly string UPDATE_QUERY = "UPDATE CompteFournisseurSiege SET `Courriel` = @Courriel, `Password` = @Password, `IdCompagnieAerienne` = @IdCompagnieAerienne WHERE `IdFournisseur` = @IdFournisseur";
         private static readonly string DELETE_QUERY = "DELETE FROM CompteFournisseurSiege WHERE `IdFournisseur` = @IdFournisseur";
-        private static readonly string GET_ALL_QUERY = "SELECT `IdFournisseur`, `Courriel`, `Password`, `IdCompagnieAerienne`, `champ4`, `champ5` FROM CompteFournisseurSiege";
+        private static readonly string GET_ALL_QUERY = "SELECT `IdFournisseur`, `Courriel`, `Password`, `IdCompagnieAerienne` FROM CompteFournisseurSiege";
 
         public CompteFournisseurSiegeDAO() {
             connexion = new Connexion.Connexion();
@@ -53,8 +53,6 @@ namespace Prj_Final_2017_.Models.DAO {
                         command.Parameters.AddWithValue("Courriel", compteFournisseurSiegeDTO.Courriel);
                         command.Parameters.AddWithValue("Password", compteFournisseurSiegeDTO.Password);
                         command.Parameters.AddWithValue("IdCompagnieAerienne", compteFournisseurSiegeDTO.IdCompagnieAerienne);
-                        command.Parameters.AddWithValue("champ4", compteFournisseurSiegeDTO.champ4);
-                        command.Parameters.AddWithValue("champ5", compteFournisseurSiegeDTO.champ5);
 
                         command.ExecuteNonQuery();
                     }
@@ -81,12 +79,10 @@ namespace Prj_Final_2017_.Models.DAO {
                         using (MySqlDataReader reader = command.ExecuteReader()) {
                             if (reader.Read()) {
                                 compteFournisseurSiegeDTO = new CompteFournisseurSiegeDTO();
-                                compteFournisseurSiegeDTO.IdFournisseur = reader.GetString("IdFournisseur");
+                                compteFournisseurSiegeDTO.IdFournisseur = reader.GetInt32("IdFournisseur");
                                 compteFournisseurSiegeDTO.Courriel = reader.GetString("Courriel");
                                 compteFournisseurSiegeDTO.Password = reader.GetString("Password");
-                                compteFournisseurSiegeDTO.IdCompagnieAerienne = reader.GetString("IdCompagnieAerienne");
-                                compteFournisseurSiegeDTO.champ4 = reader.GetString("champ4");
-                                compteFournisseurSiegeDTO.champ5 = reader.GetString("champ5");
+                                compteFournisseurSiegeDTO.IdCompagnieAerienne = reader.GetInt32("IdCompagnieAerienne");
                             }
                         }
                     }
@@ -111,8 +107,6 @@ namespace Prj_Final_2017_.Models.DAO {
                         command.Parameters.AddWithValue("Courriel", compteFournisseurSiegeDTO.Courriel);
                         command.Parameters.AddWithValue("Password", compteFournisseurSiegeDTO.Password);
                         command.Parameters.AddWithValue("IdCompagnieAerienne", compteFournisseurSiegeDTO.IdCompagnieAerienne);
-                        command.Parameters.AddWithValue("champ4", compteFournisseurSiegeDTO.champ4);
-                        command.Parameters.AddWithValue("champ5", compteFournisseurSiegeDTO.champ5);
                         command.Parameters.AddWithValue("IdFournisseur", compteFournisseurSiegeDTO.IdFournisseur);
 
                         command.ExecuteNonQuery();

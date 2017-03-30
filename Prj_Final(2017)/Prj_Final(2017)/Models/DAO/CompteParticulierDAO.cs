@@ -30,11 +30,11 @@ namespace Prj_Final_2017_.Models.DAO {
 
 
         Connexion.Connexion connexion;
-        private static readonly string INSERT_QUERY = "INSERT INTO CompteParticulier(`Password`, `Prenom`, `Nom`, `Courriel`, `champ5`) VALUES(@Password, @Prenom, @Nom, @Courriel, @champ5)";
-        private static readonly string READ_QUERY = "SELECT `IdParticulier`, `Password`, `Prenom`, `Nom`, `Courriel`, `champ5` FROM CompteParticulier WHERE `IdParticulier` = @IdParticulier";
-        private static readonly string UPDATE_QUERY = "UPDATE CompteParticulier SET `Password` = @Password, `Prenom` = @Prenom, `Nom` = @Nom, `Courriel` = @Courriel, `champ5` = @champ5 WHERE `IdParticulier` = @IdParticulier";
+        private static readonly string INSERT_QUERY = "INSERT INTO CompteParticulier(`Password`, `Prenom`, `Nom`, `Courriel`) VALUES(@Password, @Prenom, @Nom, @Courriel)";
+        private static readonly string READ_QUERY = "SELECT `IdParticulier`, `Password`, `Prenom`, `Nom`, `Courriel` FROM CompteParticulier WHERE `IdParticulier` = @IdParticulier";
+        private static readonly string UPDATE_QUERY = "UPDATE CompteParticulier SET `Password` = @Password, `Prenom` = @Prenom, `Nom` = @Nom, `Courriel` = @Courriel WHERE `IdParticulier` = @IdParticulier";
         private static readonly string DELETE_QUERY = "DELETE FROM CompteParticulier WHERE `IdParticulier` = @IdParticulier";
-        private static readonly string GET_ALL_QUERY = "SELECT `IdParticulier`, `Password`, `Prenom`, `Nom`, `Courriel`, `champ5` FROM CompteParticulier";
+        private static readonly string GET_ALL_QUERY = "SELECT `IdParticulier`, `Password`, `Prenom`, `Nom`, `Courriel` FROM CompteParticulier";
 
         public CompteParticulierDAO() {
             connexion = new Connexion.Connexion();
@@ -54,7 +54,6 @@ namespace Prj_Final_2017_.Models.DAO {
                         command.Parameters.AddWithValue("Prenom", compteParticulierDTO.Prenom);
                         command.Parameters.AddWithValue("Nom", compteParticulierDTO.Nom);
                         command.Parameters.AddWithValue("Courriel", compteParticulierDTO.Courriel);
-                        command.Parameters.AddWithValue("champ5", compteParticulierDTO.champ5);
 
                         command.ExecuteNonQuery();
                     }
@@ -81,12 +80,11 @@ namespace Prj_Final_2017_.Models.DAO {
                         using (MySqlDataReader reader = command.ExecuteReader()) {
                             if (reader.Read()) {
                                 compteParticulierDTO = new CompteParticulierDTO();
-                                compteParticulierDTO.IdParticulier = reader.GetString("IdParticulier");
+                                compteParticulierDTO.IdParticulier = reader.GetInt32("IdParticulier");
                                 compteParticulierDTO.Password = reader.GetString("Password");
                                 compteParticulierDTO.Prenom = reader.GetString("Prenom");
                                 compteParticulierDTO.Nom = reader.GetString("Nom");
                                 compteParticulierDTO.Courriel = reader.GetString("Courriel");
-                                compteParticulierDTO.champ5 = reader.GetString("champ5");
                             }
                         }
                     }
@@ -112,7 +110,6 @@ namespace Prj_Final_2017_.Models.DAO {
                         command.Parameters.AddWithValue("Prenom", compteParticulierDTO.Prenom);
                         command.Parameters.AddWithValue("Nom", compteParticulierDTO.Nom);
                         command.Parameters.AddWithValue("Courriel", compteParticulierDTO.Courriel);
-                        command.Parameters.AddWithValue("champ5", compteParticulierDTO.champ5);
                         command.Parameters.AddWithValue("IdParticulier", compteParticulierDTO.IdParticulier);
 
                         command.ExecuteNonQuery();

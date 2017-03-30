@@ -8,9 +8,9 @@ namespace Prj_Final_2017_.DTO {
 
         public int IdParticulier { get; set; }
 
-        public int Password { get; set; }
+        public string Password { get; set; }
 
-        public int Prenom { get; set; }
+        public string Prenom { get; set; }
 
         public string Nom { get; set; }
 

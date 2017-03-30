@@ -21,8 +21,6 @@ namespace Prj_Final_2017_.Models.DAO {
          * Courriel = 1er champ de la table
          * Password = 2ième champ de la table
          * IdHotel = 3ième champ de la table
-         * champ4 = 4ième champ de la table
-         * champ5 = 5ième champ de la table
          * 
          * (les nom de champ doivent être pareil dans la BD et la classe DTO)
          * 
@@ -30,11 +28,11 @@ namespace Prj_Final_2017_.Models.DAO {
 
 
         Connexion.Connexion connexion;
-        private static readonly string INSERT_QUERY = "INSERT INTO CompteFournisseurChambre(`Courriel`, `Password`, `IdHotel`, `champ4`, `champ5`) VALUES(@Courriel, @Password, @IdHotel, @champ4, @champ5)";
-        private static readonly string READ_QUERY = "SELECT `IdFournisseur`, `Courriel`, `Password`, `IdHotel`, `champ4`, `champ5` FROM CompteFournisseurChambre WHERE `IdFournisseur` = @IdFournisseur";
-        private static readonly string UPDATE_QUERY = "UPDATE CompteFournisseurChambre SET `Courriel` = @Courriel, `Password` = @Password, `IdHotel` = @IdHotel, `champ4` = @champ4, `champ5` = @champ5 WHERE `IdFournisseur` = @IdFournisseur";
+        private static readonly string INSERT_QUERY = "INSERT INTO CompteFournisseurChambre(`Courriel`, `Password`, `IdHotel`) VALUES(@Courriel, @Password, @IdHotel)";
+        private static readonly string READ_QUERY = "SELECT `IdFournisseur`, `Courriel`, `Password`, `IdHotel` FROM CompteFournisseurChambre WHERE `IdFournisseur` = @IdFournisseur";
+        private static readonly string UPDATE_QUERY = "UPDATE CompteFournisseurChambre SET `Courriel` = @Courriel, `Password` = @Password, `IdHotel` = @IdHotel WHERE `IdFournisseur` = @IdFournisseur";
         private static readonly string DELETE_QUERY = "DELETE FROM CompteFournisseurChambre WHERE `IdFournisseur` = @IdFournisseur";
-        private static readonly string GET_ALL_QUERY = "SELECT `IdFournisseur`, `Courriel`, `Password`, `IdHotel`, `champ4`, `champ5` FROM CompteFournisseurChambre";
+        private static readonly string GET_ALL_QUERY = "SELECT `IdFournisseur`, `Courriel`, `Password`, `IdHotel` FROM CompteFournisseurChambre";
 
         public CompteFournisseurChambreDAO() {
             connexion = new Connexion.Connexion();
@@ -53,8 +51,6 @@ namespace Prj_Final_2017_.Models.DAO {
                         command.Parameters.AddWithValue("Courriel", compteFournisseurChambreDTO.Courriel);
                         command.Parameters.AddWithValue("Password", compteFournisseurChambreDTO.Password);
                         command.Parameters.AddWithValue("IdHotel", compteFournisseurChambreDTO.IdHotel);
-                        command.Parameters.AddWithValue("champ4", compteFournisseurChambreDTO.champ4);
-                        command.Parameters.AddWithValue("champ5", compteFournisseurChambreDTO.champ5);
 
                         command.ExecuteNonQuery();
                     }
@@ -81,12 +77,10 @@ namespace Prj_Final_2017_.Models.DAO {
                         using (MySqlDataReader reader = command.ExecuteReader()) {
                             if (reader.Read()) {
                                 compteFournisseurChambreDTO = new CompteFournisseurChambreDTO();
-                                compteFournisseurChambreDTO.IdFournisseur = reader.GetString("IdFournisseur");
+                                compteFournisseurChambreDTO.IdFournisseur = reader.GetInt32("IdFournisseur");
                                 compteFournisseurChambreDTO.Courriel = reader.GetString("Courriel");
                                 compteFournisseurChambreDTO.Password = reader.GetString("Password");
-                                compteFournisseurChambreDTO.IdHotel = reader.GetString("IdHotel");
-                                compteFournisseurChambreDTO.champ4 = reader.GetString("champ4");
-                                compteFournisseurChambreDTO.champ5 = reader.GetString("champ5");
+                                compteFournisseurChambreDTO.IdHotel = reader.GetInt32("IdHotel");
                             }
                         }
                     }
@@ -111,8 +105,6 @@ namespace Prj_Final_2017_.Models.DAO {
                         command.Parameters.AddWithValue("Courriel", compteFournisseurChambreDTO.Courriel);
                         command.Parameters.AddWithValue("Password", compteFournisseurChambreDTO.Password);
                         command.Parameters.AddWithValue("IdHotel", compteFournisseurChambreDTO.IdHotel);
-                        command.Parameters.AddWithValue("champ4", compteFournisseurChambreDTO.champ4);
-                        command.Parameters.AddWithValue("champ5", compteFournisseurChambreDTO.champ5);
                         command.Parameters.AddWithValue("IdFournisseur", compteFournisseurChambreDTO.IdFournisseur);
 
                         command.ExecuteNonQuery();

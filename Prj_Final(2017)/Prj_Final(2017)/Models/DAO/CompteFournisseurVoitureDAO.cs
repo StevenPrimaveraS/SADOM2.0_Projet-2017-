@@ -30,11 +30,11 @@ namespace Prj_Final_2017_.Models.DAO {
 
 
         Connexion.Connexion connexion;
-        private static readonly string INSERT_QUERY = "INSERT INTO CompteFournisseurVoiture(`Courriel`, `Password`, `IdAgenceVoiture`, `champ4`, `champ5`) VALUES(@Courriel, @Password, @IdAgenceVoiture, @champ4, @champ5)";
-        private static readonly string READ_QUERY = "SELECT `IdFournisseur`, `Courriel`, `Password`, `IdAgenceVoiture`, `champ4`, `champ5` FROM CompteFournisseurVoiture WHERE `IdFournisseur` = @IdFournisseur";
-        private static readonly string UPDATE_QUERY = "UPDATE CompteFournisseurVoiture SET `Courriel` = @Courriel, `Password` = @Password, `IdAgenceVoiture` = @IdAgenceVoiture, `champ4` = @champ4, `champ5` = @champ5 WHERE `IdFournisseur` = @IdFournisseur";
+        private static readonly string INSERT_QUERY = "INSERT INTO CompteFournisseurVoiture(`Courriel`, `Password`, `IdAgenceVoiture`) VALUES(@Courriel, @Password, @IdAgenceVoiture)";
+        private static readonly string READ_QUERY = "SELECT `IdFournisseur`, `Courriel`, `Password`, `IdAgenceVoiture` FROM CompteFournisseurVoiture WHERE `IdFournisseur` = @IdFournisseur";
+        private static readonly string UPDATE_QUERY = "UPDATE CompteFournisseurVoiture SET `Courriel` = @Courriel, `Password` = @Password, `IdAgenceVoiture` = @IdAgenceVoiture WHERE `IdFournisseur` = @IdFournisseur";
         private static readonly string DELETE_QUERY = "DELETE FROM CompteFournisseurVoiture WHERE `IdFournisseur` = @IdFournisseur";
-        private static readonly string GET_ALL_QUERY = "SELECT `IdFournisseur`, `Courriel`, `Password`, `IdAgenceVoiture`, `champ4`, `champ5` FROM CompteFournisseurVoiture";
+        private static readonly string GET_ALL_QUERY = "SELECT `IdFournisseur`, `Courriel`, `Password`, `IdAgenceVoiture` FROM CompteFournisseurVoiture";
 
         public CompteFournisseurVoitureDAO() {
             connexion = new Connexion.Connexion();
@@ -53,8 +53,6 @@ namespace Prj_Final_2017_.Models.DAO {
                         command.Parameters.AddWithValue("Courriel", compteFournisseurVoitureDTO.Courriel);
                         command.Parameters.AddWithValue("Password", compteFournisseurVoitureDTO.Password);
                         command.Parameters.AddWithValue("IdAgenceVoiture", compteFournisseurVoitureDTO.IdAgenceVoiture);
-                        command.Parameters.AddWithValue("champ4", compteFournisseurVoitureDTO.champ4);
-                        command.Parameters.AddWithValue("champ5", compteFournisseurVoitureDTO.champ5);
 
                         command.ExecuteNonQuery();
                     }
@@ -81,12 +79,10 @@ namespace Prj_Final_2017_.Models.DAO {
                         using (MySqlDataReader reader = command.ExecuteReader()) {
                             if (reader.Read()) {
                                 compteFournisseurVoitureDTO = new CompteFournisseurVoitureDTO();
-                                compteFournisseurVoitureDTO.IdFournisseur = reader.GetString("IdFournisseur");
+                                compteFournisseurVoitureDTO.IdFournisseur = reader.GetInt32("IdFournisseur");
                                 compteFournisseurVoitureDTO.Courriel = reader.GetString("Courriel");
                                 compteFournisseurVoitureDTO.Password = reader.GetString("Password");
-                                compteFournisseurVoitureDTO.IdAgenceVoiture = reader.GetString("IdAgenceVoiture");
-                                compteFournisseurVoitureDTO.champ4 = reader.GetString("champ4");
-                                compteFournisseurVoitureDTO.champ5 = reader.GetString("champ5");
+                                compteFournisseurVoitureDTO.IdAgenceVoiture = reader.GetInt32("IdAgenceVoiture");
                             }
                         }
                     }
@@ -111,8 +107,6 @@ namespace Prj_Final_2017_.Models.DAO {
                         command.Parameters.AddWithValue("Courriel", compteFournisseurVoitureDTO.Courriel);
                         command.Parameters.AddWithValue("Password", compteFournisseurVoitureDTO.Password);
                         command.Parameters.AddWithValue("IdAgenceVoiture", compteFournisseurVoitureDTO.IdAgenceVoiture);
-                        command.Parameters.AddWithValue("champ4", compteFournisseurVoitureDTO.champ4);
-                        command.Parameters.AddWithValue("champ5", compteFournisseurVoitureDTO.champ5);
                         command.Parameters.AddWithValue("IdFournisseur", compteFournisseurVoitureDTO.IdFournisseur);
 
                         command.ExecuteNonQuery();
