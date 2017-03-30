@@ -14,7 +14,7 @@ namespace Prj_Final_2017_.DTO {
 
         public int Tarif { get; set; }
 
-        public int Nbpassager { get; set; }
+        public int NbPassager { get; set; }
 
         public string Nom { get; set; }
 
