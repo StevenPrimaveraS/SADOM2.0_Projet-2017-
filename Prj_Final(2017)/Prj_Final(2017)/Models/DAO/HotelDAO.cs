@@ -13,16 +13,16 @@ namespace Prj_Final_2017_.Models.DAO {
          * *** Pour ctrl + F rapidement : ***
          * **********************************
          * 
-         * TableDAO = nom du dao de la table
-         * TableDTO = nom du DTO de la table
-         * tableDTO = instance de TableDTO
-         * tableBD = nom de la table dans la BD (requête)
-         * champID = champ d'ID de la table
-         * champ1 = 1er champ de la table
-         * champ2 = 2ième champ de la table
-         * champ3 = 3ième champ de la table
-         * champ4 = 4ième champ de la table
-         * champ5 = 5ième champ de la table
+         * HotelDAO = nom du dao de la table
+         * HotelDTO = nom du DTO de la table
+         * hotelDTO = instance de HotelDTO
+         * Hotel = nom de la table dans la BD (requête)
+         * IdHotel = champ d'ID de la table
+         * Nom = 1er champ de la table
+         * Telephone = 2ième champ de la table
+         * Adresse = 3ième champ de la table
+         * Ville = 4ième champ de la table
+         * Categorie = 5ième champ de la table
          * 
          * (les nom de champ doivent être pareil dans la BD et la classe DTO)
          * 
@@ -30,32 +30,32 @@ namespace Prj_Final_2017_.Models.DAO {
 
 
         Connexion.Connexion connexion;
-        private static readonly string INSERT_QUERY = "INSERT INTO Hotel('Nom', 'Telephone', 'Adresse', 'Ville', 'Categorie', 'Description') VALUES(@champ1, @champ2, @champ3, @champ4, @champ5, @champ6)";
-        private static readonly string READ_QUERY = "SELECT 'Nom', 'Telephone', 'Adresse', 'Ville', 'Categorie', 'Description' FROM Hotel WHERE `champID` = @champID";
-        private static readonly string UPDATE_QUERY = "UPDATE Hotel SET 'Nom' = @champ1, 'Telephone' = @champ2, 'Adresse' = @champ3, 'Ville' = @champ4, 'Categorie' = @champ5, 'Description' = @champ6 WHERE 'IdHotel' = @champID";
-        private static readonly string DELETE_QUERY = "DELETE FROM Hotel WHERE 'IdHotel' = @champID";
-        private static readonly string GET_ALL_QUERY = "SELECT 'IdHotel', 'Nom', 'Telephone', 'Adresse', 'Ville', 'Categorie', 'Description' FROM Hotel";
+        private static readonly string INSERT_QUERY = "INSERT INTO Hotel(`Nom`, `Telephone`, `Adresse`, `Ville`, `Categorie`, `Description`) VALUES(@Nom, @Telephone, @Adresse, @Ville, @Categorie, @Description)";
+        private static readonly string READ_QUERY = "SELECT `IdHotel`, `Nom`, `Telephone`, `Adresse`, `Ville`, `Categorie`, `Description` FROM Hotel WHERE `IdHotel` = @IdHotel";
+        private static readonly string UPDATE_QUERY = "UPDATE Hotel SET `Nom` = @Nom, `Telephone` = @Telephone, `Adresse` = @Adresse, `Ville` = @Ville, `Categorie` = @Categorie, `Description` = @Description WHERE `IdHotel` = @IdHotel";
+        private static readonly string DELETE_QUERY = "DELETE FROM Hotel WHERE `IdHotel` = @IdHotel";
+        private static readonly string GET_ALL_QUERY = "SELECT `IdHotel`, `Nom`, `Telephone`, `Adresse`, `Ville`, `Categorie`, `Description` FROM Hotel";
 
         public HotelDAO() {
             connexion = new Connexion.Connexion();
         }
 
         /// <summary>
-        /// Fait un Insert dans la BD sur la table tableBD
+        /// Fait un Insert dans la BD sur la table Hotel
         /// </summary>
-        /// <param name="tableDTO">tableBD a ajouter</param>
+        /// <param name="hotelDTO">Hotel a ajouter</param>
         public void Add(HotelDTO hotelDTO) {
             try {
                 using (MySqlConnection connection = connexion.getConnexion()) {
                     connection.Open();
                     using (MySqlCommand command = new MySqlCommand(HotelDAO.INSERT_QUERY, connection)) {
                         command.Prepare();
-                        command.Parameters.AddWithValue("champ1", hotelDTO.Nom);
-                        command.Parameters.AddWithValue("champ2", hotelDTO.Telephone);
-                        command.Parameters.AddWithValue("champ3", hotelDTO.Adresse);
-                        command.Parameters.AddWithValue("champ4", hotelDTO.Ville);
-                        command.Parameters.AddWithValue("champ5", hotelDTO.Categorie);
-                        command.Parameters.AddWithValue("champ6", hotelDTO.Categorie);
+                        command.Parameters.AddWithValue("Nom", hotelDTO.Nom);
+                        command.Parameters.AddWithValue("Telephone", hotelDTO.Telephone);
+                        command.Parameters.AddWithValue("Adresse", hotelDTO.Adresse);
+                        command.Parameters.AddWithValue("Ville", hotelDTO.Ville);
+                        command.Parameters.AddWithValue("Categorie", hotelDTO.Categorie);
+                        command.Parameters.AddWithValue("Description", hotelDTO.Description);
 
                         command.ExecuteNonQuery();
                     }
@@ -67,28 +67,29 @@ namespace Prj_Final_2017_.Models.DAO {
         }
 
         /// <summary>
-        /// Fait un Read dans la BD sur la table tableBD
+        /// Fait un Read dans la BD sur la table Hotel
         /// </summary>
-        /// <param name="champID">l'id de tableBD que l'on veut read</param>
-        /// <returns>une instance de TableDTO; null sinon</returns>
-        public HotelDTO Read(int champID) {
+        /// <param name="IdHotel">l'id de Hotel que l'on veut read</param>
+        /// <returns>une instance de HotelDTO; null sinon</returns>
+        public HotelDTO Read(int IdHotel) {
             HotelDTO hotelDTO = null;
             try {
                 using (MySqlConnection connection = connexion.getConnexion()) {
                     connection.Open();
                     using (MySqlCommand command = new MySqlCommand(HotelDAO.READ_QUERY, connection)) {
                         command.Prepare();
-                        command.Parameters.AddWithValue("HotelID", champID);
+                        command.Parameters.AddWithValue("IdHotel", IdHotel);
                         using (MySqlDataReader reader = command.ExecuteReader()) {
                             if (reader.Read()) {
                                 hotelDTO = new HotelDTO();
-                                hotelDTO.IdHotel= reader.GetString("HotelID");
+                                hotelDTO.IdHotel = reader.GetInt32("IdHotel");
                                 hotelDTO.Nom = reader.GetString("Nom");
-                                hotelDTO.Telephone= reader.GetString("Telephone");
+                                hotelDTO.Telephone = reader.GetString("Telephone");
                                 hotelDTO.Adresse = reader.GetString("Adresse");
                                 hotelDTO.Ville = reader.GetString("Ville");
                                 hotelDTO.Categorie = reader.GetString("Categorie");
                                 hotelDTO.Description = reader.GetString("Description");
+
                             }
                         }
                     }
@@ -101,22 +102,22 @@ namespace Prj_Final_2017_.Models.DAO {
         }
 
         /// <summary>
-        /// Fait un Update dans la BD sur la table tableBD
+        /// Fait un Update dans la BD sur la table Hotel
         /// </summary>
-        /// <param name="tableDTO">tableBD a modifier</param>
+        /// <param name="hotelDTO">Hotel a modifier</param>
         public void Update(HotelDTO hotelDTO) {
             try {
                 using (MySqlConnection connection = connexion.getConnexion()) {
                     connection.Open();
                     using (MySqlCommand command = new MySqlCommand(HotelDAO.UPDATE_QUERY, connection)) {
                         command.Prepare();
-                        command.Parameters.AddWithValue("champ1", hotelDTO.Nom);
-                        command.Parameters.AddWithValue("champ2", hotelDTO.Telephone);
-                        command.Parameters.AddWithValue("champ3", hotelDTO.Adresse);
-                        command.Parameters.AddWithValue("champ4", hotelDTO.Ville);
-                        command.Parameters.AddWithValue("champ5", hotelDTO.Categorie);
-                        command.Parameters.AddWithValue("champ6", hotelDTO.Description);
-                        command.Parameters.AddWithValue("champID", hotelDTO.IdHotel);
+                        command.Parameters.AddWithValue("Nom", hotelDTO.Nom);
+                        command.Parameters.AddWithValue("Telephone", hotelDTO.Telephone);
+                        command.Parameters.AddWithValue("Adresse", hotelDTO.Adresse);
+                        command.Parameters.AddWithValue("Ville", hotelDTO.Ville);
+                        command.Parameters.AddWithValue("Categorie", hotelDTO.Categorie);
+                        command.Parameters.AddWithValue("Description", hotelDTO.Description);
+                        command.Parameters.AddWithValue("IdHotel", hotelDTO.IdHotel);
 
                         command.ExecuteNonQuery();
                     }
@@ -128,16 +129,16 @@ namespace Prj_Final_2017_.Models.DAO {
         }
 
         /// <summary>
-        /// Fait un Delete dans la BD sur la table tableBD
+        /// Fait un Delete dans la BD sur la table Hotel
         /// </summary>
-        /// <param name="tableDTO">tableBD a supprimer</param>
+        /// <param name="hotelDTO">Hotel a supprimer</param>
         public void Delete(HotelDTO hotelDTO) {
             try {
                 using (MySqlConnection connection = connexion.getConnexion()) {
                     connection.Open();
                     using (MySqlCommand command = new MySqlCommand(HotelDAO.DELETE_QUERY, connection)) {
                         command.Prepare();
-                        command.Parameters.AddWithValue("champID", hotelDTO.IdHotel);
+                        command.Parameters.AddWithValue("IdHotel", hotelDTO.IdHotel);
 
                         command.ExecuteNonQuery();
                     }
@@ -149,9 +150,9 @@ namespace Prj_Final_2017_.Models.DAO {
         }
 
         /// <summary>
-        /// Retourne la liste de tous les tableBDs de la table tableBD
+        /// Retourne la liste de tous les Hotels de la table Hotel
         /// </summary>
-        /// <returns>La liste de tous les tableBDs; une liste vide sinon</returns>
+        /// <returns>La liste de tous les Hotels; une liste vide sinon</returns>
         public DataSet GetAll() {
             DataSet dataset = null;
             try {

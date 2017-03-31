@@ -13,16 +13,16 @@ namespace Prj_Final_2017_.Models.DAO {
          * *** Pour ctrl + F rapidement : ***
          * **********************************
          * 
-         * TableDAO = nom du dao de la table
-         * TableDTO = nom du DTO de la table
-         * tableDTO = instance de TableDTO
-         * tableBD = nom de la table dans la BD (requête)
-         * champID = champ d'ID de la table
-         * champ1 = 1er champ de la table
-         * champ2 = 2ième champ de la table
-         * champ3 = 3ième champ de la table
-         * champ4 = 4ième champ de la table
-         * champ5 = 5ième champ de la table
+         * AgenceVoitureDAO = nom du dao de la table
+         * AgenceVoitureDTO = nom du DTO de la table
+         * agenceVoitureDTO = instance de AgenceVoitureDTO
+         * AgenceVoiture = nom de la table dans la BD (requête)
+         * IdAgenceVoiture = champ d'ID de la table
+         * Nom = 1er champ de la table
+         * Telephone = 2ième champ de la table
+         * Adresse = 3ième champ de la table
+         * Ville = 4ième champ de la table
+         * Aeroport = 5ième champ de la table
          * 
          * (les nom de champ doivent être pareil dans la BD et la classe DTO)
          * 
@@ -30,31 +30,31 @@ namespace Prj_Final_2017_.Models.DAO {
 
 
         Connexion.Connexion connexion;
-        private static readonly string INSERT_QUERY = "INSERT INTO AgenceVoiture('Nom', 'Telephone', 'Adresse', 'Ville', 'Aeroport') VALUES (@champ1, @champ2, @champ3, @champ4, @champ5)";
-        private static readonly string READ_QUERY = "SELECT 'IdAgenceVoiture', 'Nom', 'Telephone', 'Adresse', 'Ville', 'Aeroport' FROM AgenceVoiture WHERE 'IdAgenceVoiture' = @champID";
-        private static readonly string UPDATE_QUERY = "UPDATE AgenceVoiture SET 'Nom' = @champ1, 'Telephone' = @champ2, 'Adresse' = @champ3, 'Ville' = @champ4, 'Aeroport' = @champ5 WHERE 'IdAgenceVoiture' = @champID";
-        private static readonly string DELETE_QUERY = "DELETE FROM AgenceVoiture WHERE 'IdAgenceVoiture' = @champID";
-        private static readonly string GET_ALL_QUERY = "SELECT 'IdAgenceVoiture', 'Nom', 'Telephone', 'Adresse', 'Ville', 'Aeroport' FROM AgenceVoiture";
+        private static readonly string INSERT_QUERY = "INSERT INTO AgenceVoiture(`Nom`, `Telephone`, `Adresse`, `Ville`, `Aeroport`) VALUES(@Nom, @Telephone, @Adresse, @Ville, @Aeroport)";
+        private static readonly string READ_QUERY = "SELECT `IdAgenceVoiture`, `Nom`, `Telephone`, `Adresse`, `Ville`, `Aeroport` FROM AgenceVoiture WHERE `IdAgenceVoiture` = @IdAgenceVoiture";
+        private static readonly string UPDATE_QUERY = "UPDATE AgenceVoiture SET `Nom` = @Nom, `Telephone` = @Telephone, `Adresse` = @Adresse, `Ville` = @Ville, `Aeroport` = @Aeroport WHERE `IdAgenceVoiture` = @IdAgenceVoiture";
+        private static readonly string DELETE_QUERY = "DELETE FROM AgenceVoiture WHERE `IdAgenceVoiture` = @IdAgenceVoiture";
+        private static readonly string GET_ALL_QUERY = "SELECT `IdAgenceVoiture`, `Nom`, `Telephone`, `Adresse`, `Ville`, `Aeroport` FROM AgenceVoiture";
 
         public AgenceVoitureDAO() {
             connexion = new Connexion.Connexion();
         }
 
         /// <summary>
-        /// Fait un Insert dans la BD sur la table tableBD
+        /// Fait un Insert dans la BD sur la table AgenceVoiture
         /// </summary>
-        /// <param name="tableDTO">tableBD a ajouter</param>
+        /// <param name="agenceVoitureDTO">AgenceVoiture a ajouter</param>
         public void Add(AgenceVoitureDTO agenceVoitureDTO) {
             try {
                 using (MySqlConnection connection = connexion.getConnexion()) {
                     connection.Open();
                     using (MySqlCommand command = new MySqlCommand(AgenceVoitureDAO.INSERT_QUERY, connection)) {
                         command.Prepare();
-                        command.Parameters.AddWithValue("champ1", agenceVoitureDTO.Nom);
-                        command.Parameters.AddWithValue("champ2", agenceVoitureDTO.Telephone);
-                        command.Parameters.AddWithValue("champ3", agenceVoitureDTO.Adresse);
-                        command.Parameters.AddWithValue("champ4", agenceVoitureDTO.Ville);
-                        command.Parameters.AddWithValue("champ5", agenceVoitureDTO.Aeroport);
+                        command.Parameters.AddWithValue("Nom", agenceVoitureDTO.Nom);
+                        command.Parameters.AddWithValue("Telephone", agenceVoitureDTO.Telephone);
+                        command.Parameters.AddWithValue("Adresse", agenceVoitureDTO.Adresse);
+                        command.Parameters.AddWithValue("Ville", agenceVoitureDTO.Ville);
+                        command.Parameters.AddWithValue("Aeroport", agenceVoitureDTO.Aeroport);
 
                         command.ExecuteNonQuery();
                     }
@@ -66,27 +66,27 @@ namespace Prj_Final_2017_.Models.DAO {
         }
 
         /// <summary>
-        /// Fait un Read dans la BD sur la table tableBD
+        /// Fait un Read dans la BD sur la table AgenceVoiture
         /// </summary>
-        /// <param name="champID">l'id de tableBD que l'on veut read</param>
-        /// <returns>une instance de TableDTO; null sinon</returns>
-        public AgenceVoitureDTO Read(int champID) {
+        /// <param name="IdAgenceVoiture">l'id de AgenceVoiture que l'on veut read</param>
+        /// <returns>une instance de AgenceVoitureDTO; null sinon</returns>
+        public AgenceVoitureDTO Read(int IdAgenceVoiture) {
             AgenceVoitureDTO agenceVoitureDTO = null;
             try {
                 using (MySqlConnection connection = connexion.getConnexion()) {
                     connection.Open();
                     using (MySqlCommand command = new MySqlCommand(AgenceVoitureDAO.READ_QUERY, connection)) {
                         command.Prepare();
-                        command.Parameters.AddWithValue("champID", champID);
+                        command.Parameters.AddWithValue("IdAgenceVoiture", IdAgenceVoiture);
                         using (MySqlDataReader reader = command.ExecuteReader()) {
                             if (reader.Read()) {
                                 agenceVoitureDTO = new AgenceVoitureDTO();
-                                agenceVoitureDTO.IdAgenceVoiture = reader.GetString("champID");
-                                agenceVoitureDTO.Nom = reader.GetString("champ1");
-                                agenceVoitureDTO.Telephone = reader.GetString("champ2");
-                                agenceVoitureDTO.Adresse = reader.GetString("champ3");
-                                agenceVoitureDTO.Ville = reader.GetString("champ4");
-                                agenceVoitureDTO.Aeroport = reader.GetString("champ5");
+                                agenceVoitureDTO.IdAgenceVoiture = reader.GetInt32("IdAgenceVoiture");
+                                agenceVoitureDTO.Nom = reader.GetString("Nom");
+                                agenceVoitureDTO.Telephone = reader.GetString("Telephone");
+                                agenceVoitureDTO.Adresse = reader.GetString("Adresse");
+                                agenceVoitureDTO.Ville = reader.GetString("Ville");
+                                agenceVoitureDTO.Aeroport = reader.GetString("Aeroport");
                             }
                         }
                     }
@@ -99,21 +99,21 @@ namespace Prj_Final_2017_.Models.DAO {
         }
 
         /// <summary>
-        /// Fait un Update dans la BD sur la table tableBD
+        /// Fait un Update dans la BD sur la table AgenceVoiture
         /// </summary>
-        /// <param name="tableDTO">tableBD a modifier</param>
+        /// <param name="agenceVoitureDTO">AgenceVoiture a modifier</param>
         public void Update(AgenceVoitureDTO agenceVoitureDTO) {
             try {
                 using (MySqlConnection connection = connexion.getConnexion()) {
                     connection.Open();
                     using (MySqlCommand command = new MySqlCommand(AgenceVoitureDAO.UPDATE_QUERY, connection)) {
                         command.Prepare();
-                        command.Parameters.AddWithValue("champ1", agenceVoitureDTO.Nom);
-                        command.Parameters.AddWithValue("champ2", agenceVoitureDTO.Telephone);
-                        command.Parameters.AddWithValue("champ3", agenceVoitureDTO.Adresse);
-                        command.Parameters.AddWithValue("champ4", agenceVoitureDTO.Ville);
-                        command.Parameters.AddWithValue("champ5", agenceVoitureDTO.Aeroport);
-                        command.Parameters.AddWithValue("champID", agenceVoitureDTO.IdAgenceVoiture);
+                        command.Parameters.AddWithValue("Nom", agenceVoitureDTO.Nom);
+                        command.Parameters.AddWithValue("Telephone", agenceVoitureDTO.Telephone);
+                        command.Parameters.AddWithValue("Adresse", agenceVoitureDTO.Adresse);
+                        command.Parameters.AddWithValue("Ville", agenceVoitureDTO.Ville);
+                        command.Parameters.AddWithValue("Aeroport", agenceVoitureDTO.Aeroport);
+                        command.Parameters.AddWithValue("IdAgenceVoiture", agenceVoitureDTO.IdAgenceVoiture);
 
                         command.ExecuteNonQuery();
                     }
@@ -125,16 +125,16 @@ namespace Prj_Final_2017_.Models.DAO {
         }
 
         /// <summary>
-        /// Fait un Delete dans la BD sur la table tableBD
+        /// Fait un Delete dans la BD sur la table AgenceVoiture
         /// </summary>
-        /// <param name="tableDTO">tableBD a supprimer</param>
+        /// <param name="agenceVoitureDTO">AgenceVoiture a supprimer</param>
         public void Delete(AgenceVoitureDTO agenceVoitureDTO) {
             try {
                 using (MySqlConnection connection = connexion.getConnexion()) {
                     connection.Open();
                     using (MySqlCommand command = new MySqlCommand(AgenceVoitureDAO.DELETE_QUERY, connection)) {
                         command.Prepare();
-                        command.Parameters.AddWithValue("champID", agenceVoitureDTO.IdAgenceVoiture);
+                        command.Parameters.AddWithValue("IdAgenceVoiture", agenceVoitureDTO.IdAgenceVoiture);
 
                         command.ExecuteNonQuery();
                     }
@@ -146,9 +146,9 @@ namespace Prj_Final_2017_.Models.DAO {
         }
 
         /// <summary>
-        /// Retourne la liste de tous les tableBDs de la table tableBD
+        /// Retourne la liste de tous les AgenceVoitures de la table AgenceVoiture
         /// </summary>
-        /// <returns>La liste de tous les tableBDs; une liste vide sinon</returns>
+        /// <returns>La liste de tous les AgenceVoitures; une liste vide sinon</returns>
         public DataSet GetAll() {
             DataSet dataset = null;
             try {

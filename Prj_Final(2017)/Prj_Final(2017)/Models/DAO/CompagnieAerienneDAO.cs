@@ -14,15 +14,15 @@ namespace Prj_Final_2017_.Models.DAO {
          * *** Pour ctrl + F rapidement : ***
          * **********************************
          * 
-         * TableDAO = nom du dao de la table
-         * TableDTO = nom du DTO de la table
-         * tableDTO = instance de TableDTO
-         * tableBD = nom de la table dans la BD (requête)
-         * champID = champ d'ID de la table
-         * champ1 = 1er champ de la table
-         * champ2 = 2ième champ de la table
-         * champ3 = 3ième champ de la table
-         * champ4 = 4ième champ de la table
+         * CompagnieAerienneDAO = nom du dao de la table
+         * CompagnieAerienneDTO = nom du DTO de la table
+         * compagnieAerienneDTO = instance de CompagnieAerienneDTO
+         * CompagnieAerienne = nom de la table dans la BD (requête)
+         * IdCompagnieAerienne = champ d'ID de la table
+         * Nom = 1er champ de la table
+         * Telephone = 2ième champ de la table
+         * Adresse = 3ième champ de la table
+         * Ville = 4ième champ de la table
          * champ5 = 5ième champ de la table
          * 
          * (les nom de champ doivent être pareil dans la BD et la classe DTO)
@@ -31,29 +31,31 @@ namespace Prj_Final_2017_.Models.DAO {
 
 
         Connexion.Connexion connexion;
-        private static readonly string INSERT_QUERY = "INSERT INTO CompagnieAerienne('Nom', 'Telephone') VALUES(@champ1, @champ2)";
-        private static readonly string READ_QUERY = "SELECT 'IdCompagnieAerienne', 'Nom', 'Telephone' FROM CompagnieAerienne WHERE 'IdCompagnieAerienne' = @champID";
-        private static readonly string UPDATE_QUERY = "UPDATE CompagnieAerienne SET 'Nom' = @champ1, 'Telephone' = @champ2 WHERE 'IdCompagnieAerienne' = @champID";
-        private static readonly string DELETE_QUERY = "DELETE FROM CompagnieAerienne WHERE 'IdCompagnieAerienne' = @champID";
-        private static readonly string GET_ALL_QUERY = "SELECT 'IdCompagnieAerienne', 'Nom', 'Telephone' FROM CompagnieAerienne";
+        private static readonly string INSERT_QUERY = "INSERT INTO CompagnieAerienne(`Nom`, `Telephone`, `Adresse`, `Ville`) VALUES(@Nom, @Telephone, @Adresse, @Ville)";
+        private static readonly string READ_QUERY = "SELECT `IdCompagnieAerienne`, `Nom`, `Telephone`, `Adresse`, `Ville` FROM CompagnieAerienne WHERE `IdCompagnieAerienne` = @IdCompagnieAerienne";
+        private static readonly string UPDATE_QUERY = "UPDATE CompagnieAerienne SET `Nom` = @Nom, `Telephone` = @Telephone, `Adresse` = @Adresse, `Ville` = @Ville WHERE `IdCompagnieAerienne` = @IdCompagnieAerienne";
+        private static readonly string DELETE_QUERY = "DELETE FROM CompagnieAerienne WHERE `IdCompagnieAerienne` = @IdCompagnieAerienne";
+        private static readonly string GET_ALL_QUERY = "SELECT `IdCompagnieAerienne`, `Nom`, `Telephone`, `Adresse`, `Ville` FROM CompagnieAerienne";
 
         public CompagnieAerienneDAO() {
             connexion = new Connexion.Connexion();
         }
 
         /// <summary>
-        /// Fait un Insert dans la BD sur la table tableBD
+        /// Fait un Insert dans la BD sur la table CompagnieAerienne
         /// </summary>
-        /// <param name="tableDTO">tableBD a ajouter</param>
+        /// <param name="compagnieAerienneDTO">CompagnieAerienne a ajouter</param>
         public void Add(CompagnieAerienneDTO compagnieAerienneDTO) {
             try {
                 using (MySqlConnection connection = connexion.getConnexion()) {
                     connection.Open();
                     using (MySqlCommand command = new MySqlCommand(CompagnieAerienneDAO.INSERT_QUERY, connection)) {
                         command.Prepare();
-                        command.Parameters.AddWithValue("champ1", compagnieAerienneDTO.Nom);
-                        command.Parameters.AddWithValue("champ2", compagnieAerienneDTO.Telephone);
-         
+                        command.Parameters.AddWithValue("Nom", compagnieAerienneDTO.Nom);
+                        command.Parameters.AddWithValue("Telephone", compagnieAerienneDTO.Telephone);
+                        command.Parameters.AddWithValue("Adresse", compagnieAerienneDTO.Adresse);
+                        command.Parameters.AddWithValue("Ville", compagnieAerienneDTO.Ville);
+
                         command.ExecuteNonQuery();
                     }
                 }
@@ -64,24 +66,26 @@ namespace Prj_Final_2017_.Models.DAO {
         }
 
         /// <summary>
-        /// Fait un Read dans la BD sur la table tableBD
+        /// Fait un Read dans la BD sur la table CompagnieAerienne
         /// </summary>
-        /// <param name="champID">l'id de tableBD que l'on veut read</param>
-        /// <returns>une instance de TableDTO; null sinon</returns>
-        public CompagnieAerienneDTO Read(int champID) {
+        /// <param name="IdCompagnieAerienne">l'id de CompagnieAerienne que l'on veut read</param>
+        /// <returns>une instance de CompagnieAerienneDTO; null sinon</returns>
+        public CompagnieAerienneDTO Read(int IdCompagnieAerienne) {
             CompagnieAerienneDTO compagnieAerienneDTO = null;
             try {
                 using (MySqlConnection connection = connexion.getConnexion()) {
                     connection.Open();
                     using (MySqlCommand command = new MySqlCommand(CompagnieAerienneDAO.READ_QUERY, connection)) {
                         command.Prepare();
-                        command.Parameters.AddWithValue("champID", champID);
+                        command.Parameters.AddWithValue("IdCompagnieAerienne", IdCompagnieAerienne);
                         using (MySqlDataReader reader = command.ExecuteReader()) {
                             if (reader.Read()) {
                                 compagnieAerienneDTO = new CompagnieAerienneDTO();
-                                compagnieAerienneDTO.IdCompagnieAerienne = reader.GetString("champID");
-                                compagnieAerienneDTO.Nom = reader.GetString("champ1");
-                                compagnieAerienneDTO.Telephone = reader.GetString("champ2");
+                                compagnieAerienneDTO.IdCompagnieAerienne = reader.GetInt32("IdCompagnieAerienne");
+                                compagnieAerienneDTO.Nom = reader.GetString("Nom");
+                                compagnieAerienneDTO.Telephone = reader.GetString("Telephone");
+                                compagnieAerienneDTO.Adresse = reader.GetString("Adresse");
+                                compagnieAerienneDTO.Ville = reader.GetString("Ville");
                             }
                         }
                     }
@@ -94,18 +98,20 @@ namespace Prj_Final_2017_.Models.DAO {
         }
 
         /// <summary>
-        /// Fait un Update dans la BD sur la table tableBD
+        /// Fait un Update dans la BD sur la table CompagnieAerienne
         /// </summary>
-        /// <param name="tableDTO">tableBD a modifier</param>
+        /// <param name="compagnieAerienneDTO">CompagnieAerienne a modifier</param>
         public void Update(CompagnieAerienneDTO compagnieAerienneDTO) {
             try {
                 using (MySqlConnection connection = connexion.getConnexion()) {
                     connection.Open();
                     using (MySqlCommand command = new MySqlCommand(CompagnieAerienneDAO.UPDATE_QUERY, connection)) {
                         command.Prepare();
-                        command.Parameters.AddWithValue("champ1", compagnieAerienneDTO.Nom);
-                        command.Parameters.AddWithValue("champ2", compagnieAerienneDTO.Telephone);
-                        command.Parameters.AddWithValue("champID", compagnieAerienneDTO.IdCompagnieAerienne);
+                        command.Parameters.AddWithValue("Nom", compagnieAerienneDTO.Nom);
+                        command.Parameters.AddWithValue("Telephone", compagnieAerienneDTO.Telephone);
+                        command.Parameters.AddWithValue("Adresse", compagnieAerienneDTO.Adresse);
+                        command.Parameters.AddWithValue("Ville", compagnieAerienneDTO.Ville);
+                        command.Parameters.AddWithValue("IdCompagnieAerienne", compagnieAerienneDTO.IdCompagnieAerienne);
 
                         command.ExecuteNonQuery();
                     }
@@ -117,16 +123,16 @@ namespace Prj_Final_2017_.Models.DAO {
         }
 
         /// <summary>
-        /// Fait un Delete dans la BD sur la table tableBD
+        /// Fait un Delete dans la BD sur la table CompagnieAerienne
         /// </summary>
-        /// <param name="tableDTO">tableBD a supprimer</param>
+        /// <param name="compagnieAerienneDTO">CompagnieAerienne a supprimer</param>
         public void Delete(CompagnieAerienneDTO compagnieAerienneDTO) {
             try {
                 using (MySqlConnection connection = connexion.getConnexion()) {
                     connection.Open();
                     using (MySqlCommand command = new MySqlCommand(CompagnieAerienneDAO.DELETE_QUERY, connection)) {
                         command.Prepare();
-                        command.Parameters.AddWithValue("champID", compagnieAerienneDTO.IdCompagnieAerienne);
+                        command.Parameters.AddWithValue("IdCompagnieAerienne", compagnieAerienneDTO.IdCompagnieAerienne);
 
                         command.ExecuteNonQuery();
                     }
@@ -138,9 +144,9 @@ namespace Prj_Final_2017_.Models.DAO {
         }
 
         /// <summary>
-        /// Retourne la liste de tous les tableBDs de la table tableBD
+        /// Retourne la liste de tous les CompagnieAeriennes de la table CompagnieAerienne
         /// </summary>
-        /// <returns>La liste de tous les tableBDs; une liste vide sinon</returns>
+        /// <returns>La liste de tous les CompagnieAeriennes; une liste vide sinon</returns>
         public DataSet GetAll() {
             DataSet dataset = null;
             try {

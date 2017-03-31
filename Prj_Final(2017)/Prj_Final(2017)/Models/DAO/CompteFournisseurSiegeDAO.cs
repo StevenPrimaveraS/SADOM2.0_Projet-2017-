@@ -7,20 +7,20 @@ using System.Data;
 using Prj_Final_2017_.DTO;
 
 namespace Prj_Final_2017_.Models.DAO {
-    public class TableDAO {
+    public class CompteFournisseurSiegeDAO {
 
         /* **********************************
          * *** Pour ctrl + F rapidement : ***
          * **********************************
          * 
-         * TableDAO = nom du dao de la table
-         * TableDTO = nom du DTO de la table
-         * tableDTO = instance de TableDTO
-         * tableBD = nom de la table dans la BD (requête)
-         * champID = champ d'ID de la table
-         * champ1 = 1er champ de la table
-         * champ2 = 2ième champ de la table
-         * champ3 = 3ième champ de la table
+         * CompteFournisseurSiegeDAO = nom du dao de la table
+         * CompteFournisseurSiegeDTO = nom du DTO de la table
+         * compteFournisseurSiegeDTO = instance de CompteFournisseurSiegeDTO
+         * CompteFournisseurSiege = nom de la table dans la BD (requête)
+         * IdFournisseur = champ d'ID de la table
+         * Courriel = 1er champ de la table
+         * Password = 2ième champ de la table
+         * IdCompagnieAerienne = 3ième champ de la table
          * champ4 = 4ième champ de la table
          * champ5 = 5ième champ de la table
          * 
@@ -30,31 +30,29 @@ namespace Prj_Final_2017_.Models.DAO {
 
 
         Connexion.Connexion connexion;
-        private static readonly string INSERT_QUERY = "INSERT INTO tableBD(`champ1`, `champ2`, `champ3`, `champ4`, `champ5`) VALUES(@champ1, @champ2, @champ3, @champ4, @champ5)";
-        private static readonly string READ_QUERY = "SELECT `champID`, `champ1`, `champ2`, `champ3`, `champ4`, `champ5` FROM tableBD WHERE `champID` = @champID";
-        private static readonly string UPDATE_QUERY = "UPDATE tableBD SET `champ1` = @champ1, `champ2` = @champ2, `champ3` = @champ3, `champ4` = @champ4, `champ5` = @champ5 WHERE `champID` = @champID";
-        private static readonly string DELETE_QUERY = "DELETE FROM tableBD WHERE `champID` = @champID";
-        private static readonly string GET_ALL_QUERY = "SELECT `champID`, `champ1`, `champ2`, `champ3`, `champ4`, `champ5` FROM tableBD";
+        private static readonly string INSERT_QUERY = "INSERT INTO CompteFournisseurSiege(`Courriel`, `Password`, `IdCompagnieAerienne`) VALUES(@Courriel, @Password, @IdCompagnieAerienne)";
+        private static readonly string READ_QUERY = "SELECT `IdFournisseur`, `Courriel`, `Password`, `IdCompagnieAerienne` FROM CompteFournisseurSiege WHERE `IdFournisseur` = @IdFournisseur";
+        private static readonly string UPDATE_QUERY = "UPDATE CompteFournisseurSiege SET `Courriel` = @Courriel, `Password` = @Password, `IdCompagnieAerienne` = @IdCompagnieAerienne WHERE `IdFournisseur` = @IdFournisseur";
+        private static readonly string DELETE_QUERY = "DELETE FROM CompteFournisseurSiege WHERE `IdFournisseur` = @IdFournisseur";
+        private static readonly string GET_ALL_QUERY = "SELECT `IdFournisseur`, `Courriel`, `Password`, `IdCompagnieAerienne` FROM CompteFournisseurSiege";
 
-        public TableDAO() {
+        public CompteFournisseurSiegeDAO() {
             connexion = new Connexion.Connexion();
         }
 
         /// <summary>
-        /// Fait un Insert dans la BD sur la table tableBD
+        /// Fait un Insert dans la BD sur la table CompteFournisseurSiege
         /// </summary>
-        /// <param name="tableDTO">tableBD a ajouter</param>
-        public void Add(TableDTO tableDTO) {
+        /// <param name="compteFournisseurSiegeDTO">CompteFournisseurSiege a ajouter</param>
+        public void Add(CompteFournisseurSiegeDTO compteFournisseurSiegeDTO) {
             try {
                 using (MySqlConnection connection = connexion.getConnexion()) {
                     connection.Open();
-                    using (MySqlCommand command = new MySqlCommand(TableDAO.INSERT_QUERY, connection)) {
+                    using (MySqlCommand command = new MySqlCommand(CompteFournisseurSiegeDAO.INSERT_QUERY, connection)) {
                         command.Prepare();
-                        command.Parameters.AddWithValue("champ1", tableDTO.champ1);
-                        command.Parameters.AddWithValue("champ2", tableDTO.champ2);
-                        command.Parameters.AddWithValue("champ3", tableDTO.champ3);
-                        command.Parameters.AddWithValue("champ4", tableDTO.champ4);
-                        command.Parameters.AddWithValue("champ5", tableDTO.champ5);
+                        command.Parameters.AddWithValue("Courriel", compteFournisseurSiegeDTO.Courriel);
+                        command.Parameters.AddWithValue("Password", compteFournisseurSiegeDTO.Password);
+                        command.Parameters.AddWithValue("IdCompagnieAerienne", compteFournisseurSiegeDTO.IdCompagnieAerienne);
 
                         command.ExecuteNonQuery();
                     }
@@ -66,27 +64,25 @@ namespace Prj_Final_2017_.Models.DAO {
         }
 
         /// <summary>
-        /// Fait un Read dans la BD sur la table tableBD
+        /// Fait un Read dans la BD sur la table CompteFournisseurSiege
         /// </summary>
-        /// <param name="champID">l'id de tableBD que l'on veut read</param>
-        /// <returns>une instance de TableDTO; null sinon</returns>
-        public TableDTO Read(int champID) {
-            TableDTO tableDTO = null;
+        /// <param name="IdFournisseur">l'id de CompteFournisseurSiege que l'on veut read</param>
+        /// <returns>une instance de CompteFournisseurSiegeDTO; null sinon</returns>
+        public CompteFournisseurSiegeDTO Read(int IdFournisseur) {
+            CompteFournisseurSiegeDTO compteFournisseurSiegeDTO = null;
             try {
                 using (MySqlConnection connection = connexion.getConnexion()) {
                     connection.Open();
-                    using (MySqlCommand command = new MySqlCommand(TableDAO.READ_QUERY, connection)) {
+                    using (MySqlCommand command = new MySqlCommand(CompteFournisseurSiegeDAO.READ_QUERY, connection)) {
                         command.Prepare();
-                        command.Parameters.AddWithValue("champID", champID);
+                        command.Parameters.AddWithValue("IdFournisseur", IdFournisseur);
                         using (MySqlDataReader reader = command.ExecuteReader()) {
                             if (reader.Read()) {
-                                tableDTO = new TableDTO();
-                                tableDTO.champID = reader.GetString("champID");
-                                tableDTO.champ1 = reader.GetString("champ1");
-                                tableDTO.champ2 = reader.GetString("champ2");
-                                tableDTO.champ3 = reader.GetString("champ3");
-                                tableDTO.champ4 = reader.GetString("champ4");
-                                tableDTO.champ5 = reader.GetString("champ5");
+                                compteFournisseurSiegeDTO = new CompteFournisseurSiegeDTO();
+                                compteFournisseurSiegeDTO.IdFournisseur = reader.GetInt32("IdFournisseur");
+                                compteFournisseurSiegeDTO.Courriel = reader.GetString("Courriel");
+                                compteFournisseurSiegeDTO.Password = reader.GetString("Password");
+                                compteFournisseurSiegeDTO.IdCompagnieAerienne = reader.GetInt32("IdCompagnieAerienne");
                             }
                         }
                     }
@@ -95,25 +91,23 @@ namespace Prj_Final_2017_.Models.DAO {
             catch (MySqlException mysqlException) {
                 System.Diagnostics.Debug.WriteLine(mysqlException.Message);
             }
-            return tableDTO;
+            return compteFournisseurSiegeDTO;
         }
 
         /// <summary>
-        /// Fait un Update dans la BD sur la table tableBD
+        /// Fait un Update dans la BD sur la table CompteFournisseurSiege
         /// </summary>
-        /// <param name="tableDTO">tableBD a modifier</param>
-        public void Update(TableDTO tableDTO) {
+        /// <param name="compteFournisseurSiegeDTO">CompteFournisseurSiege a modifier</param>
+        public void Update(CompteFournisseurSiegeDTO compteFournisseurSiegeDTO) {
             try {
                 using (MySqlConnection connection = connexion.getConnexion()) {
                     connection.Open();
-                    using (MySqlCommand command = new MySqlCommand(TableDAO.UPDATE_QUERY, connection)) {
+                    using (MySqlCommand command = new MySqlCommand(CompteFournisseurSiegeDAO.UPDATE_QUERY, connection)) {
                         command.Prepare();
-                        command.Parameters.AddWithValue("champ1", tableDTO.champ1);
-                        command.Parameters.AddWithValue("champ2", tableDTO.champ2);
-                        command.Parameters.AddWithValue("champ3", tableDTO.champ3);
-                        command.Parameters.AddWithValue("champ4", tableDTO.champ4);
-                        command.Parameters.AddWithValue("champ5", tableDTO.champ5);
-                        command.Parameters.AddWithValue("champID", tableDTO.champID);
+                        command.Parameters.AddWithValue("Courriel", compteFournisseurSiegeDTO.Courriel);
+                        command.Parameters.AddWithValue("Password", compteFournisseurSiegeDTO.Password);
+                        command.Parameters.AddWithValue("IdCompagnieAerienne", compteFournisseurSiegeDTO.IdCompagnieAerienne);
+                        command.Parameters.AddWithValue("IdFournisseur", compteFournisseurSiegeDTO.IdFournisseur);
 
                         command.ExecuteNonQuery();
                     }
@@ -125,16 +119,16 @@ namespace Prj_Final_2017_.Models.DAO {
         }
 
         /// <summary>
-        /// Fait un Delete dans la BD sur la table tableBD
+        /// Fait un Delete dans la BD sur la table CompteFournisseurSiege
         /// </summary>
-        /// <param name="tableDTO">tableBD a supprimer</param>
-        public void Delete(TableDTO tableDTO) {
+        /// <param name="compteFournisseurSiegeDTO">CompteFournisseurSiege a supprimer</param>
+        public void Delete(CompteFournisseurSiegeDTO compteFournisseurSiegeDTO) {
             try {
                 using (MySqlConnection connection = connexion.getConnexion()) {
                     connection.Open();
-                    using (MySqlCommand command = new MySqlCommand(TableDAO.DELETE_QUERY, connection)) {
+                    using (MySqlCommand command = new MySqlCommand(CompteFournisseurSiegeDAO.DELETE_QUERY, connection)) {
                         command.Prepare();
-                        command.Parameters.AddWithValue("champID", tableDTO.champID);
+                        command.Parameters.AddWithValue("IdFournisseur", compteFournisseurSiegeDTO.IdFournisseur);
 
                         command.ExecuteNonQuery();
                     }
@@ -146,15 +140,15 @@ namespace Prj_Final_2017_.Models.DAO {
         }
 
         /// <summary>
-        /// Retourne la liste de tous les tableBDs de la table tableBD
+        /// Retourne la liste de tous les CompteFournisseurSieges de la table CompteFournisseurSiege
         /// </summary>
-        /// <returns>La liste de tous les tableBDs; une liste vide sinon</returns>
+        /// <returns>La liste de tous les CompteFournisseurSieges; une liste vide sinon</returns>
         public DataSet GetAll() {
             DataSet dataset = null;
             try {
                 using (MySqlConnection connection = connexion.getConnexion()) {
                     connection.Open();
-                    using (MySqlCommand command = new MySqlCommand(TableDAO.GET_ALL_QUERY, connection)) {
+                    using (MySqlCommand command = new MySqlCommand(CompteFournisseurSiegeDAO.GET_ALL_QUERY, connection)) {
                         MySqlDataAdapter adapter = new MySqlDataAdapter(command);
                         dataset = new DataSet();
                         adapter.Fill(dataset);

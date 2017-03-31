@@ -219,8 +219,40 @@
     <Compile Include="Models\DTO\SiegeDTO.cs" />
     <Compile Include="Models\DTO\VoitureDTO.cs" />
     <Compile Include="Models\DTO\VolDTO.cs" />
+    <Compile Include="Models\Facade\AgenceVoitureFacade.cs" />
+    <Compile Include="Models\Facade\ChambreFacade.cs" />
+    <Compile Include="Models\Facade\CompagnieAerienneFacade.cs" />
+    <Compile Include="Models\Facade\CompteFournisseurChambreFacade.cs" />
+    <Compile Include="Models\Facade\CompteFournisseurSiegeFacade.cs" />
+    <Compile Include="Models\Facade\CompteFournisseurVoitureFacade.cs" />
+    <Compile Include="Models\Facade\CompteParticulierFacade.cs" />
+    <Compile Include="Models\Facade\ForfaitFacade.cs" />
+    <Compile Include="Models\Facade\HotelFacade.cs" />
+    <Compile Include="Models\Facade\ReservationChambreFacade.cs" />
+    <Compile Include="Models\Facade\ReservationForfaitFacade.cs" />
+    <Compile Include="Models\Facade\ReservationSiegeFacade.cs" />
+    <Compile Include="Models\Facade\ReservationVoitureFacade.cs" />
+    <Compile Include="Models\Facade\SiegeFacade.cs" />
+    <Compile Include="Models\Facade\VoitureFacade.cs" />
+    <Compile Include="Models\Facade\VolFacade.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Service\AgenceVoitureService.cs" />
+    <Compile Include="Models\Service\ChambreService.cs" />
+    <Compile Include="Models\Service\CompagnieAerienneService.cs" />
+    <Compile Include="Models\Service\CompteFournisseurChambreService.cs" />
+    <Compile Include="Models\Service\CompteFournisseurSiegeService.cs" />
+    <Compile Include="Models\Service\CompteFournisseurVoitureService.cs" />
+    <Compile Include="Models\Service\CompteParticulierService.cs" />
+    <Compile Include="Models\Service\ForfaitService.cs" />
+    <Compile Include="Models\Service\HotelService.cs" />
+    <Compile Include="Models\Service\ReservationChambreService.cs" />
+    <Compile Include="Models\Service\ReservationForfaitService.cs" />
+    <Compile Include="Models\Service\ReservationSiegeService.cs" />
+    <Compile Include="Models\Service\ReservationVoitureService.cs" />
+    <Compile Include="Models\Service\SiegeService.cs" />
+    <Compile Include="Models\Service\VoitureService.cs" />
+    <Compile Include="Models\Service\VolService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -299,8 +331,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\Exception\" />
-    <Folder Include="Models\Facade\" />
-    <Folder Include="Models\Service\" />
     <Folder Include="Models\util\" />
     <Folder Include="Views\Achat\" />
   </ItemGroup>
