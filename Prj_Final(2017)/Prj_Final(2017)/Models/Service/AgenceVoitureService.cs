@@ -9,12 +9,13 @@ using Prj_Final_2017_.Models.Exception;
 
 namespace Prj_Final_2017_.Models.Service {
     public class AgenceVoitureService {
-        AgenceVoitureDAO agenceVoitureDAO = new AgenceVoitureDAO();
+        private AgenceVoitureDAO agenceVoitureDAO;
         public AgenceVoitureService(AgenceVoitureDAO agenceVoitureDAO) {
             if(agenceVoitureDAO == null)
             {
                 throw new VoyageAhuntsicException(4444);
             }
+            this.agenceVoitureDAO = agenceVoitureDAO;
         }
 
         public void Add(AgenceVoitureDTO agenceVoitureDTO) {
