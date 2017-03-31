@@ -219,6 +219,7 @@
     <Compile Include="Models\DTO\SiegeDTO.cs" />
     <Compile Include="Models\DTO\VoitureDTO.cs" />
     <Compile Include="Models\DTO\VolDTO.cs" />
+    <Compile Include="Models\Exception\VoyageAhuntsicException.cs" />
     <Compile Include="Models\Facade\AgenceVoitureFacade.cs" />
     <Compile Include="Models\Facade\ChambreFacade.cs" />
     <Compile Include="Models\Facade\CompagnieAerienneFacade.cs" />
@@ -330,7 +331,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\Exception\" />
     <Folder Include="Models\util\" />
     <Folder Include="Views\Achat\" />
   </ItemGroup>
