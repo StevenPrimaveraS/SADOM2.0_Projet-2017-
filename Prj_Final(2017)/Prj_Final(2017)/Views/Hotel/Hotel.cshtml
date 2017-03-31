@@ -5,12 +5,12 @@
         @"ma description ici  ";
 }
 <link href="~/Content/StylePrincipal.css" rel="stylesheet" media="all" type="text/css">
-<div id="recherche" style="background-color: #eeeeee; border-radius:6px; padding:30px">
+<div id="recherche" class= "jumbotron">
 
     <h1>@ViewBag.Title</h1>
     @{ /* Styles temporaires : éventuellement dans fichier css */  }
     <div>
-        <div id="description" style="float:left; display:inline-block; min-width:196px; width:22%; padding:8px; margin: 3px 16px 25px auto; background-color:#cfcfcf; border-radius:6px;">
+        <div id="description">
             <p style="text-align:justify">@ViewBag.Description</p>
         </div>
         <div class="form-inline" id="boiteRecherche" style="display:inline-block;">
