@@ -16,9 +16,9 @@ namespace Prj_Final_2017_.DTO {
 
         public string VilleDestination { get; set; }
 
-        public string DateDepart { get; set; }
+        public DateTime DateDepart { get; set; }
 
-        public string DateArrivee { get; set; }
+        public DateTime DateArrivee { get; set; }
 
         public int IdCompagnieAerienne { get; set; }
 
