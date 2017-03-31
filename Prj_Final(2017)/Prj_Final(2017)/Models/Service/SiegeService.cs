@@ -10,12 +10,13 @@ using Prj_Final_2017_.Models.Exception;
 namespace Prj_Final_2017_.Models.Service {
     public class SiegeService {
 
-        SiegeDAO siegeDAO = new SiegeDAO();
+        private SiegeDAO siegeDAO;
         public SiegeService(SiegeDAO siegeDAO) {
             if(siegeDAO == null)
             {
                 throw new VoyageAhuntsicException(4444);
             }
+            this.siegeDAO = siegeDAO;
         }
 
         public void Add(SiegeDTO siegeDTO) {
