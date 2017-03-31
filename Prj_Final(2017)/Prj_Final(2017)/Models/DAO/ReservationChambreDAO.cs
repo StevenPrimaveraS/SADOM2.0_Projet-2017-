@@ -83,8 +83,8 @@ namespace Prj_Final_2017_.Models.DAO {
                                 reservationChambreDTO.IdReservationChambre = reader.GetInt32("IdReservationChambre");
                                 reservationChambreDTO.IdChambre = reader.GetInt32("IdChambre");
                                 reservationChambreDTO.IdParticulier = reader.GetInt32("IdParticulier");
-                                reservationChambreDTO.DateReservation = reader.GetString("DateReservation");
-                                reservationChambreDTO.DateFinReservation = reader.GetString("DateFinReservation");
+                                reservationChambreDTO.DateReservation = reader.GetDateTime("DateReservation");
+                                reservationChambreDTO.DateFinReservation = reader.GetDateTime("DateFinReservation");
                             }
                         }
                     }

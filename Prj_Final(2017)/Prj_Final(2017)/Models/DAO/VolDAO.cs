@@ -96,8 +96,8 @@ namespace Prj_Final_2017_.Models.DAO {
                                 volDTO.AeroportDestination = reader.GetString("AeroportDestination");
                                 volDTO.VilleDepart = reader.GetString("VilleDepart");
                                 volDTO.VilleDestination = reader.GetString("VilleDestination");
-                                volDTO.DateDepart = reader.GetString("DateDepart");
-                                volDTO.DateArrivee = reader.GetString("DateArrivee");
+                                volDTO.DateDepart = reader.GetDateTime("DateDepart");
+                                volDTO.DateArrivee = reader.GetDateTime("DateArrivee");
                                 volDTO.IdCompagnieAerienne = reader.GetInt32("IdCompagnieAerienne");
                                 volDTO.Classe = reader.GetString("Classe");
                                 volDTO.IsRemboursable = reader.GetBoolean("IsRemboursable");
