@@ -9,15 +9,15 @@ using Prj_Final_2017_.Models.Exception;
 
 namespace Prj_Final_2017_.Models.Service {
     public class CompteFournisseurVoitureService {
-        CompteFournisseurVoitureDAO compteFournisseurSiegeDAO;
+        CompteFournisseurVoitureDAO compteFournisseurVoitureDAO;
 
-        public CompteFournisseurVoitureService(CompteFournisseurVoitureDAO compteFournisseurSiegeDAO)
+        public CompteFournisseurVoitureService(CompteFournisseurVoitureDAO compteFournisseurVoitureDAO)
         {
-            if (compteFournisseurSiegeDAO == null)
+            if (compteFournisseurVoitureDAO == null)
             {
                 throw new VoyageAhuntsicException(44);
             }
-            this.compteFournisseurSiegeDAO = compteFournisseurSiegeDAO;
+            this.compteFournisseurVoitureDAO = compteFournisseurVoitureDAO;
         }
 
         public void Add(CompteFournisseurVoitureDTO compteFournisseurVoitureDTO)
@@ -26,12 +26,12 @@ namespace Prj_Final_2017_.Models.Service {
             {
                 throw new VoyageAhuntsicException(44);
             }
-            compteFournisseurSiegeDAO.Add(compteFournisseurVoitureDTO);
+            compteFournisseurVoitureDAO.Add(compteFournisseurVoitureDTO);
         }
 
         public CompteFournisseurVoitureDTO Read(int IdCompteFournisseurVoiture)
         {
-            compteFournisseurSiegeDAO.Read(IdCompteFournisseurVoiture);
+            compteFournisseurVoitureDAO.Read(IdCompteFournisseurVoiture);
             return null;
         }
 
@@ -41,7 +41,7 @@ namespace Prj_Final_2017_.Models.Service {
             {
                 throw new VoyageAhuntsicException(44);
             }
-            compteFournisseurSiegeDAO.Update(compteFournisseurVoitureDTO);
+            compteFournisseurVoitureDAO.Update(compteFournisseurVoitureDTO);
         }
 
         public void Delete(CompteFournisseurVoitureDTO compteFournisseurVoitureDTO)
@@ -50,12 +50,12 @@ namespace Prj_Final_2017_.Models.Service {
             {
                 throw new VoyageAhuntsicException(44);
             }
-            compteFournisseurSiegeDAO.Delete(compteFournisseurVoitureDTO);
+            compteFournisseurVoitureDAO.Delete(compteFournisseurVoitureDTO);
         }
 
         public DataSet GetAll()
         {
-            return null;
+            return compteFournisseurVoitureDAO.GetAll(); ;
         }
     }
 }

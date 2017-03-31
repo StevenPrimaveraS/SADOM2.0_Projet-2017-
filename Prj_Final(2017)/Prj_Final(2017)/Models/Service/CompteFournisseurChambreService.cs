@@ -48,7 +48,7 @@ namespace Prj_Final_2017_.Models.Service {
         }
 
         public DataSet GetAll() {
-            return null;
+            return compteFournisseurChambreDAO.GetAll();
         }
     }
 }

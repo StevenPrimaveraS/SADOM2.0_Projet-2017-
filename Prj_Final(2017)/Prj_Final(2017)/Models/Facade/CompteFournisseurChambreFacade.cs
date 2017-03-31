@@ -4,32 +4,40 @@ using System.Linq;
 using System.Web;
 using System.Data;
 using Prj_Final_2017_.DTO;
+using Prj_Final_2017_.Models.Service;
 
 namespace Prj_Final_2017_.Models.Facade {
     public class CompteFournisseurChambreFacade {
+        CompteFournisseurChambreService compteFournisseurChambreService;
+        public CompteFournisseurChambreFacade(CompteFournisseurChambreService compteFournisseurChambreService)
+        {
+            this.compteFournisseurChambreService = compteFournisseurChambreService;
+        }
 
-        public CompteFournisseurChambreFacade() {
+        public void Add(CompteFournisseurChambreDTO compteFournisseurChambreDTO)
+        {
+            compteFournisseurChambreService.Add(compteFournisseurChambreDTO);
+        }
+
+        public CompteFournisseurChambreDTO Read(int IdCompteFournisseurVoiture)
+        {
+            return compteFournisseurChambreService.Read(IdCompteFournisseurVoiture);
 
         }
 
-        public void Add(CompteFournisseurChambreDTO compteFournisseurChambreDTO) {
-
+        public void Update(CompteFournisseurChambreDTO compteFournisseurChambreDTO)
+        {
+            compteFournisseurChambreService.Update(compteFournisseurChambreDTO);
         }
 
-        public CompteFournisseurChambreDTO Read(int IdCompteFournisseurChambre) {
-            return null;
+        public void Delete(CompteFournisseurChambreDTO compteFournisseurChambreDTO)
+        {
+            compteFournisseurChambreService.Delete(compteFournisseurChambreDTO);
         }
 
-        public void Update(CompteFournisseurChambreDTO compteFournisseurChambreDTO) {
-
-        }
-
-        public void Delete(CompteFournisseurChambreDTO compteFournisseurChambreDTO) {
-
-        }
-
-        public DataSet GetAll() {
-            return null;
+        public DataSet GetAll()
+        {
+            return compteFournisseurChambreService.GetAll(); ;
         }
     }
 }

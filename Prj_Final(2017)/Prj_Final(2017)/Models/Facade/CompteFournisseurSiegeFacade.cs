@@ -6,30 +6,37 @@ using System.Data;
 using Prj_Final_2017_.DTO;
 
 namespace Prj_Final_2017_.Models.Facade {
-    public class CompteFournisseurSiegeFacade {
+    public class CompteFournisseurSiegeService {
+        CompteFournisseurSiegeService compteFournisseurSiegeService;
+        public CompteFournisseurSiegeService(CompteFournisseurSiegeService compteFournisseurSiegeService)
+        {
+            this.compteFournisseurSiegeService = compteFournisseurSiegeService;
+        }
 
-        public CompteFournisseurSiegeFacade() {
+        public void Add(CompteFournisseurSiegeDTO compteFournisseurSiegeDTO)
+        {
+            compteFournisseurSiegeService.Add(compteFournisseurSiegeDTO);
+        }
+
+        public CompteFournisseurSiegeDTO Read(int IdCompteFournisseurVoiture)
+        {
+            return compteFournisseurSiegeService.Read(IdCompteFournisseurVoiture);
 
         }
 
-        public void Add(CompteFournisseurSiegeDTO compteFournisseurSiegeDTO) {
-
+        public void Update(CompteFournisseurSiegeDTO compteFournisseurSiegeDTO)
+        {
+            compteFournisseurSiegeService.Update(compteFournisseurSiegeDTO);
         }
 
-        public CompteFournisseurSiegeDTO Read(int IdCompteFournisseurSiege) {
-            return null;
+        public void Delete(CompteFournisseurSiegeDTO compteFournisseurSiegeDTO)
+        {
+            compteFournisseurSiegeService.Delete(compteFournisseurSiegeDTO);
         }
 
-        public void Update(CompteFournisseurSiegeDTO compteFournisseurSiegeDTO) {
-
-        }
-
-        public void Delete(CompteFournisseurSiegeDTO compteFournisseurSiegeDTO) {
-
-        }
-
-        public DataSet GetAll() {
-            return null;
+        public DataSet GetAll()
+        {
+            return compteFournisseurSiegeService.GetAll(); ;
         }
     }
 }
