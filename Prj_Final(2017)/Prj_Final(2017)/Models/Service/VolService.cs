@@ -10,12 +10,13 @@ using Prj_Final_2017_.Models.Exception;
 namespace Prj_Final_2017_.Models.Service {
     public class VolService {
 
-        VolDAO volDAO = new VolDAO();
+        private VolDAO volDAO = new VolDAO();
         public VolService(VolDAO volDAO) {
             if(volDAO == null)
             {
                 throw new VoyageAhuntsicException(4444);
             }
+            this.volDAO = volDAO;
         }
 
         public void Add(VolDTO volDTO) {

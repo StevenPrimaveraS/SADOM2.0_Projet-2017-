@@ -11,13 +11,14 @@ namespace Prj_Final_2017_.Models.Service
 {
     public class ForfaitService
     {
-        private ForfaitDAO forfaitDAO;
+        ForfaitDAO forfaitDAO;
         public ForfaitService(ForfaitDAO forfaitDAO)
         {
             if (forfaitDAO == null)
             {
                 throw new VoyageAhuntsicException(6789);
             }
+            this.forfaitDAO = forfaitDAO;
         }
 
         public void Add(ForfaitDTO forfaitDTO)

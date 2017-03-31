@@ -11,12 +11,14 @@ using Prj_Final_2017_.Models.Exception;
 namespace Prj_Final_2017_.Models.Service {
     public class CompagnieAerienneService {
 
-        CompagnieAerienneDAO compagnieAerienneDAO = new CompagnieAerienneDAO();
+        private CompagnieAerienneDAO compagnieAerienneDAO;
         public CompagnieAerienneService(CompagnieAerienneDAO compagnieAerienneDAO) {
             if(compagnieAerienneDAO == null)
             {
                 throw new VoyageAhuntsicException(4444);
             }
+            this.compagnieAerienneDAO =compagnieAerienneDAO;
+
 
         }
 

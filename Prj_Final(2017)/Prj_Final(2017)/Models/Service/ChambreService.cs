@@ -9,12 +9,13 @@ using Prj_Final_2017_.Models.Exception;
 
 namespace Prj_Final_2017_.Models.Service {
     public class ChambreService {
-        private ChambreDAO chambreDAO;
-        public ChambreService() {
+        ChambreDAO chambreDAO;
+        public ChambreService(ChambreDAO chambreDAO) {
             if (chambreDAO == null)
             {
                 throw new VoyageAhuntsicException(7890);
             }
+            this.chambreDAO = chambreDAO;
         }
 
         public void Add(ChambreDTO chambreDTO) {

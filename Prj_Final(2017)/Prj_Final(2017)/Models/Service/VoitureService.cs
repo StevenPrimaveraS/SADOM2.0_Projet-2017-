@@ -9,13 +9,14 @@ using Prj_Final_2017_.Models.Exception;
 
 namespace Prj_Final_2017_.Models.Service {
     public class VoitureService {
-        private VoitureDAO voitureDAO;
+        VoitureDAO voitureDAO;
         public VoitureService(VoitureDAO voitureDAO)
         {
             if (voitureDAO == null)
             {
                 throw new VoyageAhuntsicException(5678);
             }
+            this.voitureDAO = voitureDAO;
         }
 
         public void Add(VoitureDTO voitureDTO)
