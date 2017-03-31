@@ -31,8 +31,8 @@ namespace Prj_Final_2017_.Models.Service {
 
         public CompteFournisseurSiegeDTO Read(int IdCompteFournisseurSiege)
         {
-            compteFournisseurSiegeDAO.Read(IdCompteFournisseurSiege);
-            return null;
+            return compteFournisseurSiegeDAO.Read(IdCompteFournisseurSiege);
+             
         }
 
         public void Update(CompteFournisseurSiegeDTO compteFournisseurSiegeDTO)
