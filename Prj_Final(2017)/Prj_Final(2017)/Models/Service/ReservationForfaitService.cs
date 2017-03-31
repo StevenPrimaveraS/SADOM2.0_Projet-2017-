@@ -4,32 +4,85 @@ using System.Linq;
 using System.Web;
 using System.Data;
 using Prj_Final_2017_.DTO;
+using Prj_Final_2017_.Models.DAO;
+using Prj_Final_2017_.Models.Exception;
 
 namespace Prj_Final_2017_.Models.Service {
     public class ReservationForfaitService {
 
-        public ReservationForfaitService() {
+        private ReservationForfaitDAO reservationForfaitDAO;
+        private ForfaitDAO forfaitDAO;
+        private CompteParticulierDAO compteParticulierDAO;
 
+
+        public ReservationForfaitService(ReservationForfaitDAO reservationForfaitDAO, ForfaitDAO forfaitDAO, CompteParticulierDAO compteParticulierDAO­­) {
+            if (reservationForfaitDAO == null) {
+                throw new VoyageAhuntsicException(1234);
+            }
+            if (forfaitDAO == null) {
+                throw new VoyageAhuntsicException(1234);
+            }
+            if (compteParticulierDAO == null) {
+                throw new VoyageAhuntsicException(1234);
+            }
+            this.reservationForfaitDAO = reservationForfaitDAO;
+            this.forfaitDAO = forfaitDAO;
+            this.compteParticulierDAO = compteParticulierDAO;
         }
 
         public void Add(ReservationForfaitDTO reservationForfaitDTO) {
-
+            if (reservationForfaitDTO == null) {
+                throw new VoyageAhuntsicException(1234);
+            }
+            if (forfaitDAO.Read(reservationForfaitDTO.IdForfait) == null) {
+                throw new VoyageAhuntsicException(1234);
+            }
+            if (forfaitDAO.Read(reservationForfaitDTO.IdParticulier) == null) {
+                throw new VoyageAhuntsicException(1234);
+            }
+            if (reservationForfaitDTO.DateReservation > DateTime.Now) {
+                throw new VoyageAhuntsicException(1234);
+            }
+            if (reservationForfaitDTO.DateFinReservation < reservationForfaitDTO.DateReservation) {
+                throw new VoyageAhuntsicException(1234);
+            }
+            reservationForfaitDAO.Add(reservationForfaitDTO);
         }
 
         public ReservationForfaitDTO Read(int IdReservationForfait) {
-            return null;
+            return reservationForfaitDAO.Read(IdReservationForfait);
         }
 
         public void Update(ReservationForfaitDTO reservationForfaitDTO) {
-
+            if (reservationForfaitDTO == null) {
+                throw new VoyageAhuntsicException(1234);
+            }
+            ReservationForfaitDTO newReservationForfaitDTO = reservationForfaitDTO;
+            ReservationForfaitDTO oldReservationForfaitDTO = reservationForfaitDAO.Read(reservationForfaitDTO.IdReservationForfait);
+            if (oldReservationForfaitDTO == null) {
+                throw new VoyageAhuntsicException(1234);
+            }
+            if (newReservationForfaitDTO.DateReservation > DateTime.Now) {
+                throw new VoyageAhuntsicException(1234);
+            }
+            if (newReservationForfaitDTO.DateFinReservation < newReservationForfaitDTO.DateReservation) {
+                throw new VoyageAhuntsicException(1234);
+            }
+            reservationForfaitDAO.Update(reservationForfaitDTO);
         }
 
         public void Delete(ReservationForfaitDTO reservationForfaitDTO) {
-
+            if (reservationForfaitDTO == null) {
+                throw new VoyageAhuntsicException(1234);
+            }
+            if (reservationForfaitDAO.Read(reservationForfaitDTO.IdReservationForfait) == null) {
+                throw new VoyageAhuntsicException(1234);
+            }
+            reservationForfaitDAO.Delete(reservationForfaitDTO);
         }
 
         public DataSet GetAll() {
-            return null;
+            return reservationForfaitDAO.GetAll();
         }
     }
 }
