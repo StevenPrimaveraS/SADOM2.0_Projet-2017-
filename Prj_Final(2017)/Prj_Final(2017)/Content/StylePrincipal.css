@@ -6,3 +6,9 @@ h1 {
  font-weight: bold;
  text-align: center;
 }
+.jumbotron 
+{
+    width:100%;
+    height:auto;
+    background-color: #a6e8e2;
+}
