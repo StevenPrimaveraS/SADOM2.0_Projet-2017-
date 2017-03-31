@@ -5,6 +5,7 @@ using System.Web;
 using MySql.Data.MySqlClient;
 using System.Data;
 using Prj_Final_2017_.DTO;
+using Prj_Final_2017_.Models.Exception;
 
 namespace Prj_Final_2017_.Models.DAO {
     public class VolDAO {
@@ -71,7 +72,7 @@ namespace Prj_Final_2017_.Models.DAO {
                 }
             }
             catch (MySqlException mysqlException) {
-                System.Diagnostics.Debug.WriteLine(mysqlException.Message);
+                throw new VoyageAhuntsicException(1234,VoyageAhuntsicException.CharteErreur[1234],mysqlException);
             }
         }
 
@@ -108,7 +109,7 @@ namespace Prj_Final_2017_.Models.DAO {
                 }
             }
             catch (MySqlException mysqlException) {
-                System.Diagnostics.Debug.WriteLine(mysqlException.Message);
+                throw new VoyageAhuntsicException(1234,VoyageAhuntsicException.CharteErreur[1234],mysqlException);
             }
             return volDTO;
         }
@@ -140,7 +141,7 @@ namespace Prj_Final_2017_.Models.DAO {
                 }
             }
             catch (MySqlException mysqlException) {
-                System.Diagnostics.Debug.WriteLine(mysqlException.Message);
+                throw new VoyageAhuntsicException(1234,VoyageAhuntsicException.CharteErreur[1234],mysqlException);
             }
         }
 
@@ -161,7 +162,7 @@ namespace Prj_Final_2017_.Models.DAO {
                 }
             }
             catch (MySqlException mysqlException) {
-                System.Diagnostics.Debug.WriteLine(mysqlException.Message);
+                throw new VoyageAhuntsicException(1234,VoyageAhuntsicException.CharteErreur[1234],mysqlException);
             }
         }
 
@@ -182,7 +183,7 @@ namespace Prj_Final_2017_.Models.DAO {
                 }
             }
             catch (MySqlException mysqlException) {
-                System.Diagnostics.Debug.WriteLine(mysqlException.Message);
+                throw new VoyageAhuntsicException(1234,VoyageAhuntsicException.CharteErreur[1234],mysqlException);
             }
             return dataset;
         }
