@@ -179,6 +179,10 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PaiementController.cs" />
     <Compile Include="Controllers\PanierController.cs" />
+    <Compile Include="Controllers\ReservationChambreController.cs" />
+    <Compile Include="Controllers\ReservationForfaitController.cs" />
+    <Compile Include="Controllers\ReservationSiegeController.cs" />
+    <Compile Include="Controllers\ReservationVoitureController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\VoitureController.cs" />
     <Compile Include="Controllers\VolController.cs" />
@@ -337,6 +341,11 @@
     <Folder Include="App_Data\" />
     <Folder Include="Models\util\" />
     <Folder Include="Views\Achat\" />
+    <Folder Include="Views\ReservaitionVoiture\" />
+    <Folder Include="Views\ReservationChambre\" />
+    <Folder Include="Views\ReservationForfait\" />
+    <Folder Include="Views\ReservationSiege\" />
+    <Folder Include="Views\ReservationVoiture\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
