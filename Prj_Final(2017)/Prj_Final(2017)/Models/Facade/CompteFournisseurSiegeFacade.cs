@@ -4,11 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Data;
 using Prj_Final_2017_.DTO;
+using Prj_Final_2017_.Models.Service;
 
 namespace Prj_Final_2017_.Models.Facade {
-    public class CompteFournisseurSiegeService {
+    public class CompteFournisseurSiegeFacade {
         CompteFournisseurSiegeService compteFournisseurSiegeService;
-        public CompteFournisseurSiegeService(CompteFournisseurSiegeService compteFournisseurSiegeService)
+        public CompteFournisseurSiegeFacade(CompteFournisseurSiegeService compteFournisseurSiegeService)
         {
             this.compteFournisseurSiegeService = compteFournisseurSiegeService;
         }
