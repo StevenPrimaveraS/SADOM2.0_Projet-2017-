@@ -172,6 +172,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ChambreController.cs" />
+    <Compile Include="Controllers\CompteParticulierController.cs" />
     <Compile Include="Controllers\FactureController.cs" />
     <Compile Include="Controllers\ForfaitController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -341,6 +342,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Models\util\" />
     <Folder Include="Views\Achat\" />
+    <Folder Include="Views\CompteParticulier\" />
     <Folder Include="Views\ReservaitionVoiture\" />
     <Folder Include="Views\ReservationChambre\" />
     <Folder Include="Views\ReservationForfait\" />
