@@ -38,6 +38,8 @@ namespace Prj_Final_2017_.Models.DAO {
         private static readonly string UPDATE_QUERY = "UPDATE Chambre SET `NumeroChambre` = @NumeroChambre, `NomChambre` = @NomChambre, `Tarif` = @Tarif, `MaxPersonne` = @MaxPersonne, `Taille` = @Taille, `Description` = @Description, `IdHotel` = @IdHotel WHERE `IdChambre` = @IdChambre";
         private static readonly string DELETE_QUERY = "DELETE FROM Chambre WHERE `IdChambre` = @IdChambre";
         private static readonly string GET_ALL_QUERY = "SELECT `IdChambre`, `NumeroChambre`, `NomChambre`, `Tarif`, `MaxPersonne`, `Taille`, `Description`, `IdHotel` FROM Chambre";
+        private static readonly string FIND_BY_HOTEL = "SELECT `IdChambre`, `NumeroChambre`, `NomChambre`, `Tarif`, `MaxPersonne`, `Taille`, `Description`, `IdHotel` FROM Chambre WHERE `IdHotel` = @IdHotel";
+
 
         public ChambreDAO() {
             connexion = new Connexion.Connexion();
@@ -171,6 +173,37 @@ namespace Prj_Final_2017_.Models.DAO {
                 }
             }
             catch (MySqlException mysqlException) {
+                throw new VoyageAhuntsicException(1234, VoyageAhuntsicException.CharteErreur[1234], mysqlException);
+            }
+            return dataset;
+        }
+
+        /// <summary>
+        /// Retorune la liste de tous les Chambre de la table Chambre ayant le IdHotel entré
+        /// </summary>
+        /// <param name="idHotel">Hotel à vérifier</param>
+        /// <returns>La liste des Chambre de l'hotel; une liste vide sinon</returns>
+
+        public DataSet FindByHotel(int idHotel)
+        {
+            DataSet dataset = null;
+            try
+            {
+                using (MySqlConnection connection = connexion.getConnexion())
+                {
+                    connection.Open();
+                    using (MySqlCommand command = new MySqlCommand(ChambreDAO.FIND_BY_HOTEL, connection))
+                    {
+                        command.Prepare();
+                        command.Parameters.AddWithValue("IdHotel", idHotel);
+                        MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                        dataset = new DataSet();
+                        adapter.Fill(dataset);
+                    }
+                }
+            }
+            catch (MySqlException mysqlException)
+            {
                 throw new VoyageAhuntsicException(1234, VoyageAhuntsicException.CharteErreur[1234], mysqlException);
             }
             return dataset;

@@ -36,6 +36,7 @@ namespace Prj_Final_2017_.Models.DAO {
         private static readonly string UPDATE_QUERY = "UPDATE CompteParticulier SET `Password` = @Password, `Prenom` = @Prenom, `Nom` = @Nom, `Courriel` = @Courriel WHERE `IdParticulier` = @IdParticulier";
         private static readonly string DELETE_QUERY = "DELETE FROM CompteParticulier WHERE `IdParticulier` = @IdParticulier";
         private static readonly string GET_ALL_QUERY = "SELECT `IdParticulier`, `Password`, `Prenom`, `Nom`, `Courriel` FROM CompteParticulier";
+        private static readonly string FIND_BY_COURRIEL = "SELECT `IdParticulier`, `Password`, `Prenom`, `Nom`, `Courriel` FROM CompteParticulier WHERE `Courriel` = @Courriel";
 
         public CompteParticulierDAO() {
             connexion = new Connexion.Connexion();
@@ -161,6 +162,36 @@ namespace Prj_Final_2017_.Models.DAO {
             }
             catch (MySqlException mysqlException) {
                 throw new VoyageAhuntsicException(1234,VoyageAhuntsicException.CharteErreur[1234],mysqlException);
+            }
+            return dataset;
+        }
+
+        /// <summary>
+        /// Retorune la liste de tous les CompteParticulier de la table CompteParticulier ayant le Courriel entré
+        /// </summary>
+        /// <param name="courriel">Particulier à vérifier</param>
+        /// <returns>La liste des CompteParticulier du courriel; une liste vide sinon</returns>
+        public DataSet FindByCourriel(string courriel)
+        {
+            DataSet dataset = null;
+            try
+            {
+                using (MySqlConnection connection = connexion.getConnexion())
+                {
+                    connection.Open();
+                    using (MySqlCommand command = new MySqlCommand(CompteParticulierDAO.FIND_BY_COURRIEL, connection))
+                    {
+                        command.Prepare();
+                        command.Parameters.AddWithValue("Courriel", courriel);
+                        MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                        dataset = new DataSet();
+                        adapter.Fill(dataset);
+                    }
+                }
+            }
+            catch (MySqlException mysqlException)
+            {
+                throw new VoyageAhuntsicException(1234, VoyageAhuntsicException.CharteErreur[1234], mysqlException);
             }
             return dataset;
         }

@@ -36,6 +36,7 @@ namespace Prj_Final_2017_.Models.DAO {
         private static readonly string UPDATE_QUERY = "UPDATE ReservationChambre SET `IdChambre` = @IdChambre, `IdParticulier` = @IdParticulier, `DateReservation` = @DateReservation, `DateFinReservation` = @DateFinReservation WHERE `IdReservationChambre` = @IdReservationChambre";
         private static readonly string DELETE_QUERY = "DELETE FROM ReservationChambre WHERE `IdReservationChambre` = @IdReservationChambre";
         private static readonly string GET_ALL_QUERY = "SELECT `IdReservationChambre`, `IdChambre`, `IdParticulier`, `DateReservation`, `DateFinReservation` FROM ReservationChambre";
+        private static readonly string FIND_BY_PARTICULIER = "SELECT `IdReservationChambre`, `IdChambre`, `IdParticulier`, `DateReservation`, `DateFinReservation` FROM ReservationChambre WHERE `IdParticulier` = @IdParticulier AND `DateFinReservation`< @DateActuelle";
 
         public ReservationChambreDAO() {
             connexion = new Connexion.Connexion();
@@ -161,6 +162,38 @@ namespace Prj_Final_2017_.Models.DAO {
             }
             catch (MySqlException mysqlException) {
                 throw new VoyageAhuntsicException(1234,VoyageAhuntsicException.CharteErreur[1234],mysqlException);
+            }
+            return dataset;
+        }
+
+        /// <summary>
+        /// Retorune la liste de tous les ReservationChambre de la table ReservationChambre ayant le IdParticulier entré
+        /// </summary>
+        /// <param name="idParticulier">Particulier à vérifier</param>
+        /// <returns>La liste des ReservationChambre du particulier; une liste vide sinon</returns>
+
+        public DataSet FindByParticulier(int idParticulier)
+        {
+            DataSet dataset = null;
+            try
+            {
+                using (MySqlConnection connection = connexion.getConnexion())
+                {
+                    connection.Open();
+                    using (MySqlCommand command = new MySqlCommand(ReservationChambreDAO.FIND_BY_PARTICULIER, connection))
+                    {
+                        command.Prepare();
+                        command.Parameters.AddWithValue("IdParticulier", idParticulier);
+                        command.Parameters.AddWithValue("DateActuelle", DateTime.Now);
+                        MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                        dataset = new DataSet();
+                        adapter.Fill(dataset);
+                    }
+                }
+            }
+            catch (MySqlException mysqlException)
+            {
+                throw new VoyageAhuntsicException(1234, VoyageAhuntsicException.CharteErreur[1234], mysqlException);
             }
             return dataset;
         }
