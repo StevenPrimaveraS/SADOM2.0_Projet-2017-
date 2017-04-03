@@ -36,6 +36,7 @@ namespace Prj_Final_2017_.Models.DAO {
         private static readonly string UPDATE_QUERY = "UPDATE Siege SET `Type` = @Type, `Numero` = @Numero, `IdVol` = @IdVol WHERE `IdSiege` = @IdSiege";
         private static readonly string DELETE_QUERY = "DELETE FROM Siege WHERE `IdSiege` = @IdSiege";
         private static readonly string GET_ALL_QUERY = "SELECT `IdSiege`, `Type`, `Numero`, `IdVol` FROM Siege";
+        private static readonly string FIND_BY_VOL = "SELECT `IdSiege`, `Type`, `Numero`, `IdVol` FROM Siege WHERE `IdVol` = @IdVol";
 
         public SiegeDAO() {
             connexion = new Connexion.Connexion();
@@ -158,6 +159,37 @@ namespace Prj_Final_2017_.Models.DAO {
             }
             catch (MySqlException mysqlException) {
                 throw new VoyageAhuntsicException(1234,VoyageAhuntsicException.CharteErreur[1234],mysqlException);
+            }
+            return dataset;
+        }
+
+        /// <summary>
+        /// Retorune la liste de tous les Sieges de la table Siege ayant le IdVol entré
+        /// </summary>
+        /// <param name="idVol">Vol à vérifier</param>
+        /// <returns>La liste des Siege du vol; une liste vide sinon</returns>
+
+        public DataSet FindByVol(int idVol)
+        {
+            DataSet dataset = null;
+            try
+            {
+                using (MySqlConnection connection = connexion.getConnexion())
+                {
+                    connection.Open();
+                    using (MySqlCommand command = new MySqlCommand(SiegeDAO.FIND_BY_VOL, connection))
+                    {
+                        command.Prepare();
+                        command.Parameters.AddWithValue("IdVol", idVol);
+                        MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                        dataset = new DataSet();
+                        adapter.Fill(dataset);
+                    }
+                }
+            }
+            catch (MySqlException mysqlException)
+            {
+                throw new VoyageAhuntsicException(4444, VoyageAhuntsicException.CharteErreur[4444], mysqlException);
             }
             return dataset;
         }

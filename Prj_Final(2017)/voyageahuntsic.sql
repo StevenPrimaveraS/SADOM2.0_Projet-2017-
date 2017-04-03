@@ -17,241 +17,241 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `voyageahuntsic`
+-- Base de données :  voyageahuntsic
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `agencevoiture`
+-- Structure de la table agencevoiture
 --
 
-CREATE TABLE `agencevoiture` (
-  `IdAgenceVoiture` int(4) NOT NULL,
-  `Nom` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-  `Telephone` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `Adresse` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `Ville` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-  `Aeroport` varchar(20) COLLATE utf8_unicode_ci NOT NULL
+CREATE TABLE agencevoiture (
+  IdAgenceVoiture int(4) NOT NULL,
+  Nom varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  Telephone varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  Adresse varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  Ville varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  Aeroport varchar(20) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `chambre`
+-- Structure de la table chambre
 --
 
-CREATE TABLE `chambre` (
-  `IdChambre` int(4) NOT NULL,
-  `NumeroChambre` int(4) NOT NULL,
-  `NomChambre` int(32) NOT NULL,
-  `Tarif` float NOT NULL,
-  `MaxPersonne` int(4) NOT NULL,
-  `Taille` float NOT NULL,
-  `Description` text COLLATE utf8_unicode_ci NOT NULL,
-  `IdHotel` int(4) NOT NULL
+CREATE TABLE chambre (
+  IdChambre int(4) NOT NULL,
+  NumeroChambre int(4) NOT NULL,
+  NomChambre int(32) NOT NULL,
+  Tarif float NOT NULL,
+  MaxPersonne int(4) NOT NULL,
+  Taille float NOT NULL,
+  Description text COLLATE utf8_unicode_ci NOT NULL,
+  IdHotel int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `compagnieaerienne`
+-- Structure de la table compagnieaerienne
 --
 
-CREATE TABLE `compagnieaerienne` (
-  `IdCompagnieAerienne` int(4) NOT NULL,
-  `Nom` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-  `Telephone` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `Adresse` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `Ville` varchar(32) COLLATE utf8_unicode_ci NOT NULL
+CREATE TABLE compagnieaerienne (
+  IdCompagnieAerienne int(4) NOT NULL,
+  Nom varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  Telephone varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  Adresse varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  Ville varchar(32) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `comptefournisseurchambre`
+-- Structure de la table comptefournisseurchambre
 --
 
-CREATE TABLE `comptefournisseurchambre` (
-  `IdFournisseur` int(4) NOT NULL,
-  `Courriel` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `Password` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `IdHotel` int(4) NOT NULL
+CREATE TABLE comptefournisseurchambre (
+  IdFournisseur int(4) NOT NULL,
+  Courriel varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  Password varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  IdHotel int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `comptefournisseursiege`
+-- Structure de la table comptefournisseursiege
 --
 
-CREATE TABLE `comptefournisseursiege` (
-  `IdFournisseur` int(4) NOT NULL,
-  `Courriel` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `Password` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `IdCompagnieAerienne` int(4) NOT NULL
+CREATE TABLE comptefournisseursiege (
+  IdFournisseur int(4) NOT NULL,
+  Courriel varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  Password varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  IdCompagnieAerienne int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `comptefournisseurvoiture`
+-- Structure de la table comptefournisseurvoiture
 --
 
-CREATE TABLE `comptefournisseurvoiture` (
-  `IdFournisseur` int(4) NOT NULL,
-  `Courriel` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `Password` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `IdAgenceVoiture` int(4) NOT NULL
+CREATE TABLE comptefournisseurvoiture (
+  IdFournisseur int(4) NOT NULL,
+  Courriel varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  Password varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  IdAgenceVoiture int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `compteparticulier`
+-- Structure de la table compteparticulier
 --
 
-CREATE TABLE `compteparticulier` (
-  `IdParticulier` int(4) NOT NULL,
-  `Password` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `Prenom` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `Nom` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `Courriel` varchar(40) COLLATE utf8_unicode_ci NOT NULL
+CREATE TABLE compteparticulier (
+  IdParticulier int(4) NOT NULL,
+  Password varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  Prenom varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  Nom varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  Courriel varchar(40) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `forfait`
+-- Structure de la table forfait
 --
 
-CREATE TABLE `forfait` (
-  `IdForfait` int(4) NOT NULL,
-  `IdChambre` int(4) NOT NULL,
-  `IdVoiture` int(4) NOT NULL,
-  `IdSiege` int(4) NOT NULL,
-  `TarifReduit` float NOT NULL
+CREATE TABLE forfait (
+  IdForfait int(4) NOT NULL,
+  IdChambre int(4) NOT NULL,
+  IdVoiture int(4) NOT NULL,
+  IdSiege int(4) NOT NULL,
+  TarifReduit float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `hotel`
+-- Structure de la table hotel
 --
 
-CREATE TABLE `hotel` (
-  `IdHotel` int(4) NOT NULL,
-  `Nom` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-  `Telephone` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `Adresse` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `Ville` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-  `Categorie` int(2) NOT NULL,
-  `Description` text COLLATE utf8_unicode_ci NOT NULL
+CREATE TABLE hotel (
+  IdHotel int(4) NOT NULL,
+  Nom varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  Telephone varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  Adresse varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  Ville varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  Categorie int(2) NOT NULL,
+  Description text COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `reservationchambre`
+-- Structure de la table reservationchambre
 --
 
-CREATE TABLE `reservationchambre` (
-  `IdReservationChambre` int(4) NOT NULL,
-  `IdChambre` int(4) NOT NULL,
-  `IdParticulier` int(4) NOT NULL,
-  `DateReservation` date NOT NULL,
-  `DateFinReservation` date NOT NULL
+CREATE TABLE reservationchambre (
+  IdReservationChambre int(4) NOT NULL,
+  IdChambre int(4) NOT NULL,
+  IdParticulier int(4) NOT NULL,
+  DateReservation date NOT NULL,
+  DateFinReservation date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `reservationforfait`
+-- Structure de la table reservationforfait
 --
 
-CREATE TABLE `reservationforfait` (
-  `IdReservationForfait` int(4) NOT NULL,
-  `IdForfait` int(4) NOT NULL,
-  `IdParticulier` int(4) NOT NULL,
-  `DateReservation` date NOT NULL,
-  `DateFinReservation` date NOT NULL
+CREATE TABLE reservationforfait (
+  IdReservationForfait int(4) NOT NULL,
+  IdForfait int(4) NOT NULL,
+  IdParticulier int(4) NOT NULL,
+  DateReservation date NOT NULL,
+  DateFinReservation date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `reservationsiege`
+-- Structure de la table reservationsiege
 --
 
-CREATE TABLE `reservationsiege` (
-  `IdReservationSiege` int(4) NOT NULL,
-  `IdSiege` int(4) NOT NULL,
-  `IdParticulier` int(4) NOT NULL,
-  `DateReservation` date NOT NULL,
-  `DateFinReservation` date NOT NULL
+CREATE TABLE reservationsiege (
+  IdReservationSiege int(4) NOT NULL,
+  IdSiege int(4) NOT NULL,
+  IdParticulier int(4) NOT NULL,
+  DateReservation date NOT NULL,
+  DateFinReservation date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `reservationvoiture`
+-- Structure de la table reservationvoiture
 --
 
-CREATE TABLE `reservationvoiture` (
-  `IdReservationVoiture` int(4) NOT NULL,
-  `IdVoiture` int(4) NOT NULL,
-  `IdParticulier` int(4) NOT NULL,
-  `DateReservation` date NOT NULL,
-  `DateFinReservation` date NOT NULL
+CREATE TABLE reservationvoiture (
+  IdReservationVoiture int(4) NOT NULL,
+  IdVoiture int(4) NOT NULL,
+  IdParticulier int(4) NOT NULL,
+  DateReservation date NOT NULL,
+  DateFinReservation date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `siege`
+-- Structure de la table siege
 --
 
-CREATE TABLE `siege` (
-  `IdSiege` int(4) NOT NULL,
-  `Type` varchar(16) COLLATE utf8_unicode_ci NOT NULL,
-  `Numero` int(4) NOT NULL,
-  `IdVol` int(4) NOT NULL
+CREATE TABLE siege (
+  IdSiege int(4) NOT NULL,
+  Type varchar(16) COLLATE utf8_unicode_ci NOT NULL,
+  Numero int(4) NOT NULL,
+  IdVol int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `voiture`
+-- Structure de la table voiture
 --
 
-CREATE TABLE `voiture` (
-  `IdVoiture` int(4) NOT NULL,
-  `Type` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-  `IdAgence` int(4) NOT NULL,
-  `Tarif` float NOT NULL,
-  `NbPassager` int(4) NOT NULL,
-  `Nom` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-  `Plaque` varchar(8) COLLATE utf8_unicode_ci NOT NULL
+CREATE TABLE voiture (
+  IdVoiture int(4) NOT NULL,
+  Type varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  IdAgence int(4) NOT NULL,
+  Tarif float NOT NULL,
+  NbPassager int(4) NOT NULL,
+  Nom varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  Plaque varchar(8) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `vol`
+-- Structure de la table vol
 --
 
-CREATE TABLE `vol` (
-  `IdVol` int(4) NOT NULL,
-  `AeroportDepart` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-  `AeroportDestination` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-  `VilleDepart` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-  `VilleDestination` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-  `DateDepart` date NOT NULL,
-  `DateArrivee` date NOT NULL,
-  `IdCompagnieAerienne` int(4) NOT NULL,
-  `Classe` varchar(16) COLLATE utf8_unicode_ci NOT NULL,
-  `IsRemboursable` tinyint(1) NOT NULL,
-  `Tarif` float NOT NULL
+CREATE TABLE vol (
+  IdVol int(4) NOT NULL,
+  AeroportDepart varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  AeroportDestination varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  VilleDepart varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  VilleDestination varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  DateDepart date NOT NULL,
+  DateArrivee date NOT NULL,
+  IdCompagnieAerienne int(4) NOT NULL,
+  Classe varchar(16) COLLATE utf8_unicode_ci NOT NULL,
+  IsRemboursable tinyint(1) NOT NULL,
+  Tarif float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -259,244 +259,244 @@ CREATE TABLE `vol` (
 --
 
 --
--- Index pour la table `agencevoiture`
+-- Index pour la table agencevoiture
 --
-ALTER TABLE `agencevoiture`
-  ADD PRIMARY KEY (`IdAgenceVoiture`);
+ALTER TABLE agencevoiture
+  ADD PRIMARY KEY (IdAgenceVoiture);
 
 --
--- Index pour la table `chambre`
+-- Index pour la table chambre
 --
-ALTER TABLE `chambre`
-  ADD PRIMARY KEY (`IdChambre`);
+ALTER TABLE chambre
+  ADD PRIMARY KEY (IdChambre);
 
 --
--- Index pour la table `compagnieaerienne`
+-- Index pour la table compagnieaerienne
 --
-ALTER TABLE `compagnieaerienne`
-  ADD PRIMARY KEY (`IdCompagnieAerienne`);
+ALTER TABLE compagnieaerienne
+  ADD PRIMARY KEY (IdCompagnieAerienne);
 
 --
--- Index pour la table `comptefournisseurchambre`
+-- Index pour la table comptefournisseurchambre
 --
-ALTER TABLE `comptefournisseurchambre`
-  ADD PRIMARY KEY (`IdFournisseur`);
+ALTER TABLE comptefournisseurchambre
+  ADD PRIMARY KEY (IdFournisseur);
 
 --
--- Index pour la table `comptefournisseursiege`
+-- Index pour la table comptefournisseursiege
 --
-ALTER TABLE `comptefournisseursiege`
-  ADD PRIMARY KEY (`IdFournisseur`);
+ALTER TABLE comptefournisseursiege
+  ADD PRIMARY KEY (IdFournisseur);
 
 --
--- Index pour la table `comptefournisseurvoiture`
+-- Index pour la table comptefournisseurvoiture
 --
-ALTER TABLE `comptefournisseurvoiture`
-  ADD PRIMARY KEY (`IdFournisseur`);
+ALTER TABLE comptefournisseurvoiture
+  ADD PRIMARY KEY (IdFournisseur);
 
 --
--- Index pour la table `compteparticulier`
+-- Index pour la table compteparticulier
 --
-ALTER TABLE `compteparticulier`
-  ADD PRIMARY KEY (`IdParticulier`);
+ALTER TABLE compteparticulier
+  ADD PRIMARY KEY (IdParticulier);
 
 --
--- Index pour la table `hotel`
+-- Index pour la table hotel
 --
-ALTER TABLE `hotel`
-  ADD PRIMARY KEY (`IdHotel`);
+ALTER TABLE hotel
+  ADD PRIMARY KEY (IdHotel);
 
 --
--- Index pour la table `reservationchambre`
+-- Index pour la table reservationchambre
 --
-ALTER TABLE `reservationchambre`
-  ADD PRIMARY KEY (`IdReservationChambre`);
+ALTER TABLE reservationchambre
+  ADD PRIMARY KEY (IdReservationChambre);
 
 --
--- Index pour la table `reservationforfait`
+-- Index pour la table reservationforfait
 --
-ALTER TABLE `reservationforfait`
-  ADD PRIMARY KEY (`IdReservationForfait`);
+ALTER TABLE reservationforfait
+  ADD PRIMARY KEY (IdReservationForfait);
 
 --
--- Index pour la table `reservationsiege`
+-- Index pour la table reservationsiege
 --
-ALTER TABLE `reservationsiege`
-  ADD PRIMARY KEY (`IdReservationSiege`);
+ALTER TABLE reservationsiege
+  ADD PRIMARY KEY (IdReservationSiege);
 
 --
--- Index pour la table `reservationvoiture`
+-- Index pour la table reservationvoiture
 --
-ALTER TABLE `reservationvoiture`
-  ADD PRIMARY KEY (`IdReservationVoiture`);
+ALTER TABLE reservationvoiture
+  ADD PRIMARY KEY (IdReservationVoiture);
 
 --
--- Index pour la table `siege`
+-- Index pour la table siege
 --
-ALTER TABLE `siege`
-  ADD PRIMARY KEY (`IdSiege`);
+ALTER TABLE siege
+  ADD PRIMARY KEY (IdSiege);
 
 --
--- Index pour la table `voiture`
+-- Index pour la table voiture
 --
-ALTER TABLE `voiture`
-  ADD PRIMARY KEY (`IdVoiture`);
+ALTER TABLE voiture
+  ADD PRIMARY KEY (IdVoiture);
 
 --
--- Index pour la table `vol`
+-- Index pour la table vol
 --
-ALTER TABLE `vol`
-  ADD PRIMARY KEY (`IdVol`);
+ALTER TABLE vol
+  ADD PRIMARY KEY (IdVol);
 
 --
 -- AUTO_INCREMENT pour les tables exportées
 --
 
 --
--- AUTO_INCREMENT pour la table `agencevoiture`
+-- AUTO_INCREMENT pour la table agencevoiture
 --
-ALTER TABLE `agencevoiture`
-  MODIFY `IdAgenceVoiture` int(4) NOT NULL AUTO_INCREMENT;
+ALTER TABLE agencevoiture
+  MODIFY IdAgenceVoiture int(4) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `chambre`
+-- AUTO_INCREMENT pour la table chambre
 --
-ALTER TABLE `chambre`
-  MODIFY `IdChambre` int(4) NOT NULL AUTO_INCREMENT;
+ALTER TABLE chambre
+  MODIFY IdChambre int(4) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `compagnieaerienne`
+-- AUTO_INCREMENT pour la table compagnieaerienne
 --
-ALTER TABLE `compagnieaerienne`
-  MODIFY `IdCompagnieAerienne` int(4) NOT NULL AUTO_INCREMENT;
+ALTER TABLE compagnieaerienne
+  MODIFY IdCompagnieAerienne int(4) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `comptefournisseurchambre`
+-- AUTO_INCREMENT pour la table comptefournisseurchambre
 --
-ALTER TABLE `comptefournisseurchambre`
-  MODIFY `IdFournisseur` int(4) NOT NULL AUTO_INCREMENT;
+ALTER TABLE comptefournisseurchambre
+  MODIFY IdFournisseur int(4) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `comptefournisseursiege`
+-- AUTO_INCREMENT pour la table comptefournisseursiege
 --
-ALTER TABLE `comptefournisseursiege`
-  MODIFY `IdFournisseur` int(4) NOT NULL AUTO_INCREMENT;
+ALTER TABLE comptefournisseursiege
+  MODIFY IdFournisseur int(4) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `comptefournisseurvoiture`
+-- AUTO_INCREMENT pour la table comptefournisseurvoiture
 --
-ALTER TABLE `comptefournisseurvoiture`
-  MODIFY `IdFournisseur` int(4) NOT NULL AUTO_INCREMENT;
+ALTER TABLE comptefournisseurvoiture
+  MODIFY IdFournisseur int(4) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `compteparticulier`
+-- AUTO_INCREMENT pour la table compteparticulier
 --
-ALTER TABLE `compteparticulier`
-  MODIFY `IdParticulier` int(4) NOT NULL AUTO_INCREMENT;
+ALTER TABLE compteparticulier
+  MODIFY IdParticulier int(4) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `hotel`
+-- AUTO_INCREMENT pour la table hotel
 --
-ALTER TABLE `hotel`
-  MODIFY `IdHotel` int(4) NOT NULL AUTO_INCREMENT;
+ALTER TABLE hotel
+  MODIFY IdHotel int(4) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `reservationchambre`
+-- AUTO_INCREMENT pour la table reservationchambre
 --
-ALTER TABLE `reservationchambre`
-  MODIFY `IdReservationChambre` int(4) NOT NULL AUTO_INCREMENT;
+ALTER TABLE reservationchambre
+  MODIFY IdReservationChambre int(4) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `reservationforfait`
+-- AUTO_INCREMENT pour la table reservationforfait
 --
-ALTER TABLE `reservationforfait`
-  MODIFY `IdReservationForfait` int(4) NOT NULL AUTO_INCREMENT;
+ALTER TABLE reservationforfait
+  MODIFY IdReservationForfait int(4) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `reservationsiege`
+-- AUTO_INCREMENT pour la table reservationsiege
 --
-ALTER TABLE `reservationsiege`
-  MODIFY `IdReservationSiege` int(4) NOT NULL AUTO_INCREMENT;
+ALTER TABLE reservationsiege
+  MODIFY IdReservationSiege int(4) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `reservationvoiture`
+-- AUTO_INCREMENT pour la table reservationvoiture
 --
-ALTER TABLE `reservationvoiture`
-  MODIFY `IdReservationVoiture` int(4) NOT NULL AUTO_INCREMENT;
+ALTER TABLE reservationvoiture
+  MODIFY IdReservationVoiture int(4) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `siege`
+-- AUTO_INCREMENT pour la table siege
 --
-ALTER TABLE `siege`
-  MODIFY `IdSiege` int(4) NOT NULL AUTO_INCREMENT;
+ALTER TABLE siege
+  MODIFY IdSiege int(4) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `voiture`
+-- AUTO_INCREMENT pour la table voiture
 --
-ALTER TABLE `voiture`
-  MODIFY `IdVoiture` int(4) NOT NULL AUTO_INCREMENT;
+ALTER TABLE voiture
+  MODIFY IdVoiture int(4) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `vol`
+-- AUTO_INCREMENT pour la table vol
 --
-ALTER TABLE `vol`
-  MODIFY `IdVol` int(4) NOT NULL AUTO_INCREMENT;
+ALTER TABLE vol
+  MODIFY IdVol int(4) NOT NULL AUTO_INCREMENT;
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `comptefournisseurchambre`
+-- Constraints for table comptefournisseurchambre
 --
-ALTER TABLE `comptefournisseurchambre`
-ADD CONSTRAINT `comptefournisseurchambre_ibfk_1` FOREIGN KEY (`IdHotel`) REFERENCES `hotel` (`IdHotel`);
+ALTER TABLE comptefournisseurchambre
+ADD CONSTRAINT comptefournisseurchambre_ibfk_1 FOREIGN KEY (IdHotel) REFERENCES hotel (IdHotel);
 --
--- Constraints for table `comptefournisseurvoiture`
+-- Constraints for table comptefournisseurvoiture
 --
-ALTER TABLE `comptefournisseurvoiture`
-ADD CONSTRAINT `comptefournisseurvoiture_ibfk_1` FOREIGN KEY (`IdAgenceDeVoiture`) REFERENCES `agencevoiture` (`IdAgenceVoiture`);
+ALTER TABLE comptefournisseurvoiture
+ADD CONSTRAINT comptefournisseurvoiture_ibfk_1 FOREIGN KEY (IdAgenceDeVoiture) REFERENCES agencevoiture (IdAgenceVoiture);
 --
--- Constraints for table `comptefournisseursiege`
+-- Constraints for table comptefournisseursiege
 --
-ALTER TABLE `comptefournisseursiege`
-ADD CONSTRAINT `comptefournisseursiege_ibfk_1` FOREIGN KEY (`IdCompagnieAerienne`) REFERENCES `compagnieaerienne` (`IdCompagnieAerienne`);
+ALTER TABLE comptefournisseursiege
+ADD CONSTRAINT comptefournisseursiege_ibfk_1 FOREIGN KEY (IdCompagnieAerienne) REFERENCES compagnieaerienne (IdCompagnieAerienne);
 --
--- Constraints for table `chambre`
+-- Constraints for table chambre
 --
-ALTER TABLE `chambre`
-ADD CONSTRAINT `chambre_ibfk_1` FOREIGN KEY (`IdHotel`) REFERENCES `hotel` (`IdHotel`);
+ALTER TABLE chambre
+ADD CONSTRAINT chambre_ibfk_1 FOREIGN KEY (IdHotel) REFERENCES hotel (IdHotel);
 --
--- Constraints for table `voiture`
+-- Constraints for table voiture
 --
-ALTER TABLE `voiture`
-ADD CONSTRAINT `voiture_ibfk_1` FOREIGN KEY (`IdAgence`) REFERENCES `agencevoiture` (`IdAgenceVoiture`);
+ALTER TABLE voiture
+ADD CONSTRAINT voiture_ibfk_1 FOREIGN KEY (IdAgence) REFERENCES agencevoiture (IdAgenceVoiture);
 --
--- Constraints for table `vol`
+-- Constraints for table vol
 --
-ALTER TABLE `vol`
-ADD CONSTRAINT `vol_ibfk_1` FOREIGN KEY (`IdCompagnieAerienne`) REFERENCES `compagnieaerienne` (`IdCompagnieAerienne`);
+ALTER TABLE vol
+ADD CONSTRAINT vol_ibfk_1 FOREIGN KEY (IdCompagnieAerienne) REFERENCES compagnieaerienne (IdCompagnieAerienne);
 --
--- Constraints for table `siege`
+-- Constraints for table siege
 --
-ALTER TABLE `siege`
-ADD CONSTRAINT `siege_ibfk_1` FOREIGN KEY (`IdVol`) REFERENCES `vol` (`IdVol`);
+ALTER TABLE siege
+ADD CONSTRAINT siege_ibfk_1 FOREIGN KEY (IdVol) REFERENCES vol (IdVol);
 --
--- Constraints for table `forfait`
+-- Constraints for table forfait
 --
-ALTER TABLE `forfait`
-ADD CONSTRAINT `forfait_ibfk_1` FOREIGN KEY (`IdChambre`) REFERENCES `chambre` (`IdChambre`),
-ADD CONSTRAINT `forfait_ibfk_2` FOREIGN KEY (`IdVoiture`) REFERENCES `voiture` (`IdVoiture`),
-ADD CONSTRAINT `forfait_ibfk_3` FOREIGN KEY (`IdSiege`) REFERENCES `siege` (`IdSiege`);
+ALTER TABLE forfait
+ADD CONSTRAINT forfait_ibfk_1 FOREIGN KEY (IdChambre) REFERENCES chambre (IdChambre),
+ADD CONSTRAINT forfait_ibfk_2 FOREIGN KEY (IdVoiture) REFERENCES voiture (IdVoiture),
+ADD CONSTRAINT forfait_ibfk_3 FOREIGN KEY (IdSiege) REFERENCES siege (IdSiege);
 --
--- Constraints for table `reservationchambre`
+-- Constraints for table reservationchambre
 --
-ALTER TABLE `reservationchambre`
-ADD CONSTRAINT `reservationchambre_ibfk_1` FOREIGN KEY (`IdChambre`) REFERENCES `hotel` (`IdChambre`),
-ADD CONSTRAINT `reservationchambre_ibfk_2` FOREIGN KEY (`IdParticulier`) REFERENCES `compteparticulier` (`IdParticulier`);
+ALTER TABLE reservationchambre
+ADD CONSTRAINT reservationchambre_ibfk_1 FOREIGN KEY (IdChambre) REFERENCES hotel (IdChambre),
+ADD CONSTRAINT reservationchambre_ibfk_2 FOREIGN KEY (IdParticulier) REFERENCES compteparticulier (IdParticulier);
 --
--- Constraints for table `reservationvoiture`
+-- Constraints for table reservationvoiture
 --
-ALTER TABLE `reservationvoiture`
-ADD CONSTRAINT `reservationvoiture_ibfk_1` FOREIGN KEY (`IdVoiture`) REFERENCES `voiture` (`IdVoiture`),
-ADD CONSTRAINT `reservationvoiture_ibfk_2` FOREIGN KEY (`IdParticulier`) REFERENCES `compteparticulier` (`IdParticulier`);
+ALTER TABLE reservationvoiture
+ADD CONSTRAINT reservationvoiture_ibfk_1 FOREIGN KEY (IdVoiture) REFERENCES voiture (IdVoiture),
+ADD CONSTRAINT reservationvoiture_ibfk_2 FOREIGN KEY (IdParticulier) REFERENCES compteparticulier (IdParticulier);
 --
--- Constraints for table `reservationsiege`
+-- Constraints for table reservationsiege
 --
-ALTER TABLE `reservationsiege`
-ADD CONSTRAINT `reservationsiege_ibfk_1` FOREIGN KEY (`IdSiege`) REFERENCES `siege` (`IdSiege`),
-ADD CONSTRAINT `reservationsiege_ibfk_2` FOREIGN KEY (`IdParticulier`) REFERENCES `compteparticulier` (`IdParticulier`);
+ALTER TABLE reservationsiege
+ADD CONSTRAINT reservationsiege_ibfk_1 FOREIGN KEY (IdSiege) REFERENCES siege (IdSiege),
+ADD CONSTRAINT reservationsiege_ibfk_2 FOREIGN KEY (IdParticulier) REFERENCES compteparticulier (IdParticulier);
 --
--- Constraints for table `reservationchambre`
+-- Constraints for table reservationchambre
 --
-ALTER TABLE `reservationchambre`
-ADD CONSTRAINT `reservationchambre_ibfk_1` FOREIGN KEY (`IdForfait`) REFERENCES `forfait` (`IdForfait`),
-ADD CONSTRAINT `reservationchambre_ibfk_2` FOREIGN KEY (`IdParticulier`) REFERENCES `compteparticulier` (`IdParticulier`);
+ALTER TABLE reservationchambre
+ADD CONSTRAINT reservationchambre_ibfk_1 FOREIGN KEY (IdForfait) REFERENCES forfait (IdForfait),
+ADD CONSTRAINT reservationchambre_ibfk_2 FOREIGN KEY (IdParticulier) REFERENCES compteparticulier (IdParticulier);
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -36,6 +36,7 @@ namespace Prj_Final_2017_.Models.DAO {
         private static readonly string UPDATE_QUERY = "UPDATE CompteFournisseurVoiture SET `Courriel` = @Courriel, `Password` = @Password, `IdAgenceVoiture` = @IdAgenceVoiture WHERE `IdFournisseur` = @IdFournisseur";
         private static readonly string DELETE_QUERY = "DELETE FROM CompteFournisseurVoiture WHERE `IdFournisseur` = @IdFournisseur";
         private static readonly string GET_ALL_QUERY = "SELECT `IdFournisseur`, `Courriel`, `Password`, `IdAgenceVoiture` FROM CompteFournisseurVoiture";
+        private static readonly string FIND_BY_COURRIEL = "SELECT 'IdFournisseur', `Courriel`, `Password`, `IdAgenceVoiture` FROM CompteFournisseurVoiture WHERE `Courriel` = @Courriel";
 
         public CompteFournisseurVoitureDAO() {
             connexion = new Connexion.Connexion();
@@ -158,6 +159,35 @@ namespace Prj_Final_2017_.Models.DAO {
             }
             catch (MySqlException mysqlException) {
                 throw new VoyageAhuntsicException(1234,VoyageAhuntsicException.CharteErreur[1234],mysqlException);
+            }
+            return dataset;
+        }
+        /// <summary>
+        /// Retorune la liste de tous les CompteFournisseurVoiture de la table CompteFournisseurVoiture ayant le Courriel entré
+        /// </summary>
+        /// <param name="courriel">Particulier à vérifier</param>
+        /// <returns>La liste des CompteFournisseurVoiture du courriel; une liste vide sinon</returns>
+        public DataSet FindByCourriel(string courriel)
+        {
+            DataSet dataset = null;
+            try
+            {
+                using (MySqlConnection connection = connexion.getConnexion())
+                {
+                    connection.Open();
+                    using (MySqlCommand command = new MySqlCommand(CompteFournisseurVoitureDAO.FIND_BY_COURRIEL, connection))
+                    {
+                        command.Prepare();
+                        command.Parameters.AddWithValue("Courriel", courriel);
+                        MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                        dataset = new DataSet();
+                        adapter.Fill(dataset);
+                    }
+                }
+            }
+            catch (MySqlException mysqlException)
+            {
+                throw new VoyageAhuntsicException(4444, VoyageAhuntsicException.CharteErreur[4444], mysqlException);
             }
             return dataset;
         }
