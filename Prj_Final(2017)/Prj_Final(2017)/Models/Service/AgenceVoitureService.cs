@@ -10,12 +10,20 @@ using Prj_Final_2017_.Models.Exception;
 namespace Prj_Final_2017_.Models.Service {
     public class AgenceVoitureService {
         private AgenceVoitureDAO agenceVoitureDAO;
-        public AgenceVoitureService(AgenceVoitureDAO agenceVoitureDAO) {
+        private CompteFournisseurVoitureDTO compteFournisseurVoitureDTO;
+        private CompteFournisseurVoitureDAO compteFournisseurVoitureDAO;
+
+        public AgenceVoitureService(AgenceVoitureDAO agenceVoitureDAO, CompteFournisseurVoitureDTO compteFournisseurVoitureDTO) {
             if(agenceVoitureDAO == null)
             {
                 throw new VoyageAhuntsicException(4444);
             }
+            if(compteFournisseurVoitureDTO == null)
+            {
+                throw new VoyageAhuntsicException(4444);
+            }
             this.agenceVoitureDAO = agenceVoitureDAO;
+            this.compteFournisseurVoitureDTO = compteFournisseurVoitureDTO;
         }
 
         public void Add(AgenceVoitureDTO agenceVoitureDTO) {
@@ -23,11 +31,19 @@ namespace Prj_Final_2017_.Models.Service {
             {
                 throw new VoyageAhuntsicException(4444);
             }
+            if (compteFournisseurVoitureDAO.FindByCourriel(compteFournisseurVoitureDTO.Courriel) == null)
+            {
+                throw new VoyageAhuntsicException(4444);
+            }
+            agenceVoitureDAO.Add(agenceVoitureDTO);
 
         }
 
         public AgenceVoitureDTO Read(int IdAgenceVoiture) {
-
+            if(IdAgenceVoiture < 0)
+            {
+                throw new VoyageAhuntsicException(4444);
+            }
             return agenceVoitureDAO.Read(IdAgenceVoiture) ;
         }
 
@@ -36,6 +52,7 @@ namespace Prj_Final_2017_.Models.Service {
             {
                 throw new VoyageAhuntsicException(4444);
             }
+            agenceVoitureDAO.Update(agenceVoitureDTO);
         }
 
         public void Delete(AgenceVoitureDTO agenceVoitureDTO) {
@@ -43,6 +60,7 @@ namespace Prj_Final_2017_.Models.Service {
             {
                 throw new VoyageAhuntsicException(4444);
             }
+            agenceVoitureDAO.Delete(agenceVoitureDTO);
 
         }
 
