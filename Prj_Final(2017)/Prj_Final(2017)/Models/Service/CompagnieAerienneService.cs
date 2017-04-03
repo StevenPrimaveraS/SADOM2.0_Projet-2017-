@@ -12,14 +12,14 @@ namespace Prj_Final_2017_.Models.Service {
     public class CompagnieAerienneService {
 
         private CompagnieAerienneDAO compagnieAerienneDAO;
+  
         public CompagnieAerienneService(CompagnieAerienneDAO compagnieAerienneDAO) {
             if(compagnieAerienneDAO == null)
             {
                 throw new VoyageAhuntsicException(4444);
             }
+
             this.compagnieAerienneDAO =compagnieAerienneDAO;
-
-
         }
 
         public void Add(CompagnieAerienneDTO compagnieAerienneDTO) {
@@ -27,10 +27,15 @@ namespace Prj_Final_2017_.Models.Service {
             {
                 throw new VoyageAhuntsicException(4444);
             }
+           compagnieAerienneDAO.Add(compagnieAerienneDTO);
 
         }
 
         public CompagnieAerienneDTO Read(int IdCompagnieAerienne) {
+            if(IdCompagnieAerienne < 0)
+            {
+                throw new VoyageAhuntsicException(4444);
+            }
             return compagnieAerienneDAO.Read(IdCompagnieAerienne);
         }
 
@@ -39,6 +44,7 @@ namespace Prj_Final_2017_.Models.Service {
             {
                 throw new VoyageAhuntsicException(4444);
             }
+            compagnieAerienneDAO.Update(compagnieAerienneDTO);
 
         }
 
@@ -47,6 +53,7 @@ namespace Prj_Final_2017_.Models.Service {
             {
                 throw new VoyageAhuntsicException(4444);
             }
+            compagnieAerienneDAO.Delete(compagnieAerienneDTO);
         }
 
         public DataSet GetAll() {

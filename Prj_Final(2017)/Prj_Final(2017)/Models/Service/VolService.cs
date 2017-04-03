@@ -11,12 +11,19 @@ namespace Prj_Final_2017_.Models.Service {
     public class VolService {
 
         private VolDAO volDAO = new VolDAO();
-        public VolService(VolDAO volDAO) {
+        private SiegeDAO siegeDAO;
+        
+        public VolService(VolDAO volDAO, SiegeDAO siegeDAO) {
             if(volDAO == null)
             {
                 throw new VoyageAhuntsicException(4444);
             }
+            if (siegeDAO == null)
+            {
+                throw new VoyageAhuntsicException(2000);
+            }
             this.volDAO = volDAO;
+            this.siegeDAO = siegeDAO;
         }
 
         public void Add(VolDTO volDTO) {
@@ -24,10 +31,15 @@ namespace Prj_Final_2017_.Models.Service {
             {
                 throw new VoyageAhuntsicException(4444);
             }
-            
+
+            volDAO.Add(volDTO);         
         }
 
         public VolDTO Read(int IdVol) {
+            if(IdVol < 0)
+            {
+                throw new VoyageAhuntsicException(4444);
+            }
             return volDAO.Read(IdVol);
         }
 
@@ -36,6 +48,7 @@ namespace Prj_Final_2017_.Models.Service {
             {
                 throw new VoyageAhuntsicException(4444);
             }
+            volDAO.Update(volDTO);
         }
 
         public void Delete(VolDTO volDTO) {
@@ -43,6 +56,11 @@ namespace Prj_Final_2017_.Models.Service {
             {
                 throw new VoyageAhuntsicException(4444);
             }
+            if (siegeDAO.FindByVol(volDTO.IdVol) == null)
+            {
+                throw new VoyageAhuntsicException(4444);
+            }
+            volDAO.Delete(volDTO);
         }
 
         public DataSet GetAll() {
