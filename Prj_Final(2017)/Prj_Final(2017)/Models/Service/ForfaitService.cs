@@ -11,7 +11,7 @@ namespace Prj_Final_2017_.Models.Service
 {
     public class ForfaitService
     {
-        ForfaitDAO forfaitDAO;
+        private ForfaitDAO forfaitDAO;
         public ForfaitService(ForfaitDAO forfaitDAO)
         {
             if (forfaitDAO == null)
@@ -30,9 +30,13 @@ namespace Prj_Final_2017_.Models.Service
             forfaitDAO.Add(forfaitDTO);
         }
 
-        public ForfaitDTO Read(int IdForfait)
+        public ForfaitDTO Read(int idForfait)
         {
-            return forfaitDAO.Read(IdForfait); ;
+            if (idForfait < 1)
+            {
+                throw new VoyageAhuntsicException(6789);
+            }
+            return forfaitDAO.Read(idForfait); ;
         }
 
         public void Update(ForfaitDTO forfaitDTO)
