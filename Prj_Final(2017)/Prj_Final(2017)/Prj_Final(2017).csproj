@@ -172,6 +172,9 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ChambreController.cs" />
+    <Compile Include="Controllers\CompteFournisseurChambreController.cs" />
+    <Compile Include="Controllers\CompteFournisseurSiegeController.cs" />
+    <Compile Include="Controllers\CompteFournisseurVoitureController.cs" />
     <Compile Include="Controllers\CompteParticulierController.cs" />
     <Compile Include="Controllers\FactureController.cs" />
     <Compile Include="Controllers\ForfaitController.cs" />
@@ -342,6 +345,9 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Achat\" />
+    <Folder Include="Views\CompteFournisseurChambre\" />
+    <Folder Include="Views\CompteFournisseurSiege\" />
+    <Folder Include="Views\CompteFournisseurVoiture\" />
     <Folder Include="Views\CompteParticulier\" />
     <Folder Include="Views\ReservaitionVoiture\" />
     <Folder Include="Views\ReservationChambre\" />
