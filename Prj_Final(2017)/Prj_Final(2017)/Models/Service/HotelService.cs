@@ -36,10 +36,6 @@ namespace Prj_Final_2017_.Models.Service {
             {
                 throw new VoyageAhuntsicException(2000);
             }
-            //if (compteFournisseurChambreDAO.FindByCourriel(compteFournisseurChambreDTO.Courriel) == null)
-            //{
-            //    throw new VoyageAhuntsicException(2000);
-            //}
             hotelDAO.Add(hotelDTO);
         }
 

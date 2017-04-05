@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Prj_Final_2017_.DTO;
+using Prj_Final_2017_.Models.Exception;
+using Prj_Final_2017_.Models.util;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +11,19 @@ namespace Prj_Final_2017_.Controllers
 {
     public class CompteParticulierController : Controller
     {
+
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            if (Session["user"] != null)
+            {
+                base.OnActionExecuting(filterContext);
+            }
+            else
+            {
+                filterContext.Result = new RedirectResult("~/Account/Login");
+            }
+        }
+
         // GET: CompteParticulier
         public ActionResult Index()
         {
@@ -17,13 +33,45 @@ namespace Prj_Final_2017_.Controllers
         // GET: CompteParticulier/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            try
+            {
+                CompteParticulierDTO compteParticulierDTO = ApplicationFunctions.CompteParticulierFacade.Read(id);
+                if (compteParticulierDTO != null)
+                {
+                    if (Session["user"].GetType() == typeof(CompteParticulierDTO))
+                    {
+                        CompteParticulierDTO user = (CompteParticulierDTO)Session["user"];
+                        if (user.IdParticulier == compteParticulierDTO.IdParticulier)
+                        {
+                            return View();
+                        }
+                    }
+                }
+            }catch (VoyageAhuntsicException e){
+                System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
+            }
+            return RedirectToAction("Index");
         }
 
         // GET: CompteParticulier/Create
-        public ActionResult Create()
+        public ActionResult Create(string password, string prenom, string nom, string courriel)
         {
-            return View();
+            try {
+                if (password != null && prenom != null && nom != null && courriel != null)
+                {
+                    CompteParticulierDTO compteParticulierDTO = new CompteParticulierDTO();
+                    compteParticulierDTO.Password = password;
+                    compteParticulierDTO.Prenom = prenom;
+                    compteParticulierDTO.Nom = nom;
+                    compteParticulierDTO.Courriel = courriel;
+                    ApplicationFunctions.CompteParticulierFacade.Add(compteParticulierDTO);
+                }
+            }
+            catch (VoyageAhuntsicException e)
+            {
+                System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
+            }
+            return RedirectToAction("Index");
         }
 
         // POST: CompteParticulier/Create
@@ -43,9 +91,22 @@ namespace Prj_Final_2017_.Controllers
         }
 
         // GET: CompteParticulier/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string password, string prenom, string nom, string courriel)
         {
-            return View();
+            try
+            { 
+                CompteParticulierDTO compteParticulierDTO = (CompteParticulierDTO)Session["user"];
+                compteParticulierDTO.Password = password;
+                compteParticulierDTO.Prenom = prenom;
+                compteParticulierDTO.Nom = nom;
+                compteParticulierDTO.Courriel = courriel;
+                ApplicationFunctions.CompteParticulierFacade.Update(compteParticulierDTO);
+            }
+            catch (VoyageAhuntsicException e)
+            {
+                System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
+            }
+            return RedirectToAction("Index");
         }
 
         // POST: CompteParticulier/Edit/5
@@ -55,7 +116,6 @@ namespace Prj_Final_2017_.Controllers
             try
             {
                 // TODO: Add update logic here
-
                 return RedirectToAction("Index");
             }
             catch
@@ -65,9 +125,18 @@ namespace Prj_Final_2017_.Controllers
         }
 
         // GET: CompteParticulier/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete()
         {
-            return View();
+            try
+            {
+                CompteParticulierDTO compteParticulierDTO = (CompteParticulierDTO)Session["user"];
+                ApplicationFunctions.CompteParticulierFacade.Delete(compteParticulierDTO);
+            }
+            catch (VoyageAhuntsicException e)
+            {
+                System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
+            }
+            return RedirectToAction("Index");
         }
 
         // POST: CompteParticulier/Delete/5
