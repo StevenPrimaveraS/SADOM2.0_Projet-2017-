@@ -7,19 +7,23 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Prj_Final_2017_.Controllers
-{
-    public class ReservationVoitureController : Controller
-    {
+namespace Prj_Final_2017_.Controllers {
+    public class ReservationVoitureController : Controller {
+
+        protected override void OnActionExecuting(ActionExecutingContext filterContext) {
+            if (Session["user"] != null)
+                base.OnActionExecuting(filterContext);
+            else
+                filterContext.Result = new RedirectResult("~/Account/Login");
+        }
+
         // GET: ReservationVoiture
-        public ActionResult Index()
-        {
+        public ActionResult Index() {
             return View();
         }
 
         // GET: ReservationVoiture/Details/5
-        public ActionResult Details(int id)
-        {
+        public ActionResult Details(int id) {
             try {
                 //Vérification des permissions
                 ReservationVoitureDTO reservationVoitureDTO = ApplicationFunctions.ReservationVoitureFacade.Read(id);
@@ -45,19 +49,18 @@ namespace Prj_Final_2017_.Controllers
         }
 
         // GET: ReservationVoiture/Create
-        public ActionResult Create(int IdVoiture, string sDateDebut, string sDateFin)
-        {
+        public ActionResult Create(int IdVoiture, string sDateDebut, string sDateFin) {
             try {
                 DateTime dateDebut = DateTime.Today.AddDays(-1);
                 DateTime dateFin = DateTime.Today.AddDays(-2); ;
-                string[] infos = sDateDebut.Split('/','-');
+                string[] infos = sDateDebut.Split('/', '-');
                 if (infos.Length == 3) {
                     dateDebut = new DateTime(int.Parse(infos[0]), int.Parse(infos[1]), int.Parse(infos[2]));
                 }
                 infos = sDateFin.Split('/', '-');
                 if (infos.Length == 3) {
                     dateFin = new DateTime(int.Parse(infos[0]), int.Parse(infos[1]), int.Parse(infos[2]));
-                }                             
+                }
 
                 if (Session["user"] != null &&
                     dateDebut >= DateTime.Today && dateFin >= DateTime.Today) {
@@ -87,23 +90,19 @@ namespace Prj_Final_2017_.Controllers
 
         // POST: ReservationVoiture/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
+        public ActionResult Create(FormCollection collection) {
+            try {
                 // TODO: Add insert logic here
 
                 return RedirectToAction("Index");
             }
-            catch
-            {
+            catch {
                 return View();
             }
         }
 
         // GET: ReservationVoiture/Edit/5
-        public ActionResult Edit(int id, int idParticulier, int idVoiture, string sDateDebut, string sDateFin)
-        {
+        public ActionResult Edit(int id, int idParticulier, int idVoiture, string sDateDebut, string sDateFin) {
             //Vérification des permissions
             try {
                 DateTime dateDebut = DateTime.Today.AddDays(-1);
@@ -120,7 +119,7 @@ namespace Prj_Final_2017_.Controllers
                 if (Session["user"] != null && dateDebut >= DateTime.Today && dateFin >= DateTime.Today) {
                     if (Session["user"].GetType() == typeof(CompteParticulierDTO)) {
                         CompteParticulierDTO user = (CompteParticulierDTO)Session["user"];
-                        if(Session["admin"] != null) {
+                        if (Session["admin"] != null) {
                             bool idAdmin = (bool)Session["admin"];
                             if (idAdmin) {
                                 ReservationVoitureDTO newReservationVoitureDTO = new ReservationVoitureDTO();
@@ -141,7 +140,7 @@ namespace Prj_Final_2017_.Controllers
                 System.Diagnostics.Debug.WriteLine(e);
             }
             catch (VoyageAhuntsicException e) {
-                System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);    
+                System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
             }
             //Redirection sinon
             return RedirectToAction("Index");
@@ -149,23 +148,19 @@ namespace Prj_Final_2017_.Controllers
 
         // POST: ReservationVoiture/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
+        public ActionResult Edit(int id, FormCollection collection) {
+            try {
                 // TODO: Add update logic here
 
                 return RedirectToAction("Index");
             }
-            catch
-            {
+            catch {
                 return View();
             }
         }
 
         // GET: ReservationVoiture/Delete/5
-        public ActionResult Delete(int id)
-        {
+        public ActionResult Delete(int id) {
             try {
                 ReservationVoitureDTO reservationVoitureDTO = ApplicationFunctions.ReservationVoitureFacade.Read(id);
                 if (Session["user"] != null && reservationVoitureDTO != null) {
@@ -179,7 +174,7 @@ namespace Prj_Final_2017_.Controllers
                             ApplicationFunctions.ReservationVoitureFacade.Delete(reservationVoitureDTO);
 
                             return View();
-                        }    
+                        }
                     }
                 }
             }
@@ -191,16 +186,13 @@ namespace Prj_Final_2017_.Controllers
 
         // POST: ReservationVoiture/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
+        public ActionResult Delete(int id, FormCollection collection) {
+            try {
                 // TODO: Add delete logic here
 
                 return RedirectToAction("Index");
             }
-            catch
-            {
+            catch {
                 return View();
             }
         }

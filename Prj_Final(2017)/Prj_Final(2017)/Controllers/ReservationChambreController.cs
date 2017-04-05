@@ -9,6 +9,14 @@ using System.Web.Mvc;
 
 namespace Prj_Final_2017_.Controllers {
     public class ReservationChambreController : Controller {
+
+        protected override void OnActionExecuting(ActionExecutingContext filterContext) {
+            if (Session["user"] != null)
+                base.OnActionExecuting(filterContext);
+            else
+                filterContext.Result = new RedirectResult("~/Account/Login");
+        }
+
         // GET: ReservationChambre
         public ActionResult Index() {
             return View();
@@ -19,7 +27,7 @@ namespace Prj_Final_2017_.Controllers {
             try {
                 //Vérification des permissions
                 ReservationChambreDTO reservationChambreDTO = ApplicationFunctions.ReservationChambreFacade.Read(id);
-                if (reservationChambreDTO != null && Session["user"] != null) {
+                if (reservationChambreDTO != null) {
                     if (Session["user"].GetType() == typeof(CompteParticulierDTO)) {
                         CompteParticulierDTO user = (CompteParticulierDTO)Session["user"];
                         bool isAdmin = false;
