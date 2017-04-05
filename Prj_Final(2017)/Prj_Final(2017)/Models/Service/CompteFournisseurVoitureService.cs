@@ -10,19 +10,28 @@ using Prj_Final_2017_.Models.Exception;
 namespace Prj_Final_2017_.Models.Service {
     public class CompteFournisseurVoitureService {
         CompteFournisseurVoitureDAO compteFournisseurVoitureDAO;
+        AgenceVoitureDAO agencevoituredao;
 
-        public CompteFournisseurVoitureService(CompteFournisseurVoitureDAO compteFournisseurVoitureDAO)
+        public CompteFournisseurVoitureService(CompteFournisseurVoitureDAO compteFournisseurVoitureDAO, AgenceVoitureDAO agencevoituredao)
         {
             if (compteFournisseurVoitureDAO == null)
+            {
+                throw new VoyageAhuntsicException(44);
+            }
+            if (agencevoituredao == null)
             {
                 throw new VoyageAhuntsicException(44);
             }
             this.compteFournisseurVoitureDAO = compteFournisseurVoitureDAO;
         }
 
-        public void Add(CompteFournisseurVoitureDTO compteFournisseurVoitureDTO)
+        public void Add(CompteFournisseurVoitureDTO compteFournisseurVoitureDTO, AgenceVoitureDTO agencevoituredto)
         {
             if (compteFournisseurVoitureDTO == null)
+            {
+                throw new VoyageAhuntsicException(44);
+            }
+            if (agencevoituredto == null)
             {
                 throw new VoyageAhuntsicException(44);
             }
@@ -35,18 +44,26 @@ namespace Prj_Final_2017_.Models.Service {
             
         }
 
-        public void Update(CompteFournisseurVoitureDTO compteFournisseurVoitureDTO)
+        public void Update(CompteFournisseurVoitureDTO compteFournisseurVoitureDTO, AgenceVoitureDTO agencevoituredto)
         {
             if (compteFournisseurVoitureDTO == null)
+            {
+                throw new VoyageAhuntsicException(44);
+            }
+            if (agencevoituredto == null)
             {
                 throw new VoyageAhuntsicException(44);
             }
             compteFournisseurVoitureDAO.Update(compteFournisseurVoitureDTO);
         }
 
-        public void Delete(CompteFournisseurVoitureDTO compteFournisseurVoitureDTO)
+        public void Delete(CompteFournisseurVoitureDTO compteFournisseurVoitureDTO, AgenceVoitureDTO agencevoituredto)
         {
             if (compteFournisseurVoitureDTO == null)
+            {
+                throw new VoyageAhuntsicException(44);
+            }
+            if (agencevoituredto == null)
             {
                 throw new VoyageAhuntsicException(44);
             }

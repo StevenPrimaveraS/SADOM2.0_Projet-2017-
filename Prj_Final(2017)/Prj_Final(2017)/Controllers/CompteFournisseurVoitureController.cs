@@ -1,4 +1,6 @@
-﻿using Prj_Final_2017_.Models.util;
+﻿using Prj_Final_2017_.DTO;
+using Prj_Final_2017_.Models.Exception;
+using Prj_Final_2017_.Models.util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,21 +16,58 @@ namespace Prj_Final_2017_.Controllers
         {
             return View();
         }
-        public ActionResult Create()
+        public ActionResult Create(int idFournisseur, string courriel, string password, int idAgenceVoiture)
         {
-            return ApplicationFunctions.CompteFournisseurVoitureFacade.Add();
+            try
+            {
+                CompteFournisseurVoitureDTO compteFournisseurVoitureDTO = new CompteFournisseurVoitureDTO();
+                compteFournisseurVoitureDTO.IdFournisseur = idFournisseur;
+                compteFournisseurVoitureDTO.Courriel = courriel;
+                compteFournisseurVoitureDTO.Password = password;
+                compteFournisseurVoitureDTO.IdAgenceVoiture = idAgenceVoiture;
+                ApplicationFunctions.CompteFournisseurVoitureFacade.Add(compteFournisseurVoitureDTO);
+            }
+            catch (VoyageAhuntsicException e)
+            {
+                System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
+            }
+            return View();
         }
-        public ActionResult Read()
+        public ActionResult Read(int id)
         {
-            return ApplicationFunctions.CompteFournisseurVoitureFacade.Read();
+            try
+            {
+                CompteFournisseurVoitureDTO compteFournisseurVoitureDTO = ApplicationFunctions.CompteFournisseurVoitureFacade.Read(id);
+            }
+            catch (VoyageAhuntsicException e)
+            {
+                System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
+            }
+            return View();
         }
-        public ActionResult Update()
+        public ActionResult Update(int idFournisseur, string courriel, string password, int idAgenceVoiture)
         {
-            return ApplicationFunctions.CompteFournisseurVoitureFacade.Update();
+            try
+            {
+                CompteFournisseurVoitureDTO compteFournisseurVoitureDTO = new CompteFournisseurVoitureDTO();
+                compteFournisseurVoitureDTO.IdFournisseur = idFournisseur;
+                compteFournisseurVoitureDTO.Courriel = courriel;
+                compteFournisseurVoitureDTO.Password = password;
+                compteFournisseurVoitureDTO.IdAgenceVoiture = idAgenceVoiture;
+                ApplicationFunctions.CompteFournisseurVoitureFacade.Add(compteFournisseurVoitureDTO);
+            }
+            catch (VoyageAhuntsicException e)
+            {
+                System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
+            }
+            return View();
         }
-        public ActionResult Delete()
+        public ActionResult Delete(int id)
         {
-            return ApplicationFunctions.CompteFournisseurVoitureFacade.Delete();
+            CompteFournisseurVoitureDTO compteFournisseurVoitureDTO = ApplicationFunctions.CompteFournisseurVoitureFacade.Read(id);
+
+            ApplicationFunctions.CompteFournisseurVoitureFacade.Delete(compteFournisseurVoitureDTO);
+            return View();
         }
     }
 }

@@ -10,16 +10,25 @@ using Prj_Final_2017_.Models.Exception;
 namespace Prj_Final_2017_.Models.Service {
     public class CompteFournisseurChambreService {
         CompteFournisseurChambreDAO compteFournisseurChambreDAO;
-
-        public CompteFournisseurChambreService(CompteFournisseurChambreDAO compteFournisseurChambreDAO) {
+        HotelDAO hoteldao;
+        
+        public CompteFournisseurChambreService(CompteFournisseurChambreDAO compteFournisseurChambreDAO, HotelDAO hoteldao) {
             if (compteFournisseurChambreDAO == null) {
+                throw new VoyageAhuntsicException(44);
+            }
+            if (hoteldao == null)
+            {
                 throw new VoyageAhuntsicException(44);
             }
             this.compteFournisseurChambreDAO = compteFournisseurChambreDAO;
         }
 
-        public void Add(CompteFournisseurChambreDTO compteFournisseurChambreDTO) {
+        public void Add(CompteFournisseurChambreDTO compteFournisseurChambreDTO, HotelDTO hoteldto) {
             if (compteFournisseurChambreDTO == null)
+            {
+                throw new VoyageAhuntsicException(44);
+            }
+            if (hoteldto == null)
             {
                 throw new VoyageAhuntsicException(44);
             }
@@ -31,16 +40,24 @@ namespace Prj_Final_2017_.Models.Service {
             
         }
 
-        public void Update(CompteFournisseurChambreDTO compteFournisseurChambreDTO) {
+        public void Update(CompteFournisseurChambreDTO compteFournisseurChambreDTO, HotelDTO hoteldto) {
             if (compteFournisseurChambreDTO == null)
+            {
+                throw new VoyageAhuntsicException(44);
+            }
+            if (hoteldto == null)
             {
                 throw new VoyageAhuntsicException(44);
             }
             compteFournisseurChambreDAO.Update(compteFournisseurChambreDTO);
         }
 
-        public void Delete(CompteFournisseurChambreDTO compteFournisseurChambreDTO) {
+        public void Delete(CompteFournisseurChambreDTO compteFournisseurChambreDTO, HotelDTO hoteldto) {
             if (compteFournisseurChambreDTO == null)
+            {
+                throw new VoyageAhuntsicException(44);
+            }
+            if (hoteldto == null)
             {
                 throw new VoyageAhuntsicException(44);
             }
