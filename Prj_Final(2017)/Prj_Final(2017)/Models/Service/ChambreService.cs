@@ -38,12 +38,12 @@ namespace Prj_Final_2017_.Models.Service {
             chambreDAO.Add(chambreDTO);
         }
 
-        public ChambreDTO Read(int idChambre) {
-            if (idChambre < 1)
+        public ChambreDTO Read(int IdChambre) {
+            if (IdChambre < 1)
             {
                 throw new VoyageAhuntsicException(7890);
             }
-            return chambreDAO.Read(idChambre);
+            return chambreDAO.Read(IdChambre);
         }
 
         public void Update(ChambreDTO chambreDTO) {
