@@ -40,10 +40,10 @@ namespace Prj_Final_2017_.Models.util {
                     HotelService hotelService = new HotelService(hotelDAO, chambreDAO, compteFournisseurChambreDAO);
                     CompagnieAerienneService compagnieAerienneService = new CompagnieAerienneService(compagnieAerienneDAO);
                     AgenceVoitureService agenceVoitureService = new AgenceVoitureService(agenceVoitureDAO);
-                    ChambreService chambreService = new ChambreService(chambreDAO);
+                    ChambreService chambreService = new ChambreService(chambreDAO,hotelDAO,compteFournisseurChambreDAO);
                     VolService volService = new VolService(volDAO,siegeDAO);
                     SiegeService siegeService = new SiegeService(siegeDAO);
-                    VoitureService voitureService = new VoitureService(voitureDAO);
+                    VoitureService voitureService = new VoitureService(voitureDAO,compteFournisseurVoitureDAO);
                     ForfaitService forfaitService = new ForfaitService(forfaitDAO);
                     ReservationChambreService reservationChambreService = new ReservationChambreService(reservationChambreDAO, chambreDAO, compteParticulierDAO);
                     ReservationSiegeService reservationSiegeService = new ReservationSiegeService(reservationSiegeDAO, siegeDAO, compteParticulierDAO);
