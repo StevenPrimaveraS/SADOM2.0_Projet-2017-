@@ -34,13 +34,13 @@ namespace Prj_Final_2017_.Models.Service {
             voitureDAO.Add(voitureDTO);
         }
 
-        public VoitureDTO Read(int idVoiture)
+        public VoitureDTO Read(int IdVoiture)
         {
-            if (idVoiture < 1)
+            if (IdVoiture < 1)
             {
                 throw new VoyageAhuntsicException(5678);
             }
-            return voitureDAO.Read(idVoiture);
+            return voitureDAO.Read(IdVoiture);
         }
 
         public void Update(VoitureDTO voitureDTO)
