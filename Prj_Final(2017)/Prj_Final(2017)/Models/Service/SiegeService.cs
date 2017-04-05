@@ -11,20 +11,15 @@ namespace Prj_Final_2017_.Models.Service {
     public class SiegeService {
 
         private SiegeDAO siegeDAO;
-        private CompteFournisseurSiegeDTO compteFournisseurSiegeDTO;
-        private CompteFournisseurSiegeDAO compteFournisseurSiegeDAO;
+        //private CompteFournisseurSiegeDTO compteFournisseurSiegeDTO;
+        //private CompteFournisseurSiegeDAO compteFournisseurSiegeDAO;
 
-        public SiegeService(SiegeDAO siegeDAO, CompteFournisseurSiegeDTO compteFournisseurSiegeDTO) {
+        public SiegeService(SiegeDAO siegeDAO) {
             if(siegeDAO == null)
             {
                 throw new VoyageAhuntsicException(4444);
             }
-            if (compteFournisseurSiegeDTO == null)
-            {
-                throw new VoyageAhuntsicException(4444);
-            }
             this.siegeDAO = siegeDAO;
-            this.compteFournisseurSiegeDTO = compteFournisseurSiegeDTO;
 
         }
 
@@ -33,10 +28,10 @@ namespace Prj_Final_2017_.Models.Service {
             {
                 throw new VoyageAhuntsicException(4444);
             }
-            if (compteFournisseurSiegeDAO.FindByCourriel(compteFournisseurSiegeDTO.Courriel) == null)
-            {
-                throw new VoyageAhuntsicException(4444);
-            }
+            //if (compteFournisseurSiegeDAO.FindByCourriel(compteFournisseurSiegeDTO.Courriel) == null)
+            //{
+            //    throw new VoyageAhuntsicException(4444);
+            //}
             siegeDAO.Add(siegeDTO);
         }
 

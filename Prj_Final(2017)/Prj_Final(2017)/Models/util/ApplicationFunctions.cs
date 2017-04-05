@@ -41,7 +41,7 @@ namespace Prj_Final_2017_.Models.util {
                     CompagnieAerienneService compagnieAerienneService = new CompagnieAerienneService(compagnieAerienneDAO);
                     AgenceVoitureService agenceVoitureService = new AgenceVoitureService(agenceVoitureDAO);
                     ChambreService chambreService = new ChambreService(chambreDAO);
-                    VolService volService = new VolService(volDAO);
+                    VolService volService = new VolService(volDAO,siegeDAO);
                     SiegeService siegeService = new SiegeService(siegeDAO);
                     VoitureService voitureService = new VoitureService(voitureDAO);
                     ForfaitService forfaitService = new ForfaitService(forfaitDAO);
