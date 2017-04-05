@@ -14,7 +14,6 @@ namespace Prj_Final_2017_.Controllers
             return View();
         }
 
-
         // GET: Voiture/Details/5
         public ActionResult Details(int id)
         {
