@@ -171,9 +171,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AgenceVoitureController.cs" />
     <Compile Include="Controllers\ChambreController.cs" />
-    <Compile Include="Controllers\CompagnieAerienneController.cs" />
+    <Compile Include="Controllers\CompteFournisseurChambreController.cs" />
+    <Compile Include="Controllers\CompteFournisseurSiegeController.cs" />
+    <Compile Include="Controllers\CompteFournisseurVoitureController.cs" />
     <Compile Include="Controllers\CompteParticulierController.cs" />
     <Compile Include="Controllers\FactureController.cs" />
     <Compile Include="Controllers\ForfaitController.cs" />
@@ -187,7 +188,6 @@
     <Compile Include="Controllers\ReservationSiegeController.cs" />
     <Compile Include="Controllers\ReservationVoitureController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
-    <Compile Include="Controllers\SiegeController.cs" />
     <Compile Include="Controllers\VoitureController.cs" />
     <Compile Include="Controllers\VolController.cs" />
     <Compile Include="Global.asax.cs">
@@ -345,15 +345,15 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Achat\" />
-    <Folder Include="Views\AgenceVoiture\" />
-    <Folder Include="Views\CompagnieAerienne\" />
+    <Folder Include="Views\CompteFournisseurChambre\" />
+    <Folder Include="Views\CompteFournisseurSiege\" />
+    <Folder Include="Views\CompteFournisseurVoiture\" />
     <Folder Include="Views\CompteParticulier\" />
     <Folder Include="Views\ReservaitionVoiture\" />
     <Folder Include="Views\ReservationChambre\" />
     <Folder Include="Views\ReservationForfait\" />
     <Folder Include="Views\ReservationSiege\" />
     <Folder Include="Views\ReservationVoiture\" />
-    <Folder Include="Views\Siege\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

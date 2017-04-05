@@ -9,10 +9,15 @@ using Prj_Final_2017_.Models.Exception;
 
 namespace Prj_Final_2017_.Models.Service {
     public class VoitureService {
-        VoitureDAO voitureDAO;
-        public VoitureService(VoitureDAO voitureDAO)
+        private VoitureDAO voitureDAO;
+        private CompteFournisseurVoitureDAO compteFournisseurVoitureDAO;
+        public VoitureService(VoitureDAO voitureDAO, CompteFournisseurVoitureDAO compteFournisseurVoitureDAO)
         {
             if (voitureDAO == null)
+            {
+                throw new VoyageAhuntsicException(5678);
+            }
+            if (compteFournisseurVoitureDAO == null)
             {
                 throw new VoyageAhuntsicException(5678);
             }
@@ -30,6 +35,10 @@ namespace Prj_Final_2017_.Models.Service {
 
         public VoitureDTO Read(int idVoiture)
         {
+            if (idVoiture < 1)
+            {
+                throw new VoyageAhuntsicException(5678);
+            }
             return voitureDAO.Read(idVoiture);
         }
 
