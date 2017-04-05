@@ -40,7 +40,7 @@ namespace Prj_Final_2017_.Models.Service {
         }
 
         public AgenceVoitureDTO Read(int IdAgenceVoiture) {
-            if(IdAgenceVoiture < 0)
+            if(IdAgenceVoiture < 1)
             {
                 throw new VoyageAhuntsicException(4444);
             }

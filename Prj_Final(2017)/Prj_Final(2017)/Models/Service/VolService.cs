@@ -36,7 +36,7 @@ namespace Prj_Final_2017_.Models.Service {
         }
 
         public VolDTO Read(int IdVol) {
-            if(IdVol < 0)
+            if(IdVol < 1)
             {
                 throw new VoyageAhuntsicException(4444);
             }

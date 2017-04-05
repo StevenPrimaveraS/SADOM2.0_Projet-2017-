@@ -41,7 +41,7 @@ namespace Prj_Final_2017_.Models.Service {
         }
 
         public SiegeDTO Read(int IdSiege) {
-            if (IdSiege < 0)
+            if (IdSiege < 1)
             {
                 throw new VoyageAhuntsicException(4444);
             }

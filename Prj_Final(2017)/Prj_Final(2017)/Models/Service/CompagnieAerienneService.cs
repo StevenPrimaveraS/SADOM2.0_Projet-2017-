@@ -32,7 +32,7 @@ namespace Prj_Final_2017_.Models.Service {
         }
 
         public CompagnieAerienneDTO Read(int IdCompagnieAerienne) {
-            if(IdCompagnieAerienne < 0)
+            if(IdCompagnieAerienne < 1)
             {
                 throw new VoyageAhuntsicException(4444);
             }
