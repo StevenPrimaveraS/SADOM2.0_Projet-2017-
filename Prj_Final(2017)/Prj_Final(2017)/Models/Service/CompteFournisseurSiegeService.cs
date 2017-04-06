@@ -33,6 +33,11 @@ namespace Prj_Final_2017_.Models.Service {
             {
                 throw new VoyageAhuntsicException(44);
             }
+            if (compagnieAerienneDAO.Read(compteFournisseurSiegeDTO.IdCompagnieAerienne) == null)
+            {
+                throw new VoyageAhuntsicException(44);
+            }
+
             compteFournisseurSiegeDAO.Add(compteFournisseurSiegeDTO);
         }
 
@@ -48,12 +53,20 @@ namespace Prj_Final_2017_.Models.Service {
             {
                 throw new VoyageAhuntsicException(44);
             }
+            if (compagnieAerienneDAO.Read(compteFournisseurSiegeDTO.IdCompagnieAerienne) == null)
+            {
+                throw new VoyageAhuntsicException(44);
+            }
             compteFournisseurSiegeDAO.Update(compteFournisseurSiegeDTO);
         }
 
         public void Delete(CompteFournisseurSiegeDTO compteFournisseurSiegeDTO)
         {
             if (compteFournisseurSiegeDTO == null)
+            {
+                throw new VoyageAhuntsicException(44);
+            }
+            if (compagnieAerienneDAO.Read(compteFournisseurSiegeDTO.IdCompagnieAerienne) == null)
             {
                 throw new VoyageAhuntsicException(44);
             }

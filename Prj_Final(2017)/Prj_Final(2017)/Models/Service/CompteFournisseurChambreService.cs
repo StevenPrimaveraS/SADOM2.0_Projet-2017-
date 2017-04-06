@@ -29,6 +29,10 @@ namespace Prj_Final_2017_.Models.Service {
             {
                 throw new VoyageAhuntsicException(44);
             }
+            if (hotelDAO.Read(compteFournisseurChambreDTO.IdHotel) == null)
+            {
+                throw new VoyageAhuntsicException(44);
+            }
             compteFournisseurChambreDAO.Add(compteFournisseurChambreDTO);
         }
 
@@ -42,11 +46,19 @@ namespace Prj_Final_2017_.Models.Service {
             {
                 throw new VoyageAhuntsicException(44);
             }
+            if (hotelDAO.Read(compteFournisseurChambreDTO.IdHotel) == null)
+            {
+                throw new VoyageAhuntsicException(44);
+            }
             compteFournisseurChambreDAO.Update(compteFournisseurChambreDTO);
         }
 
         public void Delete(CompteFournisseurChambreDTO compteFournisseurChambreDTO) {
             if (compteFournisseurChambreDTO == null)
+            {
+                throw new VoyageAhuntsicException(44);
+            }
+            if (hotelDAO.Read(compteFournisseurChambreDTO.IdHotel) == null)
             {
                 throw new VoyageAhuntsicException(44);
             }

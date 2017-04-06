@@ -23,12 +23,16 @@ namespace Prj_Final_2017_.Models.Service {
                 throw new VoyageAhuntsicException(44);
             }
             this.compteFournisseurVoitureDAO = compteFournisseurVoitureDAO;
-            this.agenceVoitureDAO = agenceVoitureDAO;
+           
         }
 
         public void Add(CompteFournisseurVoitureDTO compteFournisseurVoitureDTO)
         {
             if (compteFournisseurVoitureDTO == null)
+            {
+                throw new VoyageAhuntsicException(44);
+            }
+            if (agenceVoitureDAO.Read(compteFournisseurVoitureDTO.IdAgenceVoiture) == null)
             {
                 throw new VoyageAhuntsicException(44);
             }
@@ -47,12 +51,20 @@ namespace Prj_Final_2017_.Models.Service {
             {
                 throw new VoyageAhuntsicException(44);
             }
+            if (agenceVoitureDAO.Read(compteFournisseurVoitureDTO.IdAgenceVoiture) == null)
+            {
+                throw new VoyageAhuntsicException(44);
+            }
             compteFournisseurVoitureDAO.Update(compteFournisseurVoitureDTO);
         }
 
         public void Delete(CompteFournisseurVoitureDTO compteFournisseurVoitureDTO)
         {
             if (compteFournisseurVoitureDTO == null)
+            {
+                throw new VoyageAhuntsicException(44);
+            }
+            if (agenceVoitureDAO.Read(compteFournisseurVoitureDTO.IdAgenceVoiture) == null)
             {
                 throw new VoyageAhuntsicException(44);
             }

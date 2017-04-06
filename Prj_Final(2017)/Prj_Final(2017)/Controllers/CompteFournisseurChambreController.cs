@@ -20,12 +20,15 @@ namespace Prj_Final_2017_.Controllers
         {
             try
             {
-                CompteFournisseurChambreDTO compteFournisseurChambreDTO = new CompteFournisseurChambreDTO();
-                compteFournisseurChambreDTO.IdFournisseur = idFournisseur;
-                compteFournisseurChambreDTO.Courriel = courriel;
-                compteFournisseurChambreDTO.Password = password;
-                compteFournisseurChambreDTO.IdHotel = idhotel;
-                ApplicationFunctions.CompteFournisseurChambreFacade.Add(compteFournisseurChambreDTO);
+                if (Session["user"] != null)
+                {
+                    CompteFournisseurChambreDTO compteFournisseurChambreDTO = new CompteFournisseurChambreDTO();
+                    compteFournisseurChambreDTO.IdFournisseur = idFournisseur;
+                    compteFournisseurChambreDTO.Courriel = courriel;
+                    compteFournisseurChambreDTO.Password = password;
+                    compteFournisseurChambreDTO.IdHotel = idhotel;
+                    ApplicationFunctions.CompteFournisseurChambreFacade.Add(compteFournisseurChambreDTO);
+                }
             }
             catch (VoyageAhuntsicException e) {
                 System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
@@ -36,7 +39,10 @@ namespace Prj_Final_2017_.Controllers
         {
             try
             {
-                CompteFournisseurChambreDTO compteFournisseurChambreDTO = ApplicationFunctions.CompteFournisseurChambreFacade.Read(id);
+                if (Session["user"] != null)
+                {
+                    CompteFournisseurChambreDTO compteFournisseurChambreDTO = ApplicationFunctions.CompteFournisseurChambreFacade.Read(id);
+                }
             }
             catch (VoyageAhuntsicException e) {
                 System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
@@ -45,19 +51,26 @@ namespace Prj_Final_2017_.Controllers
         }
         public ActionResult Update(int idFournisseur, string courriel, string password, int idhotel)
         {
-            CompteFournisseurChambreDTO compteFournisseurChambreDTO = new CompteFournisseurChambreDTO();
-            compteFournisseurChambreDTO.IdFournisseur = idFournisseur;
-            compteFournisseurChambreDTO.Courriel = courriel;
-            compteFournisseurChambreDTO.Password = password;
-            compteFournisseurChambreDTO.IdHotel = idhotel;
-            ApplicationFunctions.CompteFournisseurChambreFacade.Update(compteFournisseurChambreDTO);
+            if (Session["user"] != null)
+            {
+                CompteFournisseurChambreDTO compteFournisseurChambreDTO = new CompteFournisseurChambreDTO();
+                compteFournisseurChambreDTO.IdFournisseur = idFournisseur;
+                compteFournisseurChambreDTO.Courriel = courriel;
+                compteFournisseurChambreDTO.Password = password;
+                compteFournisseurChambreDTO.IdHotel = idhotel;
+                ApplicationFunctions.CompteFournisseurChambreFacade.Update(compteFournisseurChambreDTO);
+
+            }
             return View();
         }
         public ActionResult Delete(int id)
         {
-            CompteFournisseurChambreDTO compteFournisseurChambreDTO = ApplicationFunctions.CompteFournisseurChambreFacade.Read(id);
+            if (Session["user"] != null)
+            {
+                CompteFournisseurChambreDTO compteFournisseurChambreDTO = ApplicationFunctions.CompteFournisseurChambreFacade.Read(id);
 
-            ApplicationFunctions.CompteFournisseurChambreFacade.Delete(compteFournisseurChambreDTO);
+                ApplicationFunctions.CompteFournisseurChambreFacade.Delete(compteFournisseurChambreDTO);
+            }
             return View();
         }
     }
