@@ -10,25 +10,22 @@ using Prj_Final_2017_.Models.Exception;
 namespace Prj_Final_2017_.Models.Service {
     public class CompteFournisseurChambreService {
         CompteFournisseurChambreDAO compteFournisseurChambreDAO;
-        HotelDAO hoteldao;
+        HotelDAO hotelDAO;
         
-        public CompteFournisseurChambreService(CompteFournisseurChambreDAO compteFournisseurChambreDAO, HotelDAO hoteldao) {
+        public CompteFournisseurChambreService(CompteFournisseurChambreDAO compteFournisseurChambreDAO, HotelDAO hotelDAO) {
             if (compteFournisseurChambreDAO == null) {
                 throw new VoyageAhuntsicException(44);
             }
-            if (hoteldao == null)
+            if (hotelDAO == null)
             {
                 throw new VoyageAhuntsicException(44);
             }
             this.compteFournisseurChambreDAO = compteFournisseurChambreDAO;
+            this.hotelDAO = hotelDAO;
         }
 
-        public void Add(CompteFournisseurChambreDTO compteFournisseurChambreDTO, HotelDTO hoteldto) {
+        public void Add(CompteFournisseurChambreDTO compteFournisseurChambreDTO) {
             if (compteFournisseurChambreDTO == null)
-            {
-                throw new VoyageAhuntsicException(44);
-            }
-            if (hoteldto == null)
             {
                 throw new VoyageAhuntsicException(44);
             }
@@ -40,24 +37,16 @@ namespace Prj_Final_2017_.Models.Service {
             
         }
 
-        public void Update(CompteFournisseurChambreDTO compteFournisseurChambreDTO, HotelDTO hoteldto) {
+        public void Update(CompteFournisseurChambreDTO compteFournisseurChambreDTO) {
             if (compteFournisseurChambreDTO == null)
-            {
-                throw new VoyageAhuntsicException(44);
-            }
-            if (hoteldto == null)
             {
                 throw new VoyageAhuntsicException(44);
             }
             compteFournisseurChambreDAO.Update(compteFournisseurChambreDTO);
         }
 
-        public void Delete(CompteFournisseurChambreDTO compteFournisseurChambreDTO, HotelDTO hoteldto) {
+        public void Delete(CompteFournisseurChambreDTO compteFournisseurChambreDTO) {
             if (compteFournisseurChambreDTO == null)
-            {
-                throw new VoyageAhuntsicException(44);
-            }
-            if (hoteldto == null)
             {
                 throw new VoyageAhuntsicException(44);
             }

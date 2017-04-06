@@ -11,28 +11,25 @@ using Prj_Final_2017_.Models.DTO;
 namespace Prj_Final_2017_.Models.Service {
     public class CompteFournisseurSiegeService {
         CompteFournisseurSiegeDAO compteFournisseurSiegeDAO;
-        CompagnieAerienneDAO compagnieaeriennedao;
+        CompagnieAerienneDAO compagnieAerienneDAO;
 
-        public CompteFournisseurSiegeService(CompteFournisseurSiegeDAO compteFournisseurSiegeDAO, CompagnieAerienneDAO compagnieaeriennedao)
+        public CompteFournisseurSiegeService(CompteFournisseurSiegeDAO compteFournisseurSiegeDAO, CompagnieAerienneDAO compagnieAerienneDAO)
         {
             if (compteFournisseurSiegeDAO == null)
             {
                 throw new VoyageAhuntsicException(44);
             }
-            if (compagnieaeriennedao == null)
+            if (compagnieAerienneDAO == null)
             {
                 throw new VoyageAhuntsicException(44);
             }
             this.compteFournisseurSiegeDAO = compteFournisseurSiegeDAO;
+            this.compagnieAerienneDAO = compagnieAerienneDAO;
         }
 
-        public void Add(CompteFournisseurSiegeDTO compteFournisseurSiegeDTO, CompagnieAerienneDTO compagnieaeriennedto)
+        public void Add(CompteFournisseurSiegeDTO compteFournisseurSiegeDTO)
         {
             if (compteFournisseurSiegeDTO == null)
-            {
-                throw new VoyageAhuntsicException(44);
-            }
-            if (compagnieaeriennedto == null)
             {
                 throw new VoyageAhuntsicException(44);
             }
@@ -45,26 +42,18 @@ namespace Prj_Final_2017_.Models.Service {
              
         }
 
-        public void Update(CompteFournisseurSiegeDTO compteFournisseurSiegeDTO, CompagnieAerienneDTO compagnieaeriennedto)
+        public void Update(CompteFournisseurSiegeDTO compteFournisseurSiegeDTO)
         {
             if (compteFournisseurSiegeDTO == null)
-            {
-                throw new VoyageAhuntsicException(44);
-            }
-            if (compagnieaeriennedto == null)
             {
                 throw new VoyageAhuntsicException(44);
             }
             compteFournisseurSiegeDAO.Update(compteFournisseurSiegeDTO);
         }
 
-        public void Delete(CompteFournisseurSiegeDTO compteFournisseurSiegeDTO, CompagnieAerienneDTO compagnieaeriennedto)
+        public void Delete(CompteFournisseurSiegeDTO compteFournisseurSiegeDTO)
         {
             if (compteFournisseurSiegeDTO == null)
-            {
-                throw new VoyageAhuntsicException(44);
-            }
-            if (compagnieaeriennedto == null)
             {
                 throw new VoyageAhuntsicException(44);
             }

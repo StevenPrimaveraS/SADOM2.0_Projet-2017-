@@ -33,9 +33,9 @@ namespace Prj_Final_2017_.Models.util {
                     ReservationVoitureDAO reservationVoitureDAO = new ReservationVoitureDAO();
                     ReservationForfaitDAO reservationForfaitDAO = new ReservationForfaitDAO();
                     //Services
-                    CompteFournisseurChambreService compteFournisseurChambreService = new CompteFournisseurChambreService(compteFournisseurChambreDAO);
-                    CompteFournisseurSiegeService compteFournisseurSiegeService = new CompteFournisseurSiegeService(compteFournisseurSiegeDAO);
-                    CompteFournisseurVoitureService compteFournisseurVoitureService = new CompteFournisseurVoitureService(compteFournisseurVoitureDAO);
+                    CompteFournisseurChambreService compteFournisseurChambreService = new CompteFournisseurChambreService(compteFournisseurChambreDAO, hotelDAO);
+                    CompteFournisseurSiegeService compteFournisseurSiegeService = new CompteFournisseurSiegeService(compteFournisseurSiegeDAO, compagnieAerienneDAO);
+                    CompteFournisseurVoitureService compteFournisseurVoitureService = new CompteFournisseurVoitureService(compteFournisseurVoitureDAO, agenceVoitureDAO);
                     CompteParticulierService compteParticulierService = new CompteParticulierService(compteParticulierDAO, reservationChambreDAO, reservationForfaitDAO, reservationSiegeDAO, reservationVoitureDAO);
                     HotelService hotelService = new HotelService(hotelDAO, chambreDAO, compteFournisseurChambreDAO);
                     CompagnieAerienneService compagnieAerienneService = new CompagnieAerienneService(compagnieAerienneDAO);
