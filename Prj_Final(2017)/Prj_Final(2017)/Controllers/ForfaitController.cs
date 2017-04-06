@@ -1,4 +1,5 @@
 ﻿using Prj_Final_2017_.DTO;
+using Prj_Final_2017_.Models.Exception;
 using Prj_Final_2017_.Models.util;
 using System;
 using System.Collections.Generic;
@@ -22,17 +23,65 @@ namespace Prj_Final_2017_.Controllers
         }
 
         // GET: Forfait/Details/5
-        public ActionResult Details(ForfaitDTO forfaitDTO)
+        public ActionResult Details(int id)
         {
-            ApplicationFunctions.ForfaitFacade.Read(forfaitDTO.IdForfait);
-            return View();
+            try
+            {
+                //Vérification des permissions
+                ForfaitDTO forfaitDTO = ApplicationFunctions.ForfaitFacade.Read(id);
+                if (forfaitDTO != null)
+                {
+                    if (Session["user"].GetType() == typeof(CompteParticulierDTO))
+                    {
+                        CompteParticulierDTO user = (CompteParticulierDTO)Session["user"];
+                        bool isAdmin = false;
+                        if (Session["admin"] != null)
+                        {
+                            isAdmin = (bool)Session["admin"];
+                        }
+                        if (isAdmin)
+                        {
+                            ViewBag["forfaitDTO"] = forfaitDTO;
+                            return View();
+                        }
+                    }
+                }
+            }
+            catch (VoyageAhuntsicException e)
+            {
+                System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
+            }
+            //Redirection sinon
+            return RedirectToAction("Index");
         }
 
         // GET: Forfait/Create
-        public ActionResult Create(ForfaitDTO forfaitDTO)
+        public ActionResult Create(int IdForfait, int IdChambre, int IdVoiture, int IdSiege, int TarifReduit)
         {
-            ApplicationFunctions.ForfaitFacade.Add(forfaitDTO);
-            return View();
+            try
+            {
+                if (Session["user"] != null)
+                {
+                    ForfaitDTO forfaitDTO = new ForfaitDTO();
+                    forfaitDTO.IdForfait = IdForfait;
+                    forfaitDTO.IdChambre = IdChambre;
+                    forfaitDTO.IdVoiture = IdVoiture;
+                    forfaitDTO.IdSiege = IdSiege;
+                    forfaitDTO.TarifReduit = TarifReduit;
+                    ApplicationFunctions.ForfaitFacade.Add(forfaitDTO);
+                    return View();
+                }
+            }
+            catch (FormatException e)
+            {
+                System.Diagnostics.Debug.WriteLine(e);
+            }
+            catch (VoyageAhuntsicException e)
+            {
+                System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
+            }
+            //Redirection sinon
+            return RedirectToAction("Index");
         }
 
         // POST: Forfait/Create
@@ -51,10 +100,43 @@ namespace Prj_Final_2017_.Controllers
         }
 
         // GET: Forfait/Edit/5
-        public ActionResult Edit(ForfaitDTO forfaitDTO)
+        public ActionResult Edit(int IdForfait, int IdChambre, int IdVoiture, int IdSiege, int TarifReduit)
         {
-            ApplicationFunctions.ForfaitFacade.Update(forfaitDTO);
-            return View();
+            try
+            {
+                if (Session["user"] != null)
+                {
+                    if (Session["user"].GetType() == typeof(CompteParticulierDTO))
+                    {
+                        CompteParticulierDTO user = (CompteParticulierDTO)Session["user"];
+                        if (Session["admin"] != null)
+                        {
+                            bool idAdmin = (bool)Session["admin"];
+                            if (idAdmin)
+                            {
+                                ForfaitDTO newForfaitDTO = new ForfaitDTO();
+                                newForfaitDTO.IdForfait = IdForfait;
+                                newForfaitDTO.IdChambre = IdChambre;
+                                newForfaitDTO.IdVoiture = IdVoiture;
+                                newForfaitDTO.IdSiege = IdSiege;
+                                newForfaitDTO.TarifReduit = TarifReduit;
+                                ApplicationFunctions.ForfaitFacade.Update(newForfaitDTO);
+                                return View();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (FormatException e)
+            {
+                System.Diagnostics.Debug.WriteLine(e);
+            }
+            catch (VoyageAhuntsicException e)
+            {
+                System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
+            }
+            //Redirection sinon
+            return RedirectToAction("Index");
         }
 
         // POST: Forfait/Edit/5
@@ -73,10 +155,34 @@ namespace Prj_Final_2017_.Controllers
         }
 
         // GET: Forfait/Delete/5
-        public ActionResult Delete(ForfaitDTO forfaitDTO)
+        public ActionResult Delete(int id)
         {
-            ApplicationFunctions.ForfaitFacade.Delete(forfaitDTO);
-            return View();
+            try
+            {
+                ForfaitDTO forfaitDTO = ApplicationFunctions.ForfaitFacade.Read(id);
+                if (Session["user"] != null && forfaitDTO != null)
+                {
+                    if (Session["user"].GetType() == typeof(CompteParticulierDTO))
+                    {
+                        CompteParticulierDTO user = (CompteParticulierDTO)Session["user"];
+                        bool isAdmin = false;
+                        if (Session["admin"] != null)
+                        {
+                            isAdmin = (bool)Session["admin"];
+                        }
+                        if (isAdmin)
+                        {
+                            ApplicationFunctions.ForfaitFacade.Delete(forfaitDTO);
+                            return View();
+                        }
+                    }
+                }
+            }
+            catch (VoyageAhuntsicException e)
+            {
+                System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
+            }
+            return RedirectToAction("Index");
         }
 
         // POST: Forfait/Delete/5
