@@ -23,7 +23,7 @@ namespace Prj_Final_2017_.Models.Service {
                 throw new VoyageAhuntsicException(44);
             }
             this.compteFournisseurVoitureDAO = compteFournisseurVoitureDAO;
-           
+            this.agenceVoitureDAO = agenceVoitureDAO;
         }
 
         public void Add(CompteFournisseurVoitureDTO compteFournisseurVoitureDTO)
