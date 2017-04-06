@@ -20,12 +20,15 @@ namespace Prj_Final_2017_.Controllers
         {
             try
             {
-                CompteFournisseurSiegeDTO compteFournisseurSiegeDTO = new CompteFournisseurSiegeDTO();
-                compteFournisseurSiegeDTO.IdFournisseur = idFournisseur;
-                compteFournisseurSiegeDTO.Courriel = courriel;
-                compteFournisseurSiegeDTO.Password = password;
-                compteFournisseurSiegeDTO.IdCompagnieAerienne = idCompagnieAerienne;
-                ApplicationFunctions.CompteFournisseurSiegeFacade.Add(compteFournisseurSiegeDTO);
+                if (Session["user"] != null)
+                {
+                    CompteFournisseurSiegeDTO compteFournisseurSiegeDTO = new CompteFournisseurSiegeDTO();
+                    compteFournisseurSiegeDTO.IdFournisseur = idFournisseur;
+                    compteFournisseurSiegeDTO.Courriel = courriel;
+                    compteFournisseurSiegeDTO.Password = password;
+                    compteFournisseurSiegeDTO.IdCompagnieAerienne = idCompagnieAerienne;
+                    ApplicationFunctions.CompteFournisseurSiegeFacade.Add(compteFournisseurSiegeDTO);
+                }
             }
             catch (VoyageAhuntsicException e)
             {
@@ -38,8 +41,11 @@ namespace Prj_Final_2017_.Controllers
         {
             try
             {
-                CompteFournisseurSiegeDTO compteFournisseurSiegeDTO = ApplicationFunctions.CompteFournisseurSiegeFacade.Read(id);
-            }
+                if (Session["user"] != null)
+                {
+                    CompteFournisseurSiegeDTO compteFournisseurSiegeDTO = ApplicationFunctions.CompteFournisseurSiegeFacade.Read(id);
+                }
+             }
             catch (VoyageAhuntsicException e)
             {
                 System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
@@ -48,19 +54,25 @@ namespace Prj_Final_2017_.Controllers
         }
         public ActionResult Update(int idFournisseur, string courriel, string password, int idCompagnieAerienne)
         {
-            CompteFournisseurSiegeDTO compteFournisseurSiegeDTO = new CompteFournisseurSiegeDTO();
-            compteFournisseurSiegeDTO.IdFournisseur = idFournisseur;
-            compteFournisseurSiegeDTO.Courriel = courriel;
-            compteFournisseurSiegeDTO.Password = password;
-            compteFournisseurSiegeDTO.IdCompagnieAerienne = idCompagnieAerienne;
-            ApplicationFunctions.CompteFournisseurSiegeFacade.Update(compteFournisseurSiegeDTO);
+            if (Session["user"] != null)
+            {
+                CompteFournisseurSiegeDTO compteFournisseurSiegeDTO = new CompteFournisseurSiegeDTO();
+                compteFournisseurSiegeDTO.IdFournisseur = idFournisseur;
+                compteFournisseurSiegeDTO.Courriel = courriel;
+                compteFournisseurSiegeDTO.Password = password;
+                compteFournisseurSiegeDTO.IdCompagnieAerienne = idCompagnieAerienne;
+                ApplicationFunctions.CompteFournisseurSiegeFacade.Update(compteFournisseurSiegeDTO);
+            }
             return View();
         }
         public ActionResult Delete(int id)
         {
-            CompteFournisseurChambreDTO compteFournisseurChambreDTO = ApplicationFunctions.CompteFournisseurChambreFacade.Read(id);
+            if (Session["user"] != null)
+            {
+                CompteFournisseurChambreDTO compteFournisseurChambreDTO = ApplicationFunctions.CompteFournisseurChambreFacade.Read(id);
 
-            ApplicationFunctions.CompteFournisseurChambreFacade.Delete(compteFournisseurChambreDTO);
+                ApplicationFunctions.CompteFournisseurChambreFacade.Delete(compteFournisseurChambreDTO);
+            }
             return View();
         }
     }

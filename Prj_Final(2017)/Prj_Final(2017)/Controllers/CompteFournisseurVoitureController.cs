@@ -20,12 +20,15 @@ namespace Prj_Final_2017_.Controllers
         {
             try
             {
-                CompteFournisseurVoitureDTO compteFournisseurVoitureDTO = new CompteFournisseurVoitureDTO();
-                compteFournisseurVoitureDTO.IdFournisseur = idFournisseur;
-                compteFournisseurVoitureDTO.Courriel = courriel;
-                compteFournisseurVoitureDTO.Password = password;
-                compteFournisseurVoitureDTO.IdAgenceVoiture = idAgenceVoiture;
-                ApplicationFunctions.CompteFournisseurVoitureFacade.Add(compteFournisseurVoitureDTO);
+                if (Session["user"] != null)
+                {
+                    CompteFournisseurVoitureDTO compteFournisseurVoitureDTO = new CompteFournisseurVoitureDTO();
+                    compteFournisseurVoitureDTO.IdFournisseur = idFournisseur;
+                    compteFournisseurVoitureDTO.Courriel = courriel;
+                    compteFournisseurVoitureDTO.Password = password;
+                    compteFournisseurVoitureDTO.IdAgenceVoiture = idAgenceVoiture;
+                    ApplicationFunctions.CompteFournisseurVoitureFacade.Add(compteFournisseurVoitureDTO);
+                }
             }
             catch (VoyageAhuntsicException e)
             {
@@ -37,7 +40,10 @@ namespace Prj_Final_2017_.Controllers
         {
             try
             {
-                CompteFournisseurVoitureDTO compteFournisseurVoitureDTO = ApplicationFunctions.CompteFournisseurVoitureFacade.Read(id);
+                if (Session["user"] != null)
+                {
+                    CompteFournisseurVoitureDTO compteFournisseurVoitureDTO = ApplicationFunctions.CompteFournisseurVoitureFacade.Read(id);
+                }
             }
             catch (VoyageAhuntsicException e)
             {
@@ -49,12 +55,15 @@ namespace Prj_Final_2017_.Controllers
         {
             try
             {
-                CompteFournisseurVoitureDTO compteFournisseurVoitureDTO = new CompteFournisseurVoitureDTO();
-                compteFournisseurVoitureDTO.IdFournisseur = idFournisseur;
-                compteFournisseurVoitureDTO.Courriel = courriel;
-                compteFournisseurVoitureDTO.Password = password;
-                compteFournisseurVoitureDTO.IdAgenceVoiture = idAgenceVoiture;
-                ApplicationFunctions.CompteFournisseurVoitureFacade.Add(compteFournisseurVoitureDTO);
+                if (Session["user"] != null)
+                {
+                    CompteFournisseurVoitureDTO compteFournisseurVoitureDTO = new CompteFournisseurVoitureDTO();
+                    compteFournisseurVoitureDTO.IdFournisseur = idFournisseur;
+                    compteFournisseurVoitureDTO.Courriel = courriel;
+                    compteFournisseurVoitureDTO.Password = password;
+                    compteFournisseurVoitureDTO.IdAgenceVoiture = idAgenceVoiture;
+                    ApplicationFunctions.CompteFournisseurVoitureFacade.Add(compteFournisseurVoitureDTO);
+                }
             }
             catch (VoyageAhuntsicException e)
             {
@@ -64,9 +73,13 @@ namespace Prj_Final_2017_.Controllers
         }
         public ActionResult Delete(int id)
         {
-            CompteFournisseurVoitureDTO compteFournisseurVoitureDTO = ApplicationFunctions.CompteFournisseurVoitureFacade.Read(id);
+            if (Session["user"] != null)
+            {
+                CompteFournisseurVoitureDTO compteFournisseurVoitureDTO = ApplicationFunctions.CompteFournisseurVoitureFacade.Read(id);
 
-            ApplicationFunctions.CompteFournisseurVoitureFacade.Delete(compteFournisseurVoitureDTO);
+
+                ApplicationFunctions.CompteFournisseurVoitureFacade.Delete(compteFournisseurVoitureDTO);
+            }
             return View();
         }
     }
