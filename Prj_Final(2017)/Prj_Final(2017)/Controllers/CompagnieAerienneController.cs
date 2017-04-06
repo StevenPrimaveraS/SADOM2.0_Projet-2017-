@@ -1,4 +1,6 @@
-﻿using Prj_Final_2017_.Models.DTO;
+﻿using Prj_Final_2017_.DTO;
+using Prj_Final_2017_.Models.DTO;
+using Prj_Final_2017_.Models.Exception;
 using Prj_Final_2017_.Models.util;
 using System;
 using System.Collections.Generic;
@@ -10,22 +12,84 @@ namespace Prj_Final_2017_.Controllers
 {
     public class CompagnieAerienneController : Controller
     {
+
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            if (Session["user"] != null)
+                base.OnActionExecuting(filterContext);
+            else
+                filterContext.Result = new RedirectResult("~/Account/Login");
+        }
+
         // GET: CompagnieAerienne
         public ActionResult Index()
         {
             return View();
         }
         // GET: CompagnieAerienne/Details/5
-        public ActionResult Details(CompagnieAerienneDTO compagnieAerienneDTO)
+        public ActionResult Details(int id)
         {
-            ApplicationFunctions.CompagnieAerienneFacade.Read(compagnieAerienneDTO.IdCompagnieAerienne);
+            try
+            {
+                //Vérification des permissions
+                CompagnieAerienneDTO compagnieAerienneDTO= ApplicationFunctions.CompagnieAerienneFacade.Read(id);
+                if (compagnieAerienneDTO != null)
+                {
+                    if (Session["user"].GetType() == typeof(CompteParticulierDTO))
+                    {
+                        CompteParticulierDTO user = (CompteParticulierDTO)Session["user"];
+                        bool isAdmin = false;
+                        if (Session["admin"] != null)
+                        {
+                            isAdmin = (bool)Session["admin"];
+                        }
+                        if (isAdmin)
+                        {
+                            ViewBag["compagnieAerienne"] = compagnieAerienneDTO;
+                            return View();
+                        }
+                    }
+                }
+            }
+            catch (VoyageAhuntsicException e)
+            {
+                System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
+            }
+            //ApplicationFunctions.CompagnieAerienneFacade.Read(compagnieAerienneDTO.IdCompagnieAerienne);
             return View();
         }
 
         // GET: CompagnieAerienne/Create
-        public ActionResult Create(CompagnieAerienneDTO compagnieAerienneDTO)
+        public ActionResult Create(int idCompagnieAerienne, String nom, String telephone, String adresse, String ville)
         {
-            ApplicationFunctions.CompagnieAerienneFacade.Add(compagnieAerienneDTO);
+            try
+            {
+                if (Session["user"] != null)
+                {
+                    if (Session["user"].GetType() == typeof(CompteParticulierDTO))
+                    {
+                        CompteParticulierDTO user = (CompteParticulierDTO)Session["user"];
+                        CompagnieAerienneDTO compagnieAerienneDTO = new CompagnieAerienneDTO();
+                        compagnieAerienneDTO.IdCompagnieAerienne = idCompagnieAerienne;
+                        compagnieAerienneDTO.Nom = nom;
+                        compagnieAerienneDTO.Telephone = telephone;
+                        compagnieAerienneDTO.Adresse = adresse;
+                        compagnieAerienneDTO.Ville = ville;
+                        ApplicationFunctions.CompagnieAerienneFacade.Add(compagnieAerienneDTO);
+                        return View();
+                    }
+
+                }
+            }
+            catch (FormatException e)
+            {
+                System.Diagnostics.Debug.WriteLine(e);
+            }
+            catch (VoyageAhuntsicException e)
+            {
+                System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
+            }
+            //ApplicationFunctions.CompagnieAerienneFacade.Add(compagnieAerienneDTO);
             return View();
         }
 
@@ -46,9 +110,45 @@ namespace Prj_Final_2017_.Controllers
         }
 
         // GET: CompagnieAerienne/Edit/5
-        public ActionResult Edit(CompagnieAerienneDTO compagnieAerienneDTO)
+        public ActionResult Edit(int idCompagnieAerienne, String nom, String telephone, String adresse, String ville)
         {
-            ApplicationFunctions.CompagnieAerienneFacade.Update(compagnieAerienneDTO);
+            //Vérification des permissions
+            try
+            {
+                if (Session["user"] != null)
+                {
+                    if (Session["user"].GetType() == typeof(CompteParticulierDTO))
+                    {
+                        CompteParticulierDTO user = (CompteParticulierDTO)Session["user"];
+                        if (Session["admin"] != null)
+                        {
+                            bool idAdmin = (bool)Session["admin"];
+                            if (idAdmin)
+                            {
+                                CompagnieAerienneDTO compagnieAerienneDTO = new CompagnieAerienneDTO();
+                                compagnieAerienneDTO.IdCompagnieAerienne = idCompagnieAerienne;
+                                compagnieAerienneDTO.Nom = nom;
+                                compagnieAerienneDTO.Telephone = telephone;
+                                compagnieAerienneDTO.Adresse = adresse;
+                                compagnieAerienneDTO.Ville = ville;
+
+                                ApplicationFunctions.CompagnieAerienneFacade.Update(compagnieAerienneDTO);
+
+                                return View();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (FormatException e)
+            {
+                System.Diagnostics.Debug.WriteLine(e);
+            }
+            catch (VoyageAhuntsicException e)
+            {
+                System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
+            }
+            //ApplicationFunctions.CompagnieAerienneFacade.Update(compagnieAerienneDTO);
             return View();
         }
 
@@ -73,9 +173,35 @@ namespace Prj_Final_2017_.Controllers
             return View();
         }
         // GET: CompagnieAerienne/Delete/5
-        public ActionResult Delete(CompagnieAerienneDTO compagnieAerienneDTO)
+        public ActionResult Delete(int id)
         {
-            ApplicationFunctions.CompagnieAerienneFacade.Delete(compagnieAerienneDTO);
+            try
+            {
+                CompagnieAerienneDTO compagnieAerienneDTO = ApplicationFunctions.CompagnieAerienneFacade.Read(id);
+                if (Session["user"] != null && compagnieAerienneDTO != null)
+                {
+                    if (Session["user"].GetType() == typeof(CompteParticulierDTO))
+                    {
+                        CompteParticulierDTO user = (CompteParticulierDTO)Session["user"];
+                        bool isAdmin = false;
+                        if (Session["admin"] != null)
+                        {
+                            isAdmin = (bool)Session["admin"];
+                        }
+                        if (isAdmin)
+                        {
+                            ApplicationFunctions.CompagnieAerienneFacade.Delete(compagnieAerienneDTO);
+
+                            return View();
+                        }
+                    }
+                }
+            }
+            catch (VoyageAhuntsicException e)
+            {
+                System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
+            }
+            //ApplicationFunctions.CompagnieAerienneFacade.Delete(compagnieAerienneDTO);
             return View();
         }
 

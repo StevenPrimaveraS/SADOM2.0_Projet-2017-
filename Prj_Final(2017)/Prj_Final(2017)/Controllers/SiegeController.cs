@@ -1,4 +1,5 @@
 ﻿using Prj_Final_2017_.DTO;
+using Prj_Final_2017_.Models.Exception;
 using Prj_Final_2017_.Models.util;
 using System;
 using System.Collections.Generic;
@@ -10,22 +11,83 @@ namespace Prj_Final_2017_.Controllers
 {
     public class SiegeController : Controller
     {
+
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            if (Session["user"] != null)
+                base.OnActionExecuting(filterContext);
+            else
+                filterContext.Result = new RedirectResult("~/Account/Login");
+        }
+
         // GET: Siege
         public ActionResult Index()
         {
             return View();
         }
         // GET: Siege/Details/5
-        public ActionResult Details(SiegeDTO siegeDTO)
+        public ActionResult Details(int id)
         {
-            ApplicationFunctions.SiegeFacade.Read(siegeDTO.IdSiege);
+            try
+            {
+                //Vérification des permissions
+                SiegeDTO siegeDTO = ApplicationFunctions.SiegeFacade.Read(id);
+                if(siegeDTO != null)
+                {
+                    if (Session["user"].GetType() == typeof(CompteParticulierDTO))
+                    {
+                        CompteParticulierDTO user = (CompteParticulierDTO)Session["user"];
+                        bool isAdmin = false;
+                        if (Session["admin"] != null)
+                        {
+                            isAdmin = (bool)Session["admin"];
+                        }
+                        if (isAdmin)
+                        {
+                            ViewBag["Siege"] = siegeDTO;
+                            return View();
+                        }
+                    }
+                }
+            }
+            catch (VoyageAhuntsicException e)
+            {
+                System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
+            }
+            //ApplicationFunctions.SiegeFacade.Read(siegeDTO.IdSiege);
             return View();
         }
 
         // GET: Siege/Create
-        public ActionResult Create(SiegeDTO siegeDTO)
+        public ActionResult Create(int idSiege, String type, int numero, int idVol)
         {
-            ApplicationFunctions.SiegeFacade.Add(siegeDTO);
+            try
+            {
+                if (Session["user"] != null)
+                {
+                    if (Session["user"].GetType() == typeof(CompteParticulierDTO))
+                    {
+                        CompteParticulierDTO user = (CompteParticulierDTO)Session["user"];
+                        SiegeDTO siegeDTO= new SiegeDTO();
+                        siegeDTO.IdSiege = idSiege;
+                        siegeDTO.Type = type;
+                        siegeDTO.Numero = numero;
+                        siegeDTO.IdVol = idVol;
+                        ApplicationFunctions.SiegeFacade.Add(siegeDTO);
+                        return View();
+                    }
+
+                }
+            }
+            catch (FormatException e)
+            {
+                System.Diagnostics.Debug.WriteLine(e);
+            }
+            catch (VoyageAhuntsicException e)
+            {
+                System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
+            }
+            ///ApplicationFunctions.SiegeFacade.Add(siegeDTO);
             return View();
         }
 
@@ -46,9 +108,45 @@ namespace Prj_Final_2017_.Controllers
         }
 
         // GET: Siege/Edit/5
-        public ActionResult Edit(SiegeDTO siegeDTO)
+        public ActionResult Edit(int idSiege, String type, int numero, int idVol)
         {
-            ApplicationFunctions.SiegeFacade.Update(siegeDTO);
+            //Vérification des permissions
+            try
+            {
+                if (Session["user"] != null)
+                {
+                    if (Session["user"].GetType() == typeof(CompteParticulierDTO))
+                    {
+                        CompteParticulierDTO user = (CompteParticulierDTO)Session["user"];
+                        if (Session["admin"] != null)
+                        {
+                            bool idAdmin = (bool)Session["admin"];
+                            if (idAdmin)
+                            {
+                                SiegeDTO siegeDTO = new SiegeDTO();
+                                siegeDTO.IdSiege = idSiege;
+                                siegeDTO.Type = type;
+                                siegeDTO.Numero = numero;
+                                siegeDTO.IdVol = idVol;
+
+                                ApplicationFunctions.SiegeFacade.Update(siegeDTO);
+
+                                return View();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (FormatException e)
+            {
+                System.Diagnostics.Debug.WriteLine(e);
+            }
+            catch (VoyageAhuntsicException e)
+            {
+                System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
+            }
+
+            //ApplicationFunctions.SiegeFacade.Update(siegeDTO);
             return View();
         }
 
@@ -73,9 +171,35 @@ namespace Prj_Final_2017_.Controllers
             return View();
         }
         // GET: Siege/Delete/5
-        public ActionResult Delete(SiegeDTO siegeDTO)
+        public ActionResult Delete(int id)
         {
-            ApplicationFunctions.SiegeFacade.Update(siegeDTO);
+            try
+            {
+                SiegeDTO siegeDTO = ApplicationFunctions.SiegeFacade.Read(id);
+                if (Session["user"] != null && siegeDTO != null)
+                {
+                    if (Session["user"].GetType() == typeof(CompteParticulierDTO))
+                    {
+                        CompteParticulierDTO user = (CompteParticulierDTO)Session["user"];
+                        bool isAdmin = false;
+                        if (Session["admin"] != null)
+                        {
+                            isAdmin = (bool)Session["admin"];
+                        }
+                        if (isAdmin)
+                        {
+                            ApplicationFunctions.SiegeFacade.Delete(siegeDTO);
+
+                            return View();
+                        }
+                    }
+                }
+            }
+            catch (VoyageAhuntsicException e)
+            {
+                System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
+            }
+            // ApplicationFunctions.SiegeFacade.Update(siegeDTO);
             return View();
         }
 

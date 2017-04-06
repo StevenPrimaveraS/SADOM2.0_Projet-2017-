@@ -1,4 +1,5 @@
 ﻿using Prj_Final_2017_.DTO;
+using Prj_Final_2017_.Models.Exception;
 using Prj_Final_2017_.Models.util;
 using System;
 using System.Collections.Generic;
@@ -10,22 +11,85 @@ namespace Prj_Final_2017_.Controllers
 {
     public class AgenceVoitureController : Controller
     {
+
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            if (Session["user"] != null)
+                base.OnActionExecuting(filterContext);
+            else
+                filterContext.Result = new RedirectResult("~/Account/Login");
+        }
+
         // GET: AgenceVoiture
         public ActionResult Index()
         {
             return View();
         }
         // GET: AgenceVoiture/Details/5
-        public ActionResult Details(AgenceVoitureDTO agenceVoitureDTO)
+        public ActionResult Details(int id)
         {
-            ApplicationFunctions.AgenceVoitureFacade.Read(agenceVoitureDTO.IdAgenceVoiture);
+            try
+            {
+                //Vérification des permissions
+                AgenceVoitureDTO agenceVoitureDTO = ApplicationFunctions.AgenceVoitureFacade.Read(id);
+                if (agenceVoitureDTO != null)
+                {
+                    if (Session["user"].GetType() == typeof(CompteParticulierDTO))
+                    {
+                        CompteParticulierDTO user = (CompteParticulierDTO)Session["user"];
+                        bool isAdmin = false;
+                        if (Session["admin"] != null)
+                        {
+                            isAdmin = (bool)Session["admin"];
+                        }
+                        if (isAdmin)
+                        {
+                            ViewBag["agenceVoiture"] = agenceVoitureDTO;
+                            return View();
+                        }
+                    }
+                }
+            }
+            catch (VoyageAhuntsicException e)
+            {
+                System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
+            }
+            //ApplicationFunctions.AgenceVoitureFacade.Read(agenceVoitureDTO.IdAgenceVoiture);
             return View();
         }
 
         // GET: AgenceVoiture/Create
-        public ActionResult Create(AgenceVoitureDTO agenceVoitureDTO)
+        public ActionResult Create(int idAgenceVoiture, String nom, String telephone, String adresse, String ville, String aeroport)
         {
-            ApplicationFunctions.AgenceVoitureFacade.Add(agenceVoitureDTO);
+            try
+            {
+                if (Session["user"] != null)
+                {
+                    if (Session["user"].GetType() == typeof(CompteParticulierDTO))
+                    {
+                        CompteParticulierDTO user = (CompteParticulierDTO)Session["user"];
+                        AgenceVoitureDTO agenceVoitureDTO= new AgenceVoitureDTO();
+                        agenceVoitureDTO.IdAgenceVoiture = idAgenceVoiture;
+                        agenceVoitureDTO.Nom = nom;
+                        agenceVoitureDTO.Telephone = telephone;
+                        agenceVoitureDTO.Adresse = adresse;
+                        agenceVoitureDTO.Ville = ville;
+                        agenceVoitureDTO.Aeroport = aeroport;
+                        ApplicationFunctions.AgenceVoitureFacade.Add(agenceVoitureDTO);
+                        return View();
+                    }
+
+                }
+            }
+            catch (FormatException e)
+            {
+                System.Diagnostics.Debug.WriteLine(e);
+            }
+            catch (VoyageAhuntsicException e)
+            {
+                System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
+            }
+            //ApplicationFunctions.AgenceVoitureFacade.Add(agenceVoitureDTO);
             return View();
         }
 
@@ -46,9 +110,45 @@ namespace Prj_Final_2017_.Controllers
         }
 
         // GET: AgenceVoiture/Edit/5
-        public ActionResult Edit(AgenceVoitureDTO agenceVoitureDTO)
+        public ActionResult Edit(int idAgenceVoiture, String nom, String telephone, String adresse, String ville, String aeroport)
         {
-            ApplicationFunctions.AgenceVoitureFacade.Update(agenceVoitureDTO);
+            //Vérification des permissions
+            try
+            {
+                if (Session["user"] != null)
+                {
+                    if (Session["user"].GetType() == typeof(CompteParticulierDTO))
+                    {
+                        CompteParticulierDTO user = (CompteParticulierDTO)Session["user"];
+                        if (Session["admin"] != null)
+                        {
+                            bool idAdmin = (bool)Session["admin"];
+                            if (idAdmin)
+                            {
+                                AgenceVoitureDTO agenceVoitureDTO = new AgenceVoitureDTO();
+                                agenceVoitureDTO.IdAgenceVoiture = idAgenceVoiture;
+                                agenceVoitureDTO.Nom = nom;
+                                agenceVoitureDTO.Telephone = telephone;
+                                agenceVoitureDTO.Adresse = adresse;
+                                agenceVoitureDTO.Ville = ville;
+                                agenceVoitureDTO.Aeroport = aeroport;
+
+                                ApplicationFunctions.AgenceVoitureFacade.Update(agenceVoitureDTO);
+                                return View();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (FormatException e)
+            {
+                System.Diagnostics.Debug.WriteLine(e);
+            }
+            catch (VoyageAhuntsicException e)
+            {
+                System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
+            }
+            //ApplicationFunctions.AgenceVoitureFacade.Update(agenceVoitureDTO);
             return View();
         }
 
@@ -73,9 +173,34 @@ namespace Prj_Final_2017_.Controllers
             return View();
         }
         // GET: AgenceVoiture/Delete/5
-        public ActionResult Delete(AgenceVoitureDTO agenceVoitureDTO)
+        public ActionResult Delete(int id)
         {
-            ApplicationFunctions.AgenceVoitureFacade.Delete(agenceVoitureDTO);
+            try
+            {
+                AgenceVoitureDTO agenceVoitureDTO = ApplicationFunctions.AgenceVoitureFacade.Read(id);
+                if (Session["user"] != null && agenceVoitureDTO != null)
+                {
+                    if (Session["user"].GetType() == typeof(CompteParticulierDTO))
+                    {
+                        CompteParticulierDTO user = (CompteParticulierDTO)Session["user"];
+                        bool isAdmin = false;
+                        if (Session["admin"] != null)
+                        {
+                            isAdmin = (bool)Session["admin"];
+                        }
+                        if (isAdmin)
+                        {
+                            ApplicationFunctions.AgenceVoitureFacade.Delete(agenceVoitureDTO);
+                            return View();
+                        }
+                    }
+                }
+            }
+            catch (VoyageAhuntsicException e)
+            {
+                System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
+            }
+            //ApplicationFunctions.AgenceVoitureFacade.Delete(agenceVoitureDTO);
             return View();
         }
 

@@ -1,4 +1,5 @@
 ﻿using Prj_Final_2017_.DTO;
+using Prj_Final_2017_.Models.Exception;
 using Prj_Final_2017_.Models.util;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,16 @@ namespace Prj_Final_2017_.Controllers
 {
     public class VolController : Controller
     {
+
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            if (Session["user"] != null)
+                base.OnActionExecuting(filterContext);
+            else
+                filterContext.Result = new RedirectResult("~/Account/Login");
+        }
+
+
         // GET: Vol
         public ActionResult Index()
         {
@@ -20,16 +31,77 @@ namespace Prj_Final_2017_.Controllers
             return View();
         }
         // GET: Vol/Details/5
-        public ActionResult Details(VolDTO volDTO)
+        public ActionResult Details(int id)
         {
-            ApplicationFunctions.VolFacade.Read(volDTO.IdVol);
+            try
+            {
+                //Vérification des permissions
+                VolDTO volDTO = ApplicationFunctions.VolFacade.Read(id);
+                if (volDTO != null)
+                {
+                    if (Session["user"].GetType() == typeof(CompteParticulierDTO))
+                    {
+                        CompteParticulierDTO user = (CompteParticulierDTO)Session["user"];
+                        bool isAdmin = false;
+                        if (Session["admin"] != null)
+                        {
+                            isAdmin = (bool)Session["admin"];
+                        }
+                        if (isAdmin)
+                        {
+                            ViewBag["Vol"] = volDTO;
+                            return View();
+                        }
+                    }
+                }
+            }
+            catch (VoyageAhuntsicException e)
+            {
+                System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
+            }
+            //ApplicationFunctions.VolFacade.Read(volDTO.IdVol);
             return View();
         }
 
         // GET: Vol/Create
-        public ActionResult Create(VolDTO volDTO)
+        public ActionResult Create(int idVol, String aeroportDepart, String aeroportDestination, String villeDepart, String villeDestination, DateTime dateDepart, DateTime dateArrivee,
+            int idCompagnieAerienne, String classe, bool isRemboursable, int tarif)
         {
-            ApplicationFunctions.VolFacade.Add(volDTO);
+            try
+            {
+                if (Session["user"] != null)
+                {
+                    if (Session["user"].GetType() == typeof(CompteParticulierDTO))
+                    {
+                        CompteParticulierDTO user = (CompteParticulierDTO)Session["user"];
+                        VolDTO volDTO= new VolDTO();
+                        volDTO.IdVol = idVol;
+                        volDTO.AeroportDepart = aeroportDepart;
+                        volDTO.AeroportDestination = aeroportDestination;
+                        volDTO.VilleDepart = villeDepart;
+                        volDTO.VilleDestination = villeDestination;
+                        volDTO.DateDepart = dateDepart;
+                        volDTO.DateArrivee = dateArrivee;
+                        volDTO.IdCompagnieAerienne = idCompagnieAerienne;
+                        volDTO.Classe = classe;
+                        volDTO.IsRemboursable = isRemboursable;
+                        volDTO.Tarif = tarif;
+                        ApplicationFunctions.VolFacade.Add(volDTO);
+
+                        return View();
+                    }
+
+                }
+            }
+            catch (FormatException e)
+            {
+                System.Diagnostics.Debug.WriteLine(e);
+            }
+            catch (VoyageAhuntsicException e)
+            {
+                System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
+            }
+            //ApplicationFunctions.VolFacade.Add(volDTO);
             return View();
         }
 
@@ -50,9 +122,51 @@ namespace Prj_Final_2017_.Controllers
         }
 
         // GET: Vol/Edit/5
-        public ActionResult Edit(VolDTO volDTO)
+        public ActionResult Edit(int idVol, String aeroportDepart, String aeroportDestination, String villeDepart, String villeDestination, DateTime dateDepart, DateTime dateArrivee,
+            int idCompagnieAerienne, String classe, bool isRemboursable, int tarif)
         {
-            ApplicationFunctions.VolFacade.Update(volDTO);
+            //Vérification des permissions
+            try
+            {
+                if (Session["user"] != null)
+                {
+                    if (Session["user"].GetType() == typeof(CompteParticulierDTO))
+                    {
+                        CompteParticulierDTO user = (CompteParticulierDTO)Session["user"];
+                        if (Session["admin"] != null)
+                        {
+                            bool idAdmin = (bool)Session["admin"];
+                            if (idAdmin)
+                            {
+                                VolDTO volDTO = new VolDTO();
+                                volDTO.IdVol = idVol;
+                                volDTO.AeroportDepart = aeroportDepart;
+                                volDTO.AeroportDestination = aeroportDestination;
+                                volDTO.VilleDepart = villeDepart;
+                                volDTO.VilleDestination = villeDestination;
+                                volDTO.DateDepart = dateDepart;
+                                volDTO.DateArrivee = dateArrivee;
+                                volDTO.IdCompagnieAerienne = idCompagnieAerienne;
+                                volDTO.Classe = classe;
+                                volDTO.IsRemboursable = isRemboursable;
+                                volDTO.Tarif = tarif;
+                                ApplicationFunctions.VolFacade.Update(volDTO);
+
+                                return View();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (FormatException e)
+            {
+                System.Diagnostics.Debug.WriteLine(e);
+            }
+            catch (VoyageAhuntsicException e)
+            {
+                System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
+            }
+            //ApplicationFunctions.VolFacade.Update(volDTO);
             return View();
         }
 
@@ -73,9 +187,34 @@ namespace Prj_Final_2017_.Controllers
         }
 
         // GET: Vol/Delete/5
-        public ActionResult Delete(VolDTO volDTO)
+        public ActionResult Delete(int id)
         {
-            ApplicationFunctions.VolFacade.Delete(volDTO);
+            //ApplicationFunctions.VolFacade.Delete(volDTO);
+            try
+            {
+                VolDTO volDTO = ApplicationFunctions.VolFacade.Read(id);
+                if (Session["user"] != null && volDTO != null)
+                {
+                    if (Session["user"].GetType() == typeof(CompteParticulierDTO))
+                    {
+                        CompteParticulierDTO user = (CompteParticulierDTO)Session["user"];
+                        bool isAdmin = false;
+                        if (Session["admin"] != null)
+                        {
+                            isAdmin = (bool)Session["admin"];
+                        }
+                        if (isAdmin)
+                        {
+                            ApplicationFunctions.VolFacade.Delete(volDTO);
+                            return View();
+                        }
+                    }
+                }
+            }
+            catch (VoyageAhuntsicException e)
+            {
+                System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
+            }
             return View();
         }
 
