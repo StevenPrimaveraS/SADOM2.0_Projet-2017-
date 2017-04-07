@@ -5,7 +5,6 @@ using System.Web;
 using MySql.Data.MySqlClient;
 using System.Data;
 using Prj_Final_2017_.DTO;
-using Prj_Final_2017_.Models.DTO;
 using Prj_Final_2017_.Models.Exception;
 
 namespace Prj_Final_2017_.Models.DAO {

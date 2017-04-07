@@ -6,7 +6,6 @@ using System.Data;
 using Prj_Final_2017_.DTO;
 using Prj_Final_2017_.Models.DAO;
 using Prj_Final_2017_.Models.Exception;
-using Prj_Final_2017_.Models.DTO;
 
 namespace Prj_Final_2017_.Models.Service {
     public class CompteFournisseurSiegeService {

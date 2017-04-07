@@ -1,0 +1,52 @@
+﻿@using Prj_Final_2017_.DTO;
+@using Prj_Final_2017_.Models.util;
+
+@{
+    ViewBag.Title = "Reservation";
+    //Pour afficher toutes les réservations reçues
+}
+
+
+
+@{ /*
+              * Styles temporaires : éventuellement dans fichier css
+              * Peut-être pas de boutons pour chercher par type de reservation
+              * et juste toutes les afficher.
+              *
+              */
+}
+<div id="recherche" style="background-color: #eeeeee; border-radius:6px; padding:30px;">
+    <h1>Reservation</h1>
+    <div id="description">
+        <p style="text-align:justify">@ViewBag.Description</p>
+    </div>
+    <label class="label label-primary">Vos Reservations pour:</label><br />
+    <div class="form-inline" id="boiteRecherche" style="display:inline-block;">
+        <div id="choix" style="display:inline-block; margin-bottom:15px">
+            <a href="/ReservationSiege" class="btn btn-default" aria-label="Left Align" style="width:65px; margin-top:3px;">
+                <span class="glyphicon glyphicon-plane" aria-hidden="true"></span>
+                <br />Vol
+            </a>
+            <a href="/ReservationChambre" class="btn btn-default" aria-label="Left Align" style="width:65px; margin-top:3px;">
+                <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                <br />Hotel
+            </a>
+            <a href="/ReservationVoiture" class="btn btn-default" aria-label="Left Align" style="width:65px; margin-top:3px;">
+                <span class="glyphicon glyphicon-road" aria-hidden="true"></span>
+                <br />Voiture
+            </a>
+            <a href="/ReservationForfait" class="btn btn-default" aria-label="Left Align" style="width:203px; margin-top:3px;">
+                <span class="glyphicon glyphicon-plane" aria-hidden="true"></span>
+                <strong>&nbsp;+&nbsp;</strong>
+                <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                <strong>&nbsp;+&nbsp;</strong>
+                <span class="glyphicon glyphicon-road" aria-hidden="true"></span>
+                <br />Forfait
+            </a>
+        </div>
+        <br /><br /><br />
+        <a href="/Account/Manage" class="btn btn-default btn-xs" aria-label="Left Align" style="width:65px; margin-top:3px;">
+            Retour
+        </a>
+    </div>
+</div>

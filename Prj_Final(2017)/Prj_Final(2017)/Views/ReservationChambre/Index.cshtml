@@ -2,18 +2,18 @@
 @using Prj_Final_2017_.Models.util;
 
 @{
-    ViewBag.Title = "Reservation";
+    ViewBag.Title = "Reservations de chambre";
     //Pour afficher toutes les réservations reçues
 }
 
 
 
-@{ /* 
-    * Styles temporaires : éventuellement dans fichier css
-    * Peut-être pas de boutons pour chercher par type de reservation 
-    * et juste toutes les afficher.
-    * 
-    */  
+@{ /*
+              * Styles temporaires : éventuellement dans fichier css
+              * Peut-être pas de boutons pour chercher par type de reservation
+              * et juste toutes les afficher.
+              *
+              */
 }
 <div id="recherche" style="background-color: #eeeeee; border-radius:6px; padding:30px;">
     <h1>Reservation</h1>
@@ -81,10 +81,10 @@
     </div>
 </div>
 @{
-    // Section des reservations : Généré dynamiquement dans le futur 
+    // Section des reservations : Généré dynamiquement dans le futur
 
     List<ReservationChambreDTO> reservations = ViewBag.reservations;
-    if(reservations == null) {
+    if (reservations == null) {
         reservations = new List<ReservationChambreDTO>();
     }
     /*
@@ -97,11 +97,11 @@
     hotelDTO1 = new HotelDTO();
     hotelDTO1.Adresse = "1234 MonAdresseWaou";
     hotelDTO1.Categorie = "5 étoile";
-    hotelDTO1.Description = @"L’ Hôtel Hesperia représente le bon choix pour les clients qui veulent allier le charme à la tranquillité et à un emplacement pratique pour découvrir Venise. 
-                            Il s’agit d’un petit hôtel confortable sur le Canal de Cannaregio, avec un service soigné et personnalisé proposé à la clientèle par la famille Derai et son équipe, 
+    hotelDTO1.Description = @"L’ Hôtel Hesperia représente le bon choix pour les clients qui veulent allier le charme à la tranquillité et à un emplacement pratique pour découvrir Venise.
+                            Il s’agit d’un petit hôtel confortable sur le Canal de Cannaregio, avec un service soigné et personnalisé proposé à la clientèle par la famille Derai et son équipe,
                             toujours disponibles pour d’éventuelles sollicitations.<br />
-                            L’hôtel a trois étages, sans ascenseur.Au rez-de - chaussée, outre la réception, vous trouverez un agréable petit salon où vous pourrez vous installer pour prendre un 
-                            thé ou tout simplement pour lire et une superbe terrasse pour se plonger dans l’atmosphère typique de la vie quotidienne vénitienne, en découvrant dès le matin 
+                            L’hôtel a trois étages, sans ascenseur.Au rez-de - chaussée, outre la réception, vous trouverez un agréable petit salon où vous pourrez vous installer pour prendre un
+                            thé ou tout simplement pour lire et une superbe terrasse pour se plonger dans l’atmosphère typique de la vie quotidienne vénitienne, en découvrant dès le matin
                             l’agitation de la ville sur le canal et le grouillement des personnes qui envahissent les rues et les places avec leurs bavardages.";
     hotelDTO1.IdHotel = 1;
     hotelDTO1.Nom = "Hôtel Hesperia";

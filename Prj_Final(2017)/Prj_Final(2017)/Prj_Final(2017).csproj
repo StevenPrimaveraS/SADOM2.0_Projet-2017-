@@ -349,6 +349,11 @@
     <Content Include="Views\Reservation\Edit.cshtml" />
     <Content Include="Views\Reservation\Delete.cshtml" />
     <Content Include="Views\Reservation\Create.cshtml" />
+    <Content Include="Views\ReservationChambre\Index.cshtml" />
+    <Content Include="Views\ReservationForfait\Index.cshtml" />
+    <Content Include="Views\ReservationSiege\Index.cshtml" />
+    <Content Include="Views\ReservationVoiture\Index.cshtml" />
+    <Content Include="Views\Reservation\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -357,11 +362,6 @@
     <Folder Include="Views\CompteFournisseurSiege\" />
     <Folder Include="Views\CompteFournisseurVoiture\" />
     <Folder Include="Views\CompteParticulier\" />
-    <Folder Include="Views\ReservaitionVoiture\" />
-    <Folder Include="Views\ReservationChambre\" />
-    <Folder Include="Views\ReservationForfait\" />
-    <Folder Include="Views\ReservationSiege\" />
-    <Folder Include="Views\ReservationVoiture\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
