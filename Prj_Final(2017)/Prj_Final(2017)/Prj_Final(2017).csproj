@@ -355,6 +355,10 @@
     <Content Include="Views\ReservationSiege\Index.cshtml" />
     <Content Include="Views\ReservationVoiture\Index.cshtml" />
     <Content Include="Views\Reservation\Index.cshtml" />
+    <Content Include="Views\ReservationChambre\Details.cshtml" />
+    <Content Include="Views\ReservationForfait\Details.cshtml" />
+    <Content Include="Views\ReservationSiege\Details.cshtml" />
+    <Content Include="Views\ReservationVoiture\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
