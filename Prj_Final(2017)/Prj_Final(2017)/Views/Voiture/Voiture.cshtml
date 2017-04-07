@@ -1,4 +1,4 @@
-﻿
+﻿@using WebMatrix.Data;
 @{
     ViewBag.Title = "Voiture";
 }
@@ -50,6 +50,24 @@
             <p><input type="submit" value="Submit" /> </p>
         </div>
         <p class="lead">Liste de voiture</p>
+        @{ 
+            var DB = Database.Open("mysqlConnexionString");
+            var Grid = new WebGrid(DB.Query("SELECT * FROM voiture"));
+        }
+        @Grid.GetHtml(
+            tableStyle: "MyTable",
+            headerStyle: "columnHead",
+            alternatingRowStyle: "altRow",
+            columns: Grid.Columns(
+            Grid.Column("IdVoiture", "ID Voiture"),
+                        Grid.Column("Type", "Type"),
+                        Grid.Column("IdAgence", "ID Agence"),
+                        Grid.Column("Tarif", "Tarif"),
+                        Grid.Column("NbPassager", "Nombre Passager"),
+                        Grid.Column("Nom", "Nom"),
+                        Grid.Column("Plaque", "Plaque")
+            )
+        )
         <span style="flex:auto">
             <input class="text-form" type="button" value="Ajouter au panier" />
         </span>
