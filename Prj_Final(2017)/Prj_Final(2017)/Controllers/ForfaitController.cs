@@ -56,7 +56,7 @@ namespace Prj_Final_2017_.Controllers
         }
 
         // GET: Forfait/Create
-        public ActionResult Create(int IdForfait, int IdChambre, int IdVoiture, int IdSiege, int TarifReduit)
+        public ActionResult Create(int IdForfait, int IdChambre, int IdVoiture, int IdSiege, double TarifReduit)
         {
             try
             {
@@ -100,7 +100,7 @@ namespace Prj_Final_2017_.Controllers
         }
 
         // GET: Forfait/Edit/5
-        public ActionResult Edit(int IdForfait, int IdChambre, int IdVoiture, int IdSiege, int TarifReduit)
+        public ActionResult Edit(int IdForfait, int IdChambre, int IdVoiture, int IdSiege, double TarifReduit)
         {
             try
             {
