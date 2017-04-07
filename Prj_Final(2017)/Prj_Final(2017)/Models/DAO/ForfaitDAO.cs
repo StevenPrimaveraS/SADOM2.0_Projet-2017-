@@ -85,7 +85,7 @@ namespace Prj_Final_2017_.Models.DAO {
                                 forfaitDTO.IdChambre = reader.GetInt32("IdChambre");
                                 forfaitDTO.IdVoiture = reader.GetInt32("IdVoiture");
                                 forfaitDTO.IdSiege = reader.GetInt32("IdSiege");
-                                forfaitDTO.TarifReduit = reader.GetInt32("TarifReduit");
+                                forfaitDTO.TarifReduit = reader.GetDouble("TarifReduit");
                             }
                         }
                     }

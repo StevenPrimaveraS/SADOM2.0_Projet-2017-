@@ -186,6 +186,7 @@
     <Compile Include="Controllers\PaiementController.cs" />
     <Compile Include="Controllers\PanierController.cs" />
     <Compile Include="Controllers\ReservationChambreController.cs" />
+    <Compile Include="Controllers\ReservationController.cs" />
     <Compile Include="Controllers\ReservationForfaitController.cs" />
     <Compile Include="Controllers\ReservationSiegeController.cs" />
     <Compile Include="Controllers\ReservationVoitureController.cs" />

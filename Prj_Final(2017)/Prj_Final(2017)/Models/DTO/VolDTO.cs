@@ -26,6 +26,6 @@ namespace Prj_Final_2017_.DTO {
 
         public bool IsRemboursable { get; set; }
 
-        public int Tarif { get; set; }
+        public double Tarif { get; set; }
     }
 }

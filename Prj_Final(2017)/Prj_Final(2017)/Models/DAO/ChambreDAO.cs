@@ -91,7 +91,7 @@ namespace Prj_Final_2017_.Models.DAO {
                                 chambreDTO.IdChambre = reader.GetInt32("IdChambre");
                                 chambreDTO.NumeroChambre = reader.GetInt32("NumeroChambre");
                                 chambreDTO.NomChambre = reader.GetString("NomChambre");
-                                chambreDTO.Tarif = reader.GetInt32("Tarif");
+                                chambreDTO.Tarif = reader.GetDouble("Tarif");
                                 chambreDTO.MaxPersonne = reader.GetInt32("MaxPersonne");
                                 chambreDTO.Taille = reader.GetInt32("Taille");
                                 chambreDTO.Description = reader.GetString("Description");

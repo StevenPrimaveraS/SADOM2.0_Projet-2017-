@@ -87,7 +87,7 @@ namespace Prj_Final_2017_.Models.DAO {
                                 voitureDTO.IdVoiture = reader.GetInt32("IdVoiture");
                                 voitureDTO.Type = reader.GetString("Type");
                                 voitureDTO.IdAgence = reader.GetInt32("IdAgence");
-                                voitureDTO.Tarif = reader.GetInt32("Tarif");
+                                voitureDTO.Tarif = reader.GetDouble("Tarif");
                                 voitureDTO.NbPassager = reader.GetInt32("NbPassager");
                                 voitureDTO.Nom = reader.GetString("Nom");
                                 voitureDTO.Plaque = reader.GetString("Plaque");

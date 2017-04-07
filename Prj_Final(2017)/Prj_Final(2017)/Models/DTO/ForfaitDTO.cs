@@ -14,6 +14,6 @@ namespace Prj_Final_2017_.DTO {
 
         public int IdSiege { get; set; }
 
-        public int TarifReduit { get; set; }
+        public double TarifReduit { get; set; }
     }
 }

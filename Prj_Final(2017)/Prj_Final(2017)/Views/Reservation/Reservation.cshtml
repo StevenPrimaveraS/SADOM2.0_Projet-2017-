@@ -5,7 +5,7 @@
     //Pour afficher toutes les réservations reçues
 }
 
-<h2>Reservation</h2>
+
 
 @{ /* 
     * Styles temporaires : éventuellement dans fichier css
@@ -14,73 +14,127 @@
     * 
     */  
 }
-<div>
+<div id="recherche" style="background-color: #eeeeee; border-radius:6px; padding:30px;">
+    <h1>Reservation</h1>
     <div id="description">
         <p style="text-align:justify">@ViewBag.Description</p>
     </div>
+    <label class="label label-primary">Vos Reservations pour:</label><br />
     <div class="form-inline" id="boiteRecherche" style="display:inline-block;">
-        <div id="choix" style="margin-left: 5px; display:inline-block;">
-            <button type="button" class="btn btn-default" aria-label="Left Align" style="width:50px; margin-top:3px;">
+        <div id="choix" style="display:inline-block; margin-bottom:15px">
+            <a href="/ReservationSiege" class="btn btn-default" aria-label="Left Align" style="width:65px; margin-top:3px;">
                 <span class="glyphicon glyphicon-plane" aria-hidden="true"></span>
-            </button>
-            <button type="button" class="btn btn-default" aria-label="Left Align" style="width:50px; margin-top:3px;">
+                <br />Vol
+            </a>
+            <a href="/ReservationChambre" class="btn btn-default" aria-label="Left Align" style="width:65px; margin-top:3px;">
                 <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
-            </button>
-            <button type="button" class="btn btn-default" aria-label="Left Align" style="width:50px; margin-top:3px;">
+                <br />Hotel
+            </a>
+            <a href="/ReservationVoiture" class="btn btn-default" aria-label="Left Align" style="width:65px; margin-top:3px;">
                 <span class="glyphicon glyphicon-road" aria-hidden="true"></span>
-            </button>
-            <button type="button" class="btn btn-default" aria-label="Left Align" style="width:158px; margin-top:3px;">
+                <br />Voiture
+            </a>
+            <a href="/ReservationForfait" class="btn btn-default" aria-label="Left Align" style="width:203px; margin-top:3px;">
                 <span class="glyphicon glyphicon-plane" aria-hidden="true"></span>
                 <strong>&nbsp;+&nbsp;</strong>
                 <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
                 <strong>&nbsp;+&nbsp;</strong>
                 <span class="glyphicon glyphicon-road" aria-hidden="true"></span>
-            </button>
+                <br />Forfait
+            </a>
         </div>
         <br />
         @{
             if (Session["admin"] != null) {
-                bool isAdmin = (bool)Session["admin"];
+                bool isAdmin = (bool) Session["admin"];
                 if (isAdmin) {
                     //Afficher 2 blocs : recherche par IdParticulier / IdReservation
                 }
             }
             //Afficher 2 blocs : Recherche après date / avant date
-         }
-        <div style="display:inline-block; margin: 0px 10px 0px 5px;">
-            <label class="label label-default" for="txtVilleDepart">Ville Départ</label>
+        }
+        <label class="label label-primary">Recherchez vos reservations:</label><br />
+        <div style="display:inline-block; margin: 0px 10px 0px 0px;">
+            <label class="label label-default" for="txtApresDate">Après Date</label>
             <br />
-            <input class="form-control" id="txtVilleDepart" type="text" placeholder="Ville de départ" style="width: 180px;" />
+            <input class="form-control" id="txtApresDate" type="date" placeholder="aaaa-mm-jj" style="width: 180px;" />
         </div>
-        <div style="display:inline-block; margin: 0px 10px 0px 5px;">
-            <label class="label label-default" for="txtVilleArrivee">Ville Destination</label>
+        <div style="display:inline-block; margin: 0px 10px 0px 0px;">
+            <label class="label label-default" for="txtAvantDate">Avant Date</label>
             <br />
-            <input class="form-control" id="txtVilleArrivee" type="text" placeholder="Ville de destination" style="width: 180px;" />
+            <input class="form-control" id="txtAvantDate" type="date" placeholder="aaaa-mm-jj" style="width: 180px;" />
         </div>
         <br />
-        <input class="btn btn-primary btn-lg" id="btnOk" type="button" value="Rechercher" style="margin: 10px 5px 0px 5px;" />
+        <div style="display:inline-block; margin: 0px 10px 0px 0px;">
+            <label class="label label-default" for="txtIdParticulier">Id Client</label>
+            <br />
+            <input class="form-control" id="txtIdParticulier" type="text" placeholder="Id Client" style="width: 180px;" />
+        </div>
+        <div style="display:inline-block; margin: 0px 10px 0px 0px;">
+            <label class="label label-default" for="txtIdReservation">Id Reservation</label>
+            <br />
+            <input class="form-control" id="txtIdReservation" type="text" placeholder="Id Reservation" style="width: 180px;" />
+        </div>
+        <br />
+        <input class="btn btn-primary btn-lg" id="btnOk" type="button" value="Rechercher" style="margin: 10px 5px 0px 0px;" />
+        <br /><br /><br />
+        <a href="/Reservation" class="btn btn-default btn-xs" aria-label="Left Align" style="width:65px; margin-top:3px;">
+            Retour
+        </a>
     </div>
 </div>
 @{
     // Section des reservations : Généré dynamiquement dans le futur 
+    //
     List<ReservationChambreDTO> reservations = ViewBag.reservations;
     ReservationChambreDTO reservationChambreDTO = ViewBag.reservationChambreDTO;
     ChambreDTO chambreDTO = ViewBag.chambreDTO;
     HotelDTO hotelDTO = ViewBag.hotelDTO;
+    // Test
+    reservationChambreDTO = new ReservationChambreDTO();
+    chambreDTO = new ChambreDTO();
+    hotelDTO = new HotelDTO();
+    hotelDTO.Adresse = "1234 MonAdresseWaou";
+    hotelDTO.Categorie = "5 étoile";
+    hotelDTO.Description = @"L’ Hôtel Hesperia représente le bon choix pour les clients qui veulent allier le charme à la tranquillité et à un emplacement pratique pour découvrir Venise. 
+                            Il s’agit d’un petit hôtel confortable sur le Canal de Cannaregio, avec un service soigné et personnalisé proposé à la clientèle par la famille Derai et son équipe, 
+                            toujours disponibles pour d’éventuelles sollicitations.<br />
+                            L’hôtel a trois étages, sans ascenseur.Au rez-de - chaussée, outre la réception, vous trouverez un agréable petit salon où vous pourrez vous installer pour prendre un 
+                            thé ou tout simplement pour lire et une superbe terrasse pour se plonger dans l’atmosphère typique de la vie quotidienne vénitienne, en découvrant dès le matin 
+                            l’agitation de la ville sur le canal et le grouillement des personnes qui envahissent les rues et les places avec leurs bavardages.";
+    hotelDTO.IdHotel = 1;
+    hotelDTO.Nom = "Hôtel Hesperia";
+    hotelDTO.Telephone = "514-123-1234";
+    hotelDTO.Ville = "Cannaregio";
+    chambreDTO.IdChambre = 1;
+    chambreDTO.IdHotel = 1;
+    chambreDTO.MaxPersonne = 4;
+    chambreDTO.NomChambre = "maChambreDeluxe";
+    chambreDTO.NumeroChambre = 123;
+    chambreDTO.Taille = 124;
+    chambreDTO.Tarif = 900;
+    reservationChambreDTO.IdReservationChambre = 1;
+    reservationChambreDTO.IdChambre = 1;
+    reservationChambreDTO.IdParticulier = 1;
+    reservationChambreDTO.DateReservation = DateTime.Today;
+    reservationChambreDTO.DateFinReservation = DateTime.Today.AddDays(7);
 }
 <div id="conteneurProduits" style="display:inline-block; width:100%;">
     <div class="container" id="produit1" style="border: 1px solid #aaaaaa; border-radius:6px; width:100%; margin-top:10px; padding-bottom:15px;">
         <div style="display:inline-flex; max-width:900px;">
             <div id="sectionInfo" style="padding: 5px 5px 5px 15px; ">
-                <strong>@hotelDTO.Nom &nbsp;-&nbsp; @chambreDTO.NomChambre </strong>
-                <p>Chambre : @chambreDTO.NumeroChambre</p>
+                <p><strong style="font-size:16px">@hotelDTO.Nom &nbsp;-&nbsp; @chambreDTO.NomChambre </strong></p>
+                <p>
+                    Chambre : @chambreDTO.NumeroChambre
+                    <br />
+                    Du <strong>@reservationChambreDTO.DateReservation.ToShortDateString()</strong> au <strong>@reservationChambreDTO.DateFinReservation.ToShortDateString()</strong>
+                </p>
                 <p>Telephone : @hotelDTO.Telephone </p>
-                
             </div>
         </div>
         <div style="float:right">
             <div id="sectionBouton" style="text-align:right; margin-top:15px;">
-                <strong style="display:block; font-size:16px;">@chambreDTO.Tarif</strong>
+                <strong style="display:block; font-size:16px;">@chambreDTO.Tarif.ToString("F") $</strong>
                 <a href="/ReservationChambre/Details/@reservationChambreDTO.IdReservationChambre" class="btn btn-primary">Voir Détails</a>
             </div>
         </div>

@@ -14,7 +14,7 @@ namespace Prj_Final_2017_.DTO
 
         public string NomChambre { get; set; }
 
-        public int Tarif { get; set; }
+        public double Tarif { get; set; }
 
         public int MaxPersonne { get; set; }
 

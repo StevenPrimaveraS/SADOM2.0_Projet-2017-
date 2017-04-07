@@ -12,7 +12,7 @@ namespace Prj_Final_2017_.DTO {
 
         public int IdAgence { get; set; }
 
-        public int Tarif { get; set; }
+        public double Tarif { get; set; }
 
         public int NbPassager { get; set; }
 

@@ -102,7 +102,7 @@ namespace Prj_Final_2017_.Models.DAO {
                                 volDTO.IdCompagnieAerienne = reader.GetInt32("IdCompagnieAerienne");
                                 volDTO.Classe = reader.GetString("Classe");
                                 volDTO.IsRemboursable = reader.GetBoolean("IsRemboursable");
-                                volDTO.Tarif = reader.GetInt32("Tarif");
+                                volDTO.Tarif = reader.GetDouble("Tarif");
                             }
                         }
                     }
