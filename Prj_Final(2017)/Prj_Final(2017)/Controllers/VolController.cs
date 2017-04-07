@@ -65,7 +65,7 @@ namespace Prj_Final_2017_.Controllers
 
         // GET: Vol/Create
         public ActionResult Create(int idVol, String aeroportDepart, String aeroportDestination, String villeDepart, String villeDestination, DateTime dateDepart, DateTime dateArrivee,
-            int idCompagnieAerienne, String classe, bool isRemboursable, int tarif)
+            int idCompagnieAerienne, String classe, bool isRemboursable, double tarif)
         {
             try
             {
@@ -123,7 +123,7 @@ namespace Prj_Final_2017_.Controllers
 
         // GET: Vol/Edit/5
         public ActionResult Edit(int idVol, String aeroportDepart, String aeroportDestination, String villeDepart, String villeDestination, DateTime dateDepart, DateTime dateArrivee,
-            int idCompagnieAerienne, String classe, bool isRemboursable, int tarif)
+            int idCompagnieAerienne, String classe, bool isRemboursable, double tarif)
         {
             //Vérification des permissions
             try

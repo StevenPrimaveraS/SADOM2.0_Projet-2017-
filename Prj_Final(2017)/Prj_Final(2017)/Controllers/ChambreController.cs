@@ -57,7 +57,7 @@ namespace Prj_Final_2017_.Controllers
 
         // GET: Chambre/Create
         public ActionResult Create(int IdChambre, int NumeroChambre, 
-            string NomChambre, int Tarif, int MaxPersonne, int Taille, string Description, int IdHotel)
+            string NomChambre, double Tarif, int MaxPersonne, int Taille, string Description, int IdHotel)
         {
             try
             {
@@ -106,7 +106,7 @@ namespace Prj_Final_2017_.Controllers
 
         // GET: Chambre/Edit/5
         public ActionResult Edit(int IdChambre, int NumeroChambre,
-            string NomChambre, int Tarif, int MaxPersonne, int Taille, string Description, int IdHotel)
+            string NomChambre, double Tarif, int MaxPersonne, int Taille, string Description, int IdHotel)
         {
             try
             {

@@ -57,7 +57,7 @@ namespace Prj_Final_2017_.Controllers
 
         // GET: Voiture/Create
         public ActionResult Create(int IdVoiture, string Type, int IdAgence,
-            int Tarif, int NbPassager, string Nom, string Plaque)
+            double Tarif, int NbPassager, string Nom, string Plaque)
         {
             try
             {
@@ -104,7 +104,7 @@ namespace Prj_Final_2017_.Controllers
 
         // GET: Voiture/Edit/5
         public ActionResult Edit(int IdVoiture, string Type, int IdAgence,
-            int Tarif, int NbPassager, string Nom, string Plaque)
+            double Tarif, int NbPassager, string Nom, string Plaque)
         {
             try
             {
