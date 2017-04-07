@@ -307,6 +307,12 @@ ALTER TABLE hotel
   ADD PRIMARY KEY (IdHotel);
 
 --
+-- Index pour la table forfait
+--
+ALTER TABLE forfait
+  ADD PRIMARY KEY (IdForfait);
+
+--
 -- Index pour la table reservationchambre
 --
 ALTER TABLE reservationchambre
@@ -440,7 +446,7 @@ ADD CONSTRAINT comptefournisseurchambre_ibfk_1 FOREIGN KEY (IdHotel) REFERENCES 
 -- Constraints for table comptefournisseurvoiture
 --
 ALTER TABLE comptefournisseurvoiture
-ADD CONSTRAINT comptefournisseurvoiture_ibfk_1 FOREIGN KEY (IdAgenceDeVoiture) REFERENCES agencevoiture (IdAgenceVoiture);
+ADD CONSTRAINT comptefournisseurvoiture_ibfk_1 FOREIGN KEY (IdAgenceVoiture) REFERENCES agencevoiture (IdAgenceVoiture);
 --
 -- Constraints for table comptefournisseursiege
 --
@@ -477,7 +483,7 @@ ADD CONSTRAINT forfait_ibfk_3 FOREIGN KEY (IdSiege) REFERENCES siege (IdSiege);
 -- Constraints for table reservationchambre
 --
 ALTER TABLE reservationchambre
-ADD CONSTRAINT reservationchambre_ibfk_1 FOREIGN KEY (IdChambre) REFERENCES hotel (IdChambre),
+ADD CONSTRAINT reservationchambre_ibfk_1 FOREIGN KEY (IdChambre) REFERENCES chambre (IdChambre),
 ADD CONSTRAINT reservationchambre_ibfk_2 FOREIGN KEY (IdParticulier) REFERENCES compteparticulier (IdParticulier);
 --
 -- Constraints for table reservationvoiture
@@ -492,11 +498,12 @@ ALTER TABLE reservationsiege
 ADD CONSTRAINT reservationsiege_ibfk_1 FOREIGN KEY (IdSiege) REFERENCES siege (IdSiege),
 ADD CONSTRAINT reservationsiege_ibfk_2 FOREIGN KEY (IdParticulier) REFERENCES compteparticulier (IdParticulier);
 --
--- Constraints for table reservationchambre
+-- Constraints for table reservationforfait
 --
-ALTER TABLE reservationchambre
-ADD CONSTRAINT reservationchambre_ibfk_1 FOREIGN KEY (IdForfait) REFERENCES forfait (IdForfait),
-ADD CONSTRAINT reservationchambre_ibfk_2 FOREIGN KEY (IdParticulier) REFERENCES compteparticulier (IdParticulier);
+ALTER TABLE reservationforfait
+ADD CONSTRAINT reservationforfait_ibfk_1 FOREIGN KEY (IdForfait) REFERENCES forfait (IdForfait),
+ADD CONSTRAINT reservationforfait_ibfk_2 FOREIGN KEY (IdParticulier) REFERENCES compteparticulier (IdParticulier);
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

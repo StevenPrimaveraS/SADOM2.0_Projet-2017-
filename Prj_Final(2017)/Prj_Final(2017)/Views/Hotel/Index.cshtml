@@ -1,4 +1,5 @@
-﻿@{
+﻿@using WebMatrix.Data;
+@{
     ViewBag.Title = "Hotel";
     ViewBag.Description =
         @"ma description ici  ";
@@ -51,44 +52,29 @@
 
 
 
+<p class="lead">Liste de voiture</p>
 @{
-    /* Section des articles : Généré dynamiquement dans le futur */
-    ViewBag.Image = "[Insérer Image ICI]";
-
-    ViewBag.NomHotel = "Nom Hôtel ici";
-    ViewBag.CategorieHotel = "Categorie";
-    ViewBag.VilleHotel = "Ville ici";
-    ViewBag.AdresseHotel = "Mon Adresse moyennement longue ici";
-    ViewBag.TelephoneHotel = "Telephone";
-    ViewBag.DescriptionHotel =
-        @"Description Description Description Description Description Description
-        Description Description Description Description Description Description
-        Description Description Description Description Description Description ";
-
-    ViewBag.Prix = "";
-
-
-    //
+    var DB = Database.Open("mysqlConnexionString");
+    var Grid = new WebGrid(DB.Query("SELECT * FROM hotel"));
 }
+@Grid.GetHtml(
+            tableStyle: "MyTable",
+            headerStyle: "columnHead",
+            alternatingRowStyle: "altRow",
+            columns: Grid.Columns(
+            Grid.Column("IdHotel", "ID Hotel"),
+                        Grid.Column("Nom", "Nom"),
+                        Grid.Column("Telephone", "Telephone"),
+                        Grid.Column("Adresse", "Adresse"),
+                        Grid.Column("Ville", "Ville"),
+                        Grid.Column("Categorie", "Categorie"),
+                        Grid.Column("Description", "Description")
+            )
+        )
+<span style="flex:auto">
+    <input class="text-form" type="button" value="Ajouter au panier" />
+</span>
+ 
 
-<div id="conteneurProduits" style="display:inline-block; width:100%;">
-    <div class="container" id="produit1" style="border: 1px solid #aaaaaa; border-radius:6px; width:100%; margin-top:10px; padding-bottom:15px;">
-        <div style="display:inline-flex; max-width:900px;">
-            <div class="img-thumbnail img-responsive" id="sectionImage">
-                <p>@ViewBag.Image</p>
-            </div>
-            <div id="sectionInfo" style="padding: 5px 5px 5px 15px; ">
-                <strong>@ViewBag.NomHotel &nbsp;-&nbsp; @ViewBag.CategorieHotel</strong>
-                <p>@ViewBag.AdresseHotel &nbsp;-&nbsp; @ViewBag.VilleHotel</p>
-                <p>@ViewBag.TelephoneHotel</p>
-                <p>@ViewBag.DescriptionHotel</p>
-            </div>
-        </div>
-        <div style="float:right">
-            <div id="sectionBouton" style="text-align:right; margin-top:15px;">
-                <strong style="display:block; font-size:16px;">@ViewBag.Prix</strong>
-                <a href="/Chambre/Chambre" class="btn btn-primary">Sélectionner</a>
-            </div>
-        </div>
-    </div>
-</div>
+
+

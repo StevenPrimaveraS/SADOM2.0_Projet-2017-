@@ -83,72 +83,48 @@
 @{
     // Section des reservations : Généré dynamiquement dans le futur
 
-    List<ReservationChambreDTO> reservations = ViewBag.reservations;
-    if (reservations == null) {
-        reservations = new List<ReservationChambreDTO>();
+    ReservationChambreDTO reservationChambreDTO = ViewBag.reservation;
+    if (reservationChambreDTO == null) {
+        Response.Redirect("/ReservationChambre");
     }
-    /*
-    ReservationChambreDTO reservationChambreDTO1 = ViewBag.reservationChambreDTO;
-    ChambreDTO chambreDTO1 = ViewBag.chambreDTO;
-    HotelDTO hotelDTO1 = ViewBag.hotelDTO1;
-    // Test
-    reservationChambreDTO1 = new ReservationChambreDTO();
-    chambreDTO1 = new ChambreDTO();
-    hotelDTO1 = new HotelDTO();
-    hotelDTO1.Adresse = "1234 MonAdresseWaou";
-    hotelDTO1.Categorie = "5 étoile";
-    hotelDTO1.Description = @"L’ Hôtel Hesperia représente le bon choix pour les clients qui veulent allier le charme à la tranquillité et à un emplacement pratique pour découvrir Venise.
-                            Il s’agit d’un petit hôtel confortable sur le Canal de Cannaregio, avec un service soigné et personnalisé proposé à la clientèle par la famille Derai et son équipe,
-                            toujours disponibles pour d’éventuelles sollicitations.<br />
-                            L’hôtel a trois étages, sans ascenseur.Au rez-de - chaussée, outre la réception, vous trouverez un agréable petit salon où vous pourrez vous installer pour prendre un
-                            thé ou tout simplement pour lire et une superbe terrasse pour se plonger dans l’atmosphère typique de la vie quotidienne vénitienne, en découvrant dès le matin
-                            l’agitation de la ville sur le canal et le grouillement des personnes qui envahissent les rues et les places avec leurs bavardages.";
-    hotelDTO1.IdHotel = 1;
-    hotelDTO1.Nom = "Hôtel Hesperia";
-    hotelDTO1.Telephone = "514-123-1234";
-    hotelDTO1.Ville = "Cannaregio";
-    chambreDTO1.IdChambre = 1;
-    chambreDTO1.IdHotel = 1;
-    chambreDTO1.MaxPersonne = 4;
-    chambreDTO1.NomChambre = "maChambreDeluxe";
-    chambreDTO1.NumeroChambre = 123;
-    chambreDTO1.Taille = 124;
-    chambreDTO1.Tarif = 900;
-    reservationChambreDTO1.IdReservationChambre = 1;
-    reservationChambreDTO1.IdChambre = 1;
-    reservationChambreDTO1.IdParticulier = 1;
-    reservationChambreDTO1.DateReservation = DateTime.Today;
-    reservationChambreDTO1.DateFinReservation = DateTime.Today.AddDays(7);
-    reservations.Add(reservationChambreDTO1);
-    reservations.Add(reservationChambreDTO1);
-    reservations.Add(reservationChambreDTO1);
-    reservations.Add(reservationChambreDTO1);
-    */
 }
 <div id="conteneurProduits" style="display:inline-block; width:100%;">
-    @foreach (ReservationChambreDTO reservationChambreDTO in reservations) {
+    @{
         ChambreDTO chambreDTO = ApplicationFunctions.ChambreFacade.Read(reservationChambreDTO.IdChambre);
         HotelDTO hotelDTO = ApplicationFunctions.HotelFacade.Read(chambreDTO.IdHotel);
-        <div class="container" id="produit1" style="border: 1px solid #aaaaaa; border-radius:6px; width:100%; margin-top:10px; padding-bottom:15px;">
-            <div style="display:inline-flex; max-width:900px;">
-                <div id="sectionInfo" style="padding: 5px 5px 5px 15px; ">
-                    <p><strong style="font-size:16px">@hotelDTO.Nom &nbsp;-&nbsp; @chambreDTO.NomChambre </strong></p>
-                    <p>
-                        Adresse : @hotelDTO.Adresse &nbsp;-&nbsp; @hotelDTO.Ville
-                        <br />
-                        Chambre : @chambreDTO.NumeroChambre
-                        <br />
-                        Du <strong>@reservationChambreDTO.DateReservation.ToShortDateString()</strong> au <strong>@reservationChambreDTO.DateFinReservation.ToShortDateString()</strong>
-                    </p>
-                    <p>Telephone : @hotelDTO.Telephone </p>
-                </div>
-            </div>
-            <div style="float:right">
-                <div id="sectionBouton" style="text-align:right; margin-top:15px;">
-                    <strong style="display:block; font-size:16px;">@chambreDTO.Tarif.ToString("F") $</strong>
-                    <a href="/ReservationChambre/Details/@reservationChambreDTO.IdReservationChambre" class="btn btn-primary">Voir Détails</a>
-                </div>
+    }
+    <div class="container" id="produit1" style="border: 1px solid #aaaaaa; border-radius:6px; width:100%; margin-top:10px; padding-bottom:15px;">
+        <div style="display:inline-flex; max-width:900px;">
+            <div id="sectionInfo" style="padding: 5px 5px 5px 15px; ">
+                <p><strong style="font-size:16px">@hotelDTO.Nom &nbsp;-&nbsp; @chambreDTO.NomChambre </strong></p>
+                <p>
+                    Hotel : 
+                    <br />
+                    &nbsp;&nbsp;Nom : @hotelDTO.Nom
+                    <br />
+                    &nbsp;&nbsp;Categorie : @hotelDTO.Categorie
+                    <br />
+                    &nbsp;&nbsp;Adresse : @hotelDTO.Adresse &nbsp;-&nbsp; @hotelDTO.Ville
+                    <br />
+                    &nbsp;&nbsp;Telephone : @hotelDTO.Telephone
+                    <br />
+                    &nbsp;&nbsp;Description : @hotelDTO.Description
+                    <br />
+                    <br />
+                    Chambre :
+                    <br />
+                    &nbsp;&nbsp;Nom : @chambreDTO.NomChambre
+                    <br />
+                    &nbsp;&nbsp;Numero : @chambreDTO.NumeroChambre
+                    <br />
+                    &nbsp;&nbsp;Taille : @chambreDTO.Taille
+                    <br />
+                    &nbsp;&nbsp;Description : @chambreDTO.Description
+                    <br />
+                    Tarif : @chambreDTO.Tarif.ToString("F") $
+                </p>
+                <p>Du <strong>@reservationChambreDTO.DateReservation.ToShortDateString()</strong> au <strong>@reservationChambreDTO.DateFinReservation.ToShortDateString()</strong></p>
             </div>
         </div>
-    }
+    </div>
 </div>
