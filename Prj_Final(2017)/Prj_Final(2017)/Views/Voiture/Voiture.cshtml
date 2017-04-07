@@ -4,72 +4,72 @@
 }
 <link href="~/Content/StylePrincipal.css" rel="stylesheet" media="all" type="text/css">
 <form action="" method="get">
-    <fieldset>
+    <fieldset> 
         <div class="jumbotron">
             <h1>Voiture</h1>
-            <h2>Veuillez entrer des informations pour la voiture désiré</h2>
-            <select id="CategVoiture" name="CategVoiture">
-                <option value=""></option>
-                <option value="0">Économique</option>
-                <option value="1">Familiale</option>
-                <option value="2">Compacte</option>
-                <option value="3">Luxe</option>
-                <option value="4">Routière</option>
-                <option value="5">Intermédiaire</option>
-            </select>
-            &nbsp;
-            <select id="TypeVoiture" name="TypeVoiture">
-                <option value=""></option>
-                <option value="0">2/4 portes</option>
-                <option value="1">4/5 portes</option>
-                <option value="2">Limousine</option>
-                <option value="3">Break</option>
-                <option value="4">Minibus</option>
-                <option value="5">Sport</option>
-            </select>
-            &nbsp;
-            <select id="Transmission" name="Transmission">
-                <option value=""></option>
-                <option value="0">Manuelle</option>
-                <option value="1">Automatique</option>
-            </select>
-            &nbsp;
-            <select id="Carburant" name="Carburant">
-                <option value=""></option>
-                <option value="0">Non-spécifié</option>
-                <option value="1">Diesel</option>
-                <option value="2">Hybride</option>
-                <option value="3">Électrique</option>
-                <option value="4">GPL</option>
-                <option value="5">Hydrogène</option>
-                <option value="6">Carburant multiple</option>
-                <option value="7">Essence</option>
-                <option value="8">Éthanol</option>
-            </select>
-            <br />
-            <p><input type="submit" value="Submit" /> </p>
         </div>
+        <h2>Veuillez entrer des informations pour la voiture désiré</h2>
+        <select id="CategVoiture" name="CategVoiture">
+            <option value=""></option>
+            <option value="0">Économique</option>
+            <option value="1">Familiale</option>
+            <option value="2">Compacte</option>
+            <option value="3">Luxe</option>
+            <option value="4">Routière</option>
+            <option value="5">Intermédiaire</option>
+        </select>
+        &nbsp;
+        <select id="TypeVoiture" name="TypeVoiture">
+            <option value=""></option>
+            <option value="0">2/4 portes</option>
+            <option value="1">4/5 portes</option>
+            <option value="2">Limousine</option>
+            <option value="3">Break</option>
+            <option value="4">Minibus</option>
+            <option value="5">Sport</option>
+        </select>
+        &nbsp;
+        <select id="Transmission" name="Transmission">
+            <option value=""></option>
+            <option value="0">Manuelle</option>
+            <option value="1">Automatique</option>
+        </select>
+        &nbsp;
+        <select id="Carburant" name="Carburant">
+            <option value=""></option>
+            <option value="0">Non-spécifié</option>
+            <option value="1">Diesel</option>
+            <option value="2">Hybride</option>
+            <option value="3">Électrique</option>
+            <option value="4">GPL</option>
+            <option value="5">Hydrogène</option>
+            <option value="6">Carburant multiple</option>
+            <option value="7">Essence</option>
+            <option value="8">Éthanol</option>
+        </select>
+        <p><input type="submit" value="Submit" /> </p>
         <p class="lead">Liste de voiture</p>
         @{ 
             var DB = Database.Open("mysqlConnexionString");
             var Grid = new WebGrid(DB.Query("SELECT * FROM voiture"));
         }
         @Grid.GetHtml(
-            tableStyle: "MyTable",
-            headerStyle: "columnHead",
-            alternatingRowStyle: "altRow",
+            tableStyle: "webgrid",
+            mode: WebGridPagerModes.All,
             columns: Grid.Columns(
-            Grid.Column("IdVoiture", "ID Voiture"),
+             Grid.Column(" ", format: @<text>
+                    <button class="btn-xs" style:color="blue">Détail</button></text>),
+                        Grid.Column("IdVoiture", "ID Voiture"),
                         Grid.Column("Type", "Type"),
                         Grid.Column("IdAgence", "ID Agence"),
                         Grid.Column("Tarif", "Tarif"),
                         Grid.Column("NbPassager", "Nombre Passager"),
                         Grid.Column("Nom", "Nom"),
-                        Grid.Column("Plaque", "Plaque")
+                        Grid.Column("Plaque", "Plaque"),
+                        Grid.Column(" ", format: @<text>
+                            <button class="btn-xs" style:color="blue">Ajouter au panier</button>
+                        </text>)
             )
         )
-        <span style="flex:auto">
-            <input class="text-form" type="button" value="Ajouter au panier" />
-        </span>
     </fieldset>
 </form>
