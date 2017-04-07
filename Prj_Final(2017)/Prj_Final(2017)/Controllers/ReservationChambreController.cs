@@ -11,10 +11,10 @@ namespace Prj_Final_2017_.Controllers {
     public class ReservationChambreController : Controller {
 
         protected override void OnActionExecuting(ActionExecutingContext filterContext) {
-            if (Session["user"] != null)
+           // if (Session["user"] != null)
                 base.OnActionExecuting(filterContext);
-            else
-                filterContext.Result = new RedirectResult("~/Account/Login");
+            //else
+                //filterContext.Result = new RedirectResult("~/Account/Login");
         }
 
         // GET: ReservationChambre
@@ -24,7 +24,7 @@ namespace Prj_Final_2017_.Controllers {
 
         // GET: ReservationChambre/Details/5
         public ActionResult Details(int id) {
-            try {
+            /*try {
                 //Vérification des permissions
                 ReservationChambreDTO reservationChambreDTO = ApplicationFunctions.ReservationChambreFacade.Read(id);
                 if (reservationChambreDTO != null) {
@@ -43,9 +43,10 @@ namespace Prj_Final_2017_.Controllers {
             }
             catch (VoyageAhuntsicException e) {
                 System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
-            }
+            }*/
             //Redirection sinon
-            return RedirectToAction("Index");
+            //return RedirectToAction("Index");
+            return View();
         }
 
         // GET: ReservationChambre/Create
@@ -91,6 +92,8 @@ namespace Prj_Final_2017_.Controllers {
         // POST: ReservationChambre/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection) {
+            string nom = collection["idtxtnom"];
+            ApplicationFunctions.CompteFournisseurChambreFacade.Add(new CompteFournisseurChambreDTO());
             try {
                 // TODO: Add insert logic here
 

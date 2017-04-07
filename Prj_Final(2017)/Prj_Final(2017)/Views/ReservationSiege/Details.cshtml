@@ -44,77 +44,67 @@
                 <br />Forfait
             </a>
         </div>
-        <br />
-        <label class="label label-primary">Recherchez vos reservations:</label><br />
-        <div style="display:inline-block; margin: 0px 10px 0px 0px;">
-            <label class="label label-default" for="txtApresDate">Après Date</label>
-            <br />
-            <input class="form-control" id="txtApresDate" type="date" placeholder="aaaa-mm-jj" style="width: 180px;" />
-        </div>
-        <div style="display:inline-block; margin: 0px 10px 0px 0px;">
-            <label class="label label-default" for="txtAvantDate">Avant Date</label>
-            <br />
-            <input class="form-control" id="txtAvantDate" type="date" placeholder="aaaa-mm-jj" style="width: 180px;" />
-        </div>
-        <br />
-        @if (Session["admin"] != null) {
-            bool isAdmin = (bool)Session["admin"];
-            if (isAdmin) {
-                <div style="display:inline-block; margin: 0px 10px 0px 0px;">
-                    <label class="label label-default" for="txtIdParticulier">Id Client</label>
-                    <br />
-                    <input class="form-control" id="txtIdParticulier" type="text" placeholder="Id Client" style="width: 180px;" />
-                </div>
-                <div style="display:inline-block; margin: 0px 10px 0px 0px;">
-                    <label class="label label-default" for="txtIdReservation">Id Reservation</label>
-                    <br />
-                    <input class="form-control" id="txtIdReservation" type="text" placeholder="Id Reservation" style="width: 180px;" />
-                </div>
-                <br />
-            }
-        }
-        <input class="btn btn-primary btn-lg" id="btnOk" type="button" value="Rechercher" style="margin: 10px 5px 0px 0px;" />
         <br /><br /><br />
-        <a href="/Reservation" class="btn btn-default btn-xs" aria-label="Left Align" style="width:65px; margin-top:3px;">
+        <a href="/ReservationSiege" class="btn btn-default btn-xs" aria-label="Left Align" style="width:65px; margin-top:3px;">
             Retour
         </a>
     </div>
 </div>
 @{
-
-    List<ReservationSiegeDTO> reservations = ViewBag.reservations;
-    if (reservations == null) {
-        reservations = new List<ReservationSiegeDTO>();
+    ReservationSiegeDTO reservationSiegeDTO = ViewBag.reservation;
+    if (reservationSiegeDTO == null) {
+        Response.Redirect("/ReservationSiege");
     }
-
 }
 <div id="conteneurProduits" style="display:inline-block; width:100%;">
-    @foreach (ReservationSiegeDTO reservationSiegeDTO in reservations) {
+    @{
+        CompteParticulierDTO compteParticulierDTO = ApplicationFunctions.CompteParticulierFacade.Read(reservationSiegeDTO.IdParticulier);
         SiegeDTO siegeDTO = ApplicationFunctions.SiegeFacade.Read(reservationSiegeDTO.IdSiege);
         VolDTO volDTO = ApplicationFunctions.VolFacade.Read(siegeDTO.IdVol);
         CompagnieAerienneDTO compagnieAerienneDTO = ApplicationFunctions.CompagnieAerienneFacade.Read(volDTO.IdCompagnieAerienne);
-        <div class="container" id="produit1" style="border: 1px solid #aaaaaa; border-radius:6px; width:100%; margin-top:10px; padding-bottom:15px;">
-            <div style="display:inline-flex; max-width:900px;">
-                <div id="sectionInfo" style="padding: 5px 5px 5px 15px; ">
-                    <p><strong style="font-size:16px">@compagnieAerienneDTO.Nom &nbsp;-&nbsp; @volDTO.Classe </strong></p>
-                    <p>
-                        De : @volDTO.AeroportDepart &nbsp;-&nbsp; @volDTO.VilleDepart
-                        <br />
-                        À : @volDTO.AeroportDestination &nbsp;-&nbsp; @volDTO.VilleDestination
-                        <br />
-                        Siege : @siegeDTO.Numero
-                        <br />
-                        Du <strong>@reservationSiegeDTO.DateReservation.ToShortDateString()</strong> au <strong>@reservationSiegeDTO.DateFinReservation.ToShortDateString()</strong>
-                    </p>
-                    <p>Telephone : @compagnieAerienneDTO.Telephone </p>
-                </div>
-            </div>
-            <div style="float:right">
-                <div id="sectionBouton" style="text-align:right; margin-top:15px;">
-                    <strong style="display:block; font-size:16px;">@volDTO.Tarif.ToString("F") $</strong>
-                    <a href="/ReservationSiege/Details/@reservationSiegeDTO.IdReservationSiege" class="btn btn-primary">Voir Détails</a>
-                </div>
+    }
+    <div class="container" id="produit1" style="border: 1px solid #aaaaaa; border-radius:6px; width:100%; margin-top:10px; padding-bottom:15px;">
+        <div style="display:inline-flex; max-width:900px;">
+            <div id="sectionInfo" style="padding: 5px 5px 5px 15px; ">
+                <p><strong style="font-size:16px">@compagnieAerienneDTO.Nom &nbsp;-&nbsp; @volDTO.Classe </strong></p>
+                <p>
+                    <u><strong>Compte</strong></u> :
+                    <u style="margin-left: 4px;">Courriel</u> : @compteParticulierDTO.Courriel
+                    <br />
+                    <u style="margin-left: 4px;">Prenom</u> : @compteParticulierDTO.Prenom
+                    <br />
+                    <u style="margin-left: 4px;">Nom</u> : @compteParticulierDTO.Nom
+                    <br />
+                    <u><strong>Compagnie Aerienne</strong></u> :
+                    <br />
+                    <u style="margin-left: 4px;">Nom</u> : @compagnieAerienneDTO.Nom
+                    <br />
+                    <u style="margin-left: 4px;">Adresse</u> : @compagnieAerienneDTO.Adresse &nbsp;-&nbsp; @compagnieAerienneDTO.Ville
+                    <br />
+                    <u style="margin-left: 4px;">Telephone</u> : @compagnieAerienneDTO.Telephone
+                    <br />
+                    <br />
+                    <u><strong>Vol</strong></u> :
+                    <br />
+                    <u style="margin-left: 4px;">Départ</u> : @volDTO.AeroportDepart &nbsp;-&nbsp; @volDTO.VilleDepart &nbsp;-&nbsp; @volDTO.DateDepart.ToShortDateString()
+                    <br />
+                    <u style="margin-left: 4px;">Arrivée</u> : @volDTO.AeroportDestination &nbsp;-&nbsp; @volDTO.VilleDestination &nbsp;-&nbsp; @volDTO.DateArrivee.ToShortDateString()
+                    <br />
+                    <u style="margin-left: 4px;">Classe</u> : @volDTO.Classe
+                    <br />
+                    <u style="margin-left: 4px;">Remboursable?</u> : @(volDTO.IsRemboursable ? "Oui" : "Non" )
+                    <br />
+                    <br />
+                    <u><strong>Siege</strong></u> :
+                    <br />
+                    <u style="margin-left: 4px;">Numero</u> : @siegeDTO.Numero
+                    <br />
+                    <u style="margin-left: 4px;">Type</u> : @siegeDTO.Type
+                    <br />
+                </p>
+                <p><u><strong>Tarif</strong></u> : @volDTO.Tarif.ToString("F") $</p>
+                <p><u><strong>Date</strong></u> : Du <strong>@reservationSiegeDTO.DateReservation.ToShortDateString()</strong> au <strong>@reservationSiegeDTO.DateFinReservation.ToShortDateString()</strong></p>
             </div>
         </div>
-    }
+    </div>
 </div>

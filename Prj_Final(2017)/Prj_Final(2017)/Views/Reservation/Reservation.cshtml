@@ -87,19 +87,19 @@
     if(reservations == null) {
         reservations = new List<ReservationChambreDTO>();
     }
-    /*
-    ReservationChambreDTO reservationChambreDTO1 = ViewBag.reservationChambreDTO;
+    // Test
+    /*ReservationChambreDTO reservationChambreDTO1 = ViewBag.reservationChambreDTO;
     ChambreDTO chambreDTO1 = ViewBag.chambreDTO;
     HotelDTO hotelDTO1 = ViewBag.hotelDTO1;
-    // Test
+
     reservationChambreDTO1 = new ReservationChambreDTO();
     chambreDTO1 = new ChambreDTO();
     hotelDTO1 = new HotelDTO();
     hotelDTO1.Adresse = "1234 MonAdresseWaou";
-    hotelDTO1.Categorie = "5 étoile";
+    hotelDTO1.Categorie = "5";
     hotelDTO1.Description = @"L’ Hôtel Hesperia représente le bon choix pour les clients qui veulent allier le charme à la tranquillité et à un emplacement pratique pour découvrir Venise. 
                             Il s’agit d’un petit hôtel confortable sur le Canal de Cannaregio, avec un service soigné et personnalisé proposé à la clientèle par la famille Derai et son équipe, 
-                            toujours disponibles pour d’éventuelles sollicitations.<br />
+                            toujours disponibles pour d’éventuelles sollicitations.
                             L’hôtel a trois étages, sans ascenseur.Au rez-de - chaussée, outre la réception, vous trouverez un agréable petit salon où vous pourrez vous installer pour prendre un 
                             thé ou tout simplement pour lire et une superbe terrasse pour se plonger dans l’atmosphère typique de la vie quotidienne vénitienne, en découvrant dès le matin 
                             l’agitation de la ville sur le canal et le grouillement des personnes qui envahissent les rues et les places avec leurs bavardages.";
@@ -114,11 +114,15 @@
     chambreDTO1.NumeroChambre = 123;
     chambreDTO1.Taille = 124;
     chambreDTO1.Tarif = 900;
+    chambreDTO1.Description = @"L’hôtel a trois étages, sans ascenseur.Au rez-de - chaussée, outre la réception, vous trouverez un agréable petit salon où vous pourrez vous installer pour prendre un 
+                            thé ou tout simplement pour lire et une superbe terrasse pour se plonger dans l’atmosphère typique de la vie quotidienne vénitienne, en découvrant dès le matin 
+                            l’agitation de la ville sur le canal et le grouillement des personnes qui envahissent les rues et les places avec leurs bavardages.";
     reservationChambreDTO1.IdReservationChambre = 1;
     reservationChambreDTO1.IdChambre = 1;
     reservationChambreDTO1.IdParticulier = 1;
     reservationChambreDTO1.DateReservation = DateTime.Today;
     reservationChambreDTO1.DateFinReservation = DateTime.Today.AddDays(7);
+    reservationChambreDTO = reservationChambreDTO1;
     reservations.Add(reservationChambreDTO1);
     reservations.Add(reservationChambreDTO1);
     reservations.Add(reservationChambreDTO1);

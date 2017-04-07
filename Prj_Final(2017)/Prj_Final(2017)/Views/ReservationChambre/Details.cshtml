@@ -2,7 +2,7 @@
 @using Prj_Final_2017_.Models.util;
 
 @{
-    ViewBag.Title = "Reservations de chambre";
+    ViewBag.Title = "Reservations de chambres";
     //Pour afficher toutes les réservations reçues
 }
 
@@ -44,45 +44,13 @@
                 <br />Forfait
             </a>
         </div>
-        <br />
-        <label class="label label-primary">Recherchez vos reservations:</label><br />
-        <div style="display:inline-block; margin: 0px 10px 0px 0px;">
-            <label class="label label-default" for="txtApresDate">Après Date</label>
-            <br />
-            <input class="form-control" id="txtApresDate" type="date" placeholder="aaaa-mm-jj" style="width: 180px;" />
-        </div>
-        <div style="display:inline-block; margin: 0px 10px 0px 0px;">
-            <label class="label label-default" for="txtAvantDate">Avant Date</label>
-            <br />
-            <input class="form-control" id="txtAvantDate" type="date" placeholder="aaaa-mm-jj" style="width: 180px;" />
-        </div>
-        <br />
-        @if (Session["admin"] != null) {
-            bool isAdmin = (bool)Session["admin"];
-            if (isAdmin) {
-                <div style="display:inline-block; margin: 0px 10px 0px 0px;">
-                    <label class="label label-default" for="txtIdParticulier">Id Client</label>
-                    <br />
-                    <input class="form-control" id="txtIdParticulier" type="text" placeholder="Id Client" style="width: 180px;" />
-                </div>
-                <div style="display:inline-block; margin: 0px 10px 0px 0px;">
-                    <label class="label label-default" for="txtIdReservation">Id Reservation</label>
-                    <br />
-                    <input class="form-control" id="txtIdReservation" type="text" placeholder="Id Reservation" style="width: 180px;" />
-                </div>
-                <br />
-            }
-        }
-        <input class="btn btn-primary btn-lg" id="btnOk" type="button" value="Rechercher" style="margin: 10px 5px 0px 0px;" />
         <br /><br /><br />
-        <a href="/Reservation" class="btn btn-default btn-xs" aria-label="Left Align" style="width:65px; margin-top:3px;">
+        <a href="/ReservationChambre" class="btn btn-default btn-xs" aria-label="Left Align" style="width:65px; margin-top:3px;">
             Retour
         </a>
     </div>
 </div>
 @{
-    // Section des reservations : Généré dynamiquement dans le futur
-
     ReservationChambreDTO reservationChambreDTO = ViewBag.reservation;
     if (reservationChambreDTO == null) {
         Response.Redirect("/ReservationChambre");
@@ -90,6 +58,7 @@
 }
 <div id="conteneurProduits" style="display:inline-block; width:100%;">
     @{
+        CompteParticulierDTO compteParticulierDTO = ApplicationFunctions.CompteParticulierFacade.Read(reservationChambreDTO.IdParticulier);
         ChambreDTO chambreDTO = ApplicationFunctions.ChambreFacade.Read(reservationChambreDTO.IdChambre);
         HotelDTO hotelDTO = ApplicationFunctions.HotelFacade.Read(chambreDTO.IdHotel);
     }
@@ -98,32 +67,43 @@
             <div id="sectionInfo" style="padding: 5px 5px 5px 15px; ">
                 <p><strong style="font-size:16px">@hotelDTO.Nom &nbsp;-&nbsp; @chambreDTO.NomChambre </strong></p>
                 <p>
-                    Hotel : 
+                    <u><strong>Compte</strong></u> : 
+                    <u style="margin-left: 4px;">Courriel</u> : @compteParticulierDTO.Courriel
                     <br />
-                    &nbsp;&nbsp;Nom : @hotelDTO.Nom
+                    <u style="margin-left: 4px;">Prenom</u> : @compteParticulierDTO.Prenom
                     <br />
-                    &nbsp;&nbsp;Categorie : @hotelDTO.Categorie
+                    <u style="margin-left: 4px;">Nom</u> : @compteParticulierDTO.Nom
                     <br />
-                    &nbsp;&nbsp;Adresse : @hotelDTO.Adresse &nbsp;-&nbsp; @hotelDTO.Ville
+                    <u><strong>Hotel</strong></u> : 
                     <br />
-                    &nbsp;&nbsp;Telephone : @hotelDTO.Telephone
+                    <u style = "margin-left: 4px;" >Nom</u> : @hotelDTO.Nom
                     <br />
-                    &nbsp;&nbsp;Description : @hotelDTO.Description
+                    <u style = "margin-left: 4px;" >Categorie</u> : @hotelDTO.Categorie étoiles
+                    <br />
+                    <u style = "margin-left: 4px;" >Adresse</u> : @hotelDTO.Adresse &nbsp;-&nbsp; @hotelDTO.Ville
+                    <br />
+                    <u style = "margin-left: 4px;" >Telephone</u> : @hotelDTO.Telephone
+                    <br />
+                    <u style = "margin-left: 4px;" >Description</u> :
+                    <div style = "margin-left: 8px;">@hotelDTO.Description</div>
                     <br />
                     <br />
-                    Chambre :
+                    <u><strong>Chambre</strong></u> :
                     <br />
-                    &nbsp;&nbsp;Nom : @chambreDTO.NomChambre
+                    <u style = "margin-left: 4px;" >Nom</u> : @chambreDTO.NomChambre
                     <br />
-                    &nbsp;&nbsp;Numero : @chambreDTO.NumeroChambre
+                    <u style = "margin-left: 4px;" >Numero</u> : @chambreDTO.NumeroChambre
                     <br />
-                    &nbsp;&nbsp;Taille : @chambreDTO.Taille
+                    <u style = "margin-left: 4px;" >Taille</u> : @chambreDTO.Taille mètres carrés
                     <br />
-                    &nbsp;&nbsp;Description : @chambreDTO.Description
+                    <u style = "margin-left: 4px;" >Maximum de personne</u> : @chambreDTO.MaxPersonne personnes
                     <br />
-                    Tarif : @chambreDTO.Tarif.ToString("F") $
+                    <u style = "margin-left: 4px;" >Description</u> :
+                    <div style = "margin-left: 8px;">@chambreDTO.Description</div>
+                    <br />
                 </p>
-                <p>Du <strong>@reservationChambreDTO.DateReservation.ToShortDateString()</strong> au <strong>@reservationChambreDTO.DateFinReservation.ToShortDateString()</strong></p>
+                <p><u><strong>Tarif</strong></u> : @chambreDTO.Tarif.ToString("F") $</p>
+                <p><u><strong>Date</strong></u> : Du <strong>@reservationChambreDTO.DateReservation.ToShortDateString()</strong> au <strong>@reservationChambreDTO.DateFinReservation.ToShortDateString()</strong></p>
             </div>
         </div>
     </div>
