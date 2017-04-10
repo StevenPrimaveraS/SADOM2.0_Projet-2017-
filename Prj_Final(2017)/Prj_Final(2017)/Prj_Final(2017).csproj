@@ -360,13 +360,13 @@
     <Content Include="Views\ReservationForfait\Details.cshtml" />
     <Content Include="Views\ReservationSiege\Details.cshtml" />
     <Content Include="Views\ReservationVoiture\Details.cshtml" />
+    <Content Include="Views\CompteFournisseurChambre\Create.cshtml" />
+    <Content Include="Views\CompteFournisseurSiege\Create.cshtml" />
+    <Content Include="Views\CompteFournisseurVoiture\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Achat\" />
-    <Folder Include="Views\CompteFournisseurChambre\" />
-    <Folder Include="Views\CompteFournisseurSiege\" />
-    <Folder Include="Views\CompteFournisseurVoiture\" />
     <Folder Include="Views\CompteParticulier\" />
   </ItemGroup>
   <ItemGroup>

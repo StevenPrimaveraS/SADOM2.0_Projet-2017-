@@ -16,7 +16,7 @@ namespace Prj_Final_2017_.Controllers
         {
             return View();
         }
-        public ActionResult Create(int idFournisseur, string courriel, string password, int idAgenceVoiture)
+     /*   public ActionResult Create(int idFournisseur, string courriel, string password, int idAgenceVoiture)
         {
             try
             {
@@ -28,6 +28,37 @@ namespace Prj_Final_2017_.Controllers
                     compteFournisseurVoitureDTO.Password = password;
                     compteFournisseurVoitureDTO.IdAgenceVoiture = idAgenceVoiture;
                     ApplicationFunctions.CompteFournisseurVoitureFacade.Add(compteFournisseurVoitureDTO);
+                }
+            }
+            catch (VoyageAhuntsicException e)
+            {
+                System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
+            }
+            return View();
+        }*/
+        public ActionResult Create()
+        {
+
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Create(FormCollection collections)
+        {
+            try
+            {
+                if (Session["user"] != null)
+                {
+                    int idFournisseur = Int32.Parse(collections["idFournisseur"]);
+                    string courriel = collections["courriel"];
+                    string password = collections["password"];
+                    int idAgenceVoiture = Int32.Parse(collections["idAgenceVoiture"]);
+                    CompteFournisseurVoitureDTO compteFournisseurVoitureDTO = new CompteFournisseurVoitureDTO();
+                    compteFournisseurVoitureDTO.IdFournisseur = idFournisseur;
+                    compteFournisseurVoitureDTO.Courriel = courriel;
+                    compteFournisseurVoitureDTO.Password = password;
+                    compteFournisseurVoitureDTO.IdAgenceVoiture = idAgenceVoiture;
+                    ApplicationFunctions.CompteFournisseurVoitureFacade.Add(compteFournisseurVoitureDTO);
+
                 }
             }
             catch (VoyageAhuntsicException e)
