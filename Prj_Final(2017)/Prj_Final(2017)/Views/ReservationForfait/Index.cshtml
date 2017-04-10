@@ -4,19 +4,15 @@
 @{
     ViewBag.Title = "Reservations de forfait";
     //Pour afficher toutes les réservations reçues
-}
-
-
-
-@{ /*
-                                  * Styles temporaires : éventuellement dans fichier css
-                                  * Peut-être pas de boutons pour chercher par type de reservation
-                                  * et juste toutes les afficher.
-                                  *
-                                  */
+    /*
+     * Styles temporaires : éventuellement dans fichier css
+     * Peut-être pas de boutons pour chercher par type de reservation
+     * et juste toutes les afficher.
+     *
+     */
 }
 <div id="recherche" style="background-color: #eeeeee; border-radius:6px; padding:30px;">
-    <h1>Reservation</h1>
+    <h1>@ViewBag.Title</h1>
     <div id="description">
         <p style="text-align:justify">@ViewBag.Description</p>
     </div>
@@ -81,6 +77,7 @@
     </div>
 </div>
 @{
+    // Section des reservations : Généré dynamiquement dans le futur
 
     List<ReservationForfaitDTO> reservations = ViewBag.reservations;
     if (reservations == null) {

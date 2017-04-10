@@ -301,9 +301,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -362,14 +360,13 @@
     <Content Include="Views\ReservationForfait\Details.cshtml" />
     <Content Include="Views\ReservationSiege\Details.cshtml" />
     <Content Include="Views\ReservationVoiture\Details.cshtml" />
-    <Content Include="Views\Siege\Siege.cshtml" />
+    <Content Include="Views\CompteFournisseurChambre\Create.cshtml" />
+    <Content Include="Views\CompteFournisseurSiege\Create.cshtml" />
+    <Content Include="Views\CompteFournisseurVoiture\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Achat\" />
-    <Folder Include="Views\CompteFournisseurChambre\" />
-    <Folder Include="Views\CompteFournisseurSiege\" />
-    <Folder Include="Views\CompteFournisseurVoiture\" />
     <Folder Include="Views\CompteParticulier\" />
   </ItemGroup>
   <ItemGroup>

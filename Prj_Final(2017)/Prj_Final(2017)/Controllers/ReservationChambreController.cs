@@ -50,70 +50,6 @@ namespace Prj_Final_2017_.Controllers {
             return View();
         }
 
-        // GET: ReservationChambre/Create
-        public ActionResult Create() {
-            if(Session["user"].GetType() == typeof(CompteParticulierDTO)) {
-                CompteParticulierDTO user = (CompteParticulierDTO) Session["user"];
-                if (Session["panierChambre"] != null) {
-                    List<ChambreDTO> panierChambre = (List<ChambreDTO>) Session["panierChambre"];
-                    foreach (ChambreDTO chambreDTO in panierChambre) {
-                        ReservationChambreDTO reservationChambreDTO = new ReservationChambreDTO();
-                        reservationChambreDTO.IdParticulier = user.IdParticulier;
-                        reservationChambreDTO.IdChambre = chambreDTO.IdChambre;
-                        //TODO
-                        //ApplicationFunctions.ReservationChambreFacade.Add();
-                        Session["panierChambre"] = null;
-                        Session["datesChambre"] = null;
-                    }
-                }
-            }
-            return Redirect("/");
-        }
-
-        // POST: ReservationChambre/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection) {
-            try {
-                string sDateDebut = collection["txtDateDebut"];
-                string sDateFin = collection["txtDateFin"];
-                int idParticulier = int.Parse(collection["idParticulier"]);
-                int idChambre = int.Parse(collection["chambre"]);
-                DateTime dateDebut = DateTime.Today.AddDays(-1);
-                DateTime dateFin = DateTime.Today.AddDays(-2);
-                string[] infos = sDateDebut.Split('/', '-');
-                if (infos.Length == 3) {
-                    dateDebut = new DateTime(int.Parse(infos[0]), int.Parse(infos[1]), int.Parse(infos[2]));
-                }
-                infos = sDateFin.Split('/', '-');
-                if (infos.Length == 3) {
-                    dateFin = new DateTime(int.Parse(infos[0]), int.Parse(infos[1]), int.Parse(infos[2]));
-                }
-
-                if (dateDebut >= DateTime.Today && dateFin >= DateTime.Today) {
-                    if (Session["user"].GetType() == typeof(CompteParticulierDTO)) {
-                        CompteParticulierDTO user = (CompteParticulierDTO) Session["user"];
-                        ReservationChambreDTO reservationChambreDTO = new ReservationChambreDTO();
-                        reservationChambreDTO.IdParticulier = user.IdParticulier;
-                        reservationChambreDTO.IdChambre = idChambre;
-                        reservationChambreDTO.DateReservation = dateDebut;
-                        reservationChambreDTO.DateFinReservation = dateFin;
-                        ApplicationFunctions.ReservationChambreFacade.Add(reservationChambreDTO);
-
-                        return View();
-                    }
-
-                }
-            }
-            catch (FormatException e) {
-                System.Diagnostics.Debug.WriteLine(e);
-            }
-            catch (VoyageAhuntsicException e) {
-                System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
-            }
-            //Redirection sinon
-            return RedirectToAction("Index");
-        }
-
         // GET: ReservationChambre/Edit/5
         public ActionResult Edit(int id) {
             if(Session["admin"] != null) {
@@ -133,39 +69,26 @@ namespace Prj_Final_2017_.Controllers {
                 string sDateFin = collection["txtDateFin"];
                 int idParticulier = int.Parse(collection["idParticulier"]);
                 int idChambre = int.Parse(collection["chambre"]);
-                DateTime dateDebut = DateTime.Today.AddDays(-1);
-                DateTime dateFin = DateTime.Today.AddDays(-2);
-                string[] infos = sDateDebut.Split('/', '-');
-                if (infos.Length == 3) {
-                    dateDebut = new DateTime(int.Parse(infos[0]), int.Parse(infos[1]), int.Parse(infos[2]));
-                }
-                infos = sDateFin.Split('/', '-');
-                if (infos.Length == 3) {
-                    dateFin = new DateTime(int.Parse(infos[0]), int.Parse(infos[1]), int.Parse(infos[2]));
-                }
 
-                if (dateDebut >= DateTime.Today && dateFin >= DateTime.Today) {
-                    if (Session["user"].GetType() == typeof(CompteParticulierDTO)) {
-                        CompteParticulierDTO user = (CompteParticulierDTO) Session["user"];
-                        if (Session["admin"] != null) {
-                            bool idAdmin = (bool) Session["admin"];
-                            if (idAdmin) {
-                                ReservationChambreDTO newReservationChambreDTO = new ReservationChambreDTO();
-                                newReservationChambreDTO.IdReservationChambre = id;
-                                newReservationChambreDTO.IdParticulier = idParticulier;
-                                newReservationChambreDTO.IdChambre = idChambre;
-                                newReservationChambreDTO.DateReservation = dateDebut;
-                                newReservationChambreDTO.DateFinReservation = dateFin;
-                                ApplicationFunctions.ReservationChambreFacade.Update(newReservationChambreDTO);
+                DateTime dateDebut = VADateHandler.reservationDates(sDateDebut + ";" + sDateFin)[0];
+                DateTime dateFin = VADateHandler.reservationDates(sDateDebut + ";" + sDateFin)[1];
+                if (Session["user"].GetType() == typeof(CompteParticulierDTO)) {
+                    CompteParticulierDTO user = (CompteParticulierDTO) Session["user"];
+                    if (Session["admin"] != null) {
+                        bool idAdmin = (bool) Session["admin"];
+                        if (idAdmin) {
+                            ReservationChambreDTO newReservationChambreDTO = new ReservationChambreDTO();
+                            newReservationChambreDTO.IdReservationChambre = id;
+                            newReservationChambreDTO.IdParticulier = idParticulier;
+                            newReservationChambreDTO.IdChambre = idChambre;
+                            newReservationChambreDTO.DateReservation = dateDebut;
+                            newReservationChambreDTO.DateFinReservation = dateFin;
+                            ApplicationFunctions.ReservationChambreFacade.Update(newReservationChambreDTO);
                                 
-                                return RedirectToAction("Index");
-                            }
+                            return RedirectToAction("Index");
                         }
                     }
                 }
-            }
-            catch (FormatException e) {
-                System.Diagnostics.Debug.WriteLine(e);
             }
             catch (VoyageAhuntsicException e) {
                 System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);

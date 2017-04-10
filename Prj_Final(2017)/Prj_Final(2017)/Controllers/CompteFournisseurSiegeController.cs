@@ -16,7 +16,7 @@ namespace Prj_Final_2017_.Controllers
         {
             return View();
         }
-        public ActionResult Create(int idFournisseur, string courriel, string password, int idCompagnieAerienne)
+      /*  public ActionResult Create(int idFournisseur, string courriel, string password, int idCompagnieAerienne)
         {
             try
             {
@@ -35,6 +35,37 @@ namespace Prj_Final_2017_.Controllers
                 System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
             }
             
+            return View();
+        }*/
+        public ActionResult Create()
+        {
+
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Create(FormCollection collections)
+        {
+            try
+            {
+                if (Session["user"] != null)
+                {
+                    int idFournisseur = Int32.Parse(collections["idFournisseur"]);
+                    string courriel = collections["courriel"];
+                    string password = collections["password"];
+                    int idCompagnieAerienne = Int32.Parse(collections["idCompagnieAerienne"]);
+                    CompteFournisseurSiegeDTO compteFournisseurSiegeDTO = new CompteFournisseurSiegeDTO();
+                    compteFournisseurSiegeDTO.IdFournisseur = idFournisseur;
+                    compteFournisseurSiegeDTO.Courriel = courriel;
+                    compteFournisseurSiegeDTO.Password = password;
+                    compteFournisseurSiegeDTO.IdCompagnieAerienne = idCompagnieAerienne;
+                    ApplicationFunctions.CompteFournisseurSiegeFacade.Add(compteFournisseurSiegeDTO);
+                }
+            }
+            catch (VoyageAhuntsicException e)
+            {
+                System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
+            }
+
             return View();
         }
         public ActionResult Read(int id)

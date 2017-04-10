@@ -156,12 +156,30 @@ namespace Prj_Final_2017_.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
                     // Pour plus d'informations sur l'activation de la confirmation du compte et la réinitialisation du mot de passe, consultez http://go.microsoft.com/fwlink/?LinkID=320771
                     // Envoyer un message électronique avec ce lien
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirmez votre compte", "Confirmez votre compte en cliquant <a href=\"" + callbackUrl + "\">ici</a>");
+                   
+                    string radio = @model.Radio0;
+                    switch (radio) {
+                        case "1":
+                            Response.Redirect("/CompteParticulier/Create");
+                            break;
+                        case "2":
+                            Response.Redirect("/CompteFournisseurChambre/Create");
+                            break;
+                        case "3":
+                            Response.Redirect("/CompteFournisseurSiege/Create");
+                            break;
+                        case "4":
+                            Response.Redirect("/CompteFournisseurVoiture/Create");
+                            break;
+                        default:
+                            break;
+                    }
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -270,7 +288,7 @@ namespace Prj_Final_2017_.Controllers
         {
             return View();
         }
-
+       
         //
         // POST: /Account/ExternalLogin
         [HttpPost]
