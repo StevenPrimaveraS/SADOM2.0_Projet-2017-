@@ -52,7 +52,7 @@
 
 
 
-<p class="lead">Liste de voiture</p>
+<p class="lead">Liste des hotels</p>
 @{
     var DB = Database.Open("mysqlConnexionString");
     var Grid = new WebGrid(DB.Query("SELECT * FROM hotel"));
@@ -68,7 +68,10 @@
                         Grid.Column("Adresse", "Adresse"),
                         Grid.Column("Ville", "Ville"),
                         Grid.Column("Categorie", "Categorie"),
-                        Grid.Column("Description", "Description")
+                        Grid.Column("Description", "Description"),
+                        Grid.Column(" ", format: @<text>
+                            <button class="btn-xs" style:color="blue">Voir les chambres</button>
+                        </text>)
             )
         )
 <span style="flex:auto">

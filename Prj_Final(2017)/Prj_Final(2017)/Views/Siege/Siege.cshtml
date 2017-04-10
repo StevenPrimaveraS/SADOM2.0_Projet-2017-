@@ -1,0 +1,31 @@
+﻿@using WebMatrix.Data;
+@{
+    ViewBag.Title = "Siege";
+}
+<link href="~/Content/StylePrincipal.css" rel="stylesheet" media="all" type="text/css">
+<div class="jumbotron">
+    <h1>Sieges pour le vol</h1>
+    <p class="lead">Liste des sieges</p>
+</div>
+
+@{
+    String IdVol = Request.QueryString["IdVol"];
+    var DB = Database.Open("mysqlConnexionString");
+    var Grid = new WebGrid(DB.Query("SELECT * FROM siege WHERE IdVol = " + IdVol));
+}
+@Grid.GetHtml(
+            tableStyle: "webgrid",
+            mode: WebGridPagerModes.All,
+            columns: Grid.Columns(
+             Grid.Column(" ", format: @<text>
+                    <button class="btn-xs" style:color="blue">Détail</button></text>),
+                        Grid.Column("Type", "Type"),
+                        Grid.Column("Numero", "Numero"),
+                        Grid.Column("IdVol", "ID Vol"),
+                        Grid.Column(" ", format: @<text>
+                            <button class="btn-xs" style:color="blue">Ajouter au panier</button>
+                        </text>)
+            )
+        )
+
+

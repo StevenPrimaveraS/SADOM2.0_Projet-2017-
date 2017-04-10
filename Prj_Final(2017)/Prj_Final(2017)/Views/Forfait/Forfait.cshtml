@@ -1,4 +1,4 @@
-﻿
+﻿@using WebMatrix.Data;
 @{
     ViewBag.Title = "Forfait";
 }
@@ -24,4 +24,23 @@
         </span>
     </li>
 </ul>
+@{
+    var DB = Database.Open("mysqlConnexionString");
+    var Grid = new WebGrid(DB.Query("SELECT * FROM forfait"));
+}
+@Grid.GetHtml(
+            tableStyle: "webgrid",
+            mode: WebGridPagerModes.All,
+            columns: Grid.Columns(
+             Grid.Column(" ", format: @<text>
+                    <button class="btn-xs" style:color="blue">Détail</button></text>),
+                        Grid.Column("IdChambre", "ID Chambre"),
+                        Grid.Column("IdVoiture", "ID Voiture"),
+                        Grid.Column("IdSiege", "ID Siege"),
+                        Grid.Column("TarifReduit", "Tarif Reduit"),
+                        Grid.Column(" ", format: @<text>
+                            <button class="btn-xs" style:color="blue">Appliquer</button>
+                        </text>)
+            )
+        )
 

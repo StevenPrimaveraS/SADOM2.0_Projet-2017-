@@ -1,4 +1,4 @@
-﻿
+﻿@using WebMatrix.Data;
 @{
     ViewBag.Title = "Chambre";
     ViewBag.Description =
@@ -71,23 +71,45 @@
     </div>
 </div>
 @{
-    /* Section des articles : Généré dynamiquement dans le futur */
-    ViewBag.Image = "[Insérer Image ICI]";
+/* Section des articles : Généré dynamiquement dans le futur */
+//ViewBag.Image = "[Insérer Image ICI]";
 
-    ViewBag.NomChambre = "Nom Chambre ici";
-    ViewBag.MaxPersonneChambre = "Max : 10 personnes";
-    ViewBag.TailleChambre = "Taille : 10m²";
-    ViewBag.DescriptionChambre =
-        @"Description Description Description Description Description Description
-        Description Description Description Description Description Description
-        Description Description Description Description Description Description ";
+//ViewBag.NomChambre = "Nom Chambre ici";
+//ViewBag.MaxPersonneChambre = "Max : 10 personnes";
+//ViewBag.TailleChambre = "Taille : 10m²";
+//ViewBag.DescriptionChambre =
+//    @"Description Description Description Description Description Description
+//    Description Description Description Description Description Description
+//    Description Description Description Description Description Description ";
 
-    ViewBag.Prix = "9999.99 $";
+//ViewBag.Prix = "9999.99 $";
 
-
-    //
+//
 }
-<div id="conteneurProduits" style="display:inline-block; width:100%;">
+@{
+    String IdHotel = Request.QueryString["IdHotel"];
+    var DB = Database.Open("mysqlConnexionString");
+    var Grid = new WebGrid(DB.Query("SELECT * FROM Chambre WHERE IdHotel = " + IdHotel));
+}
+@Grid.GetHtml(
+            tableStyle: "webgrid",
+            mode: WebGridPagerModes.All,
+            columns: Grid.Columns(
+             Grid.Column(" ", format: @<text>
+                    <button class="btn-xs" style:color="blue">Détail</button></text>),
+                        Grid.Column("NumeroChambre", "Numero"),
+                        Grid.Column("NomChambre", "Nom"),
+                        Grid.Column("Tarif", "Tarif"),
+                        Grid.Column("MaxPersonnes", "Max Personnes"),
+                        Grid.Column("Taille", "Taille"),
+                        Grid.Column("Description", "Description"),
+                        Grid.Column("IdHotel", "ID Hotel"),
+                        Grid.Column(" ", format: @<text>
+                            <button class="btn-xs" style:color="blue">Ajouter au panier</button>
+                        </text>)
+            )
+        )
+@*<div id="conteneurProduits" style="display:inline-block; width:100%;">
     <div class="container" id="produit1" style="border: 1px solid #aaaaaa; border-radius:6px; width:100%; margin-top:10px; padding-bottom:15px;">
         <div style="display:inline-flex; max-width:900px;">
             <div class="img-thumbnail img-responsive" id="sectionImage">
@@ -107,4 +129,4 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@
