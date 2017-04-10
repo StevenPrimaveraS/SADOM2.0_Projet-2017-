@@ -87,6 +87,10 @@ namespace Prj_Final_2017_.Models
         [Display(Name = "Confirmer le mot de passe ")]
         [Compare("Password", ErrorMessage = "Le mot de passe et le mot de passe de confirmation ne correspondent pas.")]
         public string ConfirmPassword { get; set; }
+
+                
+        [Display(Name = "Radio0")]
+        public string Radio0 { get; set; }
     }
 
     public class ResetPasswordViewModel
