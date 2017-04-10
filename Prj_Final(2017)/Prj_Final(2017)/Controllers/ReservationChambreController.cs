@@ -47,7 +47,6 @@ namespace Prj_Final_2017_.Controllers {
                 System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
             }
             //Redirection sinon
-            //return RedirectToAction("Index");
             return View();
         }
 
@@ -63,6 +62,8 @@ namespace Prj_Final_2017_.Controllers {
                         reservationChambreDTO.IdChambre = chambreDTO.IdChambre;
                         //TODO
                         //ApplicationFunctions.ReservationChambreFacade.Add();
+                        Session["panierChambre"] = null;
+                        Session["datesChambre"] = null;
                     }
                 }
             }
