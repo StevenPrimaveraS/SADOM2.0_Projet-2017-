@@ -12,6 +12,7 @@ namespace Prj_Final_2017_.Models.DAO
     {
         Connexion.Connexion connexion;
         private static readonly string INSERT_QUERY = "INSERT INTO Panier(`Information`, `Prix`, `Quantite`) VALUES(@information, @prix, @quantite)";
+        private static readonly string READ_QUERY = "SELECT `IdPanier`, `Information`, `Prix`, `Quantite` FROM Panier WHERE `IdPanier` = @idPanier";
         private static readonly string DELETE_QUERY = "DELETE FROM Panier WHERE `IdPanier` = @idPanier";
 
         public PanierDAO()
@@ -45,6 +46,44 @@ namespace Prj_Final_2017_.Models.DAO
             {
                 throw new VoyageAhuntsicException(1234, VoyageAhuntsicException.CharteErreur[1234], mysqlException);
             }
+        }
+
+        /// <summary>
+        /// Fait un Read dans la BD sur la table Panier
+        /// </summary>
+        /// <param name="IdPanier">l'id de l'item du panier que l'on veut read</param>
+        /// <returns>une instance de SiegeDTO; null sinon</returns>
+        public PanierDTO Read(int IdPanier)
+        {
+            PanierDTO panierDTO = null;
+            try
+            {
+                using (MySqlConnection connection = connexion.getConnexion())
+                {
+                    connection.Open();
+                    using (MySqlCommand command = new MySqlCommand(PanierDAO.READ_QUERY, connection))
+                    {
+                        command.Prepare();
+                        command.Parameters.AddWithValue("@idPanier", IdPanier);
+                        using (MySqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                panierDTO = new PanierDTO();
+                                panierDTO.IdPanier = reader.GetInt32("IdPanier");
+                                panierDTO.Information = reader.GetString("Information");
+                                panierDTO.Prix = reader.GetDouble("Prix");
+                                panierDTO.Quantite = reader.GetInt32("Quantite");
+                            }
+                        }
+                    }
+                }
+            }
+            catch (MySqlException mysqlException)
+            {
+                throw new VoyageAhuntsicException(1234, VoyageAhuntsicException.CharteErreur[1234], mysqlException);
+            }
+            return panierDTO;
         }
 
         /// <summary>

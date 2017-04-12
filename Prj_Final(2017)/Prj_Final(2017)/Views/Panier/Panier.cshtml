@@ -34,13 +34,12 @@
             tableStyle: "webgrid",
             mode: WebGridPagerModes.All,
             columns: Grid.Columns(
-                        Grid.Column("IdPanier", "Item No"),
                         Grid.Column("Information", "Item"),
                         Grid.Column("Prix", "Prix"),
                         Grid.Column("Quantite", "Quantite"),
                         Grid.Column(" ", format: @<text>
                             @*<button class="btn-xs" style:color="blue" onclick="@("window.location.href='" + @Url.Action("Voiture", "Voiture", Grid.SelectedRow.Value.IdVoiture) + "'");">Ajouter au panier</button>*@
-                            <input type="button" value="Supprimer" onclick="location.href='@Url.Action("AjouterPanier", "Voiture",  new {idItem = item.IdPanier})'" />
+                            <input type="button" value="Supprimer" onclick="location.href='@Url.Action("Supprimer", "Panier",  new {idItem = item.IdPanier})'" />
                         </text>)
             )
         )

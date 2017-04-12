@@ -8,28 +8,12 @@
 <p class="lead">Liste des forfaits</p>
 </div>
 
-<ul id="listeForfaits" style="flex-direction:column">
-    <li style="flex-direction:row;justify-content:space-around; display:flex">
-        <span style="flex:auto">
-            Information du forfait
-        </span>
-        <span style="flex:auto">
-            Prix du forfait
-        </span>
-        <span style="flex:auto">
-            <input class="text-form" type="text" value="Nombre de billets supp. désirés" />
-        </span>
-        <span style="flex:auto">
-            <input class="text-form" type="button" value="Ajouter au panier" />
-        </span>
-    </li>
-</ul>
 @{
     var DB = Database.Open("mysqlConnexionString");
     var Grid = new WebGrid(DB.Query("SELECT * FROM forfait"));
 }
 @Grid.GetHtml(
-            tableStyle: "webgrid4",
+            tableStyle: "webgrid",
             mode: WebGridPagerModes.All,
             columns: Grid.Columns(
              Grid.Column("IdChambre", "ID Chambre"),
