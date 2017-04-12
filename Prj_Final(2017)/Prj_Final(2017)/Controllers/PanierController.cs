@@ -1,4 +1,6 @@
 ﻿using Prj_Final_2017_.DTO;
+using Prj_Final_2017_.Models.DAO;
+using Prj_Final_2017_.Models.DTO;
 using Prj_Final_2017_.Models.Exception;
 using Prj_Final_2017_.Models.util;
 using System;
@@ -140,6 +142,28 @@ namespace Prj_Final_2017_.Controllers
                 System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
             }
             return RedirectToAction("Index");
+        }
+
+        // GET: Voiture/AjouterPanier/5
+        public ActionResult Supprimer(int idItem)
+        {
+            try
+            {
+                PanierDTO panierDTO = new PanierDTO();
+                PanierDAO panierDAO = new PanierDAO();
+                panierDTO = panierDAO.Read(idItem);
+                panierDAO.Delete(panierDTO);
+                return RedirectToAction("Panier");
+            }
+            catch (FormatException e)
+            {
+                System.Diagnostics.Debug.WriteLine(e);
+            }
+            catch (VoyageAhuntsicException e)
+            {
+                System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
+            }
+            return RedirectToAction("Voiture");
         }
     }
 }
