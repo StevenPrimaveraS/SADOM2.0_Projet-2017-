@@ -209,6 +209,7 @@
     <Compile Include="Models\DAO\CompteParticulierDAO.cs" />
     <Compile Include="Models\DAO\ForfaitDAO.cs" />
     <Compile Include="Models\DAO\HotelDAO.cs" />
+    <Compile Include="Models\DAO\PanierDAO.cs" />
     <Compile Include="Models\DAO\ReservationChambreDAO.cs" />
     <Compile Include="Models\DAO\ReservationForfaitDAO.cs" />
     <Compile Include="Models\DAO\ReservationSiegeDAO.cs" />
@@ -225,6 +226,7 @@
     <Compile Include="Models\DTO\CompteParticulierDTO.cs" />
     <Compile Include="Models\DTO\ForfaitDTO.cs" />
     <Compile Include="Models\DTO\HotelDTO.cs" />
+    <Compile Include="Models\DTO\PanierDTO.cs" />
     <Compile Include="Models\DTO\ReservationChambreDTO.cs" />
     <Compile Include="Models\DTO\ReservationForfaitDTO.cs" />
     <Compile Include="Models\DTO\ReservationSiegeDTO.cs" />

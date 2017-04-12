@@ -1,4 +1,6 @@
 ﻿using Prj_Final_2017_.DTO;
+using Prj_Final_2017_.Models.DAO;
+using Prj_Final_2017_.Models.DTO;
 using Prj_Final_2017_.Models.Exception;
 using Prj_Final_2017_.Models.util;
 using System;
@@ -204,6 +206,34 @@ namespace Prj_Final_2017_.Controllers
             {
                 return View();
             }
+        }
+
+        // GET: Voiture/AjouterPanier/5
+        public ActionResult AjouterPanier(int idItem)
+        {
+            try
+            {
+                VoitureDTO voitureDTO = new VoitureDTO();
+                voitureDTO = ApplicationFunctions.VoitureFacade.Read(idItem);
+
+                PanierDTO panierDTO = new PanierDTO();
+                panierDTO.Information = voitureDTO.Nom;
+                panierDTO.Prix = voitureDTO.Tarif;
+                panierDTO.Quantite = 1;
+
+                PanierDAO panierDAO = new PanierDAO();
+                panierDAO.Add(panierDTO);
+                return RedirectToAction("Voiture");
+            }
+            catch (FormatException e)
+            {
+                System.Diagnostics.Debug.WriteLine(e);
+            }
+            catch (VoyageAhuntsicException e)
+            {
+                System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
+            }
+            return RedirectToAction("Voiture");
         }
     }
 }

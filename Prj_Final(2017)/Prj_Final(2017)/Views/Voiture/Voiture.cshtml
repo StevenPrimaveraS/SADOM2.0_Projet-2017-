@@ -67,7 +67,8 @@
                         Grid.Column("Nom", "Nom"),
                         Grid.Column("Plaque", "Plaque"),
                         Grid.Column(" ", format: @<text>
-                            <button class="btn-xs" style:color="blue">Ajouter au panier</button>
+                            @*<button class="btn-xs" style:color="blue" onclick="@("window.location.href='" + @Url.Action("Voiture", "Voiture", Grid.SelectedRow.Value.IdVoiture) + "'");">Ajouter au panier</button>*@
+                            <input type="button" value="Ajouter au panier" onclick="location.href='@Url.Action("AjouterPanier", "Voiture",  new {idItem = item.IdVoiture})'" />
                         </text>)
             )
         )

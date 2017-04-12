@@ -12,14 +12,14 @@ namespace Prj_Final_2017_.Controllers
     public class PanierController : Controller
     {
 
-        protected override void OnActionExecuting(ActionExecutingContext filterContext) {
-            if (Session["user"] != null) {
-                base.OnActionExecuting(filterContext);
-            }
-            else {
-                filterContext.Result = new RedirectResult("~/Account/Login");
-            }
-        }
+        //protected override void OnActionExecuting(ActionExecutingContext filterContext) {
+        //    if (Session["user"] != null) {
+        //        base.OnActionExecuting(filterContext);
+        //    }
+        //    else {
+        //        filterContext.Result = new RedirectResult("~/Account/Login");
+        //    }
+        //}
 
         // GET: Panier
         public ActionResult Index()
