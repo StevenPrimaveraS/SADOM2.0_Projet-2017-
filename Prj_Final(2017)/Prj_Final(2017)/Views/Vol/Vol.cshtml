@@ -58,12 +58,9 @@
             var Grid = new WebGrid(DB.Query("SELECT * FROM vol"));
 }
 @Grid.GetHtml(
-            tableStyle: "webgrid",
+            tableStyle: "webgrid2",
             mode: WebGridPagerModes.All,
             columns: Grid.Columns(
-             Grid.Column(" ", format: @<text>
-                    <button class="btn-xs" style:color="blue">Détail</button></text>),
-                        Grid.Column("IdVol", "ID Vol"),
                         Grid.Column("AeroportDepart", "Aeroport Depart"),
                         Grid.Column("AeroportDestination", "Aeroport Destination"),
                         Grid.Column("VilleDepart", "Ville Depart"),
@@ -71,8 +68,7 @@
                         Grid.Column("DateDepart", "Date Depart"),
                         Grid.Column("DateArrivee", "Date Arrivee"),
                         Grid.Column("IdCompagnieAerienne", "Date Arrivee"),
-                        Grid.Column("Classe", "Classe"),
-                        Grid.Column("IsRemboursable", "Remboursable ?"),
+                        Grid.Column("IsRemboursable", "Remboursable"),
                         Grid.Column("Tarif", "Tarif"),
                         Grid.Column(" ", format: @<text>
                             <button class="btn-xs" style:color="blue">Voir sieges disponibles</button>

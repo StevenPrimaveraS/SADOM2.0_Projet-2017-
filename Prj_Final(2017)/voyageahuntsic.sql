@@ -27,23 +27,15 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `agencevoiture` (
-`IdAgenceVoiture` int(4) NOT NULL,
+`IdAgenceVoiture` int(3) NOT NULL,
   `Nom` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
   `Telephone` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `Adresse` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `Ville` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
   `Aeroport` varchar(20) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Contenu de la table `agencevoiture`
---
 
-INSERT INTO `agencevoiture` (`IdAgenceVoiture`, `Nom`, `Telephone`, `Adresse`, `Ville`, `Aeroport`) VALUES
-(1, 'Enterprise', '1-888-555-5460', '4862 rue Boyle', 'Montreal', 'Mirabelle'),
-(2, 'AutoExpress', '1-800-521-5554', '55469 rue St-Denis', 'Montreal', 'Mirabelle'),
-(3, 'CarNow', '1-888-487-8249', '4521 Somerville St', 'Vancouver', 'International'),
-(4, 'LocAuto', '78452958', '458 rue des Archives', 'Paris', 'Charles-de-Gaulles');
 
 -- --------------------------------------------------------
 
@@ -60,16 +52,9 @@ CREATE TABLE IF NOT EXISTS `chambre` (
   `Taille` float NOT NULL,
   `Description` text COLLATE utf8_unicode_ci NOT NULL,
   `IdHotel` int(4) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Contenu de la table `chambre`
---
 
-INSERT INTO `chambre` (`IdChambre`, `NumeroChambre`, `NomChambre`, `Tarif`, `MaxPersonne`, `Taille`, `Description`, `IdHotel`) VALUES
-(1, 452, 'Chambre 452', 256.25, 4, 100, 'Chambre avec deux lits doubles et vue sur le parc.', 1),
-(2, 482, 'Room 482', 481.62, 2, 80, 'Room with one queen bed and view on the English Bay.', 2),
-(3, 666, 'Suite Démoniaque', 666.66, 4, 100, 'Suite avec theme demonique.', 3);
 
 -- --------------------------------------------------------
 
@@ -83,16 +68,9 @@ CREATE TABLE IF NOT EXISTS `compagnieaerienne` (
   `Telephone` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `Adresse` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `Ville` varchar(32) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Contenu de la table `compagnieaerienne`
---
 
-INSERT INTO `compagnieaerienne` (`IdCompagnieAerienne`, `Nom`, `Telephone`, `Adresse`, `Ville`) VALUES
-(1, 'Air Transat', '1-877-872-6728', '4444 48e avenue', 'Montreal'),
-(2, 'Air Canada', '1-888-247-2262', '305 Boulevard Crémazie O', 'Montreal'),
-(3, 'Air Fance', '1-800-667-2747', '2 rue de la Belle Borne', 'Tremblay-en-France');
 
 -- --------------------------------------------------------
 
@@ -105,16 +83,9 @@ CREATE TABLE IF NOT EXISTS `comptefournisseurchambre` (
   `Courriel` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `Password` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `IdHotel` int(4) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Contenu de la table `comptefournisseurchambre`
---
 
-INSERT INTO `comptefournisseurchambre` (`IdFournisseur`, `Courriel`, `Password`, `IdHotel`) VALUES
-(1, 'gouverneur@gouverneur.com', 'Gouverneur1', 1),
-(2, 'innsmouth@insmouth.com', 'InnsMouth1', 2),
-(3, 'CharlesdeGaulles@CharlesdeGaulles.fr', 'CharlesdeGaulles1', 3);
 
 -- --------------------------------------------------------
 
@@ -127,16 +98,9 @@ CREATE TABLE IF NOT EXISTS `comptefournisseursiege` (
   `Courriel` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `Password` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `IdCompagnieAerienne` int(4) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Contenu de la table `comptefournisseursiege`
---
 
-INSERT INTO `comptefournisseursiege` (`IdFournisseur`, `Courriel`, `Password`, `IdCompagnieAerienne`) VALUES
-(1, 'airTransat@airTransat.qc.ca', 'AirTransat1', 1),
-(2, 'airCanada@airCanada.qc.ca', 'AirCanada1', 2),
-(3, 'airFrance@airFrance.fr', 'AirFrance1', 3);
 
 -- --------------------------------------------------------
 
@@ -149,17 +113,8 @@ CREATE TABLE IF NOT EXISTS `comptefournisseurvoiture` (
   `Courriel` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `Password` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `IdAgenceVoiture` int(4) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Contenu de la table `comptefournisseurvoiture`
---
-
-INSERT INTO `comptefournisseurvoiture` (`IdFournisseur`, `Courriel`, `Password`, `IdAgenceVoiture`) VALUES
-(1, 'enterprise@enterprise.ca', 'Enterprise1', 1),
-(2, 'autoExpress@autoExpress.ca', 'AutoExpress1', 2),
-(3, 'carNow@carNow.com', 'CarNow1', 3),
-(4, 'locAuto@locAuto.fr', 'LocAuto1', 4);
 
 -- --------------------------------------------------------
 
@@ -173,16 +128,8 @@ CREATE TABLE IF NOT EXISTS `compteparticulier` (
   `Prenom` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `Nom` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `Courriel` varchar(40) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Contenu de la table `compteparticulier`
---
-
-INSERT INTO `compteparticulier` (`IdParticulier`, `Password`, `Prenom`, `Nom`, `Courriel`) VALUES
-(1, 'Dominic1', 'Dominic', 'Leroux', 'dominicleroux@hotmail.com'),
-(2, 'Mathieu1', 'Mathieu', 'Lafond', 'mathieulafond1@hotmail.com'),
-(3, 'Anthony1', 'Anthony', 'Chan', 'anthonychan@hotmail.com');
 
 -- --------------------------------------------------------
 
@@ -198,12 +145,7 @@ CREATE TABLE IF NOT EXISTS `forfait` (
   `TarifReduit` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Contenu de la table `forfait`
---
 
-INSERT INTO `forfait` (`IdForfait`, `IdChambre`, `IdVoiture`, `IdSiege`, `TarifReduit`) VALUES
-(1, 1, 1, 1, 799.99);
 
 -- --------------------------------------------------------
 
@@ -219,16 +161,9 @@ CREATE TABLE IF NOT EXISTS `hotel` (
   `Ville` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
   `Categorie` int(2) NOT NULL,
   `Description` text COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Contenu de la table `hotel`
---
 
-INSERT INTO `hotel` (`IdHotel`, `Nom`, `Telephone`, `Adresse`, `Ville`, `Categorie`, `Description`) VALUES
-(1, 'Gouverneur', '514-555-9865', '4521 Rue st-hubert', 'Montreal', 4, 'Piscine intérieure, buffet continental'),
-(2, 'InnsMouth', '475-555-9624', '4852 Somerville St', 'Vancouver', 3, 'Beautiful decoration, swimming pool, nice staff'),
-(3, 'Charles-de-Gaules', '89654128', '588 rue des Archives', 'Paris', 5, 'Venez visiter le meilleur hotel de Paris durant votre séjour');
 
 -- --------------------------------------------------------
 
@@ -242,14 +177,9 @@ CREATE TABLE IF NOT EXISTS `reservationchambre` (
   `IdParticulier` int(4) NOT NULL,
   `DateReservation` date NOT NULL,
   `DateFinReservation` date NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Contenu de la table `reservationchambre`
---
 
-INSERT INTO `reservationchambre` (`IdReservationChambre`, `IdChambre`, `IdParticulier`, `DateReservation`, `DateFinReservation`) VALUES
-(1, 2, 3, '2017-04-25', '2017-04-28');
 
 -- --------------------------------------------------------
 
@@ -263,14 +193,9 @@ CREATE TABLE IF NOT EXISTS `reservationforfait` (
   `IdParticulier` int(4) NOT NULL,
   `DateReservation` date NOT NULL,
   `DateFinReservation` date NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Contenu de la table `reservationforfait`
---
 
-INSERT INTO `reservationforfait` (`IdReservationForfait`, `IdForfait`, `IdParticulier`, `DateReservation`, `DateFinReservation`) VALUES
-(1, 1, 1, '2017-04-24', '2017-04-26');
 
 -- --------------------------------------------------------
 
@@ -284,15 +209,9 @@ CREATE TABLE IF NOT EXISTS `reservationsiege` (
   `IdParticulier` int(4) NOT NULL,
   `DateReservation` date NOT NULL,
   `DateFinReservation` date NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Contenu de la table `reservationsiege`
---
 
-INSERT INTO `reservationsiege` (`IdReservationSiege`, `IdSiege`, `IdParticulier`, `DateReservation`, `DateFinReservation`) VALUES
-(1, 2, 2, '2017-04-24', '2017-04-24'),
-(2, 3, 3, '2017-04-25', '2017-04-25');
 
 -- --------------------------------------------------------
 
@@ -306,14 +225,9 @@ CREATE TABLE IF NOT EXISTS `reservationvoiture` (
   `IdParticulier` int(4) NOT NULL,
   `DateReservation` date NOT NULL,
   `DateFinReservation` date NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Contenu de la table `reservationvoiture`
---
 
-INSERT INTO `reservationvoiture` (`IdReservationVoiture`, `IdVoiture`, `IdParticulier`, `DateReservation`, `DateFinReservation`) VALUES
-(1, 3, 3, '2017-04-25', '2017-04-28');
 
 -- --------------------------------------------------------
 
@@ -326,17 +240,9 @@ CREATE TABLE IF NOT EXISTS `siege` (
   `Type` varchar(16) COLLATE utf8_unicode_ci NOT NULL,
   `Numero` int(4) NOT NULL,
   `IdVol` int(4) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Contenu de la table `siege`
---
 
-INSERT INTO `siege` (`IdSiege`, `Type`, `Numero`, `IdVol`) VALUES
-(1, 'Hublot', 10, 1),
-(2, 'Allee', 2, 1),
-(3, 'Hublot', 3, 2),
-(4, 'Allee', 2, 3);
 
 -- --------------------------------------------------------
 
@@ -352,17 +258,9 @@ CREATE TABLE IF NOT EXISTS `voiture` (
   `NbPassager` int(4) NOT NULL,
   `Nom` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
   `Plaque` varchar(8) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Contenu de la table `voiture`
---
 
-INSERT INTO `voiture` (`IdVoiture`, `Type`, `IdAgence`, `Tarif`, `NbPassager`, `Nom`, `Plaque`) VALUES
-(1, '2/4 portes', 1, 350.98, 4, 'Honda Civic', 'erc524'),
-(2, 'Limousine', 2, 450.85, 10, 'Chrysler', '5482red'),
-(3, 'Sport', 3, 362.94, 6, 'Mazda Sport', '256swj'),
-(4, 'Minibus', 4, 752.34, 15, 'Minibus', 'df258tg');
 
 -- --------------------------------------------------------
 
@@ -382,16 +280,9 @@ CREATE TABLE IF NOT EXISTS `vol` (
   `Classe` varchar(16) COLLATE utf8_unicode_ci NOT NULL,
   `IsRemboursable` tinyint(1) NOT NULL,
   `Tarif` float NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Contenu de la table `vol`
---
 
-INSERT INTO `vol` (`IdVol`, `AeroportDepart`, `AeroportDestination`, `VilleDepart`, `VilleDestination`, `DateDepart`, `DateArrivee`, `IdCompagnieAerienne`, `Classe`, `IsRemboursable`, `Tarif`) VALUES
-(1, 'Mirabelle', 'Pearson', 'Montreal', 'Toronto', '2017-04-24', '2017-04-24', 1, 'Economique', 1, 216),
-(2, 'Mirabelle', 'International', 'Montreal', 'Vancouver', '2017-04-25', '2017-04-25', 2, '1ere classe', 0, 419.18),
-(3, 'Charles-de-Gaulles', 'Mirabelle', 'Paris', 'Montreal', '2017-04-20', '2017-04-21', 3, 'Affaire', 0, 667.84);
 
 --
 -- Index pour les tables exportées
@@ -501,77 +392,82 @@ ALTER TABLE `vol`
 -- AUTO_INCREMENT pour la table `agencevoiture`
 --
 ALTER TABLE `agencevoiture`
-MODIFY `IdAgenceVoiture` int(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `IdAgenceVoiture` int(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT pour la table `chambre`
 --
 ALTER TABLE `chambre`
-MODIFY `IdChambre` int(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `IdChambre` int(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT pour la table `compagnieaerienne`
 --
 ALTER TABLE `compagnieaerienne`
-MODIFY `IdCompagnieAerienne` int(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `IdCompagnieAerienne` int(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT pour la table `comptefournisseurchambre`
 --
 ALTER TABLE `comptefournisseurchambre`
-MODIFY `IdFournisseur` int(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `IdFournisseur` int(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT pour la table `comptefournisseursiege`
 --
 ALTER TABLE `comptefournisseursiege`
-MODIFY `IdFournisseur` int(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `IdFournisseur` int(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT pour la table `comptefournisseurvoiture`
 --
 ALTER TABLE `comptefournisseurvoiture`
-MODIFY `IdFournisseur` int(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `IdFournisseur` int(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT pour la table `compteparticulier`
 --
 ALTER TABLE `compteparticulier`
-MODIFY `IdParticulier` int(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `IdParticulier` int(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
+--
+-- AUTO_INCREMENT pour la table `forfait`
+--
+ALTER TABLE `forfait`
+MODIFY `IdForfait` int(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT pour la table `hotel`
 --
 ALTER TABLE `hotel`
-MODIFY `IdHotel` int(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `IdHotel` int(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT pour la table `reservationchambre`
 --
 ALTER TABLE `reservationchambre`
-MODIFY `IdReservationChambre` int(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `IdReservationChambre` int(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT pour la table `reservationforfait`
 --
 ALTER TABLE `reservationforfait`
-MODIFY `IdReservationForfait` int(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `IdReservationForfait` int(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT pour la table `reservationsiege`
 --
 ALTER TABLE `reservationsiege`
-MODIFY `IdReservationSiege` int(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `IdReservationSiege` int(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT pour la table `reservationvoiture`
 --
 ALTER TABLE `reservationvoiture`
-MODIFY `IdReservationVoiture` int(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `IdReservationVoiture` int(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT pour la table `siege`
 --
 ALTER TABLE `siege`
-MODIFY `IdSiege` int(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `IdSiege` int(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT pour la table `voiture`
 --
 ALTER TABLE `voiture`
-MODIFY `IdVoiture` int(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `IdVoiture` int(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT pour la table `vol`
 --
 ALTER TABLE `vol`
-MODIFY `IdVol` int(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `IdVol` int(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
 --
 -- Contraintes pour les tables exportées
 --
@@ -653,6 +549,150 @@ ADD CONSTRAINT `voiture_ibfk_1` FOREIGN KEY (`IdAgence`) REFERENCES `agencevoitu
 --
 ALTER TABLE `vol`
 ADD CONSTRAINT `vol_ibfk_1` FOREIGN KEY (`IdCompagnieAerienne`) REFERENCES `compagnieaerienne` (`IdCompagnieAerienne`);
+
+--
+-- Contenu de la table `agencevoiture`
+--
+
+INSERT INTO `agencevoiture` (`Nom`, `Telephone`, `Adresse`, `Ville`, `Aeroport`) VALUES
+('Enterprise', '1-888-555-5460', '4862 rue Boyle', 'Montreal', 'Mirabelle'),
+('AutoExpress', '1-800-521-5554', '55469 rue St-Denis', 'Montreal', 'Mirabelle'),
+('CarNow', '1-888-487-8249', '4521 Somerville St', 'Vancouver', 'International'),
+('LocAuto', '78452958', '458 rue des Archives', 'Paris', 'Charles-de-Gaulles');
+
+
+--
+-- Contenu de la table `compagnieaerienne`
+--
+
+INSERT INTO `compagnieaerienne` (`Nom`, `Telephone`, `Adresse`, `Ville`) VALUES
+('Air Transat', '1-877-872-6728', '4444 48e avenue', 'Montreal'),
+('Air Canada', '1-888-247-2262', '305 Boulevard Crémazie O', 'Montreal'),
+('Air Fance', '1-800-667-2747', '2 rue de la Belle Borne', 'Tremblay-en-France');
+
+--
+-- Contenu de la table `hotel`
+--
+
+INSERT INTO `hotel` ( `Nom`, `Telephone`, `Adresse`, `Ville`, `Categorie`, `Description`) VALUES
+('Gouverneur', '514-555-9865', '4521 Rue st-hubert', 'Montreal', 4, 'Piscine intérieure, buffet continental'),
+( 'InnsMouth', '475-555-9624', '4852 Somerville St', 'Vancouver', 3, 'Beautiful decoration, swimming pool, nice staff'),
+( 'Charles-de-Gaules', '89654128', '588 rue des Archives', 'Paris', 5, 'Venez visiter le meilleur hotel de Paris durant votre séjour');
+
+--
+-- Contenu de la table `voiture`
+--
+
+INSERT INTO `voiture` ( `Type`, `IdAgence`, `Tarif`, `NbPassager`, `Nom`, `Plaque`) VALUES
+( '2/4 portes', 1, 350.98, 4, 'Honda Civic', 'erc524'),
+( 'Limousine', 2, 450.85, 10, 'Chrysler', '5482red'),
+( 'Sport', 3, 362.94, 6, 'Mazda Sport', '256swj'),
+( 'Minibus', 4, 752.34, 15, 'Minibus', 'df258tg');
+
+
+--
+-- Contenu de la table `vol`
+--
+
+INSERT INTO `vol` ( `AeroportDepart`, `AeroportDestination`, `VilleDepart`, `VilleDestination`, `DateDepart`, `DateArrivee`, `IdCompagnieAerienne`, `Classe`, `IsRemboursable`, `Tarif`) VALUES
+( 'Mirabelle', 'Pearson', 'Montreal', 'Toronto', '2017-04-24', '2017-04-24', 1, 'Economique', 1, 216),
+( 'Mirabelle', 'International', 'Montreal', 'Vancouver', '2017-04-25', '2017-04-25', 2, '1ere classe', 0, 419.18),
+( 'Charles-de-Gaulles', 'Mirabelle', 'Paris', 'Montreal', '2017-04-20', '2017-04-21', 3, 'Affaire', 0, 667.84);
+
+--
+-- Contenu de la table `siege`
+--
+
+INSERT INTO `siege` ( `Type`, `Numero`, `IdVol`) VALUES
+( 'Hublot', 10, 1),
+( 'Allee', 2, 1),
+( 'Hublot', 3, 2),
+( 'Allee', 2, 3);
+
+--
+-- Contenu de la table `comptefournisseurchambre`
+--
+
+INSERT INTO `comptefournisseurchambre` ( `Courriel`, `Password`, `IdHotel`) VALUES
+('gouverneur@gouverneur.com', 'Gouverneur1', 1),
+( 'innsmouth@insmouth.com', 'InnsMouth1', 2),
+( 'CharlesdeGaulles@CharlesdeGaulles.fr', 'CharlesdeGaulles1', 3);
+
+--
+-- Contenu de la table `comptefournisseursiege`
+--
+
+INSERT INTO `comptefournisseursiege` ( `Courriel`, `Password`, `IdCompagnieAerienne`) VALUES
+( 'airTransat@airTransat.qc.ca', 'AirTransat1', 1),
+( 'airCanada@airCanada.qc.ca', 'AirCanada1', 2),
+( 'airFrance@airFrance.fr', 'AirFrance1', 3);
+
+--
+-- Contenu de la table `comptefournisseurvoiture`
+--
+
+INSERT INTO `comptefournisseurvoiture` ( `Courriel`, `Password`, `IdAgenceVoiture`) VALUES
+( 'enterprise@enterprise.ca', 'Enterprise1', 1),
+( 'autoExpress@autoExpress.ca', 'AutoExpress1', 2),
+('carNow@carNow.com', 'CarNow1', 3),
+( 'locAuto@locAuto.fr', 'LocAuto1', 4);
+--
+-- Contenu de la table `compteparticulier`
+--
+
+INSERT INTO `compteparticulier` ( `Password`, `Prenom`, `Nom`, `Courriel`) VALUES
+( 'Dominic1', 'Dominic', 'Leroux', 'dominicleroux@hotmail.com'),
+( 'Mathieu1', 'Mathieu', 'Lafond', 'mathieulafond1@hotmail.com'),
+( 'Anthony1', 'Anthony', 'Chan', 'anthonychan@hotmail.com');
+
+
+
+--
+-- Contenu de la table `reservationsiege`
+--
+
+INSERT INTO `reservationsiege` ( `IdSiege`, `IdParticulier`, `DateReservation`, `DateFinReservation`) VALUES
+( 2, 2, '2017-04-24', '2017-04-24'),
+( 3, 3, '2017-04-25', '2017-04-25');
+
+--
+-- Contenu de la table `reservationvoiture`
+--
+
+INSERT INTO `reservationvoiture` ( `IdVoiture`, `IdParticulier`, `DateReservation`, `DateFinReservation`) VALUES
+( 3, 3, '2017-04-25', '2017-04-28');
+
+
+
+--
+-- Contenu de la table `chambre`
+--
+
+INSERT INTO `chambre` ( `NumeroChambre`, `NomChambre`, `Tarif`, `MaxPersonne`, `Taille`, `Description`, `IdHotel`) VALUES
+( 452, 'Chambre 452', 256.25, 4, 100, 'Chambre avec deux lits doubles et vue sur le parc.', 1),
+( 482, 'Room 482', 481.62, 2, 80, 'Room with one queen bed and view on the English Bay.', 2),
+( 666, 'Suite Démoniaque', 666.66, 4, 100, 'Suite avec theme demonique.', 3);
+
+--
+-- Contenu de la table `reservationchambre`
+--
+
+INSERT INTO `reservationchambre` ( `IdChambre`, `IdParticulier`, `DateReservation`, `DateFinReservation`) VALUES
+( 2, 3, '2017-04-25', '2017-04-28');
+
+--
+-- Contenu de la table `forfait`
+--
+
+INSERT INTO `forfait` ( `IdChambre`, `IdVoiture`, `IdSiege`, `TarifReduit`) VALUES
+( 1, 1, 1, 799.99);
+
+--
+-- Contenu de la table `reservationforfait`
+--
+
+INSERT INTO `reservationforfait` ( `IdForfait`, `IdParticulier`, `DateReservation`, `DateFinReservation`) VALUES
+( 1, 1, '2017-04-24', '2017-04-26');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
