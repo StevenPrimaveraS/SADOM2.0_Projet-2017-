@@ -1,5 +1,10 @@
-﻿@{
+﻿@{ /*TEMPORAIRE*/}
+@using Prj_Final_2017_.DTO;
+@using Prj_Final_2017_.Models.util; 
+@{
     ViewBag.Title = "Home Page";
+    //TEMPORAIRE
+    Session["user"] = ApplicationFunctions.CompteParticulierFacade.Read(1);
 }
 <link href="~/Content/StylePrincipal.css" rel="stylesheet" media="all" type="text/css">
 <div class="jumbotron">
