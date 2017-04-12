@@ -29,12 +29,10 @@
     var Grid = new WebGrid(DB.Query("SELECT * FROM forfait"));
 }
 @Grid.GetHtml(
-            tableStyle: "webgrid",
+            tableStyle: "webgrid4",
             mode: WebGridPagerModes.All,
             columns: Grid.Columns(
-             Grid.Column(" ", format: @<text>
-                    <button class="btn-xs" style:color="blue">Détail</button></text>),
-                        Grid.Column("IdChambre", "ID Chambre"),
+             Grid.Column("IdChambre", "ID Chambre"),
                         Grid.Column("IdVoiture", "ID Voiture"),
                         Grid.Column("IdSiege", "ID Siege"),
                         Grid.Column("TarifReduit", "Tarif Reduit"),
