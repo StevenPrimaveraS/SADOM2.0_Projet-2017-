@@ -74,8 +74,8 @@ namespace Prj_Final_2017_.Controllers
                         reservationChambreDTO = new ReservationChambreDTO();
                         reservationChambreDTO.IdParticulier = user.IdParticulier;
                         reservationChambreDTO.IdChambre = panierChambre[i].IdChambre;
-                        reservationChambreDTO.DateReservation = VADateHandler.reservationDates(datesChambre[i])[0];
-                        reservationChambreDTO.DateFinReservation = VADateHandler.reservationDates(datesChambre[i])[1];
+                        reservationChambreDTO.DateReservation = VADateHandler.getReservationDates(datesChambre[i])[0];
+                        reservationChambreDTO.DateFinReservation = VADateHandler.getReservationDates(datesChambre[i])[1];
                         listeReservationsChambre.Add(reservationChambreDTO);
                     }
                     //Session["reservationsChambre"] = reservationsChambre;
@@ -86,8 +86,8 @@ namespace Prj_Final_2017_.Controllers
                         reservationSiegeDTO = new ReservationSiegeDTO();
                         reservationSiegeDTO.IdParticulier = user.IdParticulier;
                         reservationSiegeDTO.IdSiege = panierSiege[i].IdSiege;
-                        reservationSiegeDTO.DateReservation = VADateHandler.reservationDates(datesSiege[i])[0];
-                        reservationSiegeDTO.DateFinReservation = VADateHandler.reservationDates(datesSiege[i])[1];
+                        reservationSiegeDTO.DateReservation = VADateHandler.getReservationDates(datesSiege[i])[0];
+                        reservationSiegeDTO.DateFinReservation = VADateHandler.getReservationDates(datesSiege[i])[1];
                         listeReservationsSiege.Add(reservationSiegeDTO);
                     }
                     //Session["reservationsSiege"] = reservationsSiege;
@@ -98,8 +98,8 @@ namespace Prj_Final_2017_.Controllers
                         reservationVoitureDTO = new ReservationVoitureDTO();
                         reservationVoitureDTO.IdParticulier = user.IdParticulier;
                         reservationVoitureDTO.IdVoiture = panierVoiture[i].IdVoiture;
-                        reservationVoitureDTO.DateReservation = VADateHandler.reservationDates(datesVoiture[i])[0];
-                        reservationVoitureDTO.DateFinReservation = VADateHandler.reservationDates(datesVoiture[i])[1];
+                        reservationVoitureDTO.DateReservation = VADateHandler.getReservationDates(datesVoiture[i])[0];
+                        reservationVoitureDTO.DateFinReservation = VADateHandler.getReservationDates(datesVoiture[i])[1];
                         listeReservationsVoiture.Add(reservationVoitureDTO);
                     }
                     //Session["reservationsVoiture"] = reservationsVoiture;
@@ -110,8 +110,8 @@ namespace Prj_Final_2017_.Controllers
                         reservationForfaitDTO = new ReservationForfaitDTO();
                         reservationForfaitDTO.IdParticulier = user.IdParticulier;
                         reservationForfaitDTO.IdForfait = panierForfait[i].IdForfait;
-                        reservationForfaitDTO.DateReservation = VADateHandler.reservationDates(datesForfait[i])[0];
-                        reservationForfaitDTO.DateFinReservation = VADateHandler.reservationDates(datesForfait[i])[1];
+                        reservationForfaitDTO.DateReservation = VADateHandler.getReservationDates(datesForfait[i])[0];
+                        reservationForfaitDTO.DateFinReservation = VADateHandler.getReservationDates(datesForfait[i])[1];
                         listeReservationsForfait.Add(reservationForfaitDTO);
                     }
                     //Session["reservationsForfait"] = reservationsForfait;

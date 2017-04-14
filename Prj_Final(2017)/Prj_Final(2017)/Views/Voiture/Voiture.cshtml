@@ -66,9 +66,10 @@
                         Grid.Column("Plaque", "Plaque"),
                         Grid.Column(" ", format: @<text>
                             @*<button class="btn-xs" style:color="blue" onclick="@("window.location.href='" + @Url.Action("Voiture", "Voiture", Grid.SelectedRow.Value.IdVoiture) + "'");">Ajouter au panier</button>*@
-                            <input type="button" value="Ajouter au panier" onclick="location.href='@Url.Action("AjouterPanier", "Voiture",  new {idItem = item.IdVoiture})'" />
-                        </text>)
+                            @*<input type="button" value="Ajouter au panier" onclick="location.href='@Url.Action("AjouterPanier", "Voiture",  new {idItem = item.IdVoiture})'" />*@
+                            </text>),
+                        Grid.Column(format: (item) => Html.ActionLink("Réserver", "Reserver", "Voiture", new { id = item.IdVoiture }, null), style: "column-action")
+                )
             )
-        )
-    </fieldset>
-</form>
+        </fieldset>
+    </form>

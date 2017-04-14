@@ -25,6 +25,39 @@ namespace Prj_Final_2017_.Controllers
         {
             return View();
         }
+
+        //TODO
+        public ActionResult Reserver(int id) {
+            string txt = id.ToString();
+            ViewBag.IdSiege = txt;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Reserver(int id, FormCollection collection) {
+            try {
+                string sDateDebut = collection["dateDebut"];
+                string sDateFin = collection["dateFin"];
+                List<SiegeDTO> panierSiege = (List<SiegeDTO>) Session["panierSiege"];
+                List<string> datesSiege = (List<string>) Session["datesSiege"];
+                if (panierSiege == null || datesSiege == null) {
+                    panierSiege = new List<SiegeDTO>();
+                    datesSiege = new List<string>();
+                }
+                datesSiege.Add(VADateHandler.ToReservationDates(sDateDebut, sDateFin));
+                panierSiege.Add(ApplicationFunctions.SiegeFacade.Read(id));
+                Session["panierSiege"] = panierSiege;
+                Session["datesSiege"] = datesSiege;
+            }
+            catch (VoyageAhuntsicException e) {
+                System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
+                return View();
+            }
+
+            return Redirect("/Home/Index");
+        }
+        //END TODO
+
         // GET: Siege/Details/5
         public ActionResult Details(int id)
         {

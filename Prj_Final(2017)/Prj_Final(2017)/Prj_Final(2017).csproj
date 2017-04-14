@@ -365,6 +365,9 @@
     <Content Include="Views\CompteFournisseurChambre\Create.cshtml" />
     <Content Include="Views\CompteFournisseurSiege\Create.cshtml" />
     <Content Include="Views\CompteFournisseurVoiture\Create.cshtml" />
+    <Content Include="Views\Chambre\PourHotel.cshtml" />
+    <Content Include="Views\Chambre\Reserver.cshtml" />
+    <Content Include="Views\Voiture\Reserver.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
