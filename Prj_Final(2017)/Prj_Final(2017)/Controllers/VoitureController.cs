@@ -26,8 +26,7 @@ namespace Prj_Final_2017_.Controllers
 
         //TODO
         public ActionResult Reserver(int id) {
-            string txt = id.ToString();
-            ViewBag.IdVoiture = txt;
+            ViewBag.IdVoiture = id;
             return View();
         }
 

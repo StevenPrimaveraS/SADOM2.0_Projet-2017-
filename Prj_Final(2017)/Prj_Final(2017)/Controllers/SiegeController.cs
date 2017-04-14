@@ -12,13 +12,13 @@ namespace Prj_Final_2017_.Controllers
     public class SiegeController : Controller
     {
 
-        protected override void OnActionExecuting(ActionExecutingContext filterContext)
-        {
-            if (Session["user"] != null)
-                base.OnActionExecuting(filterContext);
-            else
-                filterContext.Result = new RedirectResult("~/Account/Login");
-        }
+        //protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        //{
+        //    if (Session["user"] != null)
+        //        base.OnActionExecuting(filterContext);
+        //    else
+        //        filterContext.Result = new RedirectResult("~/Account/Login");
+        //}
 
         // GET: Siege
         public ActionResult Index()
@@ -27,9 +27,15 @@ namespace Prj_Final_2017_.Controllers
         }
 
         //TODO
+        public ActionResult PourVol(int id) {
+            ViewBag.IdVol = id.ToString();
+            return View();
+        }
+
         public ActionResult Reserver(int id) {
-            string txt = id.ToString();
-            ViewBag.IdSiege = txt;
+            ViewBag.IdSiege = id;
+            SiegeDTO siegeDTO = ApplicationFunctions.SiegeFacade.Read(id);
+            ViewBag.IdVol = siegeDTO.IdVol;
             return View();
         }
 

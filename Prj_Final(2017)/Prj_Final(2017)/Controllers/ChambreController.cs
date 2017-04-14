@@ -23,14 +23,14 @@ namespace Prj_Final_2017_.Controllers
         }
         //TODO + Vue associée:
         public ActionResult PourHotel(int id) {
-            string txt = id.ToString();
-            ViewBag.IdHotel = txt;
+            ViewBag.IdHotel = id.ToString();
             return View();
         }
 
         public ActionResult Reserver(int id) {
-            string txt = id.ToString();
-            ViewBag.IdChambre = txt;
+            ViewBag.IdChambre = id;
+            ChambreDTO chambreDTO = ApplicationFunctions.ChambreFacade.Read(id);
+            ViewBag.IdHotel = chambreDTO.IdHotel;
             return View();
         }
 
