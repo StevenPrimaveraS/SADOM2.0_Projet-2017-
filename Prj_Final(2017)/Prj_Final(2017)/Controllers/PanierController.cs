@@ -143,11 +143,74 @@ namespace Prj_Final_2017_.Controllers
             }
             return RedirectToAction("Index");
         }
-
-        // GET: Voiture/AjouterPanier/5
-        public ActionResult Supprimer(int idItem)
+        
+        public ActionResult Supprimer(int id)
         {
-            try
+            List<ChambreDTO> panierChambre = (List<ChambreDTO>) Session["panierChambre"];
+            List<SiegeDTO> panierSiege = (List<SiegeDTO>) Session["panierSiege"];
+            List<VoitureDTO> panierVoiture = (List<VoitureDTO>) Session["panierVoiture"];
+            List<ForfaitDTO> panierForfait = (List<ForfaitDTO>) Session["panierForfait"];
+            List<string> datesChambre = (List<string>) Session["datesChambre"];
+            List<string> datesSiege = (List<string>) Session["datesSiege"];
+            List<string> datesVoiture = (List<string>) Session["datesVoiture"];
+            List<string> datesForfait = (List<string>) Session["datesForfait"];
+            if (panierChambre == null || datesChambre == null) {
+                panierChambre = new List<ChambreDTO>();
+                datesChambre = new List<string>();
+            }
+            if (panierSiege == null || datesSiege == null) {
+                panierSiege = new List<SiegeDTO>();
+                datesSiege = new List<string>();
+            }
+            if (panierVoiture == null || datesVoiture == null) {
+                panierVoiture = new List<VoitureDTO>();
+                datesVoiture = new List<string>();
+            }
+            if (panierForfait == null || datesForfait == null) {
+                panierForfait = new List<ForfaitDTO>();
+                datesForfait = new List<string>();
+            }
+            //
+            int iterator = id-1;
+            bool trouve = false;
+            for (int i = 0; i < panierChambre.Count && !trouve; i++) {
+                if(iterator == 0) {
+                    panierChambre.RemoveAt(i);
+                    datesChambre.RemoveAt(i);
+                    trouve = true;
+                    break;
+                }
+                iterator--;
+            }
+            for (int i = 0; i < panierSiege.Count && !trouve; i++) {
+                if (iterator == 0) {
+                    panierSiege.RemoveAt(i);
+                    datesSiege.RemoveAt(i);
+                    trouve = true;
+                    break;
+                }
+                iterator--;
+            }
+            for (int i = 0; i < panierVoiture.Count && !trouve; i++) {
+                if (iterator == 0) {
+                    panierVoiture.RemoveAt(i);
+                    datesVoiture.RemoveAt(i);
+                    trouve = true;
+                    break;
+                }
+                iterator--;
+            }
+            for (int i = 0; i < panierForfait.Count && !trouve; i++) {
+                if (iterator == 0) {
+                    panierForfait.RemoveAt(i);
+                    datesForfait.RemoveAt(i);
+                    trouve = true;
+                    break;
+                }
+                iterator--;
+            }
+
+            /*try
             {
                 PanierDTO panierDTO = new PanierDTO();
                 PanierDAO panierDAO = new PanierDAO();
@@ -162,8 +225,8 @@ namespace Prj_Final_2017_.Controllers
             catch (VoyageAhuntsicException e)
             {
                 System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
-            }
-            return RedirectToAction("Voiture");
+            }*/
+            return Redirect("/Panier/Panier");
         }
     }
 }
