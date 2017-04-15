@@ -7,7 +7,7 @@ using System.Web;
 namespace Prj_Final_2017_.Models.util {
     public class VADateHandler {
 
-        internal static List<DateTime> getReservationDates(string sDatesReservation) {
+        public static List<DateTime> getReservationDates(string sDatesReservation) {
             List<DateTime> datesReservation = new List<DateTime>();
             try {
                 string[] sDates = sDatesReservation.Split(';');
@@ -31,7 +31,7 @@ namespace Prj_Final_2017_.Models.util {
         }
 
         //TODO
-        internal static string ToReservationDates(string sDateDebut, string sDateFin) {
+        public static string ToReservationDates(string sDateDebut, string sDateFin) {
             return sDateDebut + ";" + sDateFin;
         }
 

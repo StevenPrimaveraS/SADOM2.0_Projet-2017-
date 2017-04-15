@@ -1,7 +1,38 @@
 ﻿@using WebMatrix.Data;
+@using Prj_Final_2017_.DTO;
+@using Prj_Final_2017_.Models.util;
 @{
     ViewBag.Title = "Panier";
     ViewBag.Message = "Votre Panier contient " + ViewBag.nbItemsPanier + " produits";
+
+    int iterator = 0;//Chambre>Siege>Voiture>Forfait
+
+    //Possibilité de changer les panier en listes de reservation
+    List<ChambreDTO> panierChambre = (List<ChambreDTO>) Session["panierChambre"];
+    List<SiegeDTO> panierSiege = (List<SiegeDTO>) Session["panierSiege"];
+    List<VoitureDTO> panierVoiture = (List<VoitureDTO>) Session["panierVoiture"];
+    List<ForfaitDTO> panierForfait = (List<ForfaitDTO>) Session["panierForfait"];
+    List<string> datesChambre = (List<string>) Session["datesChambre"];
+    List<string> datesSiege = (List<string>) Session["datesSiege"];
+    List<string> datesVoiture = (List<string>) Session["datesVoiture"];
+    List<string> datesForfait = (List<string>) Session["datesForfait"];
+    if (panierChambre == null || datesChambre == null) {
+        panierChambre = new List<ChambreDTO>();
+        datesChambre = new List<string>();
+    }
+    if (panierSiege == null || datesSiege == null) {
+        panierSiege = new List<SiegeDTO>();
+        datesSiege = new List<string>();
+    }
+    if (panierVoiture == null || datesVoiture == null) {
+        panierVoiture = new List<VoitureDTO>();
+        datesVoiture = new List<string>();
+    }
+    if (panierForfait == null || datesForfait == null) {
+        panierForfait = new List<ForfaitDTO>();
+        datesForfait = new List<string>();
+    }
+
 }
 
 <div class="jumbotron">
@@ -9,39 +40,133 @@
     <p class="lead">Liste des produits</p>
 </div>
 <link href="~/Content/StylePrincipal.css" rel="stylesheet" media="all" type="text/css">
+
+
 <ul id="listeProduits" style="flex-direction:column">
-    <li style="flex-direction:row;justify-content:space-around; display:flex">
-        <span style="flex:auto">
-            [Information]
-        </span>
-        <span style="flex:auto">
-            [Prix]
-        </span>
-        <span style="flex:auto">
-            [Quantite]
-        </span>
-        <span style="flex:auto">
-            <input class="text-form" type="button" value="Supprimer" />
-        </span>
-    </li>
+    @foreach (ChambreDTO chambreDTO in panierChambre) {
+        HotelDTO hotelDTO = ApplicationFunctions.HotelFacade.Read(chambreDTO.IdHotel);
+        <li style="flex-direction:row;justify-content:space-around; display:flex">
+            <span style="flex:auto">
+                @chambreDTO.NomChambre
+            </span>
+            <span style="flex:auto">
+                @chambreDTO.Tarif
+            </span>
+            <span style="flex:auto">
+                @VADateHandler.getReservationDates(datesChambre[panierChambre.IndexOf(chambreDTO)])[0].ToShortDateString()
+                &nbsp;&nbsp; &ndash; &nbsp;&nbsp;
+                @VADateHandler.getReservationDates(datesChambre[panierChambre.IndexOf(chambreDTO)])[1].ToShortDateString()
+            </span>
+            <span style="flex:auto">
+                <a href="Panier/Supprimer/@iterator" class="btn btn-warning">Supprimer</a>
+            </span>
+        </li>
+        iterator++;
+    }
+    @foreach (SiegeDTO siegeDTO in panierSiege) {
+        VolDTO volDTO = ApplicationFunctions.VolFacade.Read(siegeDTO.IdVol);
+        CompagnieAerienneDTO compagnieAerienneDTO = ApplicationFunctions.CompagnieAerienneFacade.Read(volDTO.IdCompagnieAerienne);
+        <li style="flex-direction:row;justify-content:space-around; display:flex">
+            <span style="flex:auto">
+                @siegeDTO.Numero
+            </span>
+            <span style="flex:auto">
+                @volDTO.Tarif
+            </span>
+            <span style="flex:auto">
+                @VADateHandler.getReservationDates(datesSiege[panierSiege.IndexOf(siegeDTO)])[0].ToShortDateString()
+                &nbsp;&nbsp; &ndash; &nbsp;&nbsp;
+                @VADateHandler.getReservationDates(datesSiege[panierSiege.IndexOf(siegeDTO)])[1].ToShortDateString()
+            </span>
+            <span style="flex:auto">
+                <a href="Panier/Supprimer/@iterator" class="btn btn-warning">Supprimer</a>
+            </span>
+        </li>
+        iterator++;
+    }
+    @foreach (VoitureDTO voitureDTO in panierVoiture) {
+        AgenceVoitureDTO agenceVoitureDTO = ApplicationFunctions.AgenceVoitureFacade.Read(voitureDTO.IdAgence);
+        <li style="flex-direction:row;justify-content:space-around; display:flex">
+            <span style="flex:auto">
+                @voitureDTO.Nom
+                &nbsp; &ndash; &nbsp;
+                @voitureDTO.Plaque
+            </span>
+            <span style="flex:auto">
+                @voitureDTO.Tarif
+            </span>
+            <span style="flex:auto">
+                @VADateHandler.getReservationDates(datesVoiture[panierVoiture.IndexOf(voitureDTO)])[0].ToShortDateString()
+                &nbsp;&nbsp; &ndash; &nbsp;&nbsp;
+                @VADateHandler.getReservationDates(datesVoiture[panierVoiture.IndexOf(voitureDTO)])[1].ToShortDateString()
+            </span>
+            <span style="flex:auto">
+                <a href="Panier/Supprimer/@iterator" class="btn btn-warning">Supprimer</a>
+            </span>
+        </li>
+        iterator++;
+    }
+    @foreach (ForfaitDTO forfaitDTO in panierForfait) {
+        <li style="flex-direction:row;justify-content:space-around; display:flex">
+            <span style="flex:auto">
+                @forfaitDTO.IdChambre
+                &nbsp; &ndash; &nbsp;
+                @forfaitDTO.IdSiege
+                &nbsp; &ndash; &nbsp;
+                @forfaitDTO.IdVoiture
+            </span>
+            <span style="flex:auto">
+                @forfaitDTO.TarifReduit
+            </span>
+            <span style="flex:auto">
+                @VADateHandler.getReservationDates(datesForfait[panierForfait.IndexOf(forfaitDTO)])[0].ToShortDateString()
+                &nbsp;&nbsp; &ndash; &nbsp;&nbsp;
+                @VADateHandler.getReservationDates(datesForfait[panierForfait.IndexOf(forfaitDTO)])[1].ToShortDateString()
+            </span>
+            <span style="flex:auto">
+                <a href="Panier/Supprimer/@iterator" class="btn btn-warning">Supprimer</a>
+            </span>
+        </li>
+        iterator++;
+    }
 </ul>
+<button>Acheter</button>@*TEMP*@
 
-@{
-    var DB = Database.Open("mysqlConnexionString");
-    var Grid = new WebGrid(DB.Query("SELECT * FROM panier"));
-}
-@Grid.GetHtml(
-            tableStyle: "webgrid",
-            mode: WebGridPagerModes.All,
-            columns: Grid.Columns(
-                        Grid.Column("Information", "Item"),
-                        Grid.Column("Prix", "Prix"),
-                        Grid.Column("Quantite", "Quantite"),
-                        Grid.Column(" ", format: @<text>
-                            @*<button class="btn-xs" style:color="blue" onclick="@("window.location.href='" + @Url.Action("Voiture", "Voiture", Grid.SelectedRow.Value.IdVoiture) + "'");">Ajouter au panier</button>*@
-                            <input type="button" value="Supprimer" onclick="location.href='@Url.Action("Supprimer", "Panier",  new {idItem = item.IdPanier})'" />
-                        </text>)
+@*
+    <ul id="listeProduits" style="flex-direction:column">
+        <li style="flex-direction:row;justify-content:space-around; display:flex">
+            <span style="flex:auto">
+                [Information]
+            </span>
+            <span style="flex:auto">
+                [Prix]
+            </span>
+            <span style="flex:auto">
+                [Quantite]
+            </span>
+            <span style="flex:auto">
+                <input class="text-form" type="button" value="Supprimer" />
+            </span>
+        </li>
+    </ul>
+
+    @{
+        var DB = Database.Open("mysqlConnexionString");
+        var Grid = new WebGrid(DB.Query("SELECT * FROM panier"));
+    }
+    @Grid.GetHtml(
+                tableStyle: "webgrid",
+                mode: WebGridPagerModes.All,
+                columns: Grid.Columns(
+                            Grid.Column("Information", "Item"),
+                            Grid.Column("Prix", "Prix"),
+                            Grid.Column("Quantite", "Quantite"),
+                            Grid.Column(" ", format: @<text>
+                                @*<button class="btn-xs" style:color="blue" onclick="@("window.location.href='" + @Url.Action("Voiture", "Voiture", Grid.SelectedRow.Value.IdVoiture) + "'");">Ajouter au panier</button>
+                                <input type="button" value="Supprimer" onclick="location.href='@Url.Action("Supprimer", "Panier",  new {idItem = item.IdPanier})'" />
+                            </text>)
+                )
             )
-        )
 
 
+*@
