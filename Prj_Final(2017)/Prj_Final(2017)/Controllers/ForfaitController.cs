@@ -22,6 +22,37 @@ namespace Prj_Final_2017_.Controllers
             return View();
         }
 
+        //TODO
+        public ActionResult Reserver(int id) {
+            ViewBag.IdForfait = id;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Reserver(int id, FormCollection collection) {
+            try {
+                string sDateDebut = collection["dateDebut"];
+                string sDateFin = collection["dateFin"];
+                List<ForfaitDTO> panierForfait = (List<ForfaitDTO>) Session["panierForfait"];
+                List<string> datesForfait = (List<string>) Session["datesForfait"];
+                if (panierForfait == null || datesForfait == null) {
+                    panierForfait = new List<ForfaitDTO>();
+                    datesForfait = new List<string>();
+                }
+                datesForfait.Add(VADateHandler.ToReservationDates(sDateDebut, sDateFin));
+                panierForfait.Add(ApplicationFunctions.ForfaitFacade.Read(id));
+                Session["panierForfait"] = panierForfait;
+                Session["datesForfait"] = datesForfait;
+            }
+            catch (VoyageAhuntsicException e) {
+                System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
+                return View();
+            }
+
+            return Redirect("/Home/Index");
+        }
+        //END TODO
+
         // GET: Forfait/Details/5
         public ActionResult Details(int id)
         {

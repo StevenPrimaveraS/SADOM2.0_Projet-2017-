@@ -21,6 +21,44 @@ namespace Prj_Final_2017_.Controllers
         {
             return View();
         }
+        //TODO + Vue associée:
+        public ActionResult PourHotel(int id) {
+            ViewBag.IdHotel = id.ToString();
+            return View();
+        }
+
+        public ActionResult Reserver(int id) {
+            ViewBag.IdChambre = id;
+            ChambreDTO chambreDTO = ApplicationFunctions.ChambreFacade.Read(id);
+            ViewBag.IdHotel = chambreDTO.IdHotel;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Reserver(int id, FormCollection collection) {
+            try {
+                string sDateDebut = collection["dateDebut"];
+                string sDateFin = collection["dateFin"];
+                List<ChambreDTO> panierChambre = (List<ChambreDTO>) Session["panierChambre"];
+                List<string> datesChambre = (List<string>) Session["datesChambre"];
+                if (panierChambre == null || datesChambre == null) {
+                    panierChambre = new List<ChambreDTO>();
+                    datesChambre = new List<string>();
+                }
+                datesChambre.Add(VADateHandler.ToReservationDates(sDateDebut, sDateFin));
+                System.Diagnostics.Debug.WriteLine(VADateHandler.ToReservationDates(sDateDebut, sDateFin));
+                panierChambre.Add(ApplicationFunctions.ChambreFacade.Read(id));
+                Session["panierChambre"] = panierChambre;
+                Session["datesChambre"] = datesChambre;
+            } catch (VoyageAhuntsicException e) {
+                System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
+                return View();
+            }
+            
+            return Redirect("/Home/Index");
+        }
+        //End TODO
+
 
         // GET: Chambre/Details/5
         public ActionResult Details(int id)
@@ -211,10 +249,5 @@ namespace Prj_Final_2017_.Controllers
             }
         }
 
-        
-        public ActionResult ReturnChambreDisponibles(int idHotel)
-        {
-            return RedirectToAction("Chambre", new { idHotel = idHotel });
-        }
     }
 }

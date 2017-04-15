@@ -24,6 +24,37 @@ namespace Prj_Final_2017_.Controllers
             return View();
         }
 
+        //TODO
+        public ActionResult Reserver(int id) {
+            ViewBag.IdVoiture = id;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Reserver(int id, FormCollection collection) {
+            try {
+                string sDateDebut = collection["dateDebut"];
+                string sDateFin = collection["dateFin"];
+                List<VoitureDTO> panierVoiture = (List<VoitureDTO>) Session["panierVoiture"];
+                List<string> datesVoiture = (List<string>) Session["datesVoiture"];
+                if (panierVoiture == null || datesVoiture == null) {
+                    panierVoiture = new List<VoitureDTO>();
+                    datesVoiture = new List<string>();
+                }
+                datesVoiture.Add(VADateHandler.ToReservationDates(sDateDebut, sDateFin));
+                panierVoiture.Add(ApplicationFunctions.VoitureFacade.Read(id));
+                Session["panierVoiture"] = panierVoiture;
+                Session["datesVoiture"] = datesVoiture;
+            }
+            catch (VoyageAhuntsicException e) {
+                System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
+                return View();
+            }
+
+            return Redirect("/Home/Index");
+        }
+        //END TODO
+
         // GET: Voiture/Details/5
         public ActionResult Details(int id)
         {
@@ -223,7 +254,7 @@ namespace Prj_Final_2017_.Controllers
 
                 PanierDAO panierDAO = new PanierDAO();
                 panierDAO.Add(panierDTO);
-                return RedirectToAction("Voiture");
+                return Redirect("/Voiture/Reserver/"+idItem);
             }
             catch (FormatException e)
             {

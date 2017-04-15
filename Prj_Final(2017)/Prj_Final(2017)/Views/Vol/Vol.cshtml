@@ -70,10 +70,10 @@
                         Grid.Column("IdCompagnieAerienne", "Date Arrivee"),
                         Grid.Column("IsRemboursable", "Remboursable"),
                         Grid.Column("Tarif", "Tarif"),
-                        Grid.Column(" ", format: @<text>
-                            @*<button class="btn-xs" style:color="blue">Voir sieges disponibles</button>*@
-                            <input type="button" value="Voir les sieges" onclick="location.href='@Url.Action("ReturnSiegesDisponibles", "Siege",  new {IdVol = item.IdVol})'" />
-                        </text>)
+                        @*Grid.Column(" ", format: @<text>
+                            <button class="btn-xs" style:color="blue">Voir sieges disponibles</button>
+                        </text>)*@
+                        Grid.Column(format: (item) => Html.ActionLink("Voir les sieges", "PourVol", "Siege", new { id = item.IdVol }, null), style: "column-action")
             )
         )
 

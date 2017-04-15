@@ -69,10 +69,7 @@
                         Grid.Column("Ville", "Ville"),
                         Grid.Column("Categorie", "Categorie"),
                         Grid.Column("Description", "Description"),
-                        Grid.Column(" ", format: @<text>
-                            @*<button class="btn-xs" style:col or="blue">Voir les chambres</button>*@
-                            <input type="button" value="Voir les chambres" onclick="location.href='@Url.Action("ReturnChambreDisponibles", "Chambre",  new {idHotel = item.IdHotel})'" />
-                        </text>)
+                        Grid.Column(format: (item) => Html.ActionLink("Voir les chambres", "PourHotel", "Chambre" , new { id = item.IdHotel }, null), style: "column-action")
             )
         )
  

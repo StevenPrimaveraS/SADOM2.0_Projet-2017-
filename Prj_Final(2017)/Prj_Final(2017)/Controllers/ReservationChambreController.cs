@@ -70,8 +70,8 @@ namespace Prj_Final_2017_.Controllers {
                 int idParticulier = int.Parse(collection["idParticulier"]);
                 int idChambre = int.Parse(collection["chambre"]);
 
-                DateTime dateDebut = VADateHandler.reservationDates(sDateDebut + ";" + sDateFin)[0];
-                DateTime dateFin = VADateHandler.reservationDates(sDateDebut + ";" + sDateFin)[1];
+                DateTime dateDebut = VADateHandler.getReservationDates(sDateDebut + ";" + sDateFin)[0];
+                DateTime dateFin = VADateHandler.getReservationDates(sDateDebut + ";" + sDateFin)[1];
                 if (Session["user"].GetType() == typeof(CompteParticulierDTO)) {
                     CompteParticulierDTO user = (CompteParticulierDTO) Session["user"];
                     if (Session["admin"] != null) {

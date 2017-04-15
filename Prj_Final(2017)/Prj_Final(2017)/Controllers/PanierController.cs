@@ -74,8 +74,8 @@ namespace Prj_Final_2017_.Controllers
                         reservationChambreDTO = new ReservationChambreDTO();
                         reservationChambreDTO.IdParticulier = user.IdParticulier;
                         reservationChambreDTO.IdChambre = panierChambre[i].IdChambre;
-                        reservationChambreDTO.DateReservation = VADateHandler.reservationDates(datesChambre[i])[0];
-                        reservationChambreDTO.DateFinReservation = VADateHandler.reservationDates(datesChambre[i])[1];
+                        reservationChambreDTO.DateReservation = VADateHandler.getReservationDates(datesChambre[i])[0];
+                        reservationChambreDTO.DateFinReservation = VADateHandler.getReservationDates(datesChambre[i])[1];
                         listeReservationsChambre.Add(reservationChambreDTO);
                     }
                     //Session["reservationsChambre"] = reservationsChambre;
@@ -86,8 +86,8 @@ namespace Prj_Final_2017_.Controllers
                         reservationSiegeDTO = new ReservationSiegeDTO();
                         reservationSiegeDTO.IdParticulier = user.IdParticulier;
                         reservationSiegeDTO.IdSiege = panierSiege[i].IdSiege;
-                        reservationSiegeDTO.DateReservation = VADateHandler.reservationDates(datesSiege[i])[0];
-                        reservationSiegeDTO.DateFinReservation = VADateHandler.reservationDates(datesSiege[i])[1];
+                        reservationSiegeDTO.DateReservation = VADateHandler.getReservationDates(datesSiege[i])[0];
+                        reservationSiegeDTO.DateFinReservation = VADateHandler.getReservationDates(datesSiege[i])[1];
                         listeReservationsSiege.Add(reservationSiegeDTO);
                     }
                     //Session["reservationsSiege"] = reservationsSiege;
@@ -98,8 +98,8 @@ namespace Prj_Final_2017_.Controllers
                         reservationVoitureDTO = new ReservationVoitureDTO();
                         reservationVoitureDTO.IdParticulier = user.IdParticulier;
                         reservationVoitureDTO.IdVoiture = panierVoiture[i].IdVoiture;
-                        reservationVoitureDTO.DateReservation = VADateHandler.reservationDates(datesVoiture[i])[0];
-                        reservationVoitureDTO.DateFinReservation = VADateHandler.reservationDates(datesVoiture[i])[1];
+                        reservationVoitureDTO.DateReservation = VADateHandler.getReservationDates(datesVoiture[i])[0];
+                        reservationVoitureDTO.DateFinReservation = VADateHandler.getReservationDates(datesVoiture[i])[1];
                         listeReservationsVoiture.Add(reservationVoitureDTO);
                     }
                     //Session["reservationsVoiture"] = reservationsVoiture;
@@ -110,8 +110,8 @@ namespace Prj_Final_2017_.Controllers
                         reservationForfaitDTO = new ReservationForfaitDTO();
                         reservationForfaitDTO.IdParticulier = user.IdParticulier;
                         reservationForfaitDTO.IdForfait = panierForfait[i].IdForfait;
-                        reservationForfaitDTO.DateReservation = VADateHandler.reservationDates(datesForfait[i])[0];
-                        reservationForfaitDTO.DateFinReservation = VADateHandler.reservationDates(datesForfait[i])[1];
+                        reservationForfaitDTO.DateReservation = VADateHandler.getReservationDates(datesForfait[i])[0];
+                        reservationForfaitDTO.DateFinReservation = VADateHandler.getReservationDates(datesForfait[i])[1];
                         listeReservationsForfait.Add(reservationForfaitDTO);
                     }
                     //Session["reservationsForfait"] = reservationsForfait;
@@ -143,11 +143,74 @@ namespace Prj_Final_2017_.Controllers
             }
             return RedirectToAction("Index");
         }
-
-        // GET: Voiture/AjouterPanier/5
-        public ActionResult Supprimer(int idItem)
+        
+        public ActionResult Supprimer(int id)
         {
-            try
+            List<ChambreDTO> panierChambre = (List<ChambreDTO>) Session["panierChambre"];
+            List<SiegeDTO> panierSiege = (List<SiegeDTO>) Session["panierSiege"];
+            List<VoitureDTO> panierVoiture = (List<VoitureDTO>) Session["panierVoiture"];
+            List<ForfaitDTO> panierForfait = (List<ForfaitDTO>) Session["panierForfait"];
+            List<string> datesChambre = (List<string>) Session["datesChambre"];
+            List<string> datesSiege = (List<string>) Session["datesSiege"];
+            List<string> datesVoiture = (List<string>) Session["datesVoiture"];
+            List<string> datesForfait = (List<string>) Session["datesForfait"];
+            if (panierChambre == null || datesChambre == null) {
+                panierChambre = new List<ChambreDTO>();
+                datesChambre = new List<string>();
+            }
+            if (panierSiege == null || datesSiege == null) {
+                panierSiege = new List<SiegeDTO>();
+                datesSiege = new List<string>();
+            }
+            if (panierVoiture == null || datesVoiture == null) {
+                panierVoiture = new List<VoitureDTO>();
+                datesVoiture = new List<string>();
+            }
+            if (panierForfait == null || datesForfait == null) {
+                panierForfait = new List<ForfaitDTO>();
+                datesForfait = new List<string>();
+            }
+            //
+            int iterator = id-1;
+            bool trouve = false;
+            for (int i = 0; i < panierChambre.Count && !trouve; i++) {
+                if(iterator == 0) {
+                    panierChambre.RemoveAt(i);
+                    datesChambre.RemoveAt(i);
+                    trouve = true;
+                    break;
+                }
+                iterator--;
+            }
+            for (int i = 0; i < panierSiege.Count && !trouve; i++) {
+                if (iterator == 0) {
+                    panierSiege.RemoveAt(i);
+                    datesSiege.RemoveAt(i);
+                    trouve = true;
+                    break;
+                }
+                iterator--;
+            }
+            for (int i = 0; i < panierVoiture.Count && !trouve; i++) {
+                if (iterator == 0) {
+                    panierVoiture.RemoveAt(i);
+                    datesVoiture.RemoveAt(i);
+                    trouve = true;
+                    break;
+                }
+                iterator--;
+            }
+            for (int i = 0; i < panierForfait.Count && !trouve; i++) {
+                if (iterator == 0) {
+                    panierForfait.RemoveAt(i);
+                    datesForfait.RemoveAt(i);
+                    trouve = true;
+                    break;
+                }
+                iterator--;
+            }
+
+            /*try
             {
                 PanierDTO panierDTO = new PanierDTO();
                 PanierDAO panierDAO = new PanierDAO();
@@ -162,8 +225,8 @@ namespace Prj_Final_2017_.Controllers
             catch (VoyageAhuntsicException e)
             {
                 System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
-            }
-            return RedirectToAction("Voiture");
+            }*/
+            return Redirect("/Panier/Panier");
         }
     }
 }

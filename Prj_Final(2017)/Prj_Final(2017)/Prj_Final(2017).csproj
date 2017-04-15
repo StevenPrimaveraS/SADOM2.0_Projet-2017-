@@ -365,7 +365,13 @@
     <Content Include="Views\CompteFournisseurChambre\Create.cshtml" />
     <Content Include="Views\CompteFournisseurSiege\Create.cshtml" />
     <Content Include="Views\CompteFournisseurVoiture\Create.cshtml" />
+    <Content Include="Views\Chambre\PourHotel.cshtml" />
+    <Content Include="Views\Chambre\Reserver.cshtml" />
+    <Content Include="Views\Voiture\Reserver.cshtml" />
     <Content Include="Views\Siege\Siege.cshtml" />
+    <Content Include="Views\Siege\Reserver.cshtml" />
+    <Content Include="Views\Siege\PourVol.cshtml" />
+    <Content Include="Views\Forfait\Reserver.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
