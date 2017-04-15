@@ -62,7 +62,7 @@ namespace Prj_Final_2017_.Models.DAO {
                 }
             }
             catch (MySqlException mysqlException) {
-                throw new VoyageAhuntsicException(1234,VoyageAhuntsicException.CharteErreur[1234],mysqlException);
+                throw new VoyageAhuntsicException(21001, VoyageAhuntsicException.CharteErreur[21001],mysqlException);
             }
         }
 
@@ -93,7 +93,7 @@ namespace Prj_Final_2017_.Models.DAO {
                 }
             }
             catch (MySqlException mysqlException) {
-                throw new VoyageAhuntsicException(1234,VoyageAhuntsicException.CharteErreur[1234],mysqlException);
+                throw new VoyageAhuntsicException(21002, VoyageAhuntsicException.CharteErreur[21002],mysqlException);
             }
             return reservationChambreDTO;
         }
@@ -119,7 +119,7 @@ namespace Prj_Final_2017_.Models.DAO {
                 }
             }
             catch (MySqlException mysqlException) {
-                throw new VoyageAhuntsicException(1234,VoyageAhuntsicException.CharteErreur[1234],mysqlException);
+                throw new VoyageAhuntsicException(21003, VoyageAhuntsicException.CharteErreur[21003],mysqlException);
             }
         }
 
@@ -140,7 +140,7 @@ namespace Prj_Final_2017_.Models.DAO {
                 }
             }
             catch (MySqlException mysqlException) {
-                throw new VoyageAhuntsicException(1234,VoyageAhuntsicException.CharteErreur[1234],mysqlException);
+                throw new VoyageAhuntsicException(21004, VoyageAhuntsicException.CharteErreur[21004],mysqlException);
             }
         }
 
@@ -161,7 +161,7 @@ namespace Prj_Final_2017_.Models.DAO {
                 }
             }
             catch (MySqlException mysqlException) {
-                throw new VoyageAhuntsicException(1234,VoyageAhuntsicException.CharteErreur[1234],mysqlException);
+                throw new VoyageAhuntsicException(21005, VoyageAhuntsicException.CharteErreur[21005],mysqlException);
             }
             return dataset;
         }
@@ -193,7 +193,7 @@ namespace Prj_Final_2017_.Models.DAO {
             }
             catch (MySqlException mysqlException)
             {
-                throw new VoyageAhuntsicException(1234, VoyageAhuntsicException.CharteErreur[1234], mysqlException);
+                throw new VoyageAhuntsicException(21006, VoyageAhuntsicException.CharteErreur[21006], mysqlException);
             }
             return dataset;
         }

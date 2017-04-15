@@ -140,8 +140,11 @@ namespace Prj_Final_2017_.Controllers
             }
             catch (VoyageAhuntsicException e) {
                 System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
+                if(e.InnerException != null) {
+                    System.Diagnostics.Debug.WriteLine("InnerException : "+e.InnerException.Message);
+                }
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Panier");
         }
         
         public ActionResult Supprimer(int id)

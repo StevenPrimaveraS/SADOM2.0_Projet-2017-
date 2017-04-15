@@ -40,7 +40,7 @@ namespace Prj_Final_2017_.Models.Service {
             if (siegeDAO.Read(reservationSiegeDTO.IdParticulier) == null) {
                 throw new VoyageAhuntsicException(1234);
             }
-            if (reservationSiegeDTO.DateReservation > DateTime.Now) {
+            if (reservationSiegeDTO.DateReservation < DateTime.Now) {
                 throw new VoyageAhuntsicException(1234);
             }
             if (reservationSiegeDTO.DateFinReservation < reservationSiegeDTO.DateReservation) {
