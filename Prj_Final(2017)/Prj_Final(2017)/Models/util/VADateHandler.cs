@@ -14,9 +14,9 @@ namespace Prj_Final_2017_.Models.util {
 
                 foreach (string date in sDates) {
                     string[] infoDate = date.Split('-');
-                    int day = int.Parse(infoDate[0]);
+                    int day = int.Parse(infoDate[2]);
                     int month = int.Parse(infoDate[1]);
-                    int year = int.Parse(infoDate[2]);
+                    int year = int.Parse(infoDate[0]);
                     DateTime dateTime = new DateTime(year, month, day);
                     datesReservation.Add(dateTime);
                 }

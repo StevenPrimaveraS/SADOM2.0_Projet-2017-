@@ -371,6 +371,7 @@
     <Content Include="Views\Siege\Siege.cshtml" />
     <Content Include="Views\Siege\Reserver.cshtml" />
     <Content Include="Views\Siege\PourVol.cshtml" />
+    <Content Include="Views\Forfait\Reserver.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

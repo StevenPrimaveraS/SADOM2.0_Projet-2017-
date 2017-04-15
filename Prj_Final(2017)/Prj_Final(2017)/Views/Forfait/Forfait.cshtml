@@ -20,9 +20,10 @@
                         Grid.Column("IdVoiture", "ID Voiture"),
                         Grid.Column("IdSiege", "ID Siege"),
                         Grid.Column("TarifReduit", "Tarif Reduit"),
-                        Grid.Column(" ", format: @<text>
+                        @*Grid.Column(" ", format: @<text>
                             <button class="btn-xs" style:color="blue">Appliquer</button>
-                        </text>)
+                        </text>)*@
+                        Grid.Column(format: (item) => Html.ActionLink("Réserver", "Reserver", "Forfait", new { id = item.IdForfait }, null), style: "column-action")
             )
         )
 

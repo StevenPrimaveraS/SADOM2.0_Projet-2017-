@@ -46,6 +46,7 @@ namespace Prj_Final_2017_.Controllers
                     datesChambre = new List<string>();
                 }
                 datesChambre.Add(VADateHandler.ToReservationDates(sDateDebut, sDateFin));
+                System.Diagnostics.Debug.WriteLine(VADateHandler.ToReservationDates(sDateDebut, sDateFin));
                 panierChambre.Add(ApplicationFunctions.ChambreFacade.Read(id));
                 Session["panierChambre"] = panierChambre;
                 Session["datesChambre"] = datesChambre;
