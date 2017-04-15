@@ -210,5 +210,11 @@ namespace Prj_Final_2017_.Controllers
                 return View();
             }
         }
+
+        
+        public ActionResult ReturnChambreDisponibles(int idHotel)
+        {
+            return RedirectToAction("Chambre", new { idHotel = idHotel });
+        }
     }
 }

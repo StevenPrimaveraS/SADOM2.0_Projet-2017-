@@ -70,7 +70,8 @@
                         Grid.Column("Categorie", "Categorie"),
                         Grid.Column("Description", "Description"),
                         Grid.Column(" ", format: @<text>
-                            <button class="btn-xs" style:col or="blue">Voir les chambres</button>
+                            @*<button class="btn-xs" style:col or="blue">Voir les chambres</button>*@
+                            <input type="button" value="Voir les chambres" onclick="location.href='@Url.Action("ReturnChambreDisponibles", "Chambre",  new {idHotel = item.IdHotel})'" />
                         </text>)
             )
         )

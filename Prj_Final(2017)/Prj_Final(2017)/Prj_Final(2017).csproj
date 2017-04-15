@@ -365,6 +365,7 @@
     <Content Include="Views\CompteFournisseurChambre\Create.cshtml" />
     <Content Include="Views\CompteFournisseurSiege\Create.cshtml" />
     <Content Include="Views\CompteFournisseurVoiture\Create.cshtml" />
+    <Content Include="Views\Siege\Siege.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
