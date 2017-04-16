@@ -55,8 +55,6 @@ namespace Prj_Final_2017_.Controllers
                     hotelDTO.Categorie = model.Categorie;
                     hotelDTO.Description = model.Description;
                     ApplicationFunctions.HotelFacade.Add(hotelDTO);
-
-                    //TODO
                     hotelDTO = ApplicationFunctions.HotelFacade.FindByBasicInfo(hotelDTO);
 
                     CompteFournisseurChambreDTO compteFournisseurChambreDTO = new CompteFournisseurChambreDTO();
@@ -65,7 +63,7 @@ namespace Prj_Final_2017_.Controllers
                     compteFournisseurChambreDTO.IdHotel = hotelDTO.IdHotel;
                     ApplicationFunctions.CompteFournisseurChambreFacade.Add(compteFournisseurChambreDTO);
 
-                    return Redirect("/Home/Index");
+                    return Redirect("/Account/Login");
                 }
             }
             catch (VoyageAhuntsicException e)

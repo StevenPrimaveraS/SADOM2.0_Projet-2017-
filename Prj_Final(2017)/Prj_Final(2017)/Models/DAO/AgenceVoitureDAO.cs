@@ -36,6 +36,7 @@ namespace Prj_Final_2017_.Models.DAO {
         private static readonly string UPDATE_QUERY = "UPDATE AgenceVoiture SET `Nom` = @Nom, `Telephone` = @Telephone, `Adresse` = @Adresse, `Ville` = @Ville, `Aeroport` = @Aeroport WHERE `IdAgenceVoiture` = @IdAgenceVoiture";
         private static readonly string DELETE_QUERY = "DELETE FROM AgenceVoiture WHERE `IdAgenceVoiture` = @IdAgenceVoiture";
         private static readonly string GET_ALL_QUERY = "SELECT `IdAgenceVoiture`, `Nom`, `Telephone`, `Adresse`, `Ville`, `Aeroport` FROM AgenceVoiture";
+        private static readonly string FIND_BY_BASIC_INFO_QUERY = "SELECT `IdAgenceVoiture`, `Nom`, `Telephone`, `Adresse`, `Ville`, `Aeroport` FROM AgenceVoitureWHERE `Nom` = @Nom AND `Telephone` = @Telephone AND `Adresse` = @Adresse AND `Ville` = @Ville";
 
         public AgenceVoitureDAO() {
             connexion = new Connexion.Connexion();
@@ -167,5 +168,42 @@ namespace Prj_Final_2017_.Models.DAO {
             }
             return dataset;
         }
+
+        /// <summary>
+        /// trouve une AgenceVoiture selon ses informations de base
+        /// </summary>
+        /// <param name="agenceVoitureDTO">informations de bases de l,agence de voiture</param>
+        /// <returns>une instance de AgenceVoitureDTO; null sinon</returns>
+        public AgenceVoitureDTO FindByBasicInfo(AgenceVoitureDTO agenceVoitureDTO) {
+            AgenceVoitureDTO retourAgenceVoitureDTO = null;
+            try {
+                using (MySqlConnection connection = connexion.getConnexion()) {
+                    connection.Open();
+                    using (MySqlCommand command = new MySqlCommand(AgenceVoitureDAO.FIND_BY_BASIC_INFO_QUERY, connection)) {
+                        command.Prepare();
+                        command.Parameters.AddWithValue("Nom", agenceVoitureDTO.Nom);
+                        command.Parameters.AddWithValue("Telephone", agenceVoitureDTO.Telephone);
+                        command.Parameters.AddWithValue("Adresse", agenceVoitureDTO.Adresse);
+                        command.Parameters.AddWithValue("Ville", agenceVoitureDTO.Ville);
+                        using (MySqlDataReader reader = command.ExecuteReader()) {
+                            if (reader.Read()) {
+                                retourAgenceVoitureDTO = new AgenceVoitureDTO();
+                                retourAgenceVoitureDTO.IdAgenceVoiture = reader.GetInt32("IdAgenceVoiture");
+                                retourAgenceVoitureDTO.Nom = reader.GetString("Nom");
+                                retourAgenceVoitureDTO.Telephone = reader.GetString("Telephone");
+                                retourAgenceVoitureDTO.Adresse = reader.GetString("Adresse");
+                                retourAgenceVoitureDTO.Ville = reader.GetString("Ville");
+                                retourAgenceVoitureDTO.Aeroport = reader.GetString("Aeroport");
+                            }
+                        }
+                    }
+                }
+            }
+            catch (MySqlException mysqlException) {
+                throw new VoyageAhuntsicException(1234, VoyageAhuntsicException.CharteErreur[1234], mysqlException);
+            }
+            return retourAgenceVoitureDTO;
+        }
+
     }
 }

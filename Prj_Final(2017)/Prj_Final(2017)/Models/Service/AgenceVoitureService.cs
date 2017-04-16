@@ -60,5 +60,25 @@ namespace Prj_Final_2017_.Models.Service {
         public DataSet GetAll() {
             return agenceVoitureDAO.GetAll();
         }
+
+        public AgenceVoitureDTO FindByBasicInfo(AgenceVoitureDTO agenceVoitureDTO) {
+            if (agenceVoitureDTO == null) {
+                throw new VoyageAhuntsicException(2000);
+            }
+            if (agenceVoitureDTO.Nom == null) {
+                throw new VoyageAhuntsicException(2000);
+            }
+            if (agenceVoitureDTO.Telephone == null) {
+                throw new VoyageAhuntsicException(2000);
+            }
+            if (agenceVoitureDTO.Adresse == null) {
+                throw new VoyageAhuntsicException(2000);
+            }
+            if (agenceVoitureDTO.Ville == null) {
+                throw new VoyageAhuntsicException(2000);
+            }
+            return agenceVoitureDAO.FindByBasicInfo(agenceVoitureDTO);
+        }
+
     }
 }

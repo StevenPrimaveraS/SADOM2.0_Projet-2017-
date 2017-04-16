@@ -36,6 +36,7 @@ namespace Prj_Final_2017_.Models.DAO {
         private static readonly string UPDATE_QUERY = "UPDATE Hotel SET `Nom` = @Nom, `Telephone` = @Telephone, `Adresse` = @Adresse, `Ville` = @Ville, `Categorie` = @Categorie, `Description` = @Description WHERE `IdHotel` = @IdHotel";
         private static readonly string DELETE_QUERY = "DELETE FROM Hotel WHERE `IdHotel` = @IdHotel";
         private static readonly string GET_ALL_QUERY = "SELECT `IdHotel`, `Nom`, `Telephone`, `Adresse`, `Ville`, `Categorie`, `Description` FROM Hotel";
+        private static readonly string FIND_BY_BASIC_INFO_QUERY = "SELECT `IdHotel`, `Nom`, `Telephone`, `Adresse`, `Ville`, `Categorie`, `Description` FROM Hotel WHERE `Nom` = @Nom AND `Telephone` = @Telephone AND `Adresse` = @Adresse AND `Ville` = @Ville";
 
         public HotelDAO() {
             connexion = new Connexion.Connexion();
@@ -171,5 +172,43 @@ namespace Prj_Final_2017_.Models.DAO {
             }
             return dataset;
         }
+
+        /// <summary>
+        /// trouve une Hotel selon ses informations de base
+        /// </summary>
+        /// <param name="hotelDTO">informations de bases de l'hotel</param>
+        /// <returns>une instance de HotelDTO; null sinon</returns>
+        public HotelDTO FindByBasicInfo(HotelDTO hotelDTO) {
+            HotelDTO retourHotelDTO = null;
+            try {
+                using (MySqlConnection connection = connexion.getConnexion()) {
+                    connection.Open();
+                    using (MySqlCommand command = new MySqlCommand(HotelDAO.FIND_BY_BASIC_INFO_QUERY, connection)) {
+                        command.Prepare();
+                        command.Parameters.AddWithValue("Nom", hotelDTO.Nom);
+                        command.Parameters.AddWithValue("Telephone", hotelDTO.Telephone);
+                        command.Parameters.AddWithValue("Adresse", hotelDTO.Adresse);
+                        command.Parameters.AddWithValue("Ville", hotelDTO.Ville);
+                        using (MySqlDataReader reader = command.ExecuteReader()) {
+                            if (reader.Read()) {
+                                retourHotelDTO = new HotelDTO();
+                                retourHotelDTO.IdHotel = reader.GetInt32("IdHotel");
+                                retourHotelDTO.Nom = reader.GetString("Nom");
+                                retourHotelDTO.Telephone = reader.GetString("Telephone");
+                                retourHotelDTO.Adresse = reader.GetString("Adresse");
+                                retourHotelDTO.Ville = reader.GetString("Ville");
+                                retourHotelDTO.Categorie = reader.GetString("Categorie");
+                                retourHotelDTO.Description = reader.GetString("Description");
+                            }
+                        }
+                    }
+                }
+            }
+            catch (MySqlException mysqlException) {
+                throw new VoyageAhuntsicException(1234, VoyageAhuntsicException.CharteErreur[1234], mysqlException);
+            }
+            return retourHotelDTO;
+        }
+
     }
 }

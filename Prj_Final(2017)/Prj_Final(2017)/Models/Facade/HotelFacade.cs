@@ -39,5 +39,10 @@ namespace Prj_Final_2017_.Models.Facade {
         public DataSet GetAll() {
             return hotelService.GetAll();
         }
+
+        public HotelDTO FindByBasicInfo(HotelDTO hotelDTO) {
+            return hotelService.FindByBasicInfo(hotelDTO);
+        }
+
     }
 }

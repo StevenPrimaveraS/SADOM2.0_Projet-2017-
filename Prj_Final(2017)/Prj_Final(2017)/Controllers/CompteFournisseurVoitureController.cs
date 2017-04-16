@@ -52,8 +52,6 @@ namespace Prj_Final_2017_.Controllers
                     agenceVoitureDTO.Adresse = model.Adresse;
                     agenceVoitureDTO.Ville = model.Ville;
                     ApplicationFunctions.AgenceVoitureFacade.Add(agenceVoitureDTO);
-
-                    //TODO
                     agenceVoitureDTO = ApplicationFunctions.AgenceVoitureFacade.FindByBasicInfo(agenceVoitureDTO);
 
                     CompteFournisseurVoitureDTO compteFournisseurVoitureDTO = new CompteFournisseurVoitureDTO();
@@ -62,7 +60,7 @@ namespace Prj_Final_2017_.Controllers
                     compteFournisseurVoitureDTO.IdAgenceVoiture = agenceVoitureDTO.IdAgenceVoiture;
                     ApplicationFunctions.CompteFournisseurVoitureFacade.Add(compteFournisseurVoitureDTO);
 
-                    return Redirect("/Home/Index");
+                    return Redirect("/Account/Login");
                 }
             }
             catch (VoyageAhuntsicException e) {

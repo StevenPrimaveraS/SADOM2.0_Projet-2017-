@@ -39,5 +39,10 @@ namespace Prj_Final_2017_.Models.Facade {
         public DataSet GetAll() {
             return agenceVoitureService.GetAll();
         }
+
+        public AgenceVoitureDTO FindByBasicInfo(AgenceVoitureDTO agenceVoitureDTO) {
+            return agenceVoitureService.FindByBasicInfo(agenceVoitureDTO);
+        }
+
     }
 }

@@ -53,8 +53,6 @@ namespace Prj_Final_2017_.Controllers
                     compagnieAerienneDTO.Adresse = model.Adresse;
                     compagnieAerienneDTO.Ville = model.Ville;
                     ApplicationFunctions.CompagnieAerienneFacade.Add(compagnieAerienneDTO);
-
-                    //TODO
                     compagnieAerienneDTO = ApplicationFunctions.CompagnieAerienneFacade.FindByBasicInfo(compagnieAerienneDTO);
 
                     CompteFournisseurSiegeDTO compteFournisseurSiegeDTO = new CompteFournisseurSiegeDTO();
@@ -63,7 +61,7 @@ namespace Prj_Final_2017_.Controllers
                     compteFournisseurSiegeDTO.IdCompagnieAerienne = compagnieAerienneDTO.IdCompagnieAerienne;
                     ApplicationFunctions.CompteFournisseurSiegeFacade.Add(compteFournisseurSiegeDTO);
 
-                    return Redirect("/Home/Index");
+                    return Redirect("/Account/Login");
                 }
             }
             catch (VoyageAhuntsicException e) {

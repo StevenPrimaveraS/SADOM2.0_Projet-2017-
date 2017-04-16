@@ -58,5 +58,25 @@ namespace Prj_Final_2017_.Models.Service {
         public DataSet GetAll() {
             return compagnieAerienneDAO.GetAll();
         }
+
+        public CompagnieAerienneDTO FindByBasicInfo(CompagnieAerienneDTO compagnieAerienneDTO) {
+            if (compagnieAerienneDTO == null) {
+                throw new VoyageAhuntsicException(2000);
+            }
+            if (compagnieAerienneDTO.Nom == null) {
+                throw new VoyageAhuntsicException(2000);
+            }
+            if (compagnieAerienneDTO.Telephone == null) {
+                throw new VoyageAhuntsicException(2000);
+            }
+            if (compagnieAerienneDTO.Adresse == null) {
+                throw new VoyageAhuntsicException(2000);
+            }
+            if (compagnieAerienneDTO.Ville == null) {
+                throw new VoyageAhuntsicException(2000);
+            }
+            return compagnieAerienneDAO.FindByBasicInfo(compagnieAerienneDTO);
+        }
+
     }
 }

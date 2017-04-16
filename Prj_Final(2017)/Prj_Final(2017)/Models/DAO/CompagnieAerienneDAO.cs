@@ -36,6 +36,7 @@ namespace Prj_Final_2017_.Models.DAO {
         private static readonly string UPDATE_QUERY = "UPDATE CompagnieAerienne SET `Nom` = @Nom, `Telephone` = @Telephone, `Adresse` = @Adresse, `Ville` = @Ville WHERE `IdCompagnieAerienne` = @IdCompagnieAerienne";
         private static readonly string DELETE_QUERY = "DELETE FROM CompagnieAerienne WHERE `IdCompagnieAerienne` = @IdCompagnieAerienne";
         private static readonly string GET_ALL_QUERY = "SELECT `IdCompagnieAerienne`, `Nom`, `Telephone`, `Adresse`, `Ville` FROM CompagnieAerienne";
+        private static readonly string FIND_BY_BASIC_INFO_QUERY = "SELECT `IdCompagnieAerienne`, `Nom`, `Telephone`, `Adresse`, `Ville` FROM CompagnieAerienne WHERE `Nom` = @Nom AND `Telephone` = @Telephone AND `Adresse` = @Adresse AND `Ville` = @Ville";
 
         public CompagnieAerienneDAO() {
             connexion = new Connexion.Connexion();
@@ -164,5 +165,41 @@ namespace Prj_Final_2017_.Models.DAO {
             }
             return dataset;
         }
+
+        /// <summary>
+        /// trouve une CompagnieAerienne selon ses informations de base
+        /// </summary>
+        /// <param name="compagnieAerienneDTO">informations de bases de la compagnie aerienne</param>
+        /// <returns>une instance de CompagnieAerienneDTO; null sinon</returns>
+        public CompagnieAerienneDTO FindByBasicInfo(CompagnieAerienneDTO compagnieAerienneDTO) {
+            CompagnieAerienneDTO retourCompagnieAerienneDTO = null;
+            try {
+                using (MySqlConnection connection = connexion.getConnexion()) {
+                    connection.Open();
+                    using (MySqlCommand command = new MySqlCommand(CompagnieAerienneDAO.FIND_BY_BASIC_INFO_QUERY, connection)) {
+                        command.Prepare();
+                        command.Parameters.AddWithValue("Nom", compagnieAerienneDTO.Nom);
+                        command.Parameters.AddWithValue("Telephone", compagnieAerienneDTO.Telephone);
+                        command.Parameters.AddWithValue("Adresse", compagnieAerienneDTO.Adresse);
+                        command.Parameters.AddWithValue("Ville", compagnieAerienneDTO.Ville);
+                        using (MySqlDataReader reader = command.ExecuteReader()) {
+                            if (reader.Read()) {
+                                retourCompagnieAerienneDTO = new CompagnieAerienneDTO();
+                                retourCompagnieAerienneDTO.IdCompagnieAerienne = reader.GetInt32("IdCompagnieAerienne");
+                                retourCompagnieAerienneDTO.Nom = reader.GetString("Nom");
+                                retourCompagnieAerienneDTO.Telephone = reader.GetString("Telephone");
+                                retourCompagnieAerienneDTO.Adresse = reader.GetString("Adresse");
+                                retourCompagnieAerienneDTO.Ville = reader.GetString("Ville");
+                            }
+                        }
+                    }
+                }
+            }
+            catch (MySqlException mysqlException) {
+                throw new VoyageAhuntsicException(1234, VoyageAhuntsicException.CharteErreur[1234], mysqlException);
+            }
+            return retourCompagnieAerienneDTO;
+        }
+
     }
 }

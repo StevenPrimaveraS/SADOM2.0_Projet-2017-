@@ -41,5 +41,10 @@ namespace Prj_Final_2017_.Models.Facade {
         public DataSet GetAll() {
             return compagnieAerienneService.GetAll();
         }
+
+        public CompagnieAerienneDTO FindByBasicInfo(CompagnieAerienneDTO compagnieAerienneDTO) {
+            return compagnieAerienneService.FindByBasicInfo(compagnieAerienneDTO);
+        }
+
     }
 }
