@@ -372,11 +372,11 @@
     <Content Include="Views\Siege\Reserver.cshtml" />
     <Content Include="Views\Siege\PourVol.cshtml" />
     <Content Include="Views\Forfait\Reserver.cshtml" />
+    <Content Include="Views\CompteParticulier\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Achat\" />
-    <Folder Include="Views\CompteParticulier\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

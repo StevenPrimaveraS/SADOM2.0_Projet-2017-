@@ -1,4 +1,5 @@
 ﻿using Prj_Final_2017_.DTO;
+using Prj_Final_2017_.Models;
 using Prj_Final_2017_.Models.Exception;
 using Prj_Final_2017_.Models.util;
 using System;
@@ -12,17 +13,17 @@ namespace Prj_Final_2017_.Controllers
     public class CompteParticulierController : Controller
     {
 
-        protected override void OnActionExecuting(ActionExecutingContext filterContext)
-        {
-            if (Session["user"] != null)
-            {
-                base.OnActionExecuting(filterContext);
-            }
-            else
-            {
-                filterContext.Result = new RedirectResult("~/Account/Login");
-            }
-        }
+        //protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        //{
+        //    if (Session["user"] != null)
+        //    {
+        //        base.OnActionExecuting(filterContext);
+        //    }
+        //    else
+        //    {
+        //        filterContext.Result = new RedirectResult("~/Account/Login");
+        //    }
+        //}
 
         // GET: CompteParticulier
         public ActionResult Index()
@@ -54,40 +55,30 @@ namespace Prj_Final_2017_.Controllers
         }
 
         // GET: CompteParticulier/Create
-        public ActionResult Create(string password, string prenom, string nom, string courriel)
+        public ActionResult Create()
         {
-            try {
-                if (password != null && prenom != null && nom != null && courriel != null)
-                {
-                    CompteParticulierDTO compteParticulierDTO = new CompteParticulierDTO();
-                    compteParticulierDTO.Password = password;
-                    compteParticulierDTO.Prenom = prenom;
-                    compteParticulierDTO.Nom = nom;
-                    compteParticulierDTO.Courriel = courriel;
-                    ApplicationFunctions.CompteParticulierFacade.Add(compteParticulierDTO);
-                }
-            }
-            catch (VoyageAhuntsicException e)
-            {
-                System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
-            }
-            return RedirectToAction("Index");
+            return View();
         }
 
         // POST: CompteParticulier/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(RegisterViewModel model)
         {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+            try {
+                if (ModelState.IsValid) {
+                    CompteParticulierDTO compteParticulierDTO = new CompteParticulierDTO();
+                    compteParticulierDTO.Password = model.Password;
+                    compteParticulierDTO.Prenom = model.Name;
+                    compteParticulierDTO.Nom = model.LastName;
+                    compteParticulierDTO.Courriel = model.Email;
+                    ApplicationFunctions.CompteParticulierFacade.Add(compteParticulierDTO);
+                    return Redirect("/Account/Login");
+                }
             }
-            catch
-            {
-                return View();
+            catch (VoyageAhuntsicException e) {
+                System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
             }
+            return View(model);
         }
 
         // GET: CompteParticulier/Edit/5

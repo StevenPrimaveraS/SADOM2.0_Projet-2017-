@@ -5,67 +5,102 @@
 <link href="~/Content/StylePrincipal.css" rel="stylesheet" media="all" type="text/css">
 <h1>@ViewBag.Title</h1>
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
     @Html.AntiForgeryToken()
-    <h4>Créer un nouveau compte.</h4>
+    <h4>Choissisez votre type de client</h4>
     <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
-        @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        <div class="col-md-offset-2 col-md-10">
+            <input checked="checked" id="Radio0" name="Radio0" type="radio" value="1" /> <label>Particulier</label>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.LastName, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-        </div>
-    </div>
-    <hr />
-    <div>
-        <h4>Choissisez votre type de client</h4>
-        @{
-            /*
-            @Html.RadioButton("rbGrp", "1") @Html.Label("Particulier")
-            @Html.RadioButton("rbGrp", "2") @Html.Label("fournisseur de chambre")
-            @Html.RadioButton("rbGrp", "3") @Html.Label("fournisseur de siege")
-            @Html.RadioButton("rbGrp", "4") @Html.Label("fournisseur de voiture")
-            */
-        }
-        
-
-        <input checked="checked" id="Radio0" name="Radio0" type="radio" value="1"> Particulier
-        <input checked="checked" id="Radio0" name="Radio0" type="radio" value="2">fournisseur de chambre 
-        <input checked="checked" id="Radio0" name="Radio0" type="radio" value="3">fournisseur de siege 
-        <input checked="checked" id="Radio0" name="Radio0" type="radio" value="4">fournisseur de voiture
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="S’inscrire" />
+            <input id="Radio0" name="Radio0" type="radio" value="2" /> <label>Fournisseur de chambres</label>
         </div>
     </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input id="Radio0" name="Radio0" type="radio" value="3" /> <label>Fournisseur de si&egrave;ges d'avion</label>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input id="Radio0" name="Radio0" type="radio" value="4" /> <label>Fournisseur de voitures</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Confirmer" />
+        </div>
+    </div>
+
 }
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+@*
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <h4>Créer un nouveau compte.</h4>
+        <hr />
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.LastName, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+            </div>
+        </div>
+        <hr />
+        <div>
+            <h4>Choissisez votre type de client</h4>
+            @{
+                /*
+                @Html.RadioButton("rbGrp", "1") @Html.Label("Particulier")
+                @Html.RadioButton("rbGrp", "2") @Html.Label("fournisseur de chambre")
+                @Html.RadioButton("rbGrp", "3") @Html.Label("fournisseur de siege")
+                @Html.RadioButton("rbGrp", "4") @Html.Label("fournisseur de voiture")
+                */
+            }
+
+
+            <input checked="checked" id="Radio0" name="Radio0" type="radio" value="1"> Particulier
+            <input checked="checked" id="Radio0" name="Radio0" type="radio" value="2">fournisseur de chambre
+            <input checked="checked" id="Radio0" name="Radio0" type="radio" value="3">fournisseur de siege
+            <input checked="checked" id="Radio0" name="Radio0" type="radio" value="4">fournisseur de voiture
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-default" value="S’inscrire" />
+            </div>
+        </div>
+    }
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+*@

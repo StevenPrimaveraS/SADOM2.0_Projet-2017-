@@ -194,8 +194,31 @@ namespace Prj_Final_2017_.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public /*async Task<ActionResult>*/ ActionResult Register(FormCollection collection /*RegisterViewModel model*/)
         {
+            
+            string radio = collection["Radio0"];
+            string lien = "/Home/Index";
+            switch (radio) {
+            case "1":
+                lien = "/CompteParticulier/Create";
+                break;
+            case "2":
+                lien = "/CompteFournisseurChambre/Create";
+                break;
+            case "3":
+                lien = "/CompteFournisseurSiege/Create";
+                break;
+            case "4":
+                lien = "/CompteFournisseurVoiture/Create";
+                break;
+            default:
+                break;
+            }
+
+            return Redirect(lien);
+
+            /*
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
@@ -236,6 +259,7 @@ namespace Prj_Final_2017_.Controllers
 
             // Si nous sommes arrivés là, un échec s’est produit. Réafficher le formulaire
             return View(model);
+            */
         }
 
         //
