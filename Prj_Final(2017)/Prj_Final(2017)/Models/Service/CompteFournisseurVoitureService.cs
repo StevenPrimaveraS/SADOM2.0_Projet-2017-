@@ -75,5 +75,10 @@ namespace Prj_Final_2017_.Models.Service {
         {
             return compteFournisseurVoitureDAO.GetAll(); ;
         }
+
+        public CompteFournisseurVoitureDTO Authenticate(CompteFournisseurVoitureDTO compteFournisseurVoitureDTO) {
+            return compteFournisseurVoitureDAO.Authenticate(compteFournisseurVoitureDTO);
+        }
+
     }
 }

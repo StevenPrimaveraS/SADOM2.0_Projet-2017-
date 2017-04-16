@@ -86,5 +86,10 @@ namespace Prj_Final_2017_.Models.Service {
         public DataSet GetAll() {
             return compteParticulierDAO.GetAll();
         }
+
+        public CompteParticulierDTO Authenticate(CompteParticulierDTO compteParticulierDTO) {
+            return compteParticulierDAO.Authenticate(compteParticulierDTO);
+        }
+
     }
 }

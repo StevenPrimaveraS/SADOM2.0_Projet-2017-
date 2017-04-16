@@ -9,6 +9,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Prj_Final_2017_.Models;
+using Prj_Final_2017_.Models.util;
+using Prj_Final_2017_.DTO;
 
 namespace Prj_Final_2017_.Controllers
 {
@@ -76,6 +78,14 @@ namespace Prj_Final_2017_.Controllers
             // Ceci ne comptabilise pas les échecs de connexion pour le verrouillage du compte
             // Pour que les échecs de mot de passe déclenchent le verrouillage du compte, utilisez shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+
+            if(tryToAuthenticate(model.Email, model.Password)) {
+                result = SignInStatus.Success;
+            }
+            else {
+                result = SignInStatus.Failure;
+            }
+            
             switch (result)
             {
                 case SignInStatus.Success:
@@ -89,6 +99,43 @@ namespace Prj_Final_2017_.Controllers
                     ModelState.AddModelError("", "Tentative de connexion non valide.");
                     return View(model);
             }
+        }
+
+        private bool tryToAuthenticate(string email, string password) {
+            bool retour = false;
+            CompteParticulierDTO compteParticulierDTO = new CompteParticulierDTO();
+            compteParticulierDTO.Courriel = email;
+            compteParticulierDTO.Password = password;
+            compteParticulierDTO = ApplicationFunctions.CompteParticulierFacade.Authenticate(compteParticulierDTO);
+            if (compteParticulierDTO != null) {
+                Session["user"] = compteParticulierDTO;
+                retour = true;
+            }
+            CompteFournisseurChambreDTO compteFournisseurChambreDTO = new CompteFournisseurChambreDTO();
+            compteFournisseurChambreDTO.Courriel = email;
+            compteFournisseurChambreDTO.Password = password;
+            compteFournisseurChambreDTO = ApplicationFunctions.CompteFournisseurChambreFacade.Authenticate(compteFournisseurChambreDTO);
+            if (compteFournisseurChambreDTO != null) {
+                Session["user"] = compteFournisseurChambreDTO;
+                retour = true;
+            }
+            CompteFournisseurSiegeDTO compteFournisseurSiegeDTO = new CompteFournisseurSiegeDTO();
+            compteFournisseurSiegeDTO.Courriel = email;
+            compteFournisseurSiegeDTO.Password = password;
+            compteFournisseurSiegeDTO = ApplicationFunctions.CompteFournisseurSiegeFacade.Authenticate(compteFournisseurSiegeDTO);
+            if (compteFournisseurSiegeDTO != null) {
+                Session["user"] = compteFournisseurSiegeDTO;
+                retour = true;
+            }
+            CompteFournisseurVoitureDTO compteFournisseurVoitureDTO = new CompteFournisseurVoitureDTO();
+            compteFournisseurVoitureDTO.Courriel = email;
+            compteFournisseurVoitureDTO.Password = password;
+            compteFournisseurVoitureDTO = ApplicationFunctions.CompteFournisseurVoitureFacade.Authenticate(compteFournisseurVoitureDTO);
+            if (compteFournisseurVoitureDTO != null) {
+                Session["user"] = compteFournisseurVoitureDTO;
+                retour = true;
+            }
+            return retour;
         }
 
         //
@@ -164,24 +211,25 @@ namespace Prj_Final_2017_.Controllers
                     // await UserManager.SendEmailAsync(user.Id, "Confirmez votre compte", "Confirmez votre compte en cliquant <a href=\"" + callbackUrl + "\">ici</a>");
                    
                     string radio = @model.Radio0;
+                    string lien = "/Home/Index";
                     switch (radio) {
                         case "1":
-                            Response.Redirect("/CompteParticulier/Create");
+                            lien = "/CompteParticulier/Create";
                             break;
                         case "2":
-                            Response.Redirect("/CompteFournisseurChambre/Create");
+                            lien = "/CompteFournisseurChambre/Create";
                             break;
                         case "3":
-                            Response.Redirect("/CompteFournisseurSiege/Create");
+                            lien = "/CompteFournisseurSiege/Create";
                             break;
                         case "4":
-                            Response.Redirect("/CompteFournisseurVoiture/Create");
+                            lien = "/CompteFournisseurVoiture/Create";
                             break;
                         default:
                             break;
                     }
 
-                    return RedirectToAction("Index", "Home");
+                    return Redirect(lien);
                 }
                 AddErrors(result);
             }
@@ -406,9 +454,11 @@ namespace Prj_Final_2017_.Controllers
         //
         // POST: /Account/LogOff
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [AllowAnonymous]
+        //[ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
+            Session.Abandon();
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
         }

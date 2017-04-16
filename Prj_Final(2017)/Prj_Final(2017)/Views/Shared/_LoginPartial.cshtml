@@ -1,28 +1,86 @@
 ﻿@using Microsoft.AspNet.Identity
-@if (Request.IsAuthenticated)
-{
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-    {
-    @Html.AntiForgeryToken()
+@using Prj_Final_2017_.DTO;
+@using Prj_Final_2017_.Models.util;
+@{
 
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            @Html.ActionLink("Bonjour " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-        </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Se déconnecter</a></li>
-        <li>
-            <a href="@Url.Action("Panier", "Panier")">
-                <span class="glyphicon glyphicon-shopping-cart"></span>
-                Panier
-            </a>
-        </li>
-    </ul>
+    string username = "";
+    int id = 0;
+    Session["isLoggedIn"] = false;
+    if (Session["user"] != null) {
+        Session["isLoggedIn"] = true;
+        if (Session["user"].GetType() == typeof(CompteParticulierDTO)) {
+            CompteParticulierDTO c = (CompteParticulierDTO) Session["user"];
+            id = c.IdParticulier;
+            username = c.Prenom;
+        }
+        else if (Session["user"].GetType() == typeof(CompteFournisseurChambreDTO)) {
+            CompteFournisseurChambreDTO c = (CompteFournisseurChambreDTO) Session["user"];
+            id = c.IdFournisseur;
+            username = c.Courriel;
+        }
+        else if (Session["user"].GetType() == typeof(CompteFournisseurSiegeDTO)) {
+            CompteFournisseurSiegeDTO c = (CompteFournisseurSiegeDTO) Session["user"];
+            id = c.IdFournisseur;
+            username = c.Courriel;
+        }
+        else if (Session["user"].GetType() == typeof(CompteFournisseurVoitureDTO)) {
+            CompteFournisseurVoitureDTO c = (CompteFournisseurVoitureDTO) Session["user"];
+            id = c.IdFournisseur;
+            username = c.Courriel;
+        }
+    }
+
+}
+@if ((bool)Session["isLoggedIn"]) {
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" })) {
+        //@Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @Html.ActionLink("Bonjour " + username + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Se déconnecter</a></li>
+            <li>
+                <a href="@Url.Action("Panier", "Panier")">
+                    <span class="glyphicon glyphicon-shopping-cart"></span>
+                    Panier
+                </a>
+            </li>
+        </ul>
     }
 }
-else
-{
+else {
     <ul class="nav navbar-nav navbar-right">
         <li>@Html.ActionLink("S’inscrire", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
         <li>@Html.ActionLink("Se connecter", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
     </ul>
 }
+@*
+    @if (Request.IsAuthenticated)
+    {
+        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+        {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @Html.ActionLink("Bonjour " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Se déconnecter</a></li>
+            <li>
+                <a href="@Url.Action("Panier", "Panier")">
+                    <span class="glyphicon glyphicon-shopping-cart"></span>
+                    Panier
+                </a>
+            </li>
+        </ul>
+        }
+    }
+    else
+    {
+        <ul class="nav navbar-nav navbar-right">
+            <li>@Html.ActionLink("S’inscrire", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+            <li>@Html.ActionLink("Se connecter", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        </ul>
+    }
+*@

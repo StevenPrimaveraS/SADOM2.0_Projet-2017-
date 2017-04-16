@@ -39,5 +39,10 @@ namespace Prj_Final_2017_.Models.Facade {
         {
             return compteFournisseurChambreService.GetAll(); ;
         }
+
+        public CompteFournisseurChambreDTO Authenticate(CompteFournisseurChambreDTO compteFournisseurChambreDTO) {
+            return compteFournisseurChambreService.Authenticate(compteFournisseurChambreDTO);
+        }
+
     }
 }

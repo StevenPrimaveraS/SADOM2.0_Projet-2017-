@@ -39,5 +39,10 @@ namespace Prj_Final_2017_.Models.Facade {
         {
             return compteFournisseurSiegeService.GetAll(); ;
         }
+
+        public CompteFournisseurSiegeDTO Authenticate(CompteFournisseurSiegeDTO compteFournisseurSiegeDTO) {
+            return compteFournisseurSiegeService.Authenticate(compteFournisseurSiegeDTO);
+        }
+
     }
 }

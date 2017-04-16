@@ -37,6 +37,7 @@ namespace Prj_Final_2017_.Models.DAO {
         private static readonly string DELETE_QUERY = "DELETE FROM CompteFournisseurVoiture WHERE `IdFournisseur` = @IdFournisseur";
         private static readonly string GET_ALL_QUERY = "SELECT `IdFournisseur`, `Courriel`, `Password`, `IdAgenceVoiture` FROM CompteFournisseurVoiture";
         private static readonly string FIND_BY_COURRIEL = "SELECT 'IdFournisseur', `Courriel`, `Password`, `IdAgenceVoiture` FROM CompteFournisseurVoiture WHERE `Courriel` = @Courriel";
+        private static readonly string AUTHENTICATE_QUERY = "SELECT 'IdFournisseur', `Courriel`, `Password`, `IdAgenceVoiture` FROM CompteFournisseurVoiture WHERE `Courriel` = @Courriel AND `Password` = @Password";
 
         public CompteFournisseurVoitureDAO() {
             connexion = new Connexion.Connexion();
@@ -191,5 +192,38 @@ namespace Prj_Final_2017_.Models.DAO {
             }
             return dataset;
         }
+
+        /// <summary>
+        /// Authentifie un utilisateur qui a un CompteFournisseurVoiture
+        /// </summary>
+        /// <param name="compteFournisseurVoitureDTO">l'utilisateur qu'on veut authentifier</param>
+        /// <returns>une instance de CompteFournisseurVoitureDTO; null sinon</returns>
+        public CompteFournisseurVoitureDTO Authenticate(CompteFournisseurVoitureDTO compteFournisseurVoitureDTO) {
+            CompteFournisseurVoitureDTO retourCompteFournisseurVoitureDTO = null;
+            try {
+                using (MySqlConnection connection = connexion.getConnexion()) {
+                    connection.Open();
+                    using (MySqlCommand command = new MySqlCommand(CompteFournisseurVoitureDAO.AUTHENTICATE_QUERY, connection)) {
+                        command.Prepare();
+                        command.Parameters.AddWithValue("Courriel", compteFournisseurVoitureDTO.Courriel);
+                        command.Parameters.AddWithValue("Password", compteFournisseurVoitureDTO.Password);
+                        using (MySqlDataReader reader = command.ExecuteReader()) {
+                            if (reader.Read()) {
+                                retourCompteFournisseurVoitureDTO = new CompteFournisseurVoitureDTO();
+                                retourCompteFournisseurVoitureDTO.IdFournisseur = reader.GetInt32("IdFournisseur");
+                                retourCompteFournisseurVoitureDTO.Courriel = reader.GetString("Courriel");
+                                retourCompteFournisseurVoitureDTO.Password = reader.GetString("Password");
+                                retourCompteFournisseurVoitureDTO.IdAgenceVoiture = reader.GetInt32("IdAgenceVoiture");
+                            }
+                        }
+                    }
+                }
+            }
+            catch (MySqlException mysqlException) {
+                throw new VoyageAhuntsicException(1234, VoyageAhuntsicException.CharteErreur[1234], mysqlException);
+            }
+            return retourCompteFournisseurVoitureDTO;
+        }
+
     }
 }

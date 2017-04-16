@@ -38,5 +38,10 @@ namespace Prj_Final_2017_.Models.Facade {
         public DataSet GetAll() {
             return compteParticulierService.GetAll();
         }
+
+        public CompteParticulierDTO Authenticate(CompteParticulierDTO compteParticulierDTO) {
+            return compteParticulierService.Authenticate(compteParticulierDTO);
+        }
+
     }
 }

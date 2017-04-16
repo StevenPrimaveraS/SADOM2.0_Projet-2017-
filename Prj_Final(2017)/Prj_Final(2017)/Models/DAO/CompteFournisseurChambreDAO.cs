@@ -35,6 +35,7 @@ namespace Prj_Final_2017_.Models.DAO {
         private static readonly string DELETE_QUERY = "DELETE FROM CompteFournisseurChambre WHERE `IdFournisseur` = @IdFournisseur";
         private static readonly string GET_ALL_QUERY = "SELECT `IdFournisseur`, `Courriel`, `Password`, `IdHotel` FROM CompteFournisseurChambre";
         private static readonly string FIND_BY_COURRIEL = "SELECT `IdFournisseur`, `Courriel`, `Password`, `IdHotel` FROM CompteFournisseurChambre WHERE `Courriel` = @Courriel";
+        private static readonly string AUTHENTICATE_QUERY = "SELECT `IdFournisseur`, `Courriel`, `Password`, `IdHotel` FROM CompteFournisseurChambre WHERE `Courriel` = @Courriel AND `Password` = @Password";
 
 
         public CompteFournisseurChambreDAO() {
@@ -191,5 +192,38 @@ namespace Prj_Final_2017_.Models.DAO {
             }
             return dataset;
         }
+
+        /// <summary>
+        /// Authentifie un utilisateur qui a un CompteFournisseurChambre
+        /// </summary>
+        /// <param name="compteFournisseurChambreDTO">l'utilisateur qu'on veut authentifier</param>
+        /// <returns>une instance de CompteFournisseurChambreDTO; null sinon</returns>
+        public CompteFournisseurChambreDTO Authenticate(CompteFournisseurChambreDTO compteFournisseurChambreDTO) {
+            CompteFournisseurChambreDTO retourCompteFournisseurChambreDTO = null;
+            try {
+                using (MySqlConnection connection = connexion.getConnexion()) {
+                    connection.Open();
+                    using (MySqlCommand command = new MySqlCommand(CompteFournisseurChambreDAO.AUTHENTICATE_QUERY, connection)) {
+                        command.Prepare();
+                        command.Parameters.AddWithValue("Courriel", compteFournisseurChambreDTO.Courriel);
+                        command.Parameters.AddWithValue("Password", compteFournisseurChambreDTO.Password);
+                        using (MySqlDataReader reader = command.ExecuteReader()) {
+                            if (reader.Read()) {
+                                retourCompteFournisseurChambreDTO = new CompteFournisseurChambreDTO();
+                                retourCompteFournisseurChambreDTO.IdFournisseur = reader.GetInt32("IdFournisseur");
+                                retourCompteFournisseurChambreDTO.Courriel = reader.GetString("Courriel");
+                                retourCompteFournisseurChambreDTO.Password = reader.GetString("Password");
+                                retourCompteFournisseurChambreDTO.IdHotel = reader.GetInt32("IdHotel");
+                            }
+                        }
+                    }
+                }
+            }
+            catch (MySqlException mysqlException) {
+                throw new VoyageAhuntsicException(1234, VoyageAhuntsicException.CharteErreur[1234], mysqlException);
+            }
+            return retourCompteFournisseurChambreDTO;
+        }
+
     }
 }

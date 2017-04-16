@@ -68,5 +68,10 @@ namespace Prj_Final_2017_.Models.Service {
         public DataSet GetAll() {
             return compteFournisseurChambreDAO.GetAll();
         }
+
+        public CompteFournisseurChambreDTO Authenticate(CompteFournisseurChambreDTO compteFournisseurChambreDTO) {
+            return compteFournisseurChambreDAO.Authenticate(compteFournisseurChambreDTO);
+        }
+
     }
 }

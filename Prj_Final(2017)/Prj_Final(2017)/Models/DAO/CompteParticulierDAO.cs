@@ -37,6 +37,7 @@ namespace Prj_Final_2017_.Models.DAO {
         private static readonly string DELETE_QUERY = "DELETE FROM CompteParticulier WHERE `IdParticulier` = @IdParticulier";
         private static readonly string GET_ALL_QUERY = "SELECT `IdParticulier`, `Password`, `Prenom`, `Nom`, `Courriel` FROM CompteParticulier";
         private static readonly string FIND_BY_COURRIEL = "SELECT `IdParticulier`, `Password`, `Prenom`, `Nom`, `Courriel` FROM CompteParticulier WHERE `Courriel` = @Courriel";
+        private static readonly string AUTHENTICATE_QUERY = "SELECT `IdParticulier`, `Password`, `Prenom`, `Nom`, `Courriel` FROM CompteParticulier WHERE `Courriel` = @Courriel AND `Password` = @Password";
 
         public CompteParticulierDAO() {
             connexion = new Connexion.Connexion();
@@ -195,5 +196,39 @@ namespace Prj_Final_2017_.Models.DAO {
             }
             return dataset;
         }
+
+        /// <summary>
+        /// Authentifie un utilisateur qui a un CompteParticulier
+        /// </summary>
+        /// <param name="compteParticulierDTO">l'utilisateur qu'on veut authentifier</param>
+        /// <returns>une instance de CompteParticulierDTO; null sinon</returns>
+        public CompteParticulierDTO Authenticate(CompteParticulierDTO compteParticulierDTO) {
+            CompteParticulierDTO retourCompteParticulierDTO = null;
+            try {
+                using (MySqlConnection connection = connexion.getConnexion()) {
+                    connection.Open();
+                    using (MySqlCommand command = new MySqlCommand(CompteParticulierDAO.AUTHENTICATE_QUERY, connection)) {
+                        command.Prepare();
+                        command.Parameters.AddWithValue("Courriel", compteParticulierDTO.Courriel);
+                        command.Parameters.AddWithValue("Password", compteParticulierDTO.Password);
+                        using (MySqlDataReader reader = command.ExecuteReader()) {
+                            if (reader.Read()) {
+                                retourCompteParticulierDTO = new CompteParticulierDTO();
+                                retourCompteParticulierDTO.IdParticulier = reader.GetInt32("IdParticulier");
+                                retourCompteParticulierDTO.Password = reader.GetString("Password");
+                                retourCompteParticulierDTO.Prenom = reader.GetString("Prenom");
+                                retourCompteParticulierDTO.Nom = reader.GetString("Nom");
+                                retourCompteParticulierDTO.Courriel = reader.GetString("Courriel");
+                            }
+                        }
+                    }
+                }
+            }
+            catch (MySqlException mysqlException) {
+                throw new VoyageAhuntsicException(1234, VoyageAhuntsicException.CharteErreur[1234], mysqlException);
+            }
+            return retourCompteParticulierDTO;
+        }
+
     }
 }

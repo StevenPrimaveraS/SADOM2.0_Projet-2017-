@@ -33,5 +33,10 @@ namespace Prj_Final_2017_.Models.Facade {
         public DataSet GetAll() {
             return compteFournisseurVoitureService.GetAll(); ;
         }
+
+        public CompteFournisseurVoitureDTO Authenticate(CompteFournisseurVoitureDTO compteFournisseurVoitureDTO) {
+            return compteFournisseurVoitureService.Authenticate(compteFournisseurVoitureDTO);
+        }
+
     }
 }

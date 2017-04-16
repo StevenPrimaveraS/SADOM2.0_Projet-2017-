@@ -76,5 +76,10 @@ namespace Prj_Final_2017_.Models.Service {
         {
             return compteFournisseurSiegeDAO.GetAll();
         }
+
+        public CompteFournisseurSiegeDTO Authenticate(CompteFournisseurSiegeDTO compteFournisseurSiegeDTO) {
+            return compteFournisseurSiegeDAO.Authenticate(compteFournisseurSiegeDTO);
+        }
+
     }
 }
