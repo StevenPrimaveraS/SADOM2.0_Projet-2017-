@@ -1,4 +1,5 @@
 ﻿using Prj_Final_2017_.DTO;
+using Prj_Final_2017_.Models;
 using Prj_Final_2017_.Models.Exception;
 using Prj_Final_2017_.Models.util;
 using System;
@@ -41,43 +42,37 @@ namespace Prj_Final_2017_.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Create(FormCollection collections)
+        public ActionResult Create(CompteFournisseurChambreRegisterViewModel model)
         {
             try
             {
-                int idFournisseur = Int32.Parse(collections["idFournisseur"]);
-                string courriel = collections["courriel"];
-                string password = collections["password"];
-                int idhotel = Int32.Parse(collections["idhotel"]);
+                if (ModelState.IsValid) {
+                    HotelDTO hotelDTO = new HotelDTO();
+                    hotelDTO.Nom = model.Nom;
+                    hotelDTO.Telephone = model.Telephone;
+                    hotelDTO.Adresse = model.Adresse;
+                    hotelDTO.Ville = model.Ville;
+                    hotelDTO.Categorie = model.Categorie;
+                    hotelDTO.Description = model.Description;
+                    ApplicationFunctions.HotelFacade.Add(hotelDTO);
 
-                int idhotel1 = Int32.Parse(collections["idhotel1"]);
-                string nom = collections["nom"];
-                string telephone = collections["telephone"];
-                string adresse = collections["adresse"];
-                string ville = collections["ville"];
-                string categorie = collections["categorie"];
-                string description = collections["description"];
-                HotelDTO hotelDTO = new HotelDTO();
-                hotelDTO.IdHotel = idhotel1;
-                hotelDTO.Nom = nom;
-                hotelDTO.Telephone = telephone;
-                hotelDTO.Adresse = adresse;
-                hotelDTO.Ville = ville;
-                hotelDTO.Categorie = categorie;
-                hotelDTO.Description = description;
-                ApplicationFunctions.HotelFacade.Add(hotelDTO);
-                CompteFournisseurChambreDTO compteFournisseurChambreDTO = new CompteFournisseurChambreDTO();
-                compteFournisseurChambreDTO.IdFournisseur = idFournisseur;
-                compteFournisseurChambreDTO.Courriel = courriel;
-                compteFournisseurChambreDTO.Password = password;
-                compteFournisseurChambreDTO.IdHotel = idhotel;
-                ApplicationFunctions.CompteFournisseurChambreFacade.Add(compteFournisseurChambreDTO);
+                    //TODO
+                    hotelDTO = ApplicationFunctions.HotelFacade.FindByBasicInfo(hotelDTO);
+
+                    CompteFournisseurChambreDTO compteFournisseurChambreDTO = new CompteFournisseurChambreDTO();
+                    compteFournisseurChambreDTO.Courriel = model.Courriel;
+                    compteFournisseurChambreDTO.Password = model.Password;
+                    compteFournisseurChambreDTO.IdHotel = hotelDTO.IdHotel;
+                    ApplicationFunctions.CompteFournisseurChambreFacade.Add(compteFournisseurChambreDTO);
+
+                    return Redirect("/Home/Index");
+                }
             }
             catch (VoyageAhuntsicException e)
             {
                 System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
             }
-            return View();
+            return View(model);
         }
         public ActionResult Read(int id)
         {

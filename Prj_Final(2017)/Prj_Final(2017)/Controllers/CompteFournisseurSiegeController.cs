@@ -1,4 +1,5 @@
 ﻿using Prj_Final_2017_.DTO;
+using Prj_Final_2017_.Models;
 using Prj_Final_2017_.Models.Exception;
 using Prj_Final_2017_.Models.util;
 using System;
@@ -43,30 +44,32 @@ namespace Prj_Final_2017_.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Create(FormCollection collections)
-        {
-            try
-            {
-                if (Session["user"] != null)
-                {
-                    int idFournisseur = Int32.Parse(collections["idFournisseur"]);
-                    string courriel = collections["courriel"];
-                    string password = collections["password"];
-                    int idCompagnieAerienne = Int32.Parse(collections["idCompagnieAerienne"]);
+        public ActionResult Create(CompteFournisseurSiegeRegisterViewModel model) {
+            try {
+                if (ModelState.IsValid) {
+                    CompagnieAerienneDTO compagnieAerienneDTO = new CompagnieAerienneDTO();
+                    compagnieAerienneDTO.Nom = model.Nom;
+                    compagnieAerienneDTO.Telephone = model.Telephone;
+                    compagnieAerienneDTO.Adresse = model.Adresse;
+                    compagnieAerienneDTO.Ville = model.Ville;
+                    ApplicationFunctions.CompagnieAerienneFacade.Add(compagnieAerienneDTO);
+
+                    //TODO
+                    compagnieAerienneDTO = ApplicationFunctions.CompagnieAerienneFacade.FindByBasicInfo(compagnieAerienneDTO);
+
                     CompteFournisseurSiegeDTO compteFournisseurSiegeDTO = new CompteFournisseurSiegeDTO();
-                    compteFournisseurSiegeDTO.IdFournisseur = idFournisseur;
-                    compteFournisseurSiegeDTO.Courriel = courriel;
-                    compteFournisseurSiegeDTO.Password = password;
-                    compteFournisseurSiegeDTO.IdCompagnieAerienne = idCompagnieAerienne;
+                    compteFournisseurSiegeDTO.Courriel = model.Courriel;
+                    compteFournisseurSiegeDTO.Password = model.Password;
+                    compteFournisseurSiegeDTO.IdCompagnieAerienne = compagnieAerienneDTO.IdCompagnieAerienne;
                     ApplicationFunctions.CompteFournisseurSiegeFacade.Add(compteFournisseurSiegeDTO);
+
+                    return Redirect("/Home/Index");
                 }
             }
-            catch (VoyageAhuntsicException e)
-            {
+            catch (VoyageAhuntsicException e) {
                 System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
             }
-
-            return View();
+            return View(model);
         }
         public ActionResult Read(int id)
         {

@@ -1,4 +1,5 @@
 ﻿using Prj_Final_2017_.DTO;
+using Prj_Final_2017_.Models;
 using Prj_Final_2017_.Models.Exception;
 using Prj_Final_2017_.Models.util;
 using System;
@@ -42,30 +43,32 @@ namespace Prj_Final_2017_.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Create(FormCollection collections)
-        {
-            try
-            {
-                if (Session["user"] != null)
-                {
-                    int idFournisseur = Int32.Parse(collections["idFournisseur"]);
-                    string courriel = collections["courriel"];
-                    string password = collections["password"];
-                    int idAgenceVoiture = Int32.Parse(collections["idAgenceVoiture"]);
+        public ActionResult Create(CompteFournisseurVoitureRegisterViewModel model) {
+            try {
+                if (ModelState.IsValid) {
+                    AgenceVoitureDTO agenceVoitureDTO = new AgenceVoitureDTO();
+                    agenceVoitureDTO.Nom = model.Nom;
+                    agenceVoitureDTO.Telephone = model.Telephone;
+                    agenceVoitureDTO.Adresse = model.Adresse;
+                    agenceVoitureDTO.Ville = model.Ville;
+                    ApplicationFunctions.AgenceVoitureFacade.Add(agenceVoitureDTO);
+
+                    //TODO
+                    agenceVoitureDTO = ApplicationFunctions.AgenceVoitureFacade.FindByBasicInfo(agenceVoitureDTO);
+
                     CompteFournisseurVoitureDTO compteFournisseurVoitureDTO = new CompteFournisseurVoitureDTO();
-                    compteFournisseurVoitureDTO.IdFournisseur = idFournisseur;
-                    compteFournisseurVoitureDTO.Courriel = courriel;
-                    compteFournisseurVoitureDTO.Password = password;
-                    compteFournisseurVoitureDTO.IdAgenceVoiture = idAgenceVoiture;
+                    compteFournisseurVoitureDTO.Courriel = model.Courriel;
+                    compteFournisseurVoitureDTO.Password = model.Password;
+                    compteFournisseurVoitureDTO.IdAgenceVoiture = agenceVoitureDTO.IdAgenceVoiture;
                     ApplicationFunctions.CompteFournisseurVoitureFacade.Add(compteFournisseurVoitureDTO);
 
+                    return Redirect("/Home/Index");
                 }
             }
-            catch (VoyageAhuntsicException e)
-            {
+            catch (VoyageAhuntsicException e) {
                 System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
             }
-            return View();
+            return View(model);
         }
         public ActionResult Read(int id)
         {
