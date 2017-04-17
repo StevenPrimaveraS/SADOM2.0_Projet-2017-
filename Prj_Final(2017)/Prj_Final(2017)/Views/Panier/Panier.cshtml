@@ -92,7 +92,7 @@
                     @VADateHandler.getReservationDates(datesSiege[panierSiege.IndexOf(siegeDTO)])[1].ToShortDateString()
                 </span>
                 <span style="padding: 5px 5px 5px 15px;">
-                    @volDTO.Tarif.ToString("F") $
+                    <strong>@volDTO.Tarif.ToString("F") $</strong>
                 </span>
                 <span style="padding: 5px 5px 5px 15px;">
                     <a href="/Panier/Supprimer/@iterator" class="btn btn-warning">Supprimer</a>
@@ -120,7 +120,7 @@
                     @VADateHandler.getReservationDates(datesVoiture[panierVoiture.IndexOf(voitureDTO)])[1].ToShortDateString()
                 </span>
                 <span style="padding: 5px 5px 5px 15px;">
-                    @voitureDTO.Tarif.ToString("F") $
+                    <strong>@voitureDTO.Tarif.ToString("F") $</strong>
                 </span>
                 <span style="padding: 5px 5px 5px 15px;">
                     <a href="/Panier/Supprimer/@iterator" class="btn btn-warning">Supprimer</a>
@@ -158,7 +158,7 @@
                     @VADateHandler.getReservationDates(datesForfait[panierForfait.IndexOf(forfaitDTO)])[1].ToShortDateString()
                 </span>
                 <span style="padding: 5px 5px 5px 15px;">
-                    @forfaitDTO.TarifReduit.ToString("F") $
+                    <strong>@forfaitDTO.TarifReduit.ToString("F") $</strong>
                 </span>
                 <span style="padding: 5px 5px 5px 15px;">
                     <a href="/Panier/Supprimer/@iterator" class="btn btn-warning">Supprimer</a>
