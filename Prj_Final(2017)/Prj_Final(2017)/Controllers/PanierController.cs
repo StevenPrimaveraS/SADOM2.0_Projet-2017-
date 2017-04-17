@@ -42,6 +42,7 @@ namespace Prj_Final_2017_.Controllers
         public ActionResult Acheter() {
             return View();
         }
+
         [HttpPost]
         public ActionResult Acheter(FormCollection collection) {
             try {
@@ -148,7 +149,8 @@ namespace Prj_Final_2017_.Controllers
                     System.Diagnostics.Debug.WriteLine("InnerException : "+e.InnerException.Message);
                 }
             }
-            return RedirectToAction("Panier");
+            return Redirect("/Home/Index");
+            //return RedirectToAction("Panier");
         }
         
         public ActionResult Supprimer(int id)

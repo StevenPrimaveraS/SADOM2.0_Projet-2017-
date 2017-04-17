@@ -33,5 +33,10 @@ namespace Prj_Final_2017_.Controllers
         {
             return View();
         }
+        public ActionResult PourTotal(int total)
+        {
+            ViewBag.TotalChambre = total.ToString();
+            return View();
+        }
     }
 }

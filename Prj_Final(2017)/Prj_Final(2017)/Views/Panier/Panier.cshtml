@@ -165,11 +165,12 @@
     TODO : Possibilité de changer le lien pour une page de paiement
     et ensuite mettre le lien pour acheter
 *@
-@if (iterator > 1) {
+@*@if (iterator > 1) {
     <form id="formPanier" action="/Panier/Acheter" method="post">
         <input class="btn btn-primary btn-lg" type="submit" value="Acheter le panier" />
     </form>
-}
+}*@
+@Html.ActionLink("Proceder au paiement", "Paiement", "Paiement")
 
 
 @*

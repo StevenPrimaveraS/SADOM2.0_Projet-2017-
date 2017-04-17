@@ -1,11 +1,161 @@
-﻿
+﻿@using WebMatrix.Data;
+@using Prj_Final_2017_.DTO;
+@using Prj_Final_2017_.Models.util;
 @{
     ViewBag.Title = "Paiement";
 }
 <div class="jumbotron">
     <h1>Paiement</h1>
-    <h2>Montant à payer</h2>
+    <h2>Montant à payer :</h2>
 </div>
+
+@{
+    int iterator = 1;//Chambre>Siege>Voiture>Forfait
+
+    //Possibilité de changer les panier en listes de reservation
+    List<ChambreDTO> panierChambre = (List<ChambreDTO>)Session["panierChambre"];
+    List<SiegeDTO> panierSiege = (List<SiegeDTO>)Session["panierSiege"];
+    List<VoitureDTO> panierVoiture = (List<VoitureDTO>)Session["panierVoiture"];
+    List<ForfaitDTO> panierForfait = (List<ForfaitDTO>)Session["panierForfait"];
+    List<string> datesChambre = (List<string>)Session["datesChambre"];
+    List<string> datesSiege = (List<string>)Session["datesSiege"];
+    List<string> datesVoiture = (List<string>)Session["datesVoiture"];
+    List<string> datesForfait = (List<string>)Session["datesForfait"];
+    if (panierChambre == null || datesChambre == null)
+    {
+        panierChambre = new List<ChambreDTO>();
+        datesChambre = new List<string>();
+    }
+    if (panierSiege == null || datesSiege == null)
+    {
+        panierSiege = new List<SiegeDTO>();
+        datesSiege = new List<string>();
+    }
+    if (panierVoiture == null || datesVoiture == null)
+    {
+        panierVoiture = new List<VoitureDTO>();
+        datesVoiture = new List<string>();
+    }
+    if (panierForfait == null || datesForfait == null)
+    {
+        panierForfait = new List<ForfaitDTO>();
+        datesForfait = new List<string>();
+    }
+
+}
+
+<link href="~/Content/StylePrincipal.css" rel="stylesheet" media="all" type="text/css">
+<ul id="listeProduits" style="flex-direction:column">
+    @foreach (ChambreDTO chambreDTO in panierChambre)
+    {
+        HotelDTO hotelDTO = ApplicationFunctions.HotelFacade.Read(chambreDTO.IdHotel);
+        <li style="flex-direction:row; justify-content:space-around; display:flex">
+            <div id="sectionInfo" style="display:inline; padding: 5px 5px 5px 15px; flex:auto ">
+                <p>
+                    <strong style="font-size:16px">@hotelDTO.Nom &nbsp;-&nbsp; @chambreDTO.NomChambre </strong>
+                    <br />
+                    Adresse : @hotelDTO.Adresse &nbsp;-&nbsp; @hotelDTO.Ville
+                    <br />
+                    Chambre : @chambreDTO.NumeroChambre
+                </p>
+            </div>
+            <span style="flex:auto; padding: 5px 5px 5px 15px;">
+                @chambreDTO.Tarif.ToString("F") $
+            </span>
+            <span style="flex:auto; padding: 5px 5px 5px 15px;">
+                @VADateHandler.getReservationDates(datesChambre[panierChambre.IndexOf(chambreDTO)])[0].ToShortDateString()
+                &nbsp;&mdash;&nbsp;
+                @VADateHandler.getReservationDates(datesChambre[panierChambre.IndexOf(chambreDTO)])[1].ToShortDateString()
+            </span>
+        </li>
+        iterator++;
+    }
+    @foreach (SiegeDTO siegeDTO in panierSiege)
+    {
+        VolDTO volDTO = ApplicationFunctions.VolFacade.Read(siegeDTO.IdVol);
+        CompagnieAerienneDTO compagnieAerienneDTO = ApplicationFunctions.CompagnieAerienneFacade.Read(volDTO.IdCompagnieAerienne);
+        <li style="flex-direction:row;justify-content:space-around; display:flex">
+            <div id="sectionInfo" style="display:inline; padding: 5px 5px 5px 15px; flex:auto ">
+                <p>
+                    <strong style="font-size:16px">@compagnieAerienneDTO.Nom &nbsp;-&nbsp; @volDTO.Classe </strong>
+                    <br />
+                    De : @volDTO.AeroportDepart &nbsp;-&nbsp; @volDTO.VilleDepart
+                    <br />
+                    À : @volDTO.AeroportDestination &nbsp;-&nbsp; @volDTO.VilleDestination
+                    <br />
+                    Siege : @siegeDTO.Numero
+                </p>
+            </div>
+            <span style="flex:auto; padding: 5px 5px 5px 15px;">
+                @volDTO.Tarif.ToString("F") $
+            </span>
+            <span style="flex:auto; padding: 5px 5px 5px 15px;">
+                @VADateHandler.getReservationDates(datesSiege[panierSiege.IndexOf(siegeDTO)])[0].ToShortDateString()
+                &nbsp;&mdash;&nbsp;
+                @VADateHandler.getReservationDates(datesSiege[panierSiege.IndexOf(siegeDTO)])[1].ToShortDateString()
+            </span>
+        </li>
+        iterator++;
+    }
+    @foreach (VoitureDTO voitureDTO in panierVoiture)
+    {
+        AgenceVoitureDTO agenceVoitureDTO = ApplicationFunctions.AgenceVoitureFacade.Read(voitureDTO.IdAgence);
+        <li style="flex-direction:row;justify-content:space-around; display:flex">
+            <div id="sectionInfo" style="display:inline; padding: 5px 5px 5px 15px; flex:auto ">
+                <p>
+                    <strong style="font-size:16px">@agenceVoitureDTO.Nom &nbsp;-&nbsp; @voitureDTO.Nom </strong>
+                    <br />
+                    Adresse : @agenceVoitureDTO.Adresse &nbsp;-&nbsp; @agenceVoitureDTO.Ville
+                    <br />
+                    Plaque : @voitureDTO.Plaque
+                </p>
+            </div>
+            <span style="flex:auto; padding: 5px 5px 5px 15px;">
+                @voitureDTO.Tarif.ToString("F") $
+            </span>
+            <span style="flex:auto; padding: 5px 5px 5px 15px;">
+                @VADateHandler.getReservationDates(datesVoiture[panierVoiture.IndexOf(voitureDTO)])[0].ToShortDateString()
+                &nbsp;&mdash;&nbsp;
+                @VADateHandler.getReservationDates(datesVoiture[panierVoiture.IndexOf(voitureDTO)])[1].ToShortDateString()
+            </span>
+        </li>
+        iterator++;
+    }
+    @foreach (ForfaitDTO forfaitDTO in panierForfait)
+    {
+        VoitureDTO voitureDTO = ApplicationFunctions.VoitureFacade.Read(forfaitDTO.IdVoiture);
+        AgenceVoitureDTO agenceVoitureDTO = ApplicationFunctions.AgenceVoitureFacade.Read(voitureDTO.IdAgence);
+        SiegeDTO siegeDTO = ApplicationFunctions.SiegeFacade.Read(forfaitDTO.IdSiege);
+        VolDTO volDTO = ApplicationFunctions.VolFacade.Read(siegeDTO.IdVol);
+        CompagnieAerienneDTO compagnieAerienneDTO = ApplicationFunctions.CompagnieAerienneFacade.Read(volDTO.IdCompagnieAerienne);
+        ChambreDTO chambreDTO = ApplicationFunctions.ChambreFacade.Read(forfaitDTO.IdChambre);
+        HotelDTO hotelDTO = ApplicationFunctions.HotelFacade.Read(chambreDTO.IdHotel);
+        <li style="flex-direction:row;justify-content:space-around; display:flex">
+            <div id="sectionInfo" style="display:inline; padding: 5px 5px 5px 15px; flex:auto ">
+                <p>
+                    <strong style="font-size:16px">Forfait @compagnieAerienneDTO.Nom &nbsp;-&nbsp; @hotelDTO.Nom &nbsp;-&nbsp; @agenceVoitureDTO.Nom </strong>
+                    <br />
+                    Vol : @volDTO.AeroportDepart &nbsp;-&nbsp; @volDTO.AeroportDestination
+                    <br />
+                    Siege : @siegeDTO.Numero
+                    <br />
+                    Chambre : @chambreDTO.NumeroChambre
+                    <br />
+                    Plaque : @voitureDTO.Plaque
+                </p>
+            </div>
+            <span style="flex:auto; padding: 5px 5px 5px 15px;">
+                @forfaitDTO.TarifReduit.ToString("F") $
+            </span>
+            <span style="flex:auto; padding: 5px 5px 5px 15px;">
+                @VADateHandler.getReservationDates(datesForfait[panierForfait.IndexOf(forfaitDTO)])[0].ToShortDateString()
+                &nbsp;&mdash;&nbsp;
+                @VADateHandler.getReservationDates(datesForfait[panierForfait.IndexOf(forfaitDTO)])[1].ToShortDateString()
+            </span>
+        </li>
+        iterator++;
+    }
+</ul>
 
 <ul id="paiement" style="flex-direction:column">
     <li style="flex-direction:row;justify-content:space-around; display:flex">
@@ -47,9 +197,17 @@
             &nbsp;
             <input class="text-form" type="text" value="" />
         </span>
-        <input class="text-form" type="button" value="Payer" />
-        &nbsp;
-        <input class="text-form" type="button" value="Annuler" />
     </li>
 </ul>
+<br /><br />
+@*
+    TODO : Possibilité de changer le lien pour une page de paiement
+    et ensuite mettre le lien pour acheter
+*@
+@if (iterator > 1)
+{
+    <form id="formPanier" action="/Panier/Acheter" method="post">
+        <input class="btn btn-primary btn-lg" type="submit" value="Acheter le panier" />
+    </form>
+}
 
