@@ -1,9 +1,11 @@
 ﻿
 @{
-    ViewBag.Title = "Reserver";
+    ViewBag.Title = "Réserver";
 }
-
-<h2>@ViewBag.Title</h2>
+<link href="~/Content/StylePrincipal.css" rel="stylesheet" media="all" type="text/css">
+<div class="jumbotron">
+    <h1>@ViewBag.Title</h1>
+</div>
 
 <form id="formReservation" action="/Forfait/Reserver/@ViewBag.IdForfait" method="post">
     <p>Veuillez confirmer les dates pour lesquelles vous voulez réserver cette voiture</p>
@@ -18,7 +20,7 @@
         <input class="form-control" id="dateFin" name="dateFin" type="date" style="width: 180px" placeholder="aaaa-mm-jj" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" />
     </div>
     <input class="btn btn-primary" type="submit" id="btnSubmit" value="Ajouter au panier" /><br /><br />
-    <a href="/Forfait/Forfait" class="btn btn-default btn-xs" aria-label="Left Align" style="width:65px; margin-top:3px;">
+    <a href="/Forfait/Forfait" class="btn btn-default btn-xs" aria-label="Left Align" style="width:65px;">
         Retour
     </a>
 </form>

@@ -1,13 +1,15 @@
 ﻿@using WebMatrix.Data;
 @{
     ViewBag.Title = "Siege";
+    ViewBag.Description =
+        @"";
 }
 <link href="~/Content/StylePrincipal.css" rel="stylesheet" media="all" type="text/css">
 <div class="jumbotron">
     <h1>Sieges pour le vol</h1>
-    <p class="lead">Liste des sieges</p>
+    <p class="lead">@ViewBag.Description</p>
 </div>
-
+<p class="lead">Liste des sieges</p>
 @{
     String IdVol = ViewBag.IdVol;
     var DB = Database.Open("mysqlConnexionString");
