@@ -12,13 +12,7 @@ namespace Prj_Final_2017_.Controllers
     public class VolController : Controller
     {
 
-        //protected override void OnActionExecuting(ActionExecutingContext filterContext)
-        //{
-        //    if (Session["user"] != null)
-        //        base.OnActionExecuting(filterContext);
-        //    else
-        //        filterContext.Result = new RedirectResult("~/Account/Login");
-        //}
+        //Vol
 
 
         // GET: Vol

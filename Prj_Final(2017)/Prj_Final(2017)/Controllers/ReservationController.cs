@@ -8,6 +8,9 @@ namespace Prj_Final_2017_.Controllers
 {
     public class ReservationController : Controller
     {
+
+        //Aucune sert
+
         // GET: Reservation
         public ActionResult Index()
         {

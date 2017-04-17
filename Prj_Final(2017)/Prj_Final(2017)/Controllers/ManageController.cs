@@ -10,6 +10,8 @@ using Prj_Final_2017_.Models;
 
 namespace Prj_Final_2017_.Controllers
 {
+    //Aucune pour le moment
+
     [Authorize]
     public class ManageController : Controller
     {

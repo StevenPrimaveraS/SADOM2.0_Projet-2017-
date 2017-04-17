@@ -11,32 +11,29 @@ namespace Prj_Final_2017_.Controllers
 {
     public class SiegeController : Controller
     {
-
-        //protected override void OnActionExecuting(ActionExecutingContext filterContext)
-        //{
-        //    if (Session["user"] != null)
-        //        base.OnActionExecuting(filterContext);
-        //    else
-        //        filterContext.Result = new RedirectResult("~/Account/Login");
-        //}
+        //PourVol, Reserver
 
         // GET: Siege
         public ActionResult Index()
         {
             return View();
         }
-
-        //TODO
+        
         public ActionResult PourVol(int id) {
             ViewBag.IdVol = id.ToString();
             return View();
         }
 
         public ActionResult Reserver(int id) {
-            ViewBag.IdSiege = id;
-            SiegeDTO siegeDTO = ApplicationFunctions.SiegeFacade.Read(id);
-            ViewBag.IdVol = siegeDTO.IdVol;
-            return View();
+            if (Session["user"] != null) {
+                if (Session["user"].GetType() == typeof(CompteParticulierDTO)) {
+                    ViewBag.IdSiege = id;
+                    SiegeDTO siegeDTO = ApplicationFunctions.SiegeFacade.Read(id);
+                    ViewBag.IdVol = siegeDTO.IdVol;
+                    return View();
+                }
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]

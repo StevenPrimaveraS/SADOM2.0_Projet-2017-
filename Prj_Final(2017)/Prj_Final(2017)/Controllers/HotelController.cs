@@ -11,6 +11,9 @@ namespace Prj_Final_2017_.Controllers
 {
     public class HotelController : Controller
     {
+
+        //Juste Index
+
         // GET: Hotel
         public ActionResult Index()
         {

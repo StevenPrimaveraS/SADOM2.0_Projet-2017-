@@ -11,6 +11,8 @@ namespace Prj_Final_2017_.Controllers
 {
     public class ChambreController : Controller
     {
+        //PourHotel, Reserver
+
         // GET: Chambre
         public ActionResult Index()
         {
@@ -21,17 +23,22 @@ namespace Prj_Final_2017_.Controllers
         {
             return View();
         }
-        //TODO + Vue associée:
+        
         public ActionResult PourHotel(int id) {
             ViewBag.IdHotel = id.ToString();
             return View();
         }
 
         public ActionResult Reserver(int id) {
-            ViewBag.IdChambre = id;
-            ChambreDTO chambreDTO = ApplicationFunctions.ChambreFacade.Read(id);
-            ViewBag.IdHotel = chambreDTO.IdHotel;
-            return View();
+            if (Session["user"] != null) {
+                if(Session["user"].GetType() == typeof(CompteParticulierDTO)) {
+                    ViewBag.IdChambre = id;
+                    ChambreDTO chambreDTO = ApplicationFunctions.ChambreFacade.Read(id);
+                    ViewBag.IdHotel = chambreDTO.IdHotel;
+                    return View();
+                }
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]

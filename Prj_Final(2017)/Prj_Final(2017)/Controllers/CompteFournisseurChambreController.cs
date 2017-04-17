@@ -12,35 +12,22 @@ namespace Prj_Final_2017_.Controllers
 {
     public class CompteFournisseurChambreController : Controller
     {
+        //Juste Create
+
         // GET: CompteFournisseurChambre
         public ActionResult Index()
         {
             return View();
         }
-    /*    public ActionResult Create(int idFournisseur, string courriel, string password, int idhotel)
-        {
-            try
-            {
-                if (Session["user"] != null)
-                {
-                    CompteFournisseurChambreDTO compteFournisseurChambreDTO = new CompteFournisseurChambreDTO();
-                    compteFournisseurChambreDTO.IdFournisseur = idFournisseur;
-                    compteFournisseurChambreDTO.Courriel = courriel;
-                    compteFournisseurChambreDTO.Password = password;
-                    compteFournisseurChambreDTO.IdHotel = idhotel;
-                    ApplicationFunctions.CompteFournisseurChambreFacade.Add(compteFournisseurChambreDTO);
-                }
-            }
-            catch (VoyageAhuntsicException e) {
-                System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
-            }
-            return View();
-        }  */
+
         public ActionResult Create()
         {
-      
-            return View();
+            if (Session["user"] == null) {
+                return View();
+            }
+            return RedirectToAction("Index", "Home");
         }
+
         [HttpPost]
         public ActionResult Create(CompteFournisseurChambreRegisterViewModel model)
         {
@@ -72,6 +59,7 @@ namespace Prj_Final_2017_.Controllers
             }
             return View(model);
         }
+
         public ActionResult Read(int id)
         {
             try

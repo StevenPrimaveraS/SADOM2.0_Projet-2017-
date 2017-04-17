@@ -12,6 +12,8 @@ namespace Prj_Final_2017_.Controllers
     public class CompagnieAerienneController : Controller
     {
 
+        //Aucune vue n'existe pour ce contrôleur
+
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             if (Session["user"] != null)

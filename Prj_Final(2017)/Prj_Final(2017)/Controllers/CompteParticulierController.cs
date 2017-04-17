@@ -13,17 +13,7 @@ namespace Prj_Final_2017_.Controllers
     public class CompteParticulierController : Controller
     {
 
-        //protected override void OnActionExecuting(ActionExecutingContext filterContext)
-        //{
-        //    if (Session["user"] != null)
-        //    {
-        //        base.OnActionExecuting(filterContext);
-        //    }
-        //    else
-        //    {
-        //        filterContext.Result = new RedirectResult("~/Account/Login");
-        //    }
-        //}
+        //Juste Create
 
         // GET: CompteParticulier
         public ActionResult Index()
@@ -55,9 +45,11 @@ namespace Prj_Final_2017_.Controllers
         }
 
         // GET: CompteParticulier/Create
-        public ActionResult Create()
-        {
-            return View();
+        public ActionResult Create() {
+            if (Session["user"] == null) {
+                return View();
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         // POST: CompteParticulier/Create

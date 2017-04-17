@@ -14,14 +14,19 @@ namespace Prj_Final_2017_.Controllers
     public class PanierController : Controller
     {
 
-        //protected override void OnActionExecuting(ActionExecutingContext filterContext) {
-        //    if (Session["user"] != null) {
-        //        base.OnActionExecuting(filterContext);
-        //    }
-        //    else {
-        //        filterContext.Result = new RedirectResult("~/Account/Login");
-        //    }
-        //}
+        protected override void OnActionExecuting(ActionExecutingContext filterContext) {
+            if (Session["user"] != null) {
+                if (Session["user"].GetType() == typeof(CompteParticulierDTO)) {
+                    base.OnActionExecuting(filterContext);
+                }
+                else {
+                    filterContext.Result = new RedirectResult("~/Home/Index");
+                }
+            }
+            else {
+                filterContext.Result = new RedirectResult("~/Account/Login");
+            }
+        }
 
         // GET: Panier
         public ActionResult Index()
@@ -65,78 +70,77 @@ namespace Prj_Final_2017_.Controllers
                     datesForfait = new List<string>();
                 }
                 //
-                if (Session["user"].GetType() == typeof(CompteParticulierDTO)) {
-                    CompteParticulierDTO user = (CompteParticulierDTO)Session["user"];
-                    //reservations chambre
-                    List<ReservationChambreDTO> listeReservationsChambre = new List<ReservationChambreDTO>();
-                    ReservationChambreDTO reservationChambreDTO = null;
-                    for (int i = 0; i < panierChambre.Count; i++) {
-                        reservationChambreDTO = new ReservationChambreDTO();
-                        reservationChambreDTO.IdParticulier = user.IdParticulier;
-                        reservationChambreDTO.IdChambre = panierChambre[i].IdChambre;
-                        reservationChambreDTO.DateReservation = VADateHandler.getReservationDates(datesChambre[i])[0];
-                        reservationChambreDTO.DateFinReservation = VADateHandler.getReservationDates(datesChambre[i])[1];
-                        listeReservationsChambre.Add(reservationChambreDTO);
-                    }
-                    //Session["reservationsChambre"] = reservationsChambre;
-                    //reservations siege
-                    List<ReservationSiegeDTO> listeReservationsSiege = new List<ReservationSiegeDTO>();
-                    ReservationSiegeDTO reservationSiegeDTO = null;
-                    for (int i = 0; i < panierSiege.Count; i++) {
-                        reservationSiegeDTO = new ReservationSiegeDTO();
-                        reservationSiegeDTO.IdParticulier = user.IdParticulier;
-                        reservationSiegeDTO.IdSiege = panierSiege[i].IdSiege;
-                        reservationSiegeDTO.DateReservation = VADateHandler.getReservationDates(datesSiege[i])[0];
-                        reservationSiegeDTO.DateFinReservation = VADateHandler.getReservationDates(datesSiege[i])[1];
-                        listeReservationsSiege.Add(reservationSiegeDTO);
-                    }
-                    //Session["reservationsSiege"] = reservationsSiege;
-                    //reservations voiture
-                    List<ReservationVoitureDTO> listeReservationsVoiture = new List<ReservationVoitureDTO>();
-                    ReservationVoitureDTO reservationVoitureDTO = null;
-                    for (int i = 0; i < panierVoiture.Count; i++) {
-                        reservationVoitureDTO = new ReservationVoitureDTO();
-                        reservationVoitureDTO.IdParticulier = user.IdParticulier;
-                        reservationVoitureDTO.IdVoiture = panierVoiture[i].IdVoiture;
-                        reservationVoitureDTO.DateReservation = VADateHandler.getReservationDates(datesVoiture[i])[0];
-                        reservationVoitureDTO.DateFinReservation = VADateHandler.getReservationDates(datesVoiture[i])[1];
-                        listeReservationsVoiture.Add(reservationVoitureDTO);
-                    }
-                    //Session["reservationsVoiture"] = reservationsVoiture;
-                    //reservations forfait
-                    List<ReservationForfaitDTO> listeReservationsForfait = new List<ReservationForfaitDTO>();
-                    ReservationForfaitDTO reservationForfaitDTO = null;
-                    for (int i = 0; i < panierForfait.Count; i++) {
-                        reservationForfaitDTO = new ReservationForfaitDTO();
-                        reservationForfaitDTO.IdParticulier = user.IdParticulier;
-                        reservationForfaitDTO.IdForfait = panierForfait[i].IdForfait;
-                        reservationForfaitDTO.DateReservation = VADateHandler.getReservationDates(datesForfait[i])[0];
-                        reservationForfaitDTO.DateFinReservation = VADateHandler.getReservationDates(datesForfait[i])[1];
-                        listeReservationsForfait.Add(reservationForfaitDTO);
-                    }
-                    //Session["reservationsForfait"] = reservationsForfait;
-                    //Ajout de toutes les Reservations
-                    foreach(ReservationChambreDTO reservationChambre in listeReservationsChambre) {
-                        ApplicationFunctions.ReservationChambreFacade.Add(reservationChambre);
-                    }
-                    foreach (ReservationSiegeDTO reservationSiege in listeReservationsSiege) {
-                        ApplicationFunctions.ReservationSiegeFacade.Add(reservationSiege);
-                    }
-                    foreach (ReservationVoitureDTO reservationVoiture in listeReservationsVoiture) {
-                        ApplicationFunctions.ReservationVoitureFacade.Add(reservationVoiture);
-                    }
-                    foreach (ReservationForfaitDTO reservationForfait in listeReservationsForfait) {
-                        ApplicationFunctions.ReservationForfaitFacade.Add(reservationForfait);
-                    }
-                    Session["panierChambre"] = null;
-                    Session["panierSiege"] = null;
-                    Session["panierVoiture"] = null;
-                    Session["panierForfait"] = null;
-                    Session["datesChambre"] = null;
-                    Session["datesSiege"] = null;
-                    Session["datesVoiture"] = null;
-                    Session["datesForfait"] = null;
+                CompteParticulierDTO user = (CompteParticulierDTO)Session["user"];
+                //reservations chambre
+                List<ReservationChambreDTO> listeReservationsChambre = new List<ReservationChambreDTO>();
+                ReservationChambreDTO reservationChambreDTO = null;
+                for (int i = 0; i < panierChambre.Count; i++) {
+                    reservationChambreDTO = new ReservationChambreDTO();
+                    reservationChambreDTO.IdParticulier = user.IdParticulier;
+                    reservationChambreDTO.IdChambre = panierChambre[i].IdChambre;
+                    reservationChambreDTO.DateReservation = VADateHandler.getReservationDates(datesChambre[i])[0];
+                    reservationChambreDTO.DateFinReservation = VADateHandler.getReservationDates(datesChambre[i])[1];
+                    listeReservationsChambre.Add(reservationChambreDTO);
                 }
+                //Session["reservationsChambre"] = reservationsChambre;
+                //reservations siege
+                List<ReservationSiegeDTO> listeReservationsSiege = new List<ReservationSiegeDTO>();
+                ReservationSiegeDTO reservationSiegeDTO = null;
+                for (int i = 0; i < panierSiege.Count; i++) {
+                    reservationSiegeDTO = new ReservationSiegeDTO();
+                    reservationSiegeDTO.IdParticulier = user.IdParticulier;
+                    reservationSiegeDTO.IdSiege = panierSiege[i].IdSiege;
+                    reservationSiegeDTO.DateReservation = VADateHandler.getReservationDates(datesSiege[i])[0];
+                    reservationSiegeDTO.DateFinReservation = VADateHandler.getReservationDates(datesSiege[i])[1];
+                    listeReservationsSiege.Add(reservationSiegeDTO);
+                }
+                //Session["reservationsSiege"] = reservationsSiege;
+                //reservations voiture
+                List<ReservationVoitureDTO> listeReservationsVoiture = new List<ReservationVoitureDTO>();
+                ReservationVoitureDTO reservationVoitureDTO = null;
+                for (int i = 0; i < panierVoiture.Count; i++) {
+                    reservationVoitureDTO = new ReservationVoitureDTO();
+                    reservationVoitureDTO.IdParticulier = user.IdParticulier;
+                    reservationVoitureDTO.IdVoiture = panierVoiture[i].IdVoiture;
+                    reservationVoitureDTO.DateReservation = VADateHandler.getReservationDates(datesVoiture[i])[0];
+                    reservationVoitureDTO.DateFinReservation = VADateHandler.getReservationDates(datesVoiture[i])[1];
+                    listeReservationsVoiture.Add(reservationVoitureDTO);
+                }
+                //Session["reservationsVoiture"] = reservationsVoiture;
+                //reservations forfait
+                List<ReservationForfaitDTO> listeReservationsForfait = new List<ReservationForfaitDTO>();
+                ReservationForfaitDTO reservationForfaitDTO = null;
+                for (int i = 0; i < panierForfait.Count; i++) {
+                    reservationForfaitDTO = new ReservationForfaitDTO();
+                    reservationForfaitDTO.IdParticulier = user.IdParticulier;
+                    reservationForfaitDTO.IdForfait = panierForfait[i].IdForfait;
+                    reservationForfaitDTO.DateReservation = VADateHandler.getReservationDates(datesForfait[i])[0];
+                    reservationForfaitDTO.DateFinReservation = VADateHandler.getReservationDates(datesForfait[i])[1];
+                    listeReservationsForfait.Add(reservationForfaitDTO);
+                }
+                //Session["reservationsForfait"] = reservationsForfait;
+                //Ajout de toutes les Reservations
+                foreach(ReservationChambreDTO reservationChambre in listeReservationsChambre) {
+                    ApplicationFunctions.ReservationChambreFacade.Add(reservationChambre);
+                }
+                foreach (ReservationSiegeDTO reservationSiege in listeReservationsSiege) {
+                    ApplicationFunctions.ReservationSiegeFacade.Add(reservationSiege);
+                }
+                foreach (ReservationVoitureDTO reservationVoiture in listeReservationsVoiture) {
+                    ApplicationFunctions.ReservationVoitureFacade.Add(reservationVoiture);
+                }
+                foreach (ReservationForfaitDTO reservationForfait in listeReservationsForfait) {
+                    ApplicationFunctions.ReservationForfaitFacade.Add(reservationForfait);
+                }
+                Session["panierChambre"] = null;
+                Session["panierSiege"] = null;
+                Session["panierVoiture"] = null;
+                Session["panierForfait"] = null;
+                Session["datesChambre"] = null;
+                Session["datesSiege"] = null;
+                Session["datesVoiture"] = null;
+                Session["datesForfait"] = null;
+                
             }
             catch (VoyageAhuntsicException e) {
                 System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);

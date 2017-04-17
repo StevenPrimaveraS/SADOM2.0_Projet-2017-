@@ -11,6 +11,8 @@ namespace Prj_Final_2017_.Controllers
 {
     public class ForfaitController : Controller
     {
+        //Forfait, Reserver
+
         // GET: Forfait
         public ActionResult Index()
         {
@@ -24,8 +26,13 @@ namespace Prj_Final_2017_.Controllers
 
         //TODO
         public ActionResult Reserver(int id) {
-            ViewBag.IdForfait = id;
-            return View();
+            if(Session["user"] != null) {
+                if(Session["user"].GetType() == typeof(CompteParticulierDTO)) {
+                    ViewBag.IdForfait = id;
+                    return View();
+                }
+            }
+            return RedirectToAction("Login", "Account");
         }
 
         [HttpPost]

@@ -10,6 +10,8 @@ using System.Web.Mvc;
 namespace Prj_Final_2017_.Controllers {
     public class ReservationSiegeController : Controller {
 
+        //Aucune sert
+
         protected override void OnActionExecuting(ActionExecutingContext filterContext) {
             if (Session["user"] != null)
                 base.OnActionExecuting(filterContext);

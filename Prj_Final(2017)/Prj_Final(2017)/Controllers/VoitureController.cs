@@ -13,6 +13,8 @@ namespace Prj_Final_2017_.Controllers
 {
     public class VoitureController : Controller
     {
+        //Voiture, Reserver
+
         // GET: Voiture
         public ActionResult Index()
         {
@@ -26,8 +28,13 @@ namespace Prj_Final_2017_.Controllers
 
         //TODO
         public ActionResult Reserver(int id) {
-            ViewBag.IdVoiture = id;
-            return View();
+            if (Session["user"] != null) {
+                if (Session["user"].GetType() == typeof(CompteParticulierDTO)) {
+                    ViewBag.IdVoiture = id;
+                    return View();
+                }
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]

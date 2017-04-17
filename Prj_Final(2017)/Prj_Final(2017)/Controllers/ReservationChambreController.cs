@@ -10,9 +10,16 @@ using System.Web.Mvc;
 namespace Prj_Final_2017_.Controllers {
     public class ReservationChambreController : Controller {
 
+        //Aucune sert
+
         protected override void OnActionExecuting(ActionExecutingContext filterContext) {
-            if(Session["user"] != null) { 
-                base.OnActionExecuting(filterContext);
+            if (Session["user"] != null) {
+                if (Session["user"].GetType() == typeof(CompteParticulierDTO)) {
+                    base.OnActionExecuting(filterContext);
+                }
+                else {
+                    filterContext.Result = new RedirectResult("~/Home/Index");
+                }
             }
             else {
                 filterContext.Result = new RedirectResult("~/Account/Login");

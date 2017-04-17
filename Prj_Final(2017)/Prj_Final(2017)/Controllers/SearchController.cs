@@ -8,6 +8,9 @@ namespace Prj_Final_2017_.Controllers
 {
     public class SearchController : Controller
     {
+        
+        //Aucune sert
+
         // GET: Search
         public ActionResult Index()
         {

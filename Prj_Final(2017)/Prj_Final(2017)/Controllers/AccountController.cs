@@ -14,6 +14,8 @@ using Prj_Final_2017_.DTO;
 
 namespace Prj_Final_2017_.Controllers
 {
+    //Login, Register, Logout, RedirectToLocal
+
     [Authorize]
     public class AccountController : Controller
     {
@@ -59,6 +61,9 @@ namespace Prj_Final_2017_.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            if(Session["user"] != null) {
+                return Redirect("/Home/Index");
+            }
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -111,30 +116,37 @@ namespace Prj_Final_2017_.Controllers
                 Session["user"] = compteParticulierDTO;
                 retour = true;
             }
-            CompteFournisseurChambreDTO compteFournisseurChambreDTO = new CompteFournisseurChambreDTO();
-            compteFournisseurChambreDTO.Courriel = email;
-            compteFournisseurChambreDTO.Password = password;
-            compteFournisseurChambreDTO = ApplicationFunctions.CompteFournisseurChambreFacade.Authenticate(compteFournisseurChambreDTO);
-            if (compteFournisseurChambreDTO != null) {
-                Session["user"] = compteFournisseurChambreDTO;
-                retour = true;
+            if (!retour) {
+                CompteFournisseurChambreDTO compteFournisseurChambreDTO = new CompteFournisseurChambreDTO();
+                compteFournisseurChambreDTO.Courriel = email;
+                compteFournisseurChambreDTO.Password = password;
+                compteFournisseurChambreDTO = ApplicationFunctions.CompteFournisseurChambreFacade.Authenticate(compteFournisseurChambreDTO);
+                if (compteFournisseurChambreDTO != null) {
+                    Session["user"] = compteFournisseurChambreDTO;
+                    retour = true;
+                }
             }
-            CompteFournisseurSiegeDTO compteFournisseurSiegeDTO = new CompteFournisseurSiegeDTO();
-            compteFournisseurSiegeDTO.Courriel = email;
-            compteFournisseurSiegeDTO.Password = password;
-            compteFournisseurSiegeDTO = ApplicationFunctions.CompteFournisseurSiegeFacade.Authenticate(compteFournisseurSiegeDTO);
-            if (compteFournisseurSiegeDTO != null) {
-                Session["user"] = compteFournisseurSiegeDTO;
-                retour = true;
+            if (!retour) {
+                CompteFournisseurSiegeDTO compteFournisseurSiegeDTO = new CompteFournisseurSiegeDTO();
+                compteFournisseurSiegeDTO.Courriel = email;
+                compteFournisseurSiegeDTO.Password = password;
+                compteFournisseurSiegeDTO = ApplicationFunctions.CompteFournisseurSiegeFacade.Authenticate(compteFournisseurSiegeDTO);
+                if (compteFournisseurSiegeDTO != null) {
+                    Session["user"] = compteFournisseurSiegeDTO;
+                    retour = true;
+                }
             }
-            CompteFournisseurVoitureDTO compteFournisseurVoitureDTO = new CompteFournisseurVoitureDTO();
-            compteFournisseurVoitureDTO.Courriel = email;
-            compteFournisseurVoitureDTO.Password = password;
-            compteFournisseurVoitureDTO = ApplicationFunctions.CompteFournisseurVoitureFacade.Authenticate(compteFournisseurVoitureDTO);
-            if (compteFournisseurVoitureDTO != null) {
-                Session["user"] = compteFournisseurVoitureDTO;
-                retour = true;
+            if (!retour) {
+                CompteFournisseurVoitureDTO compteFournisseurVoitureDTO = new CompteFournisseurVoitureDTO();
+                compteFournisseurVoitureDTO.Courriel = email;
+                compteFournisseurVoitureDTO.Password = password;
+                compteFournisseurVoitureDTO = ApplicationFunctions.CompteFournisseurVoitureFacade.Authenticate(compteFournisseurVoitureDTO);
+                if (compteFournisseurVoitureDTO != null) {
+                    Session["user"] = compteFournisseurVoitureDTO;
+                    retour = true;
+                }
             }
+            
             return retour;
         }
 
@@ -199,21 +211,23 @@ namespace Prj_Final_2017_.Controllers
             
             string radio = collection["Radio0"];
             string lien = "/Home/Index";
-            switch (radio) {
-            case "1":
-                lien = "/CompteParticulier/Create";
-                break;
-            case "2":
-                lien = "/CompteFournisseurChambre/Create";
-                break;
-            case "3":
-                lien = "/CompteFournisseurSiege/Create";
-                break;
-            case "4":
-                lien = "/CompteFournisseurVoiture/Create";
-                break;
-            default:
-                break;
+            if(Session["user"] == null) {
+                switch (radio) {
+                case "1":
+                    lien = "/CompteParticulier/Create";
+                    break;
+                case "2":
+                    lien = "/CompteFournisseurChambre/Create";
+                    break;
+                case "3":
+                    lien = "/CompteFournisseurSiege/Create";
+                    break;
+                case "4":
+                    lien = "/CompteFournisseurVoiture/Create";
+                    break;
+                default:
+                    break;
+                }
             }
 
             return Redirect(lien);
@@ -482,8 +496,10 @@ namespace Prj_Final_2017_.Controllers
         //[ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
-            Session.Abandon();
-            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            if (Session["user"] != null) {
+                Session.Abandon();
+                AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            }
             return RedirectToAction("Index", "Home");
         }
 

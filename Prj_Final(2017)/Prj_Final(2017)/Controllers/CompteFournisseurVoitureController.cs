@@ -12,36 +12,22 @@ namespace Prj_Final_2017_.Controllers
 {
     public class CompteFournisseurVoitureController : Controller
     {
+        //Juste Create
+
         // GET: CompteFournisseurVoiture
         public ActionResult Index()
         {
             return View();
         }
-     /*   public ActionResult Create(int idFournisseur, string courriel, string password, int idAgenceVoiture)
-        {
-            try
-            {
-                if (Session["user"] != null)
-                {
-                    CompteFournisseurVoitureDTO compteFournisseurVoitureDTO = new CompteFournisseurVoitureDTO();
-                    compteFournisseurVoitureDTO.IdFournisseur = idFournisseur;
-                    compteFournisseurVoitureDTO.Courriel = courriel;
-                    compteFournisseurVoitureDTO.Password = password;
-                    compteFournisseurVoitureDTO.IdAgenceVoiture = idAgenceVoiture;
-                    ApplicationFunctions.CompteFournisseurVoitureFacade.Add(compteFournisseurVoitureDTO);
-                }
-            }
-            catch (VoyageAhuntsicException e)
-            {
-                System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
-            }
-            return View();
-        }*/
+     
         public ActionResult Create()
         {
-
-            return View();
+            if(Session["user"] == null) {
+                return View();
+            }
+            return RedirectToAction("Index", "Home");
         }
+
         [HttpPost]
         public ActionResult Create(CompteFournisseurVoitureRegisterViewModel model) {
             try {

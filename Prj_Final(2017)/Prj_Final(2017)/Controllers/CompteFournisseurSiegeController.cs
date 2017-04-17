@@ -12,36 +12,20 @@ namespace Prj_Final_2017_.Controllers
 {
     public class CompteFournisseurSiegeController : Controller
     {
+        //Juste Create
+
         // GET: CompteFournisseurSiege
         public ActionResult Index()
         {
             return View();
         }
-      /*  public ActionResult Create(int idFournisseur, string courriel, string password, int idCompagnieAerienne)
-        {
-            try
-            {
-                if (Session["user"] != null)
-                {
-                    CompteFournisseurSiegeDTO compteFournisseurSiegeDTO = new CompteFournisseurSiegeDTO();
-                    compteFournisseurSiegeDTO.IdFournisseur = idFournisseur;
-                    compteFournisseurSiegeDTO.Courriel = courriel;
-                    compteFournisseurSiegeDTO.Password = password;
-                    compteFournisseurSiegeDTO.IdCompagnieAerienne = idCompagnieAerienne;
-                    ApplicationFunctions.CompteFournisseurSiegeFacade.Add(compteFournisseurSiegeDTO);
-                }
-            }
-            catch (VoyageAhuntsicException e)
-            {
-                System.Diagnostics.Debug.WriteLine(VoyageAhuntsicException.CharteErreur[e.NumeroException]);
-            }
-            
-            return View();
-        }*/
+      
         public ActionResult Create()
         {
-
-            return View();
+            if(Session["user"] == null) {
+                return View();
+            }
+            return RedirectToAction("Index", "Home");
         }
         [HttpPost]
         public ActionResult Create(CompteFournisseurSiegeRegisterViewModel model) {
