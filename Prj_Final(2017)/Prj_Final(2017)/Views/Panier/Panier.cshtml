@@ -37,16 +37,15 @@
 
 <div class="jumbotron">
     <h1>Votre Panier</h1>
-    <p class="lead">Liste des produits</p>
+    
 </div>
 <link href="~/Content/StylePrincipal.css" rel="stylesheet" media="all" type="text/css">
-
-
-<ul id="listeProduits" style="flex-direction:column">
+<p class="lead">Liste des produits</p>
+<ul id="listeProduits" style="list-style-type:none; padding-left:0; margin-left:0px; display:inline-block; width:100%;">
     @foreach (ChambreDTO chambreDTO in panierChambre) {
         HotelDTO hotelDTO = ApplicationFunctions.HotelFacade.Read(chambreDTO.IdHotel);
-        <li style="flex-direction:row; justify-content:space-around; display:flex">
-            <div id="sectionInfo" style="display:inline; padding: 5px 5px 5px 15px; flex:auto ">
+        <li class="container" style="border: 1px solid #aaaaaa; border-radius:6px; width:100%; margin-top:10px; padding-bottom:15px;">
+            <div id="sectionInfo" style="display:inline-flex; max-width:900px; margin-left:0px; padding: 5px 5px 5px 15px;">
                 <p>
                     <strong style="font-size:16px">@hotelDTO.Nom &nbsp;-&nbsp; @chambreDTO.NomChambre </strong>
                     <br />
@@ -55,25 +54,27 @@
                     Chambre : @chambreDTO.NumeroChambre
                 </p>
             </div>
-            <span style="flex:auto; padding: 5px 5px 5px 15px;">
-                @chambreDTO.Tarif.ToString("F") $
-            </span>
-            <span style="flex:auto; padding: 5px 5px 5px 15px;">
-                @VADateHandler.getReservationDates(datesChambre[panierChambre.IndexOf(chambreDTO)])[0].ToShortDateString()
-                &nbsp;&mdash;&nbsp;
-                @VADateHandler.getReservationDates(datesChambre[panierChambre.IndexOf(chambreDTO)])[1].ToShortDateString()
-            </span>
-            <span style="flex:auto; padding: 5px 5px 5px 15px;">
-                <a href="/Panier/Supprimer/@iterator" class="btn btn-warning">Supprimer</a>
-            </span>
+            <div style="float:right; text-align:right; margin-top:18px;">
+                <span style="padding: 5px 5px 5px 15px;">
+                    @VADateHandler.getReservationDates(datesChambre[panierChambre.IndexOf(chambreDTO)])[0].ToShortDateString()
+                    &nbsp;&mdash;&nbsp;
+                    @VADateHandler.getReservationDates(datesChambre[panierChambre.IndexOf(chambreDTO)])[1].ToShortDateString()
+                </span>
+                <span style="padding: 5px 5px 5px 15px;">
+                    <strong>@chambreDTO.Tarif.ToString("F") $</strong>
+                </span>
+                <span style="padding: 5px 5px 5px 15px;">
+                    <a href="/Panier/Supprimer/@iterator" class="btn btn-warning">Supprimer</a>
+                </span>
+            </div>
         </li>
         iterator++;
     }
     @foreach (SiegeDTO siegeDTO in panierSiege) {
         VolDTO volDTO = ApplicationFunctions.VolFacade.Read(siegeDTO.IdVol);
         CompagnieAerienneDTO compagnieAerienneDTO = ApplicationFunctions.CompagnieAerienneFacade.Read(volDTO.IdCompagnieAerienne);
-        <li style="flex-direction:row;justify-content:space-around; display:flex">
-            <div id="sectionInfo" style="display:inline; padding: 5px 5px 5px 15px; flex:auto ">
+        <li class="container" style="border: 1px solid #aaaaaa; border-radius:6px; width:100%; margin-top:10px; padding-bottom:15px;">
+            <div id="sectionInfo" style="display:inline-flex; max-width:900px; margin-left:0px; padding: 5px 5px 5px 15px;">
                 <p>
                     <strong style="font-size:16px">@compagnieAerienneDTO.Nom &nbsp;-&nbsp; @volDTO.Classe </strong>
                     <br />
@@ -84,24 +85,26 @@
                     Siege : @siegeDTO.Numero
                 </p>
             </div>
-            <span style="flex:auto; padding: 5px 5px 5px 15px;">
-                @volDTO.Tarif.ToString("F") $
-            </span>
-            <span style="flex:auto; padding: 5px 5px 5px 15px;">
-                @VADateHandler.getReservationDates(datesSiege[panierSiege.IndexOf(siegeDTO)])[0].ToShortDateString()
-                &nbsp;&mdash;&nbsp;
-                @VADateHandler.getReservationDates(datesSiege[panierSiege.IndexOf(siegeDTO)])[1].ToShortDateString()
-            </span>
-            <span style="flex:auto; padding: 5px 5px 5px 15px;">
-                <a href="/Panier/Supprimer/@iterator" class="btn btn-warning">Supprimer</a>
-            </span>
+            <div style="float:right; text-align:right; margin-top:18px;">
+                <span style="padding: 5px 5px 5px 15px;">
+                    @VADateHandler.getReservationDates(datesSiege[panierSiege.IndexOf(siegeDTO)])[0].ToShortDateString()
+                    &nbsp;&mdash;&nbsp;
+                    @VADateHandler.getReservationDates(datesSiege[panierSiege.IndexOf(siegeDTO)])[1].ToShortDateString()
+                </span>
+                <span style="padding: 5px 5px 5px 15px;">
+                    @volDTO.Tarif.ToString("F") $
+                </span>
+                <span style="padding: 5px 5px 5px 15px;">
+                    <a href="/Panier/Supprimer/@iterator" class="btn btn-warning">Supprimer</a>
+                </span>
+            </div>
         </li>
         iterator++;
     }
     @foreach (VoitureDTO voitureDTO in panierVoiture) {
         AgenceVoitureDTO agenceVoitureDTO = ApplicationFunctions.AgenceVoitureFacade.Read(voitureDTO.IdAgence);
-        <li style="flex-direction:row;justify-content:space-around; display:flex">
-            <div id="sectionInfo" style="display:inline; padding: 5px 5px 5px 15px; flex:auto ">
+        <li class="container" style="border: 1px solid #aaaaaa; border-radius:6px; width:100%; margin-top:10px; padding-bottom:15px;">
+            <div id="sectionInfo" style="display:inline-flex; max-width:900px; margin-left:0px; padding: 5px 5px 5px 15px;">
                 <p>
                     <strong style="font-size:16px">@agenceVoitureDTO.Nom &nbsp;-&nbsp; @voitureDTO.Nom </strong>
                     <br />
@@ -110,17 +113,19 @@
                     Plaque : @voitureDTO.Plaque
                 </p>
             </div>
-            <span style="flex:auto; padding: 5px 5px 5px 15px;">
-                @voitureDTO.Tarif.ToString("F") $
-            </span>
-            <span style="flex:auto; padding: 5px 5px 5px 15px;">
-                @VADateHandler.getReservationDates(datesVoiture[panierVoiture.IndexOf(voitureDTO)])[0].ToShortDateString()
-                &nbsp;&mdash;&nbsp;
-                @VADateHandler.getReservationDates(datesVoiture[panierVoiture.IndexOf(voitureDTO)])[1].ToShortDateString()
-            </span>
-            <span style="flex:auto; padding: 5px 5px 5px 15px;">
-                <a href="/Panier/Supprimer/@iterator" class="btn btn-warning">Supprimer</a>
-            </span>
+            <div style="float:right; text-align:right; margin-top:18px;">
+                <span style="padding: 5px 5px 5px 15px;">
+                    @VADateHandler.getReservationDates(datesVoiture[panierVoiture.IndexOf(voitureDTO)])[0].ToShortDateString()
+                    &nbsp;&mdash;&nbsp;
+                    @VADateHandler.getReservationDates(datesVoiture[panierVoiture.IndexOf(voitureDTO)])[1].ToShortDateString()
+                </span>
+                <span style="padding: 5px 5px 5px 15px;">
+                    @voitureDTO.Tarif.ToString("F") $
+                </span>
+                <span style="padding: 5px 5px 5px 15px;">
+                    <a href="/Panier/Supprimer/@iterator" class="btn btn-warning">Supprimer</a>
+                </span>
+            </div>
         </li>
         iterator++;
     }
@@ -132,8 +137,8 @@
         CompagnieAerienneDTO compagnieAerienneDTO = ApplicationFunctions.CompagnieAerienneFacade.Read(volDTO.IdCompagnieAerienne);
         ChambreDTO chambreDTO = ApplicationFunctions.ChambreFacade.Read(forfaitDTO.IdChambre);
         HotelDTO hotelDTO = ApplicationFunctions.HotelFacade.Read(chambreDTO.IdHotel);
-        <li style="flex-direction:row;justify-content:space-around; display:flex">
-            <div id="sectionInfo" style="display:inline; padding: 5px 5px 5px 15px; flex:auto ">
+        <li class="container" style="border: 1px solid #aaaaaa; border-radius:6px; width:100%; margin-top:10px; padding-bottom:15px;">
+            <div id="sectionInfo" style="display:inline-flex; max-width:900px; margin-left:0px; padding: 5px 5px 5px 15px;">
                 <p>
                     <strong style="font-size:16px">Forfait @compagnieAerienneDTO.Nom &nbsp;-&nbsp; @hotelDTO.Nom &nbsp;-&nbsp; @agenceVoitureDTO.Nom </strong>
                     <br />
@@ -146,21 +151,25 @@
                     Plaque : @voitureDTO.Plaque
                 </p>
             </div>
-            <span style="flex:auto; padding: 5px 5px 5px 15px;">
-                @forfaitDTO.TarifReduit.ToString("F") $
-            </span>
-            <span style="flex:auto; padding: 5px 5px 5px 15px;">
-                @VADateHandler.getReservationDates(datesForfait[panierForfait.IndexOf(forfaitDTO)])[0].ToShortDateString()
-                &nbsp;&mdash;&nbsp;
-                @VADateHandler.getReservationDates(datesForfait[panierForfait.IndexOf(forfaitDTO)])[1].ToShortDateString()
-            </span>
-            <span style="flex:auto; padding: 5px 5px 5px 15px;">
-                <a href="/Panier/Supprimer/@iterator" class="btn btn-warning">Supprimer</a>
-            </span>
+            <div style="float:right; text-align:right; margin-top:18px;">
+                <span style="padding: 5px 5px 5px 15px;">
+                    @VADateHandler.getReservationDates(datesForfait[panierForfait.IndexOf(forfaitDTO)])[0].ToShortDateString()
+                    &nbsp;&mdash;&nbsp;
+                    @VADateHandler.getReservationDates(datesForfait[panierForfait.IndexOf(forfaitDTO)])[1].ToShortDateString()
+                </span>
+                <span style="padding: 5px 5px 5px 15px;">
+                    @forfaitDTO.TarifReduit.ToString("F") $
+                </span>
+                <span style="padding: 5px 5px 5px 15px;">
+                    <a href="/Panier/Supprimer/@iterator" class="btn btn-warning">Supprimer</a>
+                </span>
+            </div>
         </li>
         iterator++;
     }
 </ul>
+
+
 @*
     TODO : Possibilité de changer le lien pour une page de paiement
     et ensuite mettre le lien pour acheter
@@ -170,43 +179,3 @@
         <input class="btn btn-primary btn-lg" type="submit" value="Acheter le panier" />
     </form>
 }
-
-
-@*
-    <ul id="listeProduits" style="flex-direction:column">
-        <li style="flex-direction:row;justify-content:space-around; display:flex">
-            <span style="flex:auto">
-                [Information]
-            </span>
-            <span style="flex:auto">
-                [Prix]
-            </span>
-            <span style="flex:auto">
-                [Quantite]
-            </span>
-            <span style="flex:auto">
-                <input class="text-form" type="button" value="Supprimer" />
-            </span>
-        </li>
-    </ul>
-
-    @{
-        var DB = Database.Open("mysqlConnexionString");
-        var Grid = new WebGrid(DB.Query("SELECT * FROM panier"));
-    }
-    @Grid.GetHtml(
-                tableStyle: "webgrid",
-                mode: WebGridPagerModes.All,
-                columns: Grid.Columns(
-                            Grid.Column("Information", "Item"),
-                            Grid.Column("Prix", "Prix"),
-                            Grid.Column("Quantite", "Quantite"),
-                            Grid.Column(" ", format: @<text>
-                                @*<button class="btn-xs" style:color="blue" onclick="@("window.location.href='" + @Url.Action("Voiture", "Voiture", Grid.SelectedRow.Value.IdVoiture) + "'");">Ajouter au panier</button>
-                                <input type="button" value="Supprimer" onclick="location.href='@Url.Action("Supprimer", "Panier",  new {idItem = item.IdPanier})'" />
-                            </text>)
-                )
-            )
-
-
-*@
