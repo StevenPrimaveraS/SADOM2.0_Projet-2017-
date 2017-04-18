@@ -16,11 +16,11 @@ namespace Prj_Final_2017_.Models.Service {
         {
             if (compteFournisseurSiegeDAO == null)
             {
-                throw new VoyageAhuntsicException(44);
+                throw new VoyageAhuntsicException(1);
             }
             if (compagnieAerienneDAO == null)
             {
-                throw new VoyageAhuntsicException(44);
+                throw new VoyageAhuntsicException(1);
             }
             this.compteFournisseurSiegeDAO = compteFournisseurSiegeDAO;
             this.compagnieAerienneDAO = compagnieAerienneDAO;
@@ -30,11 +30,11 @@ namespace Prj_Final_2017_.Models.Service {
         {
             if (compteFournisseurSiegeDTO == null)
             {
-                throw new VoyageAhuntsicException(44);
+                throw new VoyageAhuntsicException(1);
             }
             if (compagnieAerienneDAO.Read(compteFournisseurSiegeDTO.IdCompagnieAerienne) == null)
             {
-                throw new VoyageAhuntsicException(44);
+                throw new VoyageAhuntsicException(1);
             }
 
             compteFournisseurSiegeDAO.Add(compteFournisseurSiegeDTO);
@@ -50,11 +50,11 @@ namespace Prj_Final_2017_.Models.Service {
         {
             if (compteFournisseurSiegeDTO == null)
             {
-                throw new VoyageAhuntsicException(44);
+                throw new VoyageAhuntsicException(1);
             }
             if (compagnieAerienneDAO.Read(compteFournisseurSiegeDTO.IdCompagnieAerienne) == null)
             {
-                throw new VoyageAhuntsicException(44);
+                throw new VoyageAhuntsicException(1);
             }
             compteFournisseurSiegeDAO.Update(compteFournisseurSiegeDTO);
         }
@@ -63,11 +63,11 @@ namespace Prj_Final_2017_.Models.Service {
         {
             if (compteFournisseurSiegeDTO == null)
             {
-                throw new VoyageAhuntsicException(44);
+                throw new VoyageAhuntsicException(1);
             }
             if (compagnieAerienneDAO.Read(compteFournisseurSiegeDTO.IdCompagnieAerienne) == null)
             {
-                throw new VoyageAhuntsicException(44);
+                throw new VoyageAhuntsicException(1);
             }
             compteFournisseurSiegeDAO.Delete(compteFournisseurSiegeDTO);
         }

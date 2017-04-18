@@ -16,7 +16,7 @@ namespace Prj_Final_2017_.Models.Service
         {
             if (forfaitDAO == null)
             {
-                throw new VoyageAhuntsicException(6789);
+                throw new VoyageAhuntsicException(1);
             }
             this.forfaitDAO = forfaitDAO;
         }
@@ -25,7 +25,7 @@ namespace Prj_Final_2017_.Models.Service
         {
             if (forfaitDTO == null)
             {
-                throw new VoyageAhuntsicException(6789);
+                throw new VoyageAhuntsicException(1);
             }
             forfaitDAO.Add(forfaitDTO);
         }
@@ -34,7 +34,7 @@ namespace Prj_Final_2017_.Models.Service
         {
             if (IdForfait < 1)
             {
-                throw new VoyageAhuntsicException(6789);
+                throw new VoyageAhuntsicException(1);
             }
             return forfaitDAO.Read(IdForfait); ;
         }
@@ -43,7 +43,7 @@ namespace Prj_Final_2017_.Models.Service
         {
             if (forfaitDTO == null)
             {
-                throw new VoyageAhuntsicException(6789);
+                throw new VoyageAhuntsicException(1);
             }
             forfaitDAO.Update(forfaitDTO);
         }
@@ -52,7 +52,7 @@ namespace Prj_Final_2017_.Models.Service
         {
             if (forfaitDTO == null)
             {
-                throw new VoyageAhuntsicException(6789);
+                throw new VoyageAhuntsicException(1);
             }
             forfaitDAO.Delete(forfaitDTO);
         }

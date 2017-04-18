@@ -62,7 +62,7 @@ namespace Prj_Final_2017_.Models.DAO {
                 }
             }
             catch (MySqlException mysqlException) {
-                throw new VoyageAhuntsicException(1234,VoyageAhuntsicException.CharteErreur[1234],mysqlException);
+                throw new VoyageAhuntsicException(1,VoyageAhuntsicException.CharteErreur[1],mysqlException);
             }
         }
 
@@ -93,7 +93,7 @@ namespace Prj_Final_2017_.Models.DAO {
                 }
             }
             catch (MySqlException mysqlException) {
-                throw new VoyageAhuntsicException(1234,VoyageAhuntsicException.CharteErreur[1234],mysqlException);
+                throw new VoyageAhuntsicException(1,VoyageAhuntsicException.CharteErreur[1],mysqlException);
             }
             return compagnieAerienneDTO;
         }
@@ -119,7 +119,7 @@ namespace Prj_Final_2017_.Models.DAO {
                 }
             }
             catch (MySqlException mysqlException) {
-                throw new VoyageAhuntsicException(1234,VoyageAhuntsicException.CharteErreur[1234],mysqlException);
+                throw new VoyageAhuntsicException(1,VoyageAhuntsicException.CharteErreur[1],mysqlException);
             }
         }
 
@@ -140,7 +140,7 @@ namespace Prj_Final_2017_.Models.DAO {
                 }
             }
             catch (MySqlException mysqlException) {
-                throw new VoyageAhuntsicException(1234,VoyageAhuntsicException.CharteErreur[1234],mysqlException);
+                throw new VoyageAhuntsicException(1,VoyageAhuntsicException.CharteErreur[1],mysqlException);
             }
         }
 
@@ -161,7 +161,7 @@ namespace Prj_Final_2017_.Models.DAO {
                 }
             }
             catch (MySqlException mysqlException) {
-                throw new VoyageAhuntsicException(1234,VoyageAhuntsicException.CharteErreur[1234],mysqlException);
+                throw new VoyageAhuntsicException(1,VoyageAhuntsicException.CharteErreur[1],mysqlException);
             }
             return dataset;
         }
@@ -196,7 +196,7 @@ namespace Prj_Final_2017_.Models.DAO {
                 }
             }
             catch (MySqlException mysqlException) {
-                throw new VoyageAhuntsicException(1234, VoyageAhuntsicException.CharteErreur[1234], mysqlException);
+                throw new VoyageAhuntsicException(1, VoyageAhuntsicException.CharteErreur[1], mysqlException);
             }
             return retourCompagnieAerienneDTO;
         }

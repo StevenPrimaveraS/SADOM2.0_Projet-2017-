@@ -15,15 +15,15 @@ namespace Prj_Final_2017_.Models.Service {
         public ChambreService(ChambreDAO chambreDAO, HotelDAO hotelDAO, CompteFournisseurChambreDAO compteFournisseurChambreDAO) {
             if (chambreDAO == null)
             {
-                throw new VoyageAhuntsicException(7890);
+                throw new VoyageAhuntsicException(1);
             }
             if (compteFournisseurChambreDAO == null)
             {
-                throw new VoyageAhuntsicException(7890);
+                throw new VoyageAhuntsicException(1);
             }
             if (hotelDAO == null)
             {
-                throw new VoyageAhuntsicException(7890);
+                throw new VoyageAhuntsicException(1);
             }
             this.chambreDAO = chambreDAO;
             this.hotelDAO = hotelDAO;
@@ -33,7 +33,7 @@ namespace Prj_Final_2017_.Models.Service {
         public void Add(ChambreDTO chambreDTO) {
             if (chambreDTO == null)
             {
-                throw new VoyageAhuntsicException(7890);
+                throw new VoyageAhuntsicException(1);
             }
             chambreDAO.Add(chambreDTO);
         }
@@ -41,7 +41,7 @@ namespace Prj_Final_2017_.Models.Service {
         public ChambreDTO Read(int IdChambre) {
             if (IdChambre < 1)
             {
-                throw new VoyageAhuntsicException(7890);
+                throw new VoyageAhuntsicException(1);
             }
             return chambreDAO.Read(IdChambre);
         }
@@ -49,7 +49,7 @@ namespace Prj_Final_2017_.Models.Service {
         public void Update(ChambreDTO chambreDTO) {
             if (chambreDTO == null)
             {
-                throw new VoyageAhuntsicException(7890);
+                throw new VoyageAhuntsicException(1);
             }
             chambreDAO.Update(chambreDTO);
         }
@@ -57,7 +57,7 @@ namespace Prj_Final_2017_.Models.Service {
         public void Delete(ChambreDTO chambreDTO) {
             if (chambreDTO == null)
             {
-                throw new VoyageAhuntsicException(7890);
+                throw new VoyageAhuntsicException(1);
             }
             chambreDAO.Delete(chambreDTO);
         }

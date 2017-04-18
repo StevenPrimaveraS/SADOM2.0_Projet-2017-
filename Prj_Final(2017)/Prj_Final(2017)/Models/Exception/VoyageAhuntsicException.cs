@@ -27,7 +27,7 @@ namespace Prj_Final_2017_.Models.Exception {
             if(CharteErreur == null) {
                 CharteErreur = new Dictionary<int,string>();
                 //Erreurs Application :
-                CharteErreur[10000] = "Message Erreur 10000";
+                CharteErreur[1] = "Une erreur c'est produite";
                 //Erreurs DAO :
                 CharteErreur[20000] = "Message Erreur 20000";
                 //Erreurs Services :

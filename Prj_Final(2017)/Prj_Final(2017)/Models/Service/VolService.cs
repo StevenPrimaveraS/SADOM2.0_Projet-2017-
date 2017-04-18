@@ -16,11 +16,11 @@ namespace Prj_Final_2017_.Models.Service {
         public VolService(VolDAO volDAO, SiegeDAO siegeDAO) {
             if(volDAO == null)
             {
-                throw new VoyageAhuntsicException(4444);
+                throw new VoyageAhuntsicException(1);
             }
             if (siegeDAO == null)
             {
-                throw new VoyageAhuntsicException(2000);
+                throw new VoyageAhuntsicException(1);
             }
             this.volDAO = volDAO;
             this.siegeDAO = siegeDAO;
@@ -29,7 +29,7 @@ namespace Prj_Final_2017_.Models.Service {
         public void Add(VolDTO volDTO) {
             if(volDTO == null)
             {
-                throw new VoyageAhuntsicException(4444);
+                throw new VoyageAhuntsicException(1);
             }
 
             volDAO.Add(volDTO);         
@@ -38,7 +38,7 @@ namespace Prj_Final_2017_.Models.Service {
         public VolDTO Read(int IdVol) {
             if(IdVol < 1)
             {
-                throw new VoyageAhuntsicException(4444);
+                throw new VoyageAhuntsicException(1);
             }
             return volDAO.Read(IdVol);
         }
@@ -46,7 +46,7 @@ namespace Prj_Final_2017_.Models.Service {
         public void Update(VolDTO volDTO) {
             if(volDTO == null)
             {
-                throw new VoyageAhuntsicException(4444);
+                throw new VoyageAhuntsicException(1);
             }
             volDAO.Update(volDTO);
         }
@@ -54,11 +54,11 @@ namespace Prj_Final_2017_.Models.Service {
         public void Delete(VolDTO volDTO) {
             if(volDTO == null)
             {
-                throw new VoyageAhuntsicException(4444);
+                throw new VoyageAhuntsicException(1);
             }
             if (siegeDAO.FindByVol(volDTO.IdVol) == null)
             {
-                throw new VoyageAhuntsicException(4444);
+                throw new VoyageAhuntsicException(1);
             }
             volDAO.Delete(volDTO);
         }
