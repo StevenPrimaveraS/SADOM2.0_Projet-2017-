@@ -6,6 +6,7 @@ using MySql.Data.MySqlClient;
 using System.Data;
 using Prj_Final_2017_.DTO;
 using Prj_Final_2017_.Models.Exception;
+using Prj_Final_2017_.Models.util;
 
 namespace Prj_Final_2017_.Models.DAO {
     public class ReservationForfaitDAO {
@@ -36,6 +37,8 @@ namespace Prj_Final_2017_.Models.DAO {
         private static readonly string UPDATE_QUERY = "UPDATE ReservationForfait SET `IdForfait` = @IdForfait, `IdParticulier` = @IdParticulier, `DateReservation` = @DateReservation, `DateFinReservation` = @DateFinReservation WHERE `IdReservationForfait` = @IdReservationForfait";
         private static readonly string DELETE_QUERY = "DELETE FROM ReservationForfait WHERE `IdReservationForfait` = @IdReservationForfait";
         private static readonly string GET_ALL_QUERY = "SELECT `IdReservationForfait`, `IdForfait`, `IdParticulier`, `DateReservation`, `DateFinReservation` FROM ReservationForfait";
+        private static readonly string FIND_BY_DATE_AND_FORFAIT_QUERY = "SELECT `IdReservationForfait`, `IdForfait`, `IdParticulier`, `DateReservation`, `DateFinReservation` FROM ReservationForfait WHERE ((`DateReservation` BETWEEN @DateReservation1 AND @DateFinReservation1) OR (`DateFinReservation` BETWEEN @DateReservation2 AND @DateFinReservation2)) AND `IdForfait` = @IdForfait";
+
 
         public ReservationForfaitDAO() {
             connexion = new Connexion.Connexion();
@@ -61,7 +64,7 @@ namespace Prj_Final_2017_.Models.DAO {
                 }
             }
             catch (MySqlException mysqlException) {
-                throw new VoyageAhuntsicException(1234,VoyageAhuntsicException.CharteErreur[1234],mysqlException);
+                throw new VoyageAhuntsicException(1,VoyageAhuntsicException.CharteErreur[1],mysqlException);
             }
         }
 
@@ -92,7 +95,7 @@ namespace Prj_Final_2017_.Models.DAO {
                 }
             }
             catch (MySqlException mysqlException) {
-                throw new VoyageAhuntsicException(1234,VoyageAhuntsicException.CharteErreur[1234],mysqlException);
+                throw new VoyageAhuntsicException(1,VoyageAhuntsicException.CharteErreur[1],mysqlException);
             }
             return reservationForfaitDTO;
         }
@@ -118,7 +121,7 @@ namespace Prj_Final_2017_.Models.DAO {
                 }
             }
             catch (MySqlException mysqlException) {
-                throw new VoyageAhuntsicException(1234,VoyageAhuntsicException.CharteErreur[1234],mysqlException);
+                throw new VoyageAhuntsicException(1,VoyageAhuntsicException.CharteErreur[1],mysqlException);
             }
         }
 
@@ -139,7 +142,7 @@ namespace Prj_Final_2017_.Models.DAO {
                 }
             }
             catch (MySqlException mysqlException) {
-                throw new VoyageAhuntsicException(1234,VoyageAhuntsicException.CharteErreur[1234],mysqlException);
+                throw new VoyageAhuntsicException(1,VoyageAhuntsicException.CharteErreur[1],mysqlException);
             }
         }
 
@@ -160,9 +163,41 @@ namespace Prj_Final_2017_.Models.DAO {
                 }
             }
             catch (MySqlException mysqlException) {
-                throw new VoyageAhuntsicException(1234,VoyageAhuntsicException.CharteErreur[1234],mysqlException);
+                throw new VoyageAhuntsicException(1,VoyageAhuntsicException.CharteErreur[1],mysqlException);
             }
             return dataset;
         }
+
+        public ReservationForfaitDTO FindByDateAndForfait(ReservationForfaitDTO reservationForfaitDTO) {
+            ReservationForfaitDTO retourReservationForfaitDTO = null;
+            try {
+                using (MySqlConnection connection = connexion.getConnexion()) {
+                    connection.Open();
+                    using (MySqlCommand command = new MySqlCommand(ReservationForfaitDAO.FIND_BY_DATE_AND_FORFAIT_QUERY, connection)) {
+                        command.Prepare();
+                        command.Parameters.AddWithValue("IdForfait", reservationForfaitDTO.IdForfait);
+                        command.Parameters.AddWithValue("DateReservation1", VADateHandler.BetweenDate(reservationForfaitDTO.DateReservation)[0]);
+                        command.Parameters.AddWithValue("DateFinReservation1", VADateHandler.BetweenDate(reservationForfaitDTO.DateFinReservation)[0]);
+                        command.Parameters.AddWithValue("DateReservation2", VADateHandler.BetweenDate(reservationForfaitDTO.DateReservation)[0]);
+                        command.Parameters.AddWithValue("DateFinReservation2", VADateHandler.BetweenDate(reservationForfaitDTO.DateFinReservation)[0]);
+                        using (MySqlDataReader reader = command.ExecuteReader()) {
+                            if (reader.Read()) {
+                                retourReservationForfaitDTO = new ReservationForfaitDTO();
+                                retourReservationForfaitDTO.IdReservationForfait = reader.GetInt32("IdReservationForfait");
+                                retourReservationForfaitDTO.IdForfait = reader.GetInt32("IdForfait");
+                                retourReservationForfaitDTO.IdParticulier = reader.GetInt32("IdParticulier");
+                                retourReservationForfaitDTO.DateReservation = reader.GetDateTime("DateReservation");
+                                retourReservationForfaitDTO.DateFinReservation = reader.GetDateTime("DateFinReservation");
+                            }
+                        }
+                    }
+                }
+            }
+            catch (MySqlException mysqlException) {
+                throw new VoyageAhuntsicException(1, VoyageAhuntsicException.CharteErreur[1], mysqlException);
+            }
+            return retourReservationForfaitDTO;
+        }
+
     }
 }

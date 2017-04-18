@@ -22,10 +22,10 @@ namespace Prj_Final_2017_.Models.util {
                 }
             }
             catch (FormatException e) {
-                throw new VoyageAhuntsicException(1234);
+                throw new VoyageAhuntsicException(1);
             }
             catch (NullReferenceException e) {
-                throw new VoyageAhuntsicException(1234);
+                throw new VoyageAhuntsicException(1);
             }
             return datesReservation;
         }
@@ -34,6 +34,14 @@ namespace Prj_Final_2017_.Models.util {
         public static string ToReservationDates(string sDateDebut, string sDateFin) {
             return sDateDebut + ";" + sDateFin;
         }
+
+        public static List<DateTime> BetweenDate(DateTime dateDebut) {
+            List<DateTime> retour = new List<DateTime>();
+            retour.Add(new DateTime(dateDebut.Year, dateDebut.Month, dateDebut.Day));
+            retour.Add(new DateTime(dateDebut.Year, dateDebut.Month, dateDebut.Day+1));
+            return retour;
+        }
+
 
     }
 }

@@ -17,13 +17,13 @@ namespace Prj_Final_2017_.Models.Service {
 
         public ReservationChambreService(ReservationCham­breDAO reservationChambreDAO, ChambreDAO chambreDAO, CompteParticulierDAO compteParticulierDAO­­) {
             if(reservationChambreDAO == null) {
-                throw new VoyageAhuntsicException(31001);
+                throw new VoyageAhuntsicException(1);
             }
             if (chambreDAO == null) {
-                throw new VoyageAhuntsicException(31002);
+                throw new VoyageAhuntsicException(1);
             }
             if (compteParticulierDAO == null) {
-                throw new VoyageAhuntsicException(31003);
+                throw new VoyageAhuntsicException(1);
             }
             this.reservationChambreDAO = reservationChambreDAO;
             this.chambreDAO = chambreDAO;
@@ -32,19 +32,23 @@ namespace Prj_Final_2017_.Models.Service {
 
         public void Add(ReservationChambreDTO reservationChambreDTO) {
             if (reservationChambreDTO == null) {
-                throw new VoyageAhuntsicException(31004);
+                throw new VoyageAhuntsicException(1);
             }
             if (chambreDAO.Read(reservationChambreDTO.IdChambre) == null) {
-                throw new VoyageAhuntsicException(31005);
+                throw new VoyageAhuntsicException(1);
             }
             if (chambreDAO.Read(reservationChambreDTO.IdParticulier) == null) {
-                throw new VoyageAhuntsicException(31006);
+                throw new VoyageAhuntsicException(1);
             }
             if (reservationChambreDTO.DateReservation < DateTime.Now) {
-                throw new VoyageAhuntsicException(31007);
+                throw new VoyageAhuntsicException(1);
             }
             if (reservationChambreDTO.DateFinReservation < reservationChambreDTO.DateReservation) {
-                throw new VoyageAhuntsicException(31008);
+                throw new VoyageAhuntsicException(1);
+            }
+            //
+            if(reservationChambreDAO.FindByDateAndChambre(reservationChambreDTO) != null) {
+                throw new VoyageAhuntsicException(1);
             }
             reservationChambreDAO.Add(reservationChambreDTO);
         }
@@ -55,28 +59,28 @@ namespace Prj_Final_2017_.Models.Service {
 
         public void Update(ReservationChambreDTO reservationChambreDTO) {
             if (reservationChambreDTO == null) {
-                throw new VoyageAhuntsicException(31009);
+                throw new VoyageAhuntsicException(1);
             }
             ReservationChambreDTO newReservationChambreDTO = reservationChambreDTO;
             ReservationChambreDTO oldReservationChambreDTO = reservationChambreDAO.Read(reservationChambreDTO.IdReservationChambre);
             if (oldReservationChambreDTO == null) {
-                throw new VoyageAhuntsicException(31010);
+                throw new VoyageAhuntsicException(1);
             }
             if (newReservationChambreDTO.DateReservation > DateTime.Now) {
-                throw new VoyageAhuntsicException(31011);
+                throw new VoyageAhuntsicException(1);
             }
             if (newReservationChambreDTO.DateFinReservation < newReservationChambreDTO.DateReservation) {
-                throw new VoyageAhuntsicException(31012);
+                throw new VoyageAhuntsicException(1);
             }
             reservationChambreDAO.Update(reservationChambreDTO);
         }
 
         public void Delete(ReservationChambreDTO reservationChambreDTO) {
             if (reservationChambreDTO == null) {
-                throw new VoyageAhuntsicException(31013);
+                throw new VoyageAhuntsicException(1);
             }
             if (reservationChambreDAO.Read(reservationChambreDTO.IdReservationChambre) == null) {
-                throw new VoyageAhuntsicException(31014);
+                throw new VoyageAhuntsicException(1);
             }
             reservationChambreDAO.Delete(reservationChambreDTO);
         }
