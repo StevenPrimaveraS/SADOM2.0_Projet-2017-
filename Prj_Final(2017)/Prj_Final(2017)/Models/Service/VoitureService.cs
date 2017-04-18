@@ -15,11 +15,11 @@ namespace Prj_Final_2017_.Models.Service {
         {
             if (voitureDAO == null)
             {
-                throw new VoyageAhuntsicException(5678);
+                throw new VoyageAhuntsicException(1);
             }
             if (compteFournisseurVoitureDAO == null)
             {
-                throw new VoyageAhuntsicException(5678);
+                throw new VoyageAhuntsicException(1);
             }
             this.voitureDAO = voitureDAO;
             this.compteFournisseurVoitureDAO = compteFournisseurVoitureDAO;
@@ -29,7 +29,7 @@ namespace Prj_Final_2017_.Models.Service {
         {
             if (voitureDTO == null)
             {
-                throw new VoyageAhuntsicException(5678);
+                throw new VoyageAhuntsicException(1);
             }
             voitureDAO.Add(voitureDTO);
         }
@@ -38,7 +38,7 @@ namespace Prj_Final_2017_.Models.Service {
         {
             if (IdVoiture < 1)
             {
-                throw new VoyageAhuntsicException(5678);
+                throw new VoyageAhuntsicException(1);
             }
             return voitureDAO.Read(IdVoiture);
         }
@@ -47,7 +47,7 @@ namespace Prj_Final_2017_.Models.Service {
         {
             if (voitureDTO == null)
             {
-                throw new VoyageAhuntsicException(5678);
+                throw new VoyageAhuntsicException(1);
             }
             voitureDAO.Update(voitureDTO);
         }
@@ -56,7 +56,7 @@ namespace Prj_Final_2017_.Models.Service {
         {
             if (voitureDTO == null)
             {
-                throw new VoyageAhuntsicException(5678);
+                throw new VoyageAhuntsicException(1);
             }
             voitureDAO.Delete(voitureDTO);
         }

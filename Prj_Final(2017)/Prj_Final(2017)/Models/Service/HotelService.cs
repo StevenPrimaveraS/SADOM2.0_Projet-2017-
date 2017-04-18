@@ -15,13 +15,13 @@ namespace Prj_Final_2017_.Models.Service {
 
         public HotelService(HotelDAO hotelDAO, ChambreDAO chambreDAO, CompteFournisseurChambreDAO compteFournisseurChambreDAO) {
             if (hotelDAO == null) {
-                throw new VoyageAhuntsicException(2000);
+                throw new VoyageAhuntsicException(1);
             }
             if (chambreDAO == null) {
-                throw new VoyageAhuntsicException(2000);
+                throw new VoyageAhuntsicException(1);
             }
             if (compteFournisseurChambreDAO == null) {
-                throw new VoyageAhuntsicException(2000);
+                throw new VoyageAhuntsicException(1);
             }
             this.hotelDAO = hotelDAO;
             this.chambreDAO = chambreDAO;
@@ -30,7 +30,7 @@ namespace Prj_Final_2017_.Models.Service {
 
         public void Add(HotelDTO hotelDTO) {
             if (hotelDTO == null) {
-                throw new VoyageAhuntsicException(2000);
+                throw new VoyageAhuntsicException(1);
             }
             hotelDAO.Add(hotelDTO);
         }
@@ -41,17 +41,17 @@ namespace Prj_Final_2017_.Models.Service {
 
         public void Update(HotelDTO hotelDTO) {
             if (hotelDTO == null) {
-                throw new VoyageAhuntsicException(2000);
+                throw new VoyageAhuntsicException(1);
             }
             hotelDAO.Update(hotelDTO);
         }
 
         public void Delete(HotelDTO hotelDTO) {
             if (hotelDTO == null) {
-                throw new VoyageAhuntsicException(2000);
+                throw new VoyageAhuntsicException(1);
             }
             if (chambreDAO.FindByHotel(hotelDTO.IdHotel) == null) {
-                throw new VoyageAhuntsicException(2000);
+                throw new VoyageAhuntsicException(1);
             }
             hotelDAO.Delete(hotelDTO);
         }
@@ -62,19 +62,19 @@ namespace Prj_Final_2017_.Models.Service {
 
         public HotelDTO FindByBasicInfo(HotelDTO hotelDTO) {
             if(hotelDTO == null) {
-                throw new VoyageAhuntsicException(2000);
+                throw new VoyageAhuntsicException(1);
             }
             if (hotelDTO.Nom == null) {
-                throw new VoyageAhuntsicException(2000);
+                throw new VoyageAhuntsicException(1);
             }
             if(hotelDTO.Telephone == null) {
-                throw new VoyageAhuntsicException(2000);
+                throw new VoyageAhuntsicException(1);
             }
             if (hotelDTO.Adresse == null) {
-                throw new VoyageAhuntsicException(2000);
+                throw new VoyageAhuntsicException(1);
             }
             if (hotelDTO.Ville == null) {
-                throw new VoyageAhuntsicException(2000);
+                throw new VoyageAhuntsicException(1);
             }
             return hotelDAO.FindByBasicInfo(hotelDTO);
         }
