@@ -14,11 +14,11 @@ namespace Prj_Final_2017_.Models.Service {
         
         public CompteFournisseurChambreService(CompteFournisseurChambreDAO compteFournisseurChambreDAO, HotelDAO hotelDAO) {
             if (compteFournisseurChambreDAO == null) {
-                throw new VoyageAhuntsicException(44);
+                throw new VoyageAhuntsicException(1);
             }
             if (hotelDAO == null)
             {
-                throw new VoyageAhuntsicException(44);
+                throw new VoyageAhuntsicException(1);
             }
             this.compteFournisseurChambreDAO = compteFournisseurChambreDAO;
             this.hotelDAO = hotelDAO;
@@ -27,11 +27,11 @@ namespace Prj_Final_2017_.Models.Service {
         public void Add(CompteFournisseurChambreDTO compteFournisseurChambreDTO) {
             if (compteFournisseurChambreDTO == null)
             {
-                throw new VoyageAhuntsicException(44);
+                throw new VoyageAhuntsicException(1);
             }
             if (hotelDAO.Read(compteFournisseurChambreDTO.IdHotel) == null)
             {
-                throw new VoyageAhuntsicException(44);
+                throw new VoyageAhuntsicException(1);
             }
             compteFournisseurChambreDAO.Add(compteFournisseurChambreDTO);
         }
@@ -44,11 +44,11 @@ namespace Prj_Final_2017_.Models.Service {
         public void Update(CompteFournisseurChambreDTO compteFournisseurChambreDTO) {
             if (compteFournisseurChambreDTO == null)
             {
-                throw new VoyageAhuntsicException(44);
+                throw new VoyageAhuntsicException(1);
             }
             if (hotelDAO.Read(compteFournisseurChambreDTO.IdHotel) == null)
             {
-                throw new VoyageAhuntsicException(44);
+                throw new VoyageAhuntsicException(1);
             }
             compteFournisseurChambreDAO.Update(compteFournisseurChambreDTO);
         }
@@ -56,11 +56,11 @@ namespace Prj_Final_2017_.Models.Service {
         public void Delete(CompteFournisseurChambreDTO compteFournisseurChambreDTO) {
             if (compteFournisseurChambreDTO == null)
             {
-                throw new VoyageAhuntsicException(44);
+                throw new VoyageAhuntsicException(1);
             }
             if (hotelDAO.Read(compteFournisseurChambreDTO.IdHotel) == null)
             {
-                throw new VoyageAhuntsicException(44);
+                throw new VoyageAhuntsicException(1);
             }
             compteFournisseurChambreDAO.Delete(compteFournisseurChambreDTO);
         }

@@ -15,7 +15,7 @@ namespace Prj_Final_2017_.Models.Service {
         public CompagnieAerienneService(CompagnieAerienneDAO compagnieAerienneDAO) {
             if(compagnieAerienneDAO == null)
             {
-                throw new VoyageAhuntsicException(4444);
+                throw new VoyageAhuntsicException(1);
             }
 
             this.compagnieAerienneDAO =compagnieAerienneDAO;
@@ -24,7 +24,7 @@ namespace Prj_Final_2017_.Models.Service {
         public void Add(CompagnieAerienneDTO compagnieAerienneDTO) {
             if(compagnieAerienneDTO == null)
             {
-                throw new VoyageAhuntsicException(4444);
+                throw new VoyageAhuntsicException(1);
             }
            compagnieAerienneDAO.Add(compagnieAerienneDTO);
 
@@ -33,7 +33,7 @@ namespace Prj_Final_2017_.Models.Service {
         public CompagnieAerienneDTO Read(int IdCompagnieAerienne) {
             if(IdCompagnieAerienne < 1)
             {
-                throw new VoyageAhuntsicException(4444);
+                throw new VoyageAhuntsicException(1);
             }
             return compagnieAerienneDAO.Read(IdCompagnieAerienne);
         }
@@ -41,7 +41,7 @@ namespace Prj_Final_2017_.Models.Service {
         public void Update(CompagnieAerienneDTO compagnieAerienneDTO) {
             if (compagnieAerienneDTO == null)
             {
-                throw new VoyageAhuntsicException(4444);
+                throw new VoyageAhuntsicException(1);
             }
             compagnieAerienneDAO.Update(compagnieAerienneDTO);
 
@@ -50,7 +50,7 @@ namespace Prj_Final_2017_.Models.Service {
         public void Delete(CompagnieAerienneDTO compagnieAerienneDTO) {
             if(compagnieAerienneDTO == null)
             {
-                throw new VoyageAhuntsicException(4444);
+                throw new VoyageAhuntsicException(1);
             }
             compagnieAerienneDAO.Delete(compagnieAerienneDTO);
         }
@@ -61,19 +61,19 @@ namespace Prj_Final_2017_.Models.Service {
 
         public CompagnieAerienneDTO FindByBasicInfo(CompagnieAerienneDTO compagnieAerienneDTO) {
             if (compagnieAerienneDTO == null) {
-                throw new VoyageAhuntsicException(2000);
+                throw new VoyageAhuntsicException(1);
             }
             if (compagnieAerienneDTO.Nom == null) {
-                throw new VoyageAhuntsicException(2000);
+                throw new VoyageAhuntsicException(1);
             }
             if (compagnieAerienneDTO.Telephone == null) {
-                throw new VoyageAhuntsicException(2000);
+                throw new VoyageAhuntsicException(1);
             }
             if (compagnieAerienneDTO.Adresse == null) {
-                throw new VoyageAhuntsicException(2000);
+                throw new VoyageAhuntsicException(1);
             }
             if (compagnieAerienneDTO.Ville == null) {
-                throw new VoyageAhuntsicException(2000);
+                throw new VoyageAhuntsicException(1);
             }
             return compagnieAerienneDAO.FindByBasicInfo(compagnieAerienneDTO);
         }

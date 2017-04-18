@@ -22,23 +22,23 @@ namespace Prj_Final_2017_.Models.Service {
                                         ReservationVoitureDAO reservationVoitureDAO) {
             if (reservationChambreDAO == null)
             {
-                throw new VoyageAhuntsicException(3000);
+                throw new VoyageAhuntsicException(1);
             }
             if (reservationForfaitDAO == null)
             {
-                throw new VoyageAhuntsicException(3000);
+                throw new VoyageAhuntsicException(1);
             }
             if (reservationSiegeDAO == null)
             {
-                throw new VoyageAhuntsicException(3000);
+                throw new VoyageAhuntsicException(1);
             }
             if (reservationVoitureDAO == null)
             {
-                throw new VoyageAhuntsicException(3000);
+                throw new VoyageAhuntsicException(1);
             }
             if (compteParticulierDAO == null)
             {
-                throw new VoyageAhuntsicException(3000);
+                throw new VoyageAhuntsicException(1);
             }
             this.compteParticulierDAO = compteParticulierDAO;
             this.reservationChambreDAO = reservationChambreDAO;
@@ -50,11 +50,11 @@ namespace Prj_Final_2017_.Models.Service {
         public void Add(CompteParticulierDTO compteParticulierDTO) {
             if (compteParticulierDTO == null)
             {
-                throw new VoyageAhuntsicException(3000);
+                throw new VoyageAhuntsicException(1);
             }
             if (compteParticulierDAO.FindByCourriel(compteParticulierDTO.Courriel) == null)
             {
-                throw new VoyageAhuntsicException(3000);
+                throw new VoyageAhuntsicException(1);
             }
             compteParticulierDAO.Add(compteParticulierDTO);
         }
@@ -66,7 +66,7 @@ namespace Prj_Final_2017_.Models.Service {
         public void Update(CompteParticulierDTO compteParticulierDTO) {
             if (compteParticulierDTO == null)
             {
-                throw new VoyageAhuntsicException(3000);
+                throw new VoyageAhuntsicException(1);
             }
             compteParticulierDAO.Update(compteParticulierDTO);
         }
@@ -74,11 +74,11 @@ namespace Prj_Final_2017_.Models.Service {
         public void Delete(CompteParticulierDTO compteParticulierDTO) {
             if (compteParticulierDTO == null)
             {
-                throw new VoyageAhuntsicException(3000);
+                throw new VoyageAhuntsicException(1);
             }
             if (reservationChambreDAO.FindByParticulier(compteParticulierDTO.IdParticulier) == null)
             {
-                throw new VoyageAhuntsicException(3000);
+                throw new VoyageAhuntsicException(1);
             }
             compteParticulierDAO.Delete(compteParticulierDTO);
         }

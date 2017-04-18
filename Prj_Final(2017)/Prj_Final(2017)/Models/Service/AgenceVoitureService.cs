@@ -14,7 +14,7 @@ namespace Prj_Final_2017_.Models.Service {
         public AgenceVoitureService(AgenceVoitureDAO agenceVoitureDAO) {
             if(agenceVoitureDAO == null)
             {
-                throw new VoyageAhuntsicException(4444);
+                throw new VoyageAhuntsicException(1);
             }
             this.agenceVoitureDAO = agenceVoitureDAO;
         }
@@ -22,11 +22,11 @@ namespace Prj_Final_2017_.Models.Service {
         public void Add(AgenceVoitureDTO agenceVoitureDTO) {
             if(agenceVoitureDTO == null)
             {
-                throw new VoyageAhuntsicException(4444);
+                throw new VoyageAhuntsicException(1);
             }
             //if (compteFournisseurVoitureDAO.FindByCourriel(compteFournisseurVoitureDTO.Courriel) == null)
             //{
-            //    throw new VoyageAhuntsicException(4444);
+            //    throw new VoyageAhuntsicException(1);
             //}
             agenceVoitureDAO.Add(agenceVoitureDTO);
 
@@ -35,7 +35,7 @@ namespace Prj_Final_2017_.Models.Service {
         public AgenceVoitureDTO Read(int IdAgenceVoiture) {
             if(IdAgenceVoiture < 1)
             {
-                throw new VoyageAhuntsicException(4444);
+                throw new VoyageAhuntsicException(1);
             }
             return agenceVoitureDAO.Read(IdAgenceVoiture) ;
         }
@@ -43,7 +43,7 @@ namespace Prj_Final_2017_.Models.Service {
         public void Update(AgenceVoitureDTO agenceVoitureDTO) {
             if(agenceVoitureDTO == null)
             {
-                throw new VoyageAhuntsicException(4444);
+                throw new VoyageAhuntsicException(1);
             }
             agenceVoitureDAO.Update(agenceVoitureDTO);
         }
@@ -51,7 +51,7 @@ namespace Prj_Final_2017_.Models.Service {
         public void Delete(AgenceVoitureDTO agenceVoitureDTO) {
             if(agenceVoitureDTO == null)
             {
-                throw new VoyageAhuntsicException(4444);
+                throw new VoyageAhuntsicException(1);
             }
             agenceVoitureDAO.Delete(agenceVoitureDTO);
 
@@ -63,19 +63,19 @@ namespace Prj_Final_2017_.Models.Service {
 
         public AgenceVoitureDTO FindByBasicInfo(AgenceVoitureDTO agenceVoitureDTO) {
             if (agenceVoitureDTO == null) {
-                throw new VoyageAhuntsicException(2000);
+                throw new VoyageAhuntsicException(1);
             }
             if (agenceVoitureDTO.Nom == null) {
-                throw new VoyageAhuntsicException(2000);
+                throw new VoyageAhuntsicException(1);
             }
             if (agenceVoitureDTO.Telephone == null) {
-                throw new VoyageAhuntsicException(2000);
+                throw new VoyageAhuntsicException(1);
             }
             if (agenceVoitureDTO.Adresse == null) {
-                throw new VoyageAhuntsicException(2000);
+                throw new VoyageAhuntsicException(1);
             }
             if (agenceVoitureDTO.Ville == null) {
-                throw new VoyageAhuntsicException(2000);
+                throw new VoyageAhuntsicException(1);
             }
             return agenceVoitureDAO.FindByBasicInfo(agenceVoitureDTO);
         }

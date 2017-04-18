@@ -16,11 +16,11 @@ namespace Prj_Final_2017_.Models.Service {
         {
             if (compteFournisseurVoitureDAO == null)
             {
-                throw new VoyageAhuntsicException(44);
+                throw new VoyageAhuntsicException(1);
             }
             if (agenceVoitureDAO == null)
             {
-                throw new VoyageAhuntsicException(44);
+                throw new VoyageAhuntsicException(1);
             }
             this.compteFournisseurVoitureDAO = compteFournisseurVoitureDAO;
             this.agenceVoitureDAO = agenceVoitureDAO;
@@ -30,11 +30,11 @@ namespace Prj_Final_2017_.Models.Service {
         {
             if (compteFournisseurVoitureDTO == null)
             {
-                throw new VoyageAhuntsicException(44);
+                throw new VoyageAhuntsicException(1);
             }
             if (agenceVoitureDAO.Read(compteFournisseurVoitureDTO.IdAgenceVoiture) == null)
             {
-                throw new VoyageAhuntsicException(44);
+                throw new VoyageAhuntsicException(1);
             }
             compteFournisseurVoitureDAO.Add(compteFournisseurVoitureDTO);
         }
@@ -49,11 +49,11 @@ namespace Prj_Final_2017_.Models.Service {
         {
             if (compteFournisseurVoitureDTO == null)
             {
-                throw new VoyageAhuntsicException(44);
+                throw new VoyageAhuntsicException(1);
             }
             if (agenceVoitureDAO.Read(compteFournisseurVoitureDTO.IdAgenceVoiture) == null)
             {
-                throw new VoyageAhuntsicException(44);
+                throw new VoyageAhuntsicException(1);
             }
             compteFournisseurVoitureDAO.Update(compteFournisseurVoitureDTO);
         }
@@ -62,11 +62,11 @@ namespace Prj_Final_2017_.Models.Service {
         {
             if (compteFournisseurVoitureDTO == null)
             {
-                throw new VoyageAhuntsicException(44);
+                throw new VoyageAhuntsicException(1);
             }
             if (agenceVoitureDAO.Read(compteFournisseurVoitureDTO.IdAgenceVoiture) == null)
             {
-                throw new VoyageAhuntsicException(44);
+                throw new VoyageAhuntsicException(1);
             }
             compteFournisseurVoitureDAO.Delete(compteFournisseurVoitureDTO);
         }
