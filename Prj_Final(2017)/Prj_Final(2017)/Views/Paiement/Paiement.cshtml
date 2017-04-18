@@ -6,11 +6,12 @@
 }
 <div class="jumbotron">
     <h1>Paiement</h1>
-    <h2>Montant à payer :</h2>
+    <!--<h2>Montant à payer :</h2>-->
 </div>
 
 @{
     int iterator = 1;//Chambre>Siege>Voiture>Forfait
+    double total = 0;
 
     //Possibilité de changer les panier en listes de reservation
     List<ChambreDTO> panierChambre = (List<ChambreDTO>)Session["panierChambre"];
@@ -45,12 +46,11 @@
 }
 
 <link href="~/Content/StylePrincipal.css" rel="stylesheet" media="all" type="text/css">
-<ul id="listeProduits" style="flex-direction:column">
-    @foreach (ChambreDTO chambreDTO in panierChambre)
-    {
+<ul id="listeProduits" style="list-style-type:none; padding-left:0; margin-left:0px; display:inline-block; width:100%;">
+    @foreach (ChambreDTO chambreDTO in panierChambre) {
         HotelDTO hotelDTO = ApplicationFunctions.HotelFacade.Read(chambreDTO.IdHotel);
-        <li style="flex-direction:row; justify-content:space-around; display:flex">
-            <div id="sectionInfo" style="display:inline; padding: 5px 5px 5px 15px; flex:auto ">
+        <li class="container" style="border: 1px solid #aaaaaa; border-radius:6px; width:100%; margin-top:10px; padding-bottom:15px;">
+            <div id="sectionInfo" style="display:inline-flex; max-width:900px; margin-left:0px; padding: 5px 5px 5px 15px;">
                 <p>
                     <strong style="font-size:16px">@hotelDTO.Nom &nbsp;-&nbsp; @chambreDTO.NomChambre </strong>
                     <br />
@@ -59,23 +59,25 @@
                     Chambre : @chambreDTO.NumeroChambre
                 </p>
             </div>
-            <span style="flex:auto; padding: 5px 5px 5px 15px;">
-                @chambreDTO.Tarif.ToString("F") $
-            </span>
-            <span style="flex:auto; padding: 5px 5px 5px 15px;">
-                @VADateHandler.getReservationDates(datesChambre[panierChambre.IndexOf(chambreDTO)])[0].ToShortDateString()
-                &nbsp;&mdash;&nbsp;
-                @VADateHandler.getReservationDates(datesChambre[panierChambre.IndexOf(chambreDTO)])[1].ToShortDateString()
-            </span>
+            <div style="float:right; text-align:right; margin-top:18px;">
+                <span style="padding: 5px 5px 5px 15px;">
+                    @VADateHandler.getReservationDates(datesChambre[panierChambre.IndexOf(chambreDTO)])[0].ToShortDateString()
+                    &nbsp;&mdash;&nbsp;
+                    @VADateHandler.getReservationDates(datesChambre[panierChambre.IndexOf(chambreDTO)])[1].ToShortDateString()
+                </span>
+                <span style="padding: 5px 5px 5px 15px;">
+                    <strong>@chambreDTO.Tarif.ToString("F") $</strong>
+                </span>
+            </div>
         </li>
         iterator++;
+        total += chambreDTO.Tarif;
     }
-    @foreach (SiegeDTO siegeDTO in panierSiege)
-    {
+    @foreach (SiegeDTO siegeDTO in panierSiege) {
         VolDTO volDTO = ApplicationFunctions.VolFacade.Read(siegeDTO.IdVol);
         CompagnieAerienneDTO compagnieAerienneDTO = ApplicationFunctions.CompagnieAerienneFacade.Read(volDTO.IdCompagnieAerienne);
-        <li style="flex-direction:row;justify-content:space-around; display:flex">
-            <div id="sectionInfo" style="display:inline; padding: 5px 5px 5px 15px; flex:auto ">
+        <li class="container" style="border: 1px solid #aaaaaa; border-radius:6px; width:100%; margin-top:10px; padding-bottom:15px;">
+            <div id="sectionInfo" style="display:inline-flex; max-width:900px; margin-left:0px; padding: 5px 5px 5px 15px;">
                 <p>
                     <strong style="font-size:16px">@compagnieAerienneDTO.Nom &nbsp;-&nbsp; @volDTO.Classe </strong>
                     <br />
@@ -86,22 +88,24 @@
                     Siege : @siegeDTO.Numero
                 </p>
             </div>
-            <span style="flex:auto; padding: 5px 5px 5px 15px;">
-                @volDTO.Tarif.ToString("F") $
-            </span>
-            <span style="flex:auto; padding: 5px 5px 5px 15px;">
-                @VADateHandler.getReservationDates(datesSiege[panierSiege.IndexOf(siegeDTO)])[0].ToShortDateString()
-                &nbsp;&mdash;&nbsp;
-                @VADateHandler.getReservationDates(datesSiege[panierSiege.IndexOf(siegeDTO)])[1].ToShortDateString()
-            </span>
+            <div style="float:right; text-align:right; margin-top:18px;">
+                <span style="padding: 5px 5px 5px 15px;">
+                    @VADateHandler.getReservationDates(datesSiege[panierSiege.IndexOf(siegeDTO)])[0].ToShortDateString()
+                    &nbsp;&mdash;&nbsp;
+                    @VADateHandler.getReservationDates(datesSiege[panierSiege.IndexOf(siegeDTO)])[1].ToShortDateString()
+                </span>
+                <span style="padding: 5px 5px 5px 15px;">
+                    <strong>@volDTO.Tarif.ToString("F") $</strong>
+                </span>
+            </div>
         </li>
         iterator++;
+        total += volDTO.Tarif;
     }
-    @foreach (VoitureDTO voitureDTO in panierVoiture)
-    {
+    @foreach (VoitureDTO voitureDTO in panierVoiture) {
         AgenceVoitureDTO agenceVoitureDTO = ApplicationFunctions.AgenceVoitureFacade.Read(voitureDTO.IdAgence);
-        <li style="flex-direction:row;justify-content:space-around; display:flex">
-            <div id="sectionInfo" style="display:inline; padding: 5px 5px 5px 15px; flex:auto ">
+        <li class="container" style="border: 1px solid #aaaaaa; border-radius:6px; width:100%; margin-top:10px; padding-bottom:15px;">
+            <div id="sectionInfo" style="display:inline-flex; max-width:900px; margin-left:0px; padding: 5px 5px 5px 15px;">
                 <p>
                     <strong style="font-size:16px">@agenceVoitureDTO.Nom &nbsp;-&nbsp; @voitureDTO.Nom </strong>
                     <br />
@@ -110,19 +114,21 @@
                     Plaque : @voitureDTO.Plaque
                 </p>
             </div>
-            <span style="flex:auto; padding: 5px 5px 5px 15px;">
-                @voitureDTO.Tarif.ToString("F") $
-            </span>
-            <span style="flex:auto; padding: 5px 5px 5px 15px;">
-                @VADateHandler.getReservationDates(datesVoiture[panierVoiture.IndexOf(voitureDTO)])[0].ToShortDateString()
-                &nbsp;&mdash;&nbsp;
-                @VADateHandler.getReservationDates(datesVoiture[panierVoiture.IndexOf(voitureDTO)])[1].ToShortDateString()
-            </span>
+            <div style="float:right; text-align:right; margin-top:18px;">
+                <span style="padding: 5px 5px 5px 15px;">
+                    @VADateHandler.getReservationDates(datesVoiture[panierVoiture.IndexOf(voitureDTO)])[0].ToShortDateString()
+                    &nbsp;&mdash;&nbsp;
+                    @VADateHandler.getReservationDates(datesVoiture[panierVoiture.IndexOf(voitureDTO)])[1].ToShortDateString()
+                </span>
+                <span style="padding: 5px 5px 5px 15px;">
+                    <strong>@voitureDTO.Tarif.ToString("F") $</strong>
+                </span>
+            </div>
         </li>
         iterator++;
+        total += voitureDTO.Tarif;
     }
-    @foreach (ForfaitDTO forfaitDTO in panierForfait)
-    {
+    @foreach (ForfaitDTO forfaitDTO in panierForfait) {
         VoitureDTO voitureDTO = ApplicationFunctions.VoitureFacade.Read(forfaitDTO.IdVoiture);
         AgenceVoitureDTO agenceVoitureDTO = ApplicationFunctions.AgenceVoitureFacade.Read(voitureDTO.IdAgence);
         SiegeDTO siegeDTO = ApplicationFunctions.SiegeFacade.Read(forfaitDTO.IdSiege);
@@ -130,8 +136,8 @@
         CompagnieAerienneDTO compagnieAerienneDTO = ApplicationFunctions.CompagnieAerienneFacade.Read(volDTO.IdCompagnieAerienne);
         ChambreDTO chambreDTO = ApplicationFunctions.ChambreFacade.Read(forfaitDTO.IdChambre);
         HotelDTO hotelDTO = ApplicationFunctions.HotelFacade.Read(chambreDTO.IdHotel);
-        <li style="flex-direction:row;justify-content:space-around; display:flex">
-            <div id="sectionInfo" style="display:inline; padding: 5px 5px 5px 15px; flex:auto ">
+        <li class="container" style="border: 1px solid #aaaaaa; border-radius:6px; width:100%; margin-top:10px; padding-bottom:15px;">
+            <div id="sectionInfo" style="display:inline-flex; max-width:900px; margin-left:0px; padding: 5px 5px 5px 15px;">
                 <p>
                     <strong style="font-size:16px">Forfait @compagnieAerienneDTO.Nom &nbsp;-&nbsp; @hotelDTO.Nom &nbsp;-&nbsp; @agenceVoitureDTO.Nom </strong>
                     <br />
@@ -144,70 +150,118 @@
                     Plaque : @voitureDTO.Plaque
                 </p>
             </div>
-            <span style="flex:auto; padding: 5px 5px 5px 15px;">
-                @forfaitDTO.TarifReduit.ToString("F") $
-            </span>
-            <span style="flex:auto; padding: 5px 5px 5px 15px;">
-                @VADateHandler.getReservationDates(datesForfait[panierForfait.IndexOf(forfaitDTO)])[0].ToShortDateString()
-                &nbsp;&mdash;&nbsp;
-                @VADateHandler.getReservationDates(datesForfait[panierForfait.IndexOf(forfaitDTO)])[1].ToShortDateString()
-            </span>
+            <div style="float:right; text-align:right; margin-top:18px;">
+                <span style="padding: 5px 5px 5px 15px;">
+                    @VADateHandler.getReservationDates(datesForfait[panierForfait.IndexOf(forfaitDTO)])[0].ToShortDateString()
+                    &nbsp;&mdash;&nbsp;
+                    @VADateHandler.getReservationDates(datesForfait[panierForfait.IndexOf(forfaitDTO)])[1].ToShortDateString()
+                </span>
+                <span style="padding: 5px 5px 5px 15px;">
+                    <strong>@forfaitDTO.TarifReduit.ToString("F") $</strong>
+                </span>
+            </div>
         </li>
         iterator++;
+        total += forfaitDTO.TarifReduit;
     }
 </ul>
 
-<ul id="paiement" style="flex-direction:column">
-    <li style="flex-direction:row;justify-content:space-around; display:flex">
-        <span style="flex:auto">
-            Numéro de la carte
-            &nbsp;
-            <input class="text-form" type="text" value="" />
-        </span>
-        <span style="flex:auto">
-            Date d'expiration(MM/AAAA)
-            &nbsp;
-            <select id="moisExpiration" name="moisExpiration">
-                <option value=""></option>
-                <option value="0">1</option>
-                <option value="1">2</option>
-                <option value="2">3</option>
-                <option value="3">4</option>
-                <option value="4">5</option>
-                <option value="5">6</option>
-                <option value="6">7</option>
-                <option value="7">8</option>
-                <option value="8">9</option>
-                <option value="9">10</option>
-                <option value="10">11</option>
-                <option value="11">12</option>
-            </select>
-            <select id="anneeExpiration" name="anneeExpiration">
-                <option value=""></option>
-                <option value="0">2017</option>
-                <option value="1">2018</option>
-                <option value="2">2019</option>
-                <option value="3">2020</option>
-                <option value="4">2021</option>
-                <option value="5">2022</option>
-            </select>
-        </span>
-        <span style="flex:auto">
-            Code sécurité
-            &nbsp;
-            <input class="text-form" type="text" value="" />
-        </span>
-    </li>
-</ul>
-<br /><br />
-@*
-    TODO : Possibilité de changer le lien pour une page de paiement
-    et ensuite mettre le lien pour acheter
-*@
-@if (iterator > 1)
-{
+@if (iterator > 1) {
+    <p class="lead" style="text-align:right; margin-right:15px;"><strong>TOTAL : @total.ToString("F") $</strong></p>
+    <hr />
+    <h2 style="margin-left:15px; margin-bottom:30px;">Payer</h2>
     <form id="formPanier" action="/Panier/Acheter" method="post">
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="numCarte">Numéro de la carte</label>
+                    <input class="form-control text-form" id="numCarte" name="numCarte" type="text" value="" placeholder="Numéro de la carte" />
+                </div>
+                <div class="form-group form-inline">
+                    <label class="col-md-2 control-label" for="moisExpiration anneeExpiration">Date d'expiration(MM/AAAA)</label>
+                    <select class="form-control" id="moisExpiration" name="moisExpiration" >
+                        <option value="">Mois</option>
+                        <option value="0">1</option>
+                        <option value="1">2</option>
+                        <option value="2">3</option>
+                        <option value="3">4</option>
+                        <option value="4">5</option>
+                        <option value="5">6</option>
+                        <option value="6">7</option>
+                        <option value="7">8</option>
+                        <option value="8">9</option>
+                        <option value="9">10</option>
+                        <option value="10">11</option>
+                        <option value="11">12</option>
+                    </select>
+                    <select class="form-control" id="anneeExpiration" name="anneeExpiration">
+                        <option value="">Année</option>
+                        <option value="0">2017</option>
+                        <option value="1">2018</option>
+                        <option value="2">2019</option>
+                        <option value="3">2020</option>
+                        <option value="4">2021</option>
+                        <option value="5">2022</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="codeSecurite">Code sécurité</label>
+                    <input class="form-control text-form" id="codeSecurite" name="codeSecurite" type="text" value="" placeholder="Code de sécurité" />
+                </div>
+        <br /><br />
+
         <input class="btn btn-primary btn-lg" type="submit" value="Acheter le panier" />
     </form>
 }
 
+
+@*
+    @if (iterator > 1) {
+        <form id="formPanier" action="/Panier/Acheter" method="post">
+
+            <ul id="paiement" style="flex-direction:column">
+                <li style="flex-direction:row;justify-content:space-around; display:flex">
+                    <span style="flex:auto">
+                        <label>Numéro de la carte</label>
+                        &nbsp;
+                        <input class="text-form" type="text" value="" />
+                    </span>
+                    <span style="flex:auto">
+                        <label>Date d'expiration(MM/AAAA)</label>
+                        &nbsp;
+                        <select id="moisExpiration" name="moisExpiration">
+                            <option value=""></option>
+                            <option value="0">1</option>
+                            <option value="1">2</option>
+                            <option value="2">3</option>
+                            <option value="3">4</option>
+                            <option value="4">5</option>
+                            <option value="5">6</option>
+                            <option value="6">7</option>
+                            <option value="7">8</option>
+                            <option value="8">9</option>
+                            <option value="9">10</option>
+                            <option value="10">11</option>
+                            <option value="11">12</option>
+                        </select>
+                        <select id="anneeExpiration" name="anneeExpiration">
+                            <option value=""></option>
+                            <option value="0">2017</option>
+                            <option value="1">2018</option>
+                            <option value="2">2019</option>
+                            <option value="3">2020</option>
+                            <option value="4">2021</option>
+                            <option value="5">2022</option>
+                        </select>
+                    </span>
+                    <span style="flex:auto">
+                        <label>Code sécurité</label>
+                        &nbsp;
+                        <input class="text-form" type="text" value="" />
+                    </span>
+                </li>
+            </ul>
+            <br /><br />
+
+            <input class="btn btn-primary btn-lg" type="submit" value="Acheter le panier" />
+        </form>
+    }
+*@
