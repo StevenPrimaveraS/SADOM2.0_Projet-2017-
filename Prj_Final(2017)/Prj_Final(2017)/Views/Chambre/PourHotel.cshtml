@@ -46,11 +46,9 @@
     var Grid = new WebGrid(DB.Query("SELECT * FROM Chambre WHERE IdHotel = " + IdHotel));
 }
 @Grid.GetHtml(
-            tableStyle: "webgrid",
+            tableStyle: "webgrid2",
             mode: WebGridPagerModes.All,
             columns: Grid.Columns(
-             Grid.Column(" ", format: @<text>
-                    <button class="btn-xs" style:color="blue">Détail</button></text>),
                         Grid.Column("NumeroChambre", "Numero"),
                         Grid.Column("NomChambre", "Nom"),
                         Grid.Column("Tarif", "Tarif"),
